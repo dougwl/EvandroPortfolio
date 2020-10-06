@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"telemetry.enableCrashReporter": false,
+		"telemetry.enableTelemetry": false,
+		"intelephense.telemetry.enabled": false,
+		"svg.preview.background": "transparent",
+		"workbench.colorTheme": "Atom One Dark",
+		"workbench.preferredDarkColorTheme": "Atom One Dark",
+	}
+}
