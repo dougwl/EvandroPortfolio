@@ -557,7 +557,7 @@
 				</div> -->
 				<div class="clear"></div>
 
-				<div class="section section-gradient m-0">
+				<div id ="wave-separator-bottom" class="section m-0">
 					<div class="svg-separator top rotate">
 						<div>
 							 <svg preserveAspectRatio="xMidYMax meet" class="svg-separator sep3" viewBox="0 0 1600 100">
@@ -567,7 +567,8 @@
 							</svg>
 						</div>
 					</div>
-					<div class="container">
+					<div id='wave-separator--filler'></div>
+					<!-- <div class="container">
 						<div class="mx-auto" style="max-width: 1200px; padding: 120px 0 50px;">
 							<div class="d-flex justify-content-between align-items-center mb-4 dark">
 								<h3 class="mb-0">What Our Users Say:</h3>
@@ -619,7 +620,7 @@
 								<img src="demos/movers/images/dot-grid.svg" alt="Dot Image">
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 
 				<div id="duvidas" class="container mb-5" style="scroll-margin-top: 120px;">
@@ -629,7 +630,7 @@
 						</div>
 						<div class="clear"></div>
 
-						<div class="toggle mt-5" data-state="open">
+						<div class="toggle mt-5 toggle-active" data-state="open">
 							<div class="toggle-header flex-row-reverse">
 								<div class="toggle-icon">
 									<i class="toggle-closed icon-line-circle-plus"></i>
@@ -675,7 +676,7 @@
 				<div class="section dark pt-0 mb-0 bg-color" id="last-content-bottom">
 					<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 1960 206.8" class="bg-white">
 						<path class="svg-themecolor" style="opacity:0.2;" d="M0,142.8A2337.49,2337.49,0,0,1,297.5,56.3C569.33-3.53,783.89.22,849.5,2.3c215.78,6.86,382.12,45.39,503.25,73.45,158.87,36.8,283.09,79.13,458.75,54.55A816.49,816.49,0,0,0,1983,86.8v110H0Z"/>
-						<path class="svg-themecolor" d="M.5,152.8s498-177,849-150,1031,238,1134,94v110H.5Z"/>
+						<path  class="svg-themecolor" d="M.5,152.8s498-177,849-150,1031,238,1134,94v110H.5Z"/>
 					</svg>
 					<div class="container">
 						<div class="row align-items-center justify-content-center center my-4">
@@ -787,6 +788,8 @@
 											<i class="icon-instagram"></i>
 											<i class="icon-instagram"></i>
 										</a>
+										<a href="#" class="social-icon si-small si-instagram" title="instagram">
+											<a href="#" class="social-icon si-small si-instagram" title="instagram">
 
 										<a href="#" class="social-icon si-small si-paypal" title="Paypal">
 											<i class="icon-paypal"></i>
@@ -840,29 +843,21 @@
 
 	<!-- JavaScripts
 	============================================= -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ==" crossorigin="anonymous"></script>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js" integrity="sha512-UzofO1xJCmOl9xNdbqkMIaaW5raQxAE8WyMa977+mY2fT001KydNwvqSTJlHy70edjCN0nb20BXIgBgO/oj6MQ==" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flickity@2.2.1/dist/flickity.pkgd.min.js" integrity="sha256-3Maq7M1TC8sOke8B4gRkhfGtETqGWq+xenQO7k2mHjI=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.5.1,npm/jquery.easing@1.4.1,npm/bootstrap@5.0.0-alpha2,npm/bootstrap-datepicker@1.9.0,npm/bootstrap-datepicker@1.9.0/js/locales/bootstrap-datepicker.pt-BR.js,npm/body-scroll-lock@3.1.5,npm/stackblur-canvas@2.4.0,npm/plyr@3.6.2"></script>
 
-	<!-- DatePicker JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.pt-BR.min.js" integrity="sha512-mVkLPLQVfOWLRlC2ZJuyX5+0XrTlbW2cyAwyqgPkLGxhoaHNSWesYMlcUjX8X+k45YB8q90s88O7sos86636NQ==" crossorigin="anonymous"></script>
-
-	<!-- Footer Scripts
-	============================================= -->
-	<script src="js/functions.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/body-scroll-lock@3.1.5/lib/bodyScrollLock.min.js" integrity="sha256-hm8DAe2kEhcuYBHNcNCxoV3RBkFMkB1zsBxN4Sl2LeI=" crossorigin="anonymous"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/body-scroll-lock@3.1.5/lib/bodyScrollLock.min.js" integrity="sha256-hm8DAe2kEhcuYBHNcNCxoV3RBkFMkB1zsBxN4Sl2LeI=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fitty/2.3.2/fitty.min.js" integrity="sha512-WW8YqRaeVvNVaQd4FvmXZvFfonSRXroDEcfzeBaL7ZyUdULuWZuxkG73xVOdxALmPoSMg0NrI7ClSQ/JTkxEOA==" crossorigin="anonymous"></script>
-
-	<!-- Extras -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/stackblur-canvas/2.4.0/stackblur.min.js" integrity="sha512-D1Dkftsk0YQuXfXYwymRK3QukzoEfukcEixNsRoRG7yHTwdiy7FHRpCIwI23vaKOTSxirA6BTTuPrQsY7TVq8w==" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.2.1/flickity.pkgd.min.js" integrity="sha512-Nx/M3T/fWprNarYOrnl+gfWZ25YlZtSNmhjHeC0+2gCtyAdDFXqaORJBj1dC427zt3z/HwkUpPX+cxzonjUgrA==" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.6.2/plyr.min.js" integrity="sha512-5HcOw3x/g3GAUpNNyvKYB2/f8ivVNBVebdqCxz3Mmdftx7vXOdbYvonB2Det6RVcA1IDxYeYWTAzxRg+c6uvYQ==" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stackblur-canvas/2.4.0/stackblur.min.js" integrity="sha512-D1Dkftsk0YQuXfXYwymRK3QukzoEfukcEixNsRoRG7yHTwdiy7FHRpCIwI23vaKOTSxirA6BTTuPrQsY7TVq8w==" crossorigin="anonymous"></script> -->
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/4.0.7/scrollreveal.min.js" integrity="sha512-yrp2XCY0JvwOgu87K/vTN3IIHolfAJL3SMsFu0ujdKeWWMmFhClABdlxna2TfOhMqX49GbmsIpbZ6fVBE7gleQ==" crossorigin="anonymous"></script> -->
-
+	
+	<script src="js/functions.js"></script>
 	<script src="js/Custom/customizations.js"></script>
+	
 
+	 
 
+	
 </body>
 </html>

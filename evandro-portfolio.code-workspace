@@ -9,7 +9,15 @@
 		"telemetry.enableTelemetry": false,
 		"intelephense.telemetry.enabled": false,
 		"svg.preview.background": "transparent",
-		"workbench.colorTheme": "Atom One Dark",
-		"workbench.preferredDarkColorTheme": "Atom One Dark",
+		"workbench.colorTheme": "Palenight Italic",
+		"workbench.preferredDarkColorTheme": "Palenight Italic",
+		"workbench.editor.scrollToSwitchTabs": true,
+		"git.enabled": false,
+		"firefox.executable": "C:\\Program Files\\Firefox Nightly\\firefox.exe",
+		"liveServer.settings.ChromeDebuggingAttachment": false,
+		"liveServer.settings.port": 5500,
+		"liveServer.settings.CustomBrowser": "firefox",
+		"firefox.profileDir": "C:\\Users\\dougl\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\vn9ol9lx.Development",
+		"liveServer.settings.AdvanceCustomBrowserCmdLine": "C:\\Program Files\\Firefox Nightly\\firefoxdev"
 	}
 }

@@ -326,92 +326,92 @@ class ScrollObserver{
 
     constructor({observerOptions:observerOptions, customCallback:customCallback} = {observerOptions:undefined, customCallback:undefined}) {
 
-        this.Options = (observerOptions != undefined)? observerOptions : this._defaultOptions;
-        this.Callback = (customCallback != undefined)? customCallback : (v) => {this._defaultCallback(v)};
-        this.Position = {previous:undefined, current:undefined};
-        this.IntersectionRatio = {previous:undefined, current:undefined};
-        this.isIntersecting = false;
-        this.State = {ascending: false, descending: false};
-        this.OnScrollDown = new CustomEvent ('OnScrollDown', {
-            detail:{
-                entering:true
-            }
-        });
-        this.OnScrollUp = new CustomEvent ('OnScrollUp', {
-            detail:{
-                leaving:true
-            }
-        });
-        this.defaultSteps = 100;
-        this.markerMovement = {
-            get bottomMarker() {
-                return window.scrollY + window.innerHeight;
-            },
-            get topMarker() {
-                return window.scrollY - 10;
-            },
-            maxPosition: window.scrollMaxY
-        }
+        this.Options = (observerOptions != undefined) ? observerOptions : this._defaultOptions;
+        this.Callback = (customCallback != undefined) ? customCallback : (v) => { this._defaultCallback(v) };
+        this.State = { ascending: false, descending: false };
+        this.OnScrollMove = (val) => { 
+            return new CustomEvent('OnScrollMove', {
+                detail: { 
+                    Up: val === 'Up'? true : false, 
+                    Down: val === 'Down'? true : false
+                }
+            })
+        };   
+        this._numberOfSignedEvents = 0;
         this.Observer = new IntersectionObserver(this.Callback, {
-            threshold: this.Options(this.defaultSteps)
+            threshold: this.Options(10)
         });
+        this.Initialized = false;
+        this.TopPosition = {current:0, previous:0, direction:''};
 
         const _container = document.createDocumentFragment().appendChild(document.createElement('div'));
         _container.setAttribute('id', 'scrollMarkerContainer');
 
-        const _topMarker = _container.appendChild(document.createElement('div'));
-        _topMarker.setAttribute('id', 'scrollTopMarker');
+        Object.assign(_container.style, {
+            position: 'absolute',
+            top: 0,
+        })
 
-        const _bottomMarker = _container.appendChild(document.createElement('div'));
-        _bottomMarker.setAttribute('id', 'scrollBottomMarker');
+        let gapBetweenMarkers = 1;
+        const areaAvailable = (document.documentElement.scrollHeight - document.documentElement.clientHeight) - window.innerHeight;
+        const numberOfMarkers = Math.round(areaAvailable / (window.innerHeight - gapBetweenMarkers));
+        let markersHeight = ((areaAvailable) / numberOfMarkers);
+        let rest = (numberOfMarkers * (markersHeight + gapBetweenMarkers)) - areaAvailable;
+        const _markers = [];
+        let position = window.innerHeight;
+
+        for (let index = 0; index < numberOfMarkers; index++) {
+            _markers.push(_container.appendChild(document.createElement('div')));
+            _markers[index].setAttribute('id', `scrollMarker${index}`);
+
+            if(index != 0) position = position + markersHeight + gapBetweenMarkers;
+            if(index == numberOfMarkers - 1) markersHeight += rest * -1;
+            
+            Object.assign(_markers[index].style, {
+                'position': 'absolute',
+                'height': `${markersHeight}px`,
+                'width': '1px',
+                'top': `${position}px`,
+                'z-index': '999'
+            });
+
+            this.Observer.observe(_markers[index]);
+        }
 
         this.scrollMarker = {
             container: _container,
-            topMarker: _topMarker,
-            bottomMarker: _bottomMarker
+            markers: _markers
         }
 
-        Object.assign(this.scrollMarker.container.style, {
-            'position': 'absolute',
-            'display': 'flex',
-            'height': document.body.scrollHeight.toString() + 'px',
-            'top': 0,
-            'background': 'yellow'
-        });
-        Object.assign(this.scrollMarker.topMarker.style, {
-            'position': 'absolute',
-            'height': '10px',
-            'width': '10px',
-            'top': `${this.markerMovement.topMarker}px`,
-            'z-index': '999',
-            'background': 'red'
-        });
-        Object.assign(this.scrollMarker.bottomMarker.style, {
-            'position': 'absolute',
-            'height': '10px',
-            'width': '10px',
-            'top': `${this.markerMovement.bottomMarker}px`,
-            'z-index': '999',
-            'background': 'red'
-        });
-
         document.body.appendChild(this.scrollMarker.container);
-        this.Observer.observe(this.scrollMarker.bottomMarker);
-        this.Observer.observe(this.scrollMarker.topMarker);
+        
     }
 
-    _defaultOptions = (steps) => {return Array(steps + 1).fill(0).map((_,index) => index/steps || 0)};
+    _defaultOptions = (steps) => {return Array(steps + 1).fill(0).map((_,index) => {
+        return index/steps;
+    })};
 
     On(event = '', callBack = undefined){
         if(callBack !== undefined){
-            if(event === 'OnScrollDown'){
-                this.scrollMarker.container.addEventListener('OnScrollDown', callBack);
-            }
-            else if(event === 'OnScrollUp'){
-                this.scrollMarker.container.addEventListener('OnScrollUp', callBack);
+            if(event === 'OnScrollMove'){
+                this.scrollMarker.container.addEventListener('OnScrollMove', callBack);
+                this._numberOfSignedEvents += 1;
             }
             else{
-                return console.error("Only events supported are OnScrollUp or OnScrollDown");
+                return console.error("Only event supported is OnScrollMove");
+            }
+        }
+        else console.error('Callback is undefined.');
+    }
+
+    Off(event = '', callBack = undefined){
+        if(callBack !== undefined){
+            if(event === 'OnScrollMove'){
+                this.scrollMarker.container.addEventListener('OnScrollMove', callBack);
+                this._numberOfSignedEvents += 1;
+            }
+            else{
+                return console.error("Only event supported is OnScrollMove");
             }
         }
         else console.error('Callback is undefined.');
@@ -421,76 +421,44 @@ class ScrollObserver{
      * 
      * @param {IntersectionObserverEntry[]} entries 
      */
+
     _defaultCallback(entries){
 
-        let entry = entries[0];
-        this.Position.current = entry.boundingClientRect.y;
-        if(this.Position.previous === undefined) this.Position.previous = this.Position.current;
-        this.IntersectionRatio.current = entry.intersectionRatio;
-        if(this.IntersectionRatio.previous === undefined) this.IntersectionRatio.previous = this.IntersectionRatio.current;
-        this.isIntersecting = entry.isIntersecting;
+        if(this.Initialized) {
 
-        let moveMarker = (direction) => {
-            direction = direction === 'up'? -10 :
-                direction === 'down'? 10 : undefined;
-            let newPosition;
-            for (const marker of ['bottomMarker', 'topMarker']) {
-                newPosition = this.markerMovement[marker] + direction;
-                this.scrollMarker[marker].style.top = `${newPosition}px`;
+            if(this._numberOfSignedEvents < 1) return console.error('No signed event listeners');
+
+            this.TopPosition.current = window.scrollY;
+
+            if(this.TopPosition.current > this.TopPosition.previous || 
+                    this.TopPosition.current === this.TopPosition.previous && 
+                        this.TopPosition.direction === 'Down') {
+                
+                this.State = {'descending':true,'ascending':false};
+                this.scrollMarker.container.dispatchEvent(this.OnScrollMove('Down'));
+                this.TopPosition.direction = 'Down';
             }
+            else if(this.TopPosition.current < this.TopPosition.previous || 
+                        this.TopPosition.current === this.TopPosition.previous && 
+                            this.TopPosition.direction === 'Up') {
+
+                this.State = {'descending':false,'ascending':true};
+                this.scrollMarker.container.dispatchEvent(this.OnScrollMove('Up'));
+                this.TopPosition.direction = 'Up';
+            }
+
+            
+            this.TopPosition.previous = this.TopPosition.current;
+                        
         }
 
-        console.log(entry.target.id)
-
-        if(this.Position.current < this.Position.previous && entry.target.id === 'scrollBottomMarker'){
-            if(this.IntersectionRatio.current > this.IntersectionRatio.previous && this.isIntersecting){
-                if(this.OnScrollDown !== undefined){
-                    this.State.descending = true;
-                    console.log('down')
-                    moveMarker('down');
-                    this.scrollMarker.container.dispatchEvent(this.OnScrollDown);
-                }
-                else console.error('Event is undefined');
-            }
-            else {
-                if(this.OnScrollDown !== undefined){
-                    this.State.descending = true;
-                    moveMarker('down');
-                    console.log('down')
-                    this.scrollMarker.container.dispatchEvent(this.OnScrollDown);
-                }
-                else console.error('Event is undefined');
-            }
+        else {
+            this.Initialized = true;
         }
-        else if(this.Position.current > this.Position.previous && this.isIntersecting && entry.target.id === 'scrollTopMarker'){
-            if(this.IntersectionRatio.current < this.IntersectionRatio.previous){
-                if(this.OnScrollUp !== undefined){
-                    this.State.ascending = true;
-                    moveMarker('up');
-                    console.log('leaving');
-                    this.scrollMarker.container.dispatchEvent(this.OnScrollUp);
-                }
-                else console.error('Event is undefined');
-            }
-            else{
-                if(this.OnScrollUp !== undefined){
-                    console.log('entering')
-                    this.State.ascending = true;
-                    moveMarker('up');
-                    this.scrollMarker.container.dispatchEvent(this.OnScrollUp);
-                }
-                else console.error('Event is undefined');
-            }
-        }
-
-        this.Position.previous = this.Position.current;
-        this.IntersectionRatio.previous = this.IntersectionRatio.current;
     }
 }
 
-let testing = new ScrollObserver();
-/* testing.On('OnScrollDown',()=>{}); */
-testing.On('OnScrollUp',()=>{});
+
 
 /* fitty('#video-section-play-title', {multiline:true}); */
 /* fitty('#video-section-description-parent'); */
@@ -837,4 +805,7 @@ jQuery('.home-date').datepicker({
     endDate: "+2m",
 });
 
+
+
+/* testing.On('OnScrollDown',()=>{}); */
 

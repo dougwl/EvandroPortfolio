@@ -1,0 +1,6 @@
+{
+    "git.enabled": false,
+    "firefox.profile": "Development",
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false
+}

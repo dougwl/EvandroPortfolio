@@ -1,0 +1,34 @@
+
+if Old Position is bigger than New Position {
+
+}
+
+if Intersection Ratio is bigger than 0 AND New Intersection Ratio is bigger than Old {
+    if()
+}
+
+if New Position is Smaller than Old, do{
+    if Intersection Ratio is bigger than 0 AND New Intersection Ratio is bigger than Old{
+
+    }
+    else{
+
+    }
+}
+
+If Intersection Ratio is bigger than 0 AND New Intersection Ratio is bigger than Old, do{
+    if New Position is Smaller than Old and Height is bigger than older{
+        Print (Going Down);
+    }
+    if New Position is bigger than Old and Height is bigger than older{
+        Print (Going Up);
+    }
+}
+Else if Intersection Ratio is bigger than 0 AND New Intersection is smaller than Old, do{
+    if New Position is bigger than Old and Height is smaller than older{
+        Print (Going Up)
+    }
+    if New Position is smaller than Old and Height is bigger than older{
+        Print (Going Down);
+    }
+}
