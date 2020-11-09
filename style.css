@@ -16150,13 +16150,13 @@ label.checkbox { padding-left: 20px; }
 	flex-direction: row-reverse;
 }
 
-.sticky-header #header-wrap{
-	visibility:hidden;
+.sticky-header #header-wrap{ /* Hide navbar when sticky. */
+	/* visibility:hidden;
 	transition: unset !important;
 	-webkit-transition: unset !important;
 	-moz-transition: unset !important;
 	-ms-transition: unset !important;
-	-o-transition: unset !important;
+	-o-transition: unset !important; */
 }
 
 body:not(.device-touch) .sticky-header .header-misc:not([style~="visibility: hidden"]) .button {
@@ -16179,7 +16179,7 @@ body:not(.device-touch) .sticky-header .header-misc:not([style~="visibility: hid
 	fill: #4d4f60 !important;
 }
 
-#last-content-bottom{
+#contato-bottom{
 	background: #4d4f60 !important;
 }
 
@@ -16708,6 +16708,6 @@ button.video-overlay-close{
 	width: 100%;
 }
 
-#last-content-bottom svg :last-child{
+#contato-bottom svg :last-child{
 	scale: 101%;
 }

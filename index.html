@@ -120,9 +120,9 @@
 						<nav class="primary-menu with-arrows not-dark">
 
 							<ul class="menu-container">
-								<li class="menu-item current"><a class="menu-link" onclick="ScrollIntoView(this,'#header')" style="cursor: pointer;"><div>Home</div></a></li>
-								<li class="menu-item"><a class="menu-link" onclick="ScrollIntoView(this,'#perfil')" style="cursor: pointer;"><div>Perfil</div></a></li>
-								<li class="menu-item"><a class="menu-link" onclick="ScrollIntoView(this, '#treatment-section')" style="cursor: pointer;"><div>Tratamentos</div></a>
+								<li class="menu-item current"><a id='home--button' class="menu-link" style="cursor: pointer;"><div>Home</div></a></li>
+								<li class="menu-item"><a id='perfil--button' class="menu-link" style="cursor: pointer;"><div>Perfil</div></a></li>
+								<li class="menu-item"><a id='treatment-section--button' class="menu-link" style="cursor: pointer;"><div>Tratamentos</div></a>
 									<!-- <ul class="sub-menu-container">
 										<li class="menu-item"><a class="menu-link" href="#"><div><i class="icon-line2-home"></i>Home Moving</div></a></li>
 										<li class="menu-item"><a class="menu-link" href="#"><div><i class="icon-building2"></i>Office Moving</div></a></li>
@@ -132,10 +132,10 @@
 										<li class="menu-item"><a class="menu-link" href="#"><div><i class="icon-truck1"></i>Hire Truck</div></a></li>
 									</ul> -->
 								</li>
-								<li class="menu-item"><a class="menu-link" onclick="ScrollIntoView(this,'#especialidades')" style="cursor: pointer;"><div>Especialidades</div></a></li>
-								<li class="menu-item"><a class="menu-link" onclick="ScrollIntoView(this,'#duvidas')" style="cursor: pointer;"><div>Dúvidas Frequentes</div></a></li>
+								<li class="menu-item"><a id='especialidades--button' class="menu-link" style="cursor: pointer;"><div>Especialidades</div></a></li>
+								<li class="menu-item"><a id='duvidas--button' class="menu-link" style="cursor: pointer;"><div>Dúvidas Frequentes</div></a></li>
 								<!-- <li class="menu-item"><a class="menu-link" href="#"><div>Blog</div></a></li> -->
-								<li class="menu-item"><a class="menu-link" onclick="ScrollIntoView(this,'#footer')" style="cursor: pointer;"><div>Contato</div></a></li>
+								<li class="menu-item"><a id='contato-bottom--button' class="menu-link" style="cursor: pointer;"><div>Contato</div></a></li>
 							</ul>
 
 						</nav><!-- #primary-menu end -->
@@ -154,7 +154,7 @@
 		============================================= -->
 		<section id="slider" class="slider-element bg-color" style="height: auto; padding: 60px 0; background: url('demos/movers/images/bg-2.png') no-repeat center center / 100% 100%;">
 
-			<div class="container" style="z-index: 2">
+			<section id="home" class="container" style="z-index: 2">
 				<div class="center">
 					<h2 class="text-white h2 font-weight-semibold mb-2">Evandro Luís Rosa</h2>
 					<p class="text-white-50">Oftalmologista especializado em retina.</p><!-- <p class="text-white-50">CRM-SC 5957 – RQE 2245</p> -->
@@ -239,7 +239,7 @@
 						<img src="demos/movers/images/slider/1.png" alt="Image 1" class="d-flex align-self-end ml-5 mt-3">
 					</div>
 				</div>
-			</div>
+			</section>
 
 			<div class="svg-separator">
 				<div>
@@ -262,9 +262,9 @@
 
 			<div class="content-wrap pb-0">
 
-				<div class="container clearfix">
+				<div class="container">
 
-					<div class="row justify-content-center mb-5" id="perfil" style="scroll-margin-top: 90px;">
+					<section id="perfil" class="row justify-content-center mb-5" style="scroll-margin-top: 90px;">
 						<div class="col-lg-7 center">
 							<div class="heading-block">
 								<h3 class="nott mb-3 font-weight-semibold ls0">Sobre meu trabalho</h3>
@@ -318,7 +318,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</section>
 
 					<!-- <div class="test-carousel">
 						<div class="carousel-cell">
@@ -333,7 +333,7 @@
 
 				<div class="clear"></div>
 
-				<div id="treatment-section" class="section p-0 dark mb-0" style="scroll-margin-top: 60px; background: linear-gradient(to right, rgba(0, 0, 0, 0.85), rgba(25,102,221,0.5)), url('demos/movers/images/section/1.jpg') no-repeat center center / cover; min-height: 400px">
+				<section id="treatment-section" class="section p-0 dark mb-0" style="scroll-margin-top: 60px; background: linear-gradient(to right, rgba(0, 0, 0, 0.85), rgba(25,102,221,0.5)), url('demos/movers/images/section/1.jpg') no-repeat center center / cover; min-height: 400px">
 					<div class="video-container">
 						<div id="video-section-grid"> <!-- class="row justify-content-between mb-4" -->
 							<div  id="video-section-play-title" class="med-type"> <!-- class="col-lg-5 col-md-6 offset-lg-1 pt-3" -->
@@ -423,9 +423,9 @@
 					<div class="clear"></div>
 					<svg class="svg-curve" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 1463 188.03">
 						<path style="fill:#FFF;" d="M-.5,288.5s297-175,792-97,599,52,671,25v143H-.5Z" transform="translate(0 -171.47)"/></svg>
-				</div>
+				</section>
 
-				<div class="section section-features bg-transparent mt-0 p-0 clearfix" id="especialidades" style="scroll-margin-top: 100px;">
+				<section class="section section-features bg-transparent mt-0 p-0 clearfix" id="especialidades" style="scroll-margin-top: 100px;">
 					<div class="container clearfix">
 						<div class="row col-mb-50 col-mb-lg-80">
 							<div class="col-md-4">
@@ -496,7 +496,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</section>
 
 
 				<div class="clear"></div>
@@ -623,7 +623,7 @@
 					</div> -->
 				</div>
 
-				<div id="duvidas" class="container mb-5" style="scroll-margin-top: 120px;">
+				<section id="duvidas" class="container mb-5" style="scroll-margin-top: 120px;">
 					<div class="section-clients mx-auto" style="max-width: 700px">
 						<div class="center clearfix mb-4">
 							<span class="badge badge-pill lightthemecolor color text-uppercase ls1 font-weight-medium py-2 px-3">We’ve valuable Organizations Since 2021</span>
@@ -669,11 +669,11 @@
 							<div class="toggle-content text-black-50">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.</div>
 						</div>
 					</div>
-				</div>
+				</section>
 
 				<div class="clear"></div>
 
-				<div class="section dark pt-0 mb-0 bg-color" id="last-content-bottom">
+				<section class="section dark pt-0 mb-0 bg-color" id="contato-bottom">
 					<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 1960 206.8" class="bg-white">
 						<path class="svg-themecolor" style="opacity:0.2;" d="M0,142.8A2337.49,2337.49,0,0,1,297.5,56.3C569.33-3.53,783.89.22,849.5,2.3c215.78,6.86,382.12,45.39,503.25,73.45,158.87,36.8,283.09,79.13,458.75,54.55A816.49,816.49,0,0,0,1983,86.8v110H0Z"/>
 						<path  class="svg-themecolor" d="M.5,152.8s498-177,849-150,1031,238,1134,94v110H.5Z"/>
@@ -691,7 +691,7 @@
 
 						</div>
 					</div>
-				</div>
+				</section>
 			</div>
 		</section><!-- #content end -->
 

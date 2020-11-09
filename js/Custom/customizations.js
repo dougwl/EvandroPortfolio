@@ -321,13 +321,12 @@ class VideoController{
 
 }
 
-
 class ScrollObserver{
 
     constructor({observerOptions:observerOptions, customCallback:customCallback} = {observerOptions:undefined, customCallback:undefined}) {
 
-        this.Options = (observerOptions != undefined) ? observerOptions : this._defaultOptions;
-        this.Callback = (customCallback != undefined) ? customCallback : (v) => { this._defaultCallback(v) };
+        this.Options = this._defaultOptions;
+        this.Callback = (v) => { this._defaultCallback(v) };
         this.State = { ascending: false, descending: false };
         this.OnScrollMove = (val) => { 
             return new CustomEvent('OnScrollMove', {
@@ -336,14 +335,14 @@ class ScrollObserver{
                     Down: val === 'Down'? true : false
                 }
             })
-        };   
+        }; 
+        this.Initialized = false;
+        this.TopPosition = {current:0, previous:0, direction:''};  
         this._numberOfSignedEvents = 0;
         this.Observer = new IntersectionObserver(this.Callback, {
             threshold: this.Options(10)
         });
-        this.Initialized = false;
-        this.TopPosition = {current:0, previous:0, direction:''};
-
+    
         const _container = document.createDocumentFragment().appendChild(document.createElement('div'));
         _container.setAttribute('id', 'scrollMarkerContainer');
 
@@ -384,44 +383,19 @@ class ScrollObserver{
         }
 
         document.body.appendChild(this.scrollMarker.container);
-        
+        ScrollObserver.ActiveObservers.push(this);
     }
+
+    static ActiveObservers = [];
 
     _defaultOptions = (steps) => {return Array(steps + 1).fill(0).map((_,index) => {
         return index/steps;
     })};
 
-    On(event = '', callBack = undefined){
-        if(callBack !== undefined){
-            if(event === 'OnScrollMove'){
-                this.scrollMarker.container.addEventListener('OnScrollMove', callBack);
-                this._numberOfSignedEvents += 1;
-            }
-            else{
-                return console.error("Only event supported is OnScrollMove");
-            }
-        }
-        else console.error('Callback is undefined.');
-    }
-
-    Off(event = '', callBack = undefined){
-        if(callBack !== undefined){
-            if(event === 'OnScrollMove'){
-                this.scrollMarker.container.addEventListener('OnScrollMove', callBack);
-                this._numberOfSignedEvents += 1;
-            }
-            else{
-                return console.error("Only event supported is OnScrollMove");
-            }
-        }
-        else console.error('Callback is undefined.');
-    }
-
     /**
      * 
      * @param {IntersectionObserverEntry[]} entries 
      */
-
     _defaultCallback(entries){
 
         if(this.Initialized) {
@@ -451,14 +425,426 @@ class ScrollObserver{
             this.TopPosition.previous = this.TopPosition.current;
                         
         }
-
         else {
             this.Initialized = true;
         }
     }
+
+    On(event = '', callBack = undefined){
+        if(callBack !== undefined){
+            if(event === 'OnScrollMove'){
+                this.scrollMarker.container.addEventListener('OnScrollMove', callBack);
+                this._numberOfSignedEvents += 1;
+            }
+            else if(event === 'OnIntersectionEnter'){
+                this.scrollMarker.container.addEventListener('OnIntersectionEnter', callBack);
+                this._numberOfSignedEvents += 1;
+            }
+            else if(event === 'OnIntersectionLeave'){
+                this.scrollMarker.container.addEventListener('OnIntersectionLeave', callBack);
+                this._numberOfSignedEvents += 1;
+            }
+            else{
+                return console.error("Event not supported");
+            }
+        }
+        else console.error('Callback is undefined.');
+    }
+
+    Off(event = '', callBack = undefined){
+        if(callBack !== undefined && this._numberOfSignedEvents > 0){
+            if(event === 'OnScrollMove'){
+                this.scrollMarker.container.removeEventListener('OnScrollMove', callBack);
+                this._numberOfSignedEvents -= 1;
+            }
+            else if(event === 'OnIntersectionEnter'){
+                this.scrollMarker.container.removeEventListener('OnIntersectionEnter', callBack);
+                this._numberOfSignedEvents -= 1;
+            }
+            else if(event === 'OnIntersectionLeave'){
+                this.scrollMarker.container.removeEventListener('OnIntersectionLeave', callBack);
+                this._numberOfSignedEvents -= 1;
+            }
+            else{
+                return console.error("Only event supported is OnScrollMove");
+            }
+        }
+        else console.error('Callback is undefined.');
+    }
+
 }
 
+class Sort{
 
+    static quickSort(originalArray) {  
+        if (originalArray.length <= 1) {    
+            return originalArray;  
+        } 
+        else {    
+            let leftSide = [];   
+            let rightSide = [];   
+            let newArray = [];   
+            let pivot = originalArray.pop();   
+            let length = originalArray.length;
+
+            for (let i = 0; i < length; i++) {    
+                if (originalArray[i] <= pivot) {  
+                    leftSide.push(originalArray[i]);    
+                    } 
+                else 
+                    {     
+                        rightSide.push(originalArray[i]);    
+                    }   
+            }//END FOR   
+
+            return newArray.concat(Sort.quickSort(leftSide), pivot, Sort.quickSort(rightSide));  
+        } //END ELSE
+    }//END QUICKSORT
+}
+
+class WatchScrollPosition{
+
+    constructor(){
+        this.Positions = [];
+        this.Nodes = {}
+        this.ScrollObserver = undefined;
+        this.Subscribers = {};
+        this._lastPosition = undefined;
+        this._positionOffset = 180;
+    }
+
+    GetElements({Tags:Tags = [], ExcludedIDs:ExcludedIDs = []}){
+        let elements = new Object;
+        let nodes, exclude,index = 0;
+        if(!Array.isArray(Tags)) Tags = [Tags];
+        for (const tag of Tags) {
+            nodes = document.querySelectorAll(tag);
+            if (ExcludedIDs.length > 0){
+                ExcludedIDs = ExcludedIDs.filter((val) => {
+                    nodes = Array.from(nodes).filter((node) => {
+                        return node.id == val? !(exclude = true) : !(exclude = false);
+                    });
+                    return !exclude;
+                });
+                elements[tag] = nodes; 
+            }
+            else{
+                elements[tag] = Array.from(nodes);
+            }
+            elements[tag].map((node) => {
+                this.Nodes[node.getBoundingClientRect().top + window.pageYOffset - this._positionOffset] = node.id? node.id : `node ${index}`; 
+            });
+            this.Positions = Object.keys(this.Nodes).map((val) => { return parseFloat(val)});
+            index++; 
+        }
+    }
+
+    Watch({ State:State = true , Callback:Callback = undefined, scrollObserver:scrollObserver = undefined}){
+        if(State)
+        {
+            if(Callback !== undefined) this.Subscribers[Callback.name] = Callback;
+            else return console.error('No callback');
+
+            if (scrollObserver === undefined) {
+                if(this.ScrollObserver === undefined) {
+                    if(ScrollObserver.ActiveObservers.length > 0){
+                        this.ScrollObserver = ScrollObserver.ActiveObservers[0];
+                    }
+                    else {
+                        this.ScrollObserver = new ScrollObserver();
+                    }
+                }
+            } 
+
+            else if(this.ScrollObserver === undefined){
+                this.ScrollObserver = ScrollObserver;
+            }
+
+
+            this.ScrollObserver.On('OnScrollMove', () => {
+                for (let i = 0; i < this.Positions.length; i++) {
+                    const position = this.Positions[i];
+                    if(window.pageYOffset >= position && 
+                        !(window.pageYOffset >= this.Positions[i+1]) && 
+                            position != this._lastPosition){
+                                this._lastPosition = position;
+                                if(Callback !== undefined){
+                                    for (const subscriber in this.Subscribers) {
+                                        this.Subscribers[subscriber](position, this.Nodes);
+                                    }
+                                    break;
+                                }
+                    }
+                }
+
+            })
+        }
+        else{
+            for (const method in this.Subscribers) {
+                if(method == Callback.name){
+                    delete this.Subscribers[method];
+                    return;
+                }
+            }
+        }
+    }
+
+    CurrentSection(){
+        let windowPosition = window.pageYOffset;
+        for (let i = 0; i < this.Positions.length; i++) {
+            const sectionPosition = this.Positions[i];
+            if(windowPosition >= sectionPosition && 
+                !(windowPosition >= this.Positions[i+1])){
+                    return this.Nodes[this.Positions[i]];
+            }
+            else if(windowPosition < this.Positions[0]){
+                console.log('returning value')
+                return this.Nodes[this.Positions[0]];
+            }
+        }
+    }
+
+}
+
+class ActiveMenuLink{
+
+    constructor(){
+        this.ActiveButton = undefined;
+        this.NewButton = undefined;
+    }
+
+    static ScrollIntoView = false;
+
+    ScrollingIntoView(state){
+        ActiveMenuLink.ScrollIntoView = state;
+    }
+
+    async Change({
+        SectionID = undefined
+    }){
+
+        if(!ActiveMenuLink.ScrollIntoView){
+            if(this.ActiveButton == undefined) this.ActiveButton =  document.querySelector('.current');
+            this.NewButton = document.querySelector(SectionID[0] == '#'? `${SectionID}--button` : `#${SectionID}--button`);
+
+            if(this.NewButton != undefined){
+                if(this.ActiveButton.id != this.NewButton.id){
+                    this.ActiveButton.classList.remove("current");
+                    this.ActiveButton = this.NewButton.parentElement;
+                    this.ActiveButton.classList.add("current");
+                }
+            }
+            else return new console.error("Can't find node with specified ID");
+
+        }
+    }
+}
+
+let ActiveMenu = new ActiveMenuLink();
+
+
+let ActiveSection = new WatchScrollPosition();
+ActiveSection.GetElements({Tags:'section',ExcludedIDs:['content','slider']});
+ActiveSection.Watch({State:true, Callback: (pos,arr) => {
+    ActiveMenu.Change({SectionID: arr[pos]});
+}});
+
+
+ActiveMenu.Change({SectionID: ActiveSection.CurrentSection()});
+let ScrollIntoView = async (element = undefined) => {
+    if(element != undefined){
+
+        ActiveMenu.Change({SectionID:element});
+        ActiveMenu.ScrollingIntoView(true);
+        ActiveSection.Watch({State:true, Callback: function Unsubscribe(pos, arr){
+            if(`#${arr[pos]}` == element){
+                ActiveSection.Watch({State:false, Callback: Unsubscribe})
+                ActiveMenu.ScrollingIntoView(false);
+            }
+        }});
+
+        let node = document.querySelector(element == '#home'? '#header' : element);
+        node.scrollIntoView({
+            behavior: 'smooth',
+            alignToTop: 'false'
+        });
+
+    }  
+}
+
+let menuButtons = document.querySelectorAll('.menu-container li>a');
+let registerButtons = (buttons) => {
+    for (const button of buttons) {
+        let sectionId = `#${button.id.split("--")[0]}`;
+        button.addEventListener('click', () => {
+            ScrollIntoView(sectionId);
+        });
+    }
+}
+registerButtons(menuButtons);
+
+
+/* let scrolling = new ScrollDirection();
+scrolling.On('OnScrollMove',(k) => {console.log(k.detail)}) */
+
+/* class CurrentSection{
+
+    constructor({observerOptions:observerOptions, 
+                customCallback:customCallback, 
+                observerTargets:observerTargets} = {
+                    observerOptions:undefined, 
+                    customCallback:undefined,
+                    observerTargets:undefined
+                }){
+
+        this.Options = observerOptions;
+        this.Callback = (customCallback != undefined) ? customCallback : (v) => { this._defaultCallback(v) };
+        this.IntersectionRatio = { previous: undefined, current: undefined };
+        this.Target = {active: undefined, current: undefined};
+        this.isIntersecting = false;
+        this.State = { ascending: false, descending: false };
+ 
+        this._numberOfSignedEvents = 0;
+
+        this.Observer = new IntersectionObserver(this.Callback, {
+            threshold: this.Options
+        });
+
+        this.IsInitialized = false;
+        this.ActiveTargets = [];
+
+        for (const target of observerTargets) {
+            this.Observer.observe(target);
+        }
+
+        this.ObserverContainer = document.createDocumentFragment().appendChild(document.createElement('div'));
+        this.ObserverContainer.setAttribute('id', 'SectionObserver');
+        document.body.appendChild(this.ObserverContainer);
+        this.DocumentPosition = {previous:0, current: 0};
+    }
+
+    On(event = '', callBack = undefined){
+        if(callBack !== undefined){
+            if(event === 'OnSectionChange'){
+                this.ObserverContainer.addEventListener('OnSectionChange', callBack);
+                this._numberOfSignedEvents += 1;
+            }
+            else{
+                return console.error("Only event supported is OnSectionChange");
+            }
+        }
+        else console.error('Callback is undefined.');
+    }
+
+    Off(event = '', callBack = undefined){
+        if(callBack !== undefined){
+            if(event === 'OnSectionChange'){
+                this.scrollMarker.container.removeEventListener('OnSectionChange', callBack);
+                this._numberOfSignedEvents -= 1;
+            }
+            else{
+                return console.error("Only event supported is OnSectionChange");
+            }
+        }
+        else console.error('Callback is undefined.');
+    }
+
+    _defaultCallback(entries){
+        if(this.IsInitialized && this._numberOfSignedEvents > 0) {
+
+            for (const entry of entries) {
+
+                this.DocumentPosition.current = entry.target.getBoundingClientRect().y + window.scrollY;
+                this.Target.current = entry.target;
+                this.IntersectionRatio.current = entry.intersectionRatio;
+
+                if(entry.isIntersecting && this.Target.current != this.Target.previous){
+                    if(this.IntersectionRatio.current > this.IntersectionRatio.previous){
+                        if(this.DocumentPosition.current > this.DocumentPosition.previous){
+                            this.Target.previous = entry.target;
+                            console.log('Entering and Going Down');
+                        }
+                    }
+                    if(this.IntersectionRatio.current < this.IntersectionRatio.previous){
+                        if(this.DocumentPosition.current < this.DocumentPosition.previous){
+                            this.Target.previous = entry.target;
+                            console.log('Entering and Going Up');
+                        }
+                    }
+                }
+
+                if(!entry.isIntersecting && entry.intersectionRatio == 0){
+                    if(window.scrollY < this.DocumentPosition.current){
+                        console.log('Leaving and Going UP');
+                    }
+                    if(window.scrollY > this.DocumentPosition.current){
+                        console.log('Leaving and Going Down');
+                    }
+                }
+
+                this.DocumentPosition.previous = this.DocumentPosition.current;
+                this.IntersectionRatio.current = entry.intersectionRatio;
+            }
+        }
+        else {
+            this.IsInitialized = true;
+            this.IntersectionRatio.previous = 0;
+        }
+    }
+} */
+
+/* let sections = Array.from(document.querySelectorAll('section')).filter((section) => {
+    return section.id !== 'slider' && section.id !== 'content'; 
+});
+
+let sectionGuides = (() => {
+    for (const section of sections) {
+        console.log(section);
+    }
+})() */
+
+/* let sectionChanger = new CurrentSection({
+    observerOptions:[0], 
+    observerTargets: Array.from(document.querySelectorAll('section')).filter((section) => {
+        return section.id !== 'slider' && section.id !== 'content'; 
+    })
+});
+
+sectionChanger.On('OnSectionChange', (val) => {
+    changeActiveMenuLink({SectionID:val.detail.currentTarget.id})
+}); */
+
+/* let autoScrolling = false; */
+
+
+
+/* let isAtHome = new MutationObserver( (mutationList, observer)=> {
+    for (let mutation of mutationList) {
+        if (mutation.type == 'attributes' && mutation.attributeName == 'class'){
+            if(!mutation.target.classList.contains('gototop-active')){
+                changeActiveMenuLink({SectionID:'home'});
+            }
+        }
+    }
+});
+
+isAtHome.observe(document.querySelector('body'),{attributes:true}); */
+
+
+/* let sectionObserver = new ScrollDirection({observerOptions: () => {
+    let sections = Array.from(document.querySelectorAll(section)).filter((section) => {
+        return section.id !== 'slider' || section.id !== 'content'; 
+    });
+    return [0.001,0.009];
+}, customCallback: (entries) => {
+    if(this.Initialized){
+        
+        if(this._numberOfSignedEvents < 1) return console.error('No signed events');
+
+
+    }
+    else this.Initialized = true;
+}}); */
 
 /* fitty('#video-section-play-title', {multiline:true}); */
 /* fitty('#video-section-description-parent'); */
@@ -734,20 +1120,6 @@ for (const anchor of anchorList) {
     }
 }
 
-let activeSectionElement = document.querySelector('.current');
-
-let ScrollIntoView = (menuItem = undefined, element) => {
-    let node = document.querySelector(element);
-    node.scrollIntoView({
-        behavior: 'smooth',
-        alignToTop: 'false'
-    });
-    if(menuItem != undefined){
-        activeSectionElement.classList.remove("current");
-        menuItem.parentElement.classList.add("current");
-        activeSectionElement = menuItem.parentElement;
-    }
-}
 
 let menuIsOpen = false;
 let executeOnMenuOpened = new MutationObserver( (mutationList, observer)=> {
