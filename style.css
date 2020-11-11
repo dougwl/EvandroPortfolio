@@ -15964,6 +15964,10 @@ label.checkbox { padding-left: 20px; }
 	animation-name: fadeInRightSmall;
 }
 
+.sticky-header #header-wrap{
+	background: #5c5e73 !important;
+}
+
 
 @-webkit-keyframes fadeInUpSmall {
 	from {
@@ -16129,7 +16133,16 @@ label.checkbox { padding-left: 20px; }
 #header-wrap{
 	background-color: #4d4f60 !important;
 	border-top: hidden !important;
-}
+	transition: all 0.20s ease;
+	-webkit-transition: all 0.20s ease;
+	-moz-transition: all 0.20s ease;
+	-ms-transition: all 0.20s ease;
+	-o-transition: all 0.20s ease;
+} /* Changes navbar color and create transition. */
+
+#header-wrap[style="opacity: 0;"]{
+	visibility: hidden;
+} /* Hides the navbar when opacity is 0 */
 
 .header-row[search-active="false"] .header-misc {
 	flex-direction: row;
@@ -16167,13 +16180,17 @@ body:not(.device-touch) .sticky-header .header-misc:not([style~="visibility: hid
 	-o-transition: none !important;
 }
 
-/* .sticky-header .menu-container > .menu-item > .menu-link::after {
+/* #header #header-wrap[style="visibility: visible;"]{
+	background: yellow !important;
+} */
+
+.sticky-header #header-wrap[style="opacity: 0;"] .menu-container > .menu-item > .menu-link::after {
 	transition: none !important;
 	-webkit-transition: none !important;
 	-moz-transition: none !important;
 	-ms-transition: none !important;
 	-o-transition: none !important;
-} */ /* Commented out this line because it was disabling the menu link animations. */
+} /* Commented out this line because it was disabling the menu link animations. */
 
 .svg-themecolor{
 	fill: #4d4f60 !important;

@@ -598,7 +598,6 @@ class WatchScrollPosition{
                     return this.Nodes[this.Positions[i]];
             }
             else if(windowPosition < this.Positions[0]){
-                console.log('returning value')
                 return this.Nodes[this.Positions[0]];
             }
         }
@@ -641,7 +640,22 @@ class ActiveMenuLink{
 }
 
 let ActiveMenu = new ActiveMenuLink();
-
+let HideNavbar = new ScrollObserver();
+let Navbar = document.querySelector('#header-wrap');
+HideNavbar.On('OnScrollMove', (val) => {
+    /* if(Navbar.parentElement.classList.contains('sticky-header')){
+        
+    } */
+    if(val.detail.Up){
+        console.log('hoooh')
+        Navbar.style = "opacity: 1;"
+        console.log(Navbar.style)
+    }
+    else{
+        Navbar.style = "opacity: 0;"
+    }
+}) /* Instead of only hiding the navbar when the sticky-header class is enabled, it hides in any scroll down. 
+In this new version, the opacity is set to 0.*/
 
 let ActiveSection = new WatchScrollPosition();
 ActiveSection.GetElements({Tags:'section',ExcludedIDs:['content','slider']});
