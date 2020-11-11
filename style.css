@@ -16141,7 +16141,12 @@ label.checkbox { padding-left: 20px; }
 } /* Changes navbar color and create transition. */
 
 #header-wrap[style="opacity: 0;"]{
+	transform: translate(0,-110%);
 	visibility: hidden;
+	-webkit-transform: translate(0,-110%);
+	-moz-transform: translate(0,-110%);
+	-ms-transform: translate(0,-110%);
+	-o-transform: translate(0,-110%);
 } /* Hides the navbar when opacity is 0 */
 
 .header-row[search-active="false"] .header-misc {
