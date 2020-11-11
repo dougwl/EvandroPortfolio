@@ -16167,13 +16167,13 @@ body:not(.device-touch) .sticky-header .header-misc:not([style~="visibility: hid
 	-o-transition: none !important;
 }
 
-.sticky-header .menu-container > .menu-item > .menu-link::after {
+/* .sticky-header .menu-container > .menu-item > .menu-link::after {
 	transition: none !important;
 	-webkit-transition: none !important;
 	-moz-transition: none !important;
 	-ms-transition: none !important;
 	-o-transition: none !important;
-}
+} */ /* Commented out this line because it was disabling the menu link animations. */
 
 .svg-themecolor{
 	fill: #4d4f60 !important;
