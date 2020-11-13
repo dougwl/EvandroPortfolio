@@ -256,11 +256,11 @@ class VideoController{
             if(!this.loadIsComplete){
                 for (let player of this.players) {
                     if(player.elements.controls === undefined){
-                        console.log(this.players[0].elements.controls);
+                        /* console.log(this.players[0].elements.controls); */ /* This part of the code should be revised */
                        return await setTimeout(() => onInstanceCreated(), 0.1);
                     }
                 }
-                console.log('but setting to true');
+                /* console.log('but setting to true'); */
                 this.loadIsComplete = true;
             }
             code();
@@ -643,9 +643,6 @@ let ActiveMenu = new ActiveMenuLink();
 let HideNavbar = new ScrollObserver();
 let Navbar = document.querySelector('#header-wrap');
 HideNavbar.On('OnScrollMove', (val) => {
-    /* if(Navbar.parentElement.classList.contains('sticky-header')){
-        
-    } */
     if(val.detail.Up){
         console.log('hoooh')
         Navbar.style = "opacity: 1;"
@@ -697,168 +694,6 @@ let registerButtons = (buttons) => {
 }
 registerButtons(menuButtons);
 
-
-/* let scrolling = new ScrollDirection();
-scrolling.On('OnScrollMove',(k) => {console.log(k.detail)}) */
-
-/* class CurrentSection{
-
-    constructor({observerOptions:observerOptions, 
-                customCallback:customCallback, 
-                observerTargets:observerTargets} = {
-                    observerOptions:undefined, 
-                    customCallback:undefined,
-                    observerTargets:undefined
-                }){
-
-        this.Options = observerOptions;
-        this.Callback = (customCallback != undefined) ? customCallback : (v) => { this._defaultCallback(v) };
-        this.IntersectionRatio = { previous: undefined, current: undefined };
-        this.Target = {active: undefined, current: undefined};
-        this.isIntersecting = false;
-        this.State = { ascending: false, descending: false };
- 
-        this._numberOfSignedEvents = 0;
-
-        this.Observer = new IntersectionObserver(this.Callback, {
-            threshold: this.Options
-        });
-
-        this.IsInitialized = false;
-        this.ActiveTargets = [];
-
-        for (const target of observerTargets) {
-            this.Observer.observe(target);
-        }
-
-        this.ObserverContainer = document.createDocumentFragment().appendChild(document.createElement('div'));
-        this.ObserverContainer.setAttribute('id', 'SectionObserver');
-        document.body.appendChild(this.ObserverContainer);
-        this.DocumentPosition = {previous:0, current: 0};
-    }
-
-    On(event = '', callBack = undefined){
-        if(callBack !== undefined){
-            if(event === 'OnSectionChange'){
-                this.ObserverContainer.addEventListener('OnSectionChange', callBack);
-                this._numberOfSignedEvents += 1;
-            }
-            else{
-                return console.error("Only event supported is OnSectionChange");
-            }
-        }
-        else console.error('Callback is undefined.');
-    }
-
-    Off(event = '', callBack = undefined){
-        if(callBack !== undefined){
-            if(event === 'OnSectionChange'){
-                this.scrollMarker.container.removeEventListener('OnSectionChange', callBack);
-                this._numberOfSignedEvents -= 1;
-            }
-            else{
-                return console.error("Only event supported is OnSectionChange");
-            }
-        }
-        else console.error('Callback is undefined.');
-    }
-
-    _defaultCallback(entries){
-        if(this.IsInitialized && this._numberOfSignedEvents > 0) {
-
-            for (const entry of entries) {
-
-                this.DocumentPosition.current = entry.target.getBoundingClientRect().y + window.scrollY;
-                this.Target.current = entry.target;
-                this.IntersectionRatio.current = entry.intersectionRatio;
-
-                if(entry.isIntersecting && this.Target.current != this.Target.previous){
-                    if(this.IntersectionRatio.current > this.IntersectionRatio.previous){
-                        if(this.DocumentPosition.current > this.DocumentPosition.previous){
-                            this.Target.previous = entry.target;
-                            console.log('Entering and Going Down');
-                        }
-                    }
-                    if(this.IntersectionRatio.current < this.IntersectionRatio.previous){
-                        if(this.DocumentPosition.current < this.DocumentPosition.previous){
-                            this.Target.previous = entry.target;
-                            console.log('Entering and Going Up');
-                        }
-                    }
-                }
-
-                if(!entry.isIntersecting && entry.intersectionRatio == 0){
-                    if(window.scrollY < this.DocumentPosition.current){
-                        console.log('Leaving and Going UP');
-                    }
-                    if(window.scrollY > this.DocumentPosition.current){
-                        console.log('Leaving and Going Down');
-                    }
-                }
-
-                this.DocumentPosition.previous = this.DocumentPosition.current;
-                this.IntersectionRatio.current = entry.intersectionRatio;
-            }
-        }
-        else {
-            this.IsInitialized = true;
-            this.IntersectionRatio.previous = 0;
-        }
-    }
-} */
-
-/* let sections = Array.from(document.querySelectorAll('section')).filter((section) => {
-    return section.id !== 'slider' && section.id !== 'content'; 
-});
-
-let sectionGuides = (() => {
-    for (const section of sections) {
-        console.log(section);
-    }
-})() */
-
-/* let sectionChanger = new CurrentSection({
-    observerOptions:[0], 
-    observerTargets: Array.from(document.querySelectorAll('section')).filter((section) => {
-        return section.id !== 'slider' && section.id !== 'content'; 
-    })
-});
-
-sectionChanger.On('OnSectionChange', (val) => {
-    changeActiveMenuLink({SectionID:val.detail.currentTarget.id})
-}); */
-
-/* let autoScrolling = false; */
-
-
-
-/* let isAtHome = new MutationObserver( (mutationList, observer)=> {
-    for (let mutation of mutationList) {
-        if (mutation.type == 'attributes' && mutation.attributeName == 'class'){
-            if(!mutation.target.classList.contains('gototop-active')){
-                changeActiveMenuLink({SectionID:'home'});
-            }
-        }
-    }
-});
-
-isAtHome.observe(document.querySelector('body'),{attributes:true}); */
-
-
-/* let sectionObserver = new ScrollDirection({observerOptions: () => {
-    let sections = Array.from(document.querySelectorAll(section)).filter((section) => {
-        return section.id !== 'slider' || section.id !== 'content'; 
-    });
-    return [0.001,0.009];
-}, customCallback: (entries) => {
-    if(this.Initialized){
-        
-        if(this._numberOfSignedEvents < 1) return console.error('No signed events');
-
-
-    }
-    else this.Initialized = true;
-}}); */
 
 /* fitty('#video-section-play-title', {multiline:true}); */
 /* fitty('#video-section-description-parent'); */
@@ -932,23 +767,20 @@ function LoadIframes(){
 
 /* document.body.addEventListener('load', LoadIframes()); */
 
+
 let EnableOverlay = new function() {
+
     let videoSection = document.querySelector("#video-section-play-title");
-    let playButton, overlay;
+    let playButton = videoSection.querySelector('.play-video');
+    let overlay = videoSection.querySelector('.video-overlay');
     let carouselButtons = document.querySelectorAll(".flickity-button");
     let videoDescriptions = document.querySelector(".video-overlay--descriptions").children;
     let videoCarousel = document.querySelector(".video-carousel");
-
-    for (let node of videoSection.children) {
-        if(node.classList.contains("play-video")) playButton = node;
-        if(node.classList.contains("video-overlay")) overlay = node;
-    }
 
     playButton.addEventListener('click',() =>{
 
         if(playerController === undefined){
             LoadIframes();
-            /* playerController = new VideoController(Plyr.setup('.video-player')); */
         }
 
         function enableOverlay(isActive) {
@@ -980,7 +812,8 @@ let EnableOverlay = new function() {
         let stopOnEnd = (ev) => {
             ev.detail.plyr.stop();
         };
-        let executeOnPlay = (ev) =>{
+
+        let executeOnPlay = () =>{
             playerController.ShowAllControls();
             for (const button of carouselButtons) {
                 let hideButton = () => button.classList.add("flickity-button--hidden");
@@ -991,24 +824,6 @@ let EnableOverlay = new function() {
                 playerController.ExecuteOnAllPlayers((player) => player.elements.container.addEventListener('pause', showButton));
                 hideButton();
             }
-
-            /* let overlay = ev.target.querySelector(".obscure-on-pause");
-            let showPauseOverlay = (ev) => {
-                overlay.classList.add("--active");
-                ev.target.removeEventListener('pause', showPauseOverlay);
-                let disableOnSlideChange = () => {
-                    ev.target.removeEventListener('pause', showPauseOverlay);
-                    overlay.classList.remove("--active");
-                    OverlayCarousel.instance.off('change', disableOnSlideChange);
-                };
-                OverlayCarousel.instance.on('change', disableOnSlideChange);
-            };
-
-            ev.target.addEventListener('pause', showPauseOverlay);
-
-            if(overlay.classList.contains("--active")){
-                overlay.classList.remove("--active");
-            } */
         }
 
         playerController.ExecuteOnAllPlayers((player) => {
@@ -1051,11 +866,6 @@ let EnableOverlay = new function() {
         });
 
         OverlayCarousel.instance.resize();
-
-
-        /* overlay.firstElementChild.addEventListener('click', function PreventParentClick(ev) {
-            ev.stopPropagation();
-        });  */
     });
 };
 

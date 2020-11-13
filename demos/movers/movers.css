@@ -5,8 +5,8 @@
 /* Root Settings
 -----------------------------------------------------------------*/
 :root {
-	--themecolor:  				#5A4D4D; /* #0F66DD */
-	--themecolorrgb: 			90,77,77; /* 25,102,221; */
+	--themecolor:  				#4D4F60; /* #0F66DD */
+	--themecolorrgb: 			77,79,96; /* 25,102,221; */
 
 	--headerbg: 				var(--themecolor);
 	--primary-menu-font-size: 	15px;
