@@ -870,7 +870,7 @@ let EnableOverlay = new function() {
 };
 
 
-let searchButton = document.getElementById("top-search-trigger");
+/* let searchButton = document.getElementById("top-search-trigger");
 let searchPanel = searchButton.closest(".header-row");
 searchPanel.setAttribute('search-active',false);
 
@@ -909,7 +909,7 @@ searchButton.addEventListener('click', () => {
         searchInput.removeEventListener('input', typedOnSearchBar);
         document.removeEventListener('click', searchBlur);
     }
-})
+}) */ /* Disabled search features */
 
 // Update the contact form to the correct city, based on the button pressed.
 let anchorList = document.getElementsByClassName('nav-link py-3');
