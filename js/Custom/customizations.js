@@ -770,7 +770,7 @@ function LoadIframes(){
 
 let EnableOverlay = new function() {
 
-    let videoSection = document.querySelector("#video-section-play-title");
+    let videoSection = document.querySelector("#video-section-play-title"); /* Make this whole function as a class and remove this query, by searching the children directly. */
     let playButton = videoSection.querySelector('.play-video');
     let overlay = videoSection.querySelector('.video-overlay');
     let carouselButtons = document.querySelectorAll(".flickity-button");

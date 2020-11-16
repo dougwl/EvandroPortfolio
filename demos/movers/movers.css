@@ -138,10 +138,19 @@
 	border-top-left-radius: 0.25rem; 
 }
 #slider .nav .nav-item:last-child { border-top-right-radius: 0.25rem; }
-#slider .nav-link { border: 1px solid rgba(255, 255, 255, .1); }
+#slider .nav-link {
+	border: 1px solid rgba(255, 255, 255, .1);
+	transition: transform 0.1s ease-out;  
+	-webkit-transition: transform 0.1s ease-out;
+	-moz-transition: transform 0.1s ease-out;
+	-ms-transition: transform 0.1s ease-out;
+	-o-transition: transform 0.1s ease-out;
+}
+
 #slider .nav-link:not(.active) {
 	color: #FFF;
 	background-color: rgba(255, 255, 255, .15);
+	transform: translateY(5%);
 }
 
 #slider .nav-link:hover:not(.active) {
@@ -359,7 +368,7 @@ footer .list-unstyled li a,
 #header-wrap .header-buttons {
 	margin-left: 1rem;
 	padding-left: 1.5rem;
-	border-left: 2px solid rgba(255, 255, 255, 0.4);
+	/* border-left: 2px solid rgba(255, 255, 255, 0.4); */ /* Disable border between the search and whatsapp buttons */
 }
 
 .header-extras li:not(:first-child) {
