@@ -16754,3 +16754,9 @@ button.video-overlay-close{
 	text-align: center;
 	box-sizing: border-box;
 }
+
+#especialidades .clearfix{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
