@@ -16754,6 +16754,11 @@ button.video-overlay-close{
 	box-sizing: border-box;
 }
 
+.about-especialidades-content li{
+	list-style-type: none;
+	text-align: left;
+}
+
 #especialidades .clearfix{
 	display: flex;
 	justify-content: center;
