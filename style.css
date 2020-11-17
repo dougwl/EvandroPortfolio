@@ -16736,7 +16736,7 @@ button.video-overlay-close{
 	max-width: 800px;
 	min-height: 700px;
 	margin: 50px -6px 50px -6px;
-	padding: 124px;
+	padding: 100px;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
@@ -16756,7 +16756,20 @@ button.video-overlay-close{
 
 .about-especialidades-content li{
 	list-style-type: none;
-	text-align: left;
+	text-align: center;
+}
+
+.about-especialidades-content img{
+	max-width: 65px;
+	vertical-align: middle;
+	display: inline-block;
+	border: 0;
+	box-sizing: border-box;
+	padding-bottom: 20px;
+}
+
+.about-especialidades-content h2 {
+	margin-bottom: 30px;
 }
 
 #especialidades .clearfix{
