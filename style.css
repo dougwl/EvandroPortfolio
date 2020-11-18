@@ -16716,7 +16716,8 @@ button.video-overlay-close{
 
 #wave-separator-bottom{
 	/* background: #4d4f60; */
-	background: linear-gradient(180deg, rgba(77,79,96,0.9) 15%, rgba(77,79,96,0.75) 37%, rgba(77,79,96,0.25) 71%, rgba(201,202,207,0.2) 84%, rgba(255,255,255,0.5) 94%, rgba(255,255,255,0.5) 100%);
+	/* background: linear-gradient(180deg, rgba(77,79,96,0.9) 15%, rgba(77,79,96,0.75) 37%, rgba(77,79,96,0.25) 71%, rgba(201,202,207,0.2) 84%, rgba(255,255,255,0.5) 94%, rgba(255,255,255,0.5) 100%); */
+	background: linear-gradient(180deg, rgba(215, 215, 215, 0.9) 15%, rgba(215, 215, 219, 0.75) 37%, rgba(168, 169, 170, 0.25) 71%, rgba(201,202,207,0.2) 84%, rgba(255,255,255,0.5) 94%, rgba(255,255,255,0.5) 100%);
 	margin-bottom: 80px !important;
 }
 
