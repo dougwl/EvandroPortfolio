@@ -16778,3 +16778,12 @@ button.video-overlay-close{
 	justify-content: center;
 	align-items: center;
 }
+
+.perfil-detalhes--link-wrapper{
+	display: grid;
+	grid-auto-columns: 1fr;
+	column-gap: 16px;
+	row-gap: 16px;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto auto;
+}
