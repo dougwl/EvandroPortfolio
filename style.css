@@ -16779,6 +16779,54 @@ button.video-overlay-close{
 	align-items: center;
 }
 
+
+
+@media screen and (min-width: 1032px){
+	.perfil-container{
+		max-width: 1032px;
+	}
+}
+
+.perfil-container{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: center;
+	line-height: 16px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.perfil-container p{
+	max-width: 850px;
+	text-align: center;
+}
+
+.perfil-container p:nth-of-type(1n){
+	padding-bottom: 20px;
+}
+
+.perfil-detalhes--block{
+	display:flex;
+	align-items: flex-start;
+}
+
+.perfil-detalhes--block a{
+	position: relative;
+	display: flex;
+	overflow: hidden;
+	padding: 24px;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	line-height: 24px;
+	max-width: 100%;
+}
+
+.perfil-detalhes--block img{
+	padding-right: 40px;
+}
+
 .perfil-detalhes--link-wrapper{
 	display: grid;
 	grid-auto-columns: 1fr;
@@ -16786,4 +16834,9 @@ button.video-overlay-close{
 	row-gap: 16px;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: auto auto;
+}
+
+#curriculo-session{
+	grid-column-start: 1;
+	grid-column-end: 3;
 }
