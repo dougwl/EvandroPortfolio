@@ -16932,6 +16932,20 @@ button.video-overlay-close{
 	margin-left: 160px;
 }
 
+#especialidades h2{
+	align-items: center;
+	text-align: center;
+	font-size: 48px;
+	font-weight: 1000;
+	margin-bottom: 10px;
+}
+
+#especialidades h3{
+	font-size: 18px;
+	font-weight: 600;
+	text-align: center;
+}
+
 /* flex-wrap: wrap;
 flex-direction: column;
 grid-template-columns: 1fr 1fr; */
