@@ -1002,6 +1002,34 @@ jQuery('.home-date').datepicker({
 });
 
 
-
 /* testing.On('OnScrollDown',()=>{}); */
 
+
+let perfilButtons = {curriculo,simposios,publicacoes};
+perfilButtons.curriculo = document.getElementById("curriculo-session");
+perfilButtons.simposios = document.getElementById("simposios-session");
+perfilButtons.publicacoes = document.getElementById("publicacoes-session");
+
+let enableSession = (el) => {
+    let block = document.getElementsByClassName('perfil-container')[0];
+    block.classList.add('--active');
+    for (const button of perfilButtons) {
+        if(button.id != el.id){
+            if(!button.classList.contains('--inactive')){
+                button.classList.add('--inactive');
+            }
+        }
+        else{
+            if(button.classList.contains('--inactive')){
+                button.classList.remove('--inactive');
+            }
+            if(!button.classList.contains('--active')){
+                button.classList.add('--active');
+            }
+        }
+    }
+};
+
+for (const button of perfilButtons) {
+    button.addEventListener('click', enableSession);
+}
