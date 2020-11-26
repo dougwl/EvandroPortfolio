@@ -16868,6 +16868,7 @@ button.video-overlay-close{
 	row-gap: 16px;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: auto auto;
+	position: relative;
 }
 
 .perfil-detalhes--link-wrapper a{
@@ -16876,6 +16877,19 @@ button.video-overlay-close{
 
 .perfil-detalhes--link-wrapper p{
 	margin-bottom: 0;
+}
+
+.perfil-detalhes--link-wrapper a:not(.--active) ul:not(.perfil-detalhes--placeHolder),
+.perfil-detalhes--link-wrapper a:not(.--active) p:not(.perfil-detalhes--placeHolder),
+.perfil-detalhes--link-wrapper a.--active ul.perfil-detalhes--placeHolder,
+.perfil-detalhes--link-wrapper a.--active p.perfil-detalhes--placeHolder{
+	display: none;
+}
+
+@media (min-width: 800px){
+	.perfil-detalhes--link-wrapper{
+		min-width: 675px;
+	}
 }
 
 .perfil-container .external-link-arrow{
@@ -16913,6 +16927,10 @@ button.video-overlay-close{
 	grid-column-end: 3;
 }
 
+.perfil-detalhes--placeHolder.--inactive{
+	display: none;
+}
+
 #curriculo-session ul{
 	margin-bottom: 0 !important;
 	padding-left: 10px;
@@ -16945,6 +16963,28 @@ button.video-overlay-close{
 	font-weight: 600;
 	text-align: center;
 }
+
+.perfil-detalhes--link-wrapper a.--active{
+	animation: switchPosition 600ms ease-in;
+	-webkit-animation: switchPosition 600ms ease-in;
+	grid-column-start: 1;
+	grid-column-end: 3;
+}
+
+
+@keyframes switchPosition{
+	from{
+		opacity: 0;
+	}
+	75%{
+		display: revert;
+		opacity:0.75;
+	}
+	to{
+		opacity: 1;
+	}
+}
+
 
 .perfil-container.--active .perfil-sobre,
 .perfil-container.--active a:not(.--active){

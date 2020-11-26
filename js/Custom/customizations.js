@@ -1009,13 +1009,12 @@ perfilButtons.simposios = document.getElementById("simposio-session");
 perfilButtons.publicacoes = document.getElementById("publicacoes-session");
 
 let enableSession = (el) => {
+    let activeButton = el.currentTarget;
+    let block = document.getElementsByClassName('perfil-container')[0];
     if(!el.currentTarget.classList.contains('--active')){
-        let activeButton = el.currentTarget;
-        let block = document.getElementsByClassName('perfil-container')[0];
         block.classList.add('--active');
         for (let button in perfilButtons) {
             button = perfilButtons[button];
-            console.log(`button:${button.id}, el:${el.id}`);
             if(button.id != activeButton.id){
                 if(!button.classList.contains('--inactive')){
                     button.classList.add('--inactive');
@@ -1029,6 +1028,14 @@ let enableSession = (el) => {
                     button.classList.add('--active');
                 }
             }
+        }
+    }
+    else{
+        block.classList.remove('--active');
+        el.currentTarget.classList.remove('--active');
+        for (let button in perfilButtons) {
+            button = perfilButtons[button];
+            button.classList.remove('--inactive');
         }
     }
 };
