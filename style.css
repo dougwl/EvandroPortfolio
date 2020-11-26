@@ -16946,6 +16946,12 @@ button.video-overlay-close{
 	text-align: center;
 }
 
+.perfil-container.--active .perfil-sobre,
+.perfil-container.--active a:not(.--active){
+	display: none;
+}
+
+
 /* flex-wrap: wrap;
 flex-direction: column;
 grid-template-columns: 1fr 1fr; */

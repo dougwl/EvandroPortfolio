@@ -644,9 +644,7 @@ let HideNavbar = new ScrollObserver();
 let Navbar = document.querySelector('#header-wrap');
 HideNavbar.On('OnScrollMove', (val) => {
     if(val.detail.Up){
-        console.log('hoooh')
         Navbar.style = "opacity: 1;"
-        console.log(Navbar.style)
     }
     else{
         Navbar.style = "opacity: 0;"
@@ -1005,31 +1003,37 @@ jQuery('.home-date').datepicker({
 /* testing.On('OnScrollDown',()=>{}); */
 
 
-let perfilButtons = {curriculo,simposios,publicacoes};
+let perfilButtons = {};
 perfilButtons.curriculo = document.getElementById("curriculo-session");
-perfilButtons.simposios = document.getElementById("simposios-session");
+perfilButtons.simposios = document.getElementById("simposio-session");
 perfilButtons.publicacoes = document.getElementById("publicacoes-session");
 
 let enableSession = (el) => {
-    let block = document.getElementsByClassName('perfil-container')[0];
-    block.classList.add('--active');
-    for (const button of perfilButtons) {
-        if(button.id != el.id){
-            if(!button.classList.contains('--inactive')){
-                button.classList.add('--inactive');
+    if(!el.currentTarget.classList.contains('--active')){
+        let activeButton = el.currentTarget;
+        let block = document.getElementsByClassName('perfil-container')[0];
+        block.classList.add('--active');
+        for (let button in perfilButtons) {
+            button = perfilButtons[button];
+            console.log(`button:${button.id}, el:${el.id}`);
+            if(button.id != activeButton.id){
+                if(!button.classList.contains('--inactive')){
+                    button.classList.add('--inactive');
+                }
             }
-        }
-        else{
-            if(button.classList.contains('--inactive')){
-                button.classList.remove('--inactive');
-            }
-            if(!button.classList.contains('--active')){
-                button.classList.add('--active');
+            else{
+                if(button.classList.contains('--inactive')){
+                    button.classList.remove('--inactive');
+                }
+                if(!button.classList.contains('--active')){
+                    button.classList.add('--active');
+                }
             }
         }
     }
 };
 
-for (const button of perfilButtons) {
-    button.addEventListener('click', enableSession);
+for (let button in perfilButtons) {
+    button = perfilButtons[button];
+    button.addEventListener('click', enableSession, true);
 }
