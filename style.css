@@ -16891,6 +16891,10 @@ button.video-overlay-close{
 	position: absolute;
 }
 
+.perfil-container.--active [class$=--link-wrapper] > a > :not(img):not(.external-link-arrow):not(.external-link-close){
+	min-width: 100%;
+}
+
 .perfil-container:not(.--active) [class$=--link-wrapper] > a:nth-child(1){
 	grid-column-start: 1;
 	grid-column-end: 3;
@@ -16919,7 +16923,8 @@ button.video-overlay-close{
 	bottom: revert;
 	min-height: 450px;
 	max-height: 100%;
-	overflow-y: scroll;
+	overflow: auto;
+	overflow-x: hidden;
 	flex-direction: row;
 	animation: switchPosition 600ms ease-in;
 	-webkit-animation: switchPosition 600ms ease-in;
@@ -16946,10 +16951,11 @@ button.video-overlay-close{
 	}
 }
 
-.perfil-container .external-link-arrow{
+.perfil-container:not(.--active) a .external-link-arrow,
+.perfil-container.--active a .external-link-close{
 	position: absolute;
 	left: auto;
-	top: 24px;
+	top: 32px;
 	right: 28px;
 	bottom: auto;
 	opacity: 0.5;
@@ -16967,6 +16973,10 @@ button.video-overlay-close{
 	-o-transition: transform 100ms ease-in;
 }
 
+.perfil-container.--active a .external-link-close{
+	font-size: 20px !important;
+}
+
 .perfil-container a:hover .external-link-arrow{
 	transform: translate3d(8px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg);
 	transform-style: preserve-3d;
@@ -16976,13 +16986,28 @@ button.video-overlay-close{
 	-o-transform: translate3d(8px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg);
 }
 
+.perfil-container.--active a .external-link-arrow,
+.perfil-container:not(.--active) a .external-link-close{
+	display: none;
+}
+
 .perfil-detalhes--placeHolder.--inactive{
 	display: none;
 }
 
-#curriculo-session ul{
+#curriculo-session ul,
+#publicacoes-session ul{
 	margin-bottom: 0 !important;
 	padding-left: 10px;
+}
+
+.--active #publicacoes-session li{
+	font-size: 1em;
+	margin-bottom: 10px;
+}
+
+.--active #publicacoes-session li > cite {
+	font-weight: 800;
 }
 
 .perfil-sobre{
@@ -17017,6 +17042,32 @@ button.video-overlay-close{
 	display: none;
 }
 
+.whatsapp-chat-bubble{
+    position: fixed;
+    top: auto;
+    left: auto;
+    right: 2em;
+    bottom: 2em;
+}
+
+.whatsapp-chat-bubble-extra{
+	position: absolute;
+	white-space: nowrap;
+	top: calc(var(--sticky-height) + var(--mobile-creep-offset));
+	right: 0;
+	left: 0;
+	opacity: 1;
+	-webkit-transition: opacity .2s ease;
+	transition: opacity .2s ease;
+}
+
+@media (min-width: 768px){
+	.whatsapp-chat-bubble{
+		top: unset;
+		right: calc(50% - 36px);
+		left: unset;
+	}
+}
 
 /* flex-wrap: wrap;
 flex-direction: column;
