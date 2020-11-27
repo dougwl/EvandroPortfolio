@@ -16886,9 +16886,63 @@ button.video-overlay-close{
 	display: none;
 }
 
+.perfil-container [class$=--link-wrapper] > a{
+	min-width: 100%;
+	position: absolute;
+}
+
+.perfil-container:not(.--active) [class$=--link-wrapper] > a:nth-child(1){
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 1;
+}
+
+.perfil-container:not(.--active) [class$=--link-wrapper] > a:nth-child(2){
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 2;
+	bottom: 0;
+}
+
+.perfil-container:not(.--active) [class$=--link-wrapper] > a:nth-child(3){
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	bottom: 0;
+}
+
+.--active [class$=--link-wrapper] a.--active{
+	grid-column-start: 1 !important;
+	grid-column-end: 3 !important;
+	grid-row-start: 1 !important;
+	top: 0;
+	bottom: revert;
+	min-height: 450px;
+	max-height: 100%;
+	overflow-y: scroll;
+	flex-direction: row;
+	animation: switchPosition 600ms ease-in;
+	-webkit-animation: switchPosition 600ms ease-in;
+}
+
+@keyframes switchPosition{
+	from{
+		opacity: 0;
+	}
+	75%{
+		display: revert;
+		opacity:0.75;
+	}
+	to{
+		opacity: 1;
+	}
+}
+
 @media (min-width: 800px){
 	.perfil-detalhes--link-wrapper{
 		min-width: 675px;
+		min-height: 450px;
+		max-height: 450px;
 	}
 }
 
@@ -16920,11 +16974,6 @@ button.video-overlay-close{
 	-moz-transform: translate3d(8px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg);
 	-ms-transform: translate3d(8px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg);
 	-o-transform: translate3d(8px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg);
-}
-
-#curriculo-session{
-	grid-column-start: 1;
-	grid-column-end: 3;
 }
 
 .perfil-detalhes--placeHolder.--inactive{
@@ -16964,29 +17013,6 @@ button.video-overlay-close{
 	text-align: center;
 }
 
-.perfil-detalhes--link-wrapper a.--active{
-	animation: switchPosition 600ms ease-in;
-	-webkit-animation: switchPosition 600ms ease-in;
-	grid-column-start: 1;
-	grid-column-end: 3;
-}
-
-
-@keyframes switchPosition{
-	from{
-		opacity: 0;
-	}
-	75%{
-		display: revert;
-		opacity:0.75;
-	}
-	to{
-		opacity: 1;
-	}
-}
-
-
-.perfil-container.--active .perfil-sobre,
 .perfil-container.--active a:not(.--active){
 	display: none;
 }
