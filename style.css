@@ -16819,6 +16819,11 @@ button.video-overlay-close{
 	margin-bottom: 10px;
 }
 
+.perfil-container > h3{
+	font-size: 18px;
+	font-weight: 600;
+}
+
 .perfil-detalhes--block{
 	display:flex;
 	align-items: flex-start;
@@ -16830,7 +16835,6 @@ button.video-overlay-close{
 	overflow: hidden;
 	padding: 24px;
 	flex-direction: column;
-	flex-wrap: wrap;
 	align-items: flex-start;
 	line-height: 24px;
 	max-width: 100%;
@@ -16886,11 +16890,6 @@ button.video-overlay-close{
 	display: none;
 }
 
-.perfil-container [class$=--link-wrapper] > a{
-	min-width: 100%;
-	position: absolute;
-}
-
 .perfil-container.--active [class$=--link-wrapper] > a > :not(img):not(.external-link-arrow):not(.external-link-close){
 	min-width: 100%;
 }
@@ -16915,7 +16914,15 @@ button.video-overlay-close{
 	bottom: 0;
 }
 
-.--active [class$=--link-wrapper] a.--active{
+.perfil-container.--active [class$=--link-wrapper] > a,
+.perfil-container:not(.--active) [class$=--link-wrapper] > a{
+	min-width: 100%;
+	position: absolute;
+	animation: switchPosition 600ms ease-in;
+	-webkit-animation: switchPosition 600ms ease-in;
+} 
+
+.perfil-container.--active [class$=--link-wrapper] > a.--active{
 	grid-column-start: 1 !important;
 	grid-column-end: 3 !important;
 	grid-row-start: 1 !important;
@@ -16925,9 +16932,7 @@ button.video-overlay-close{
 	max-height: 100%;
 	overflow: auto;
 	overflow-x: hidden;
-	flex-direction: row;
-	animation: switchPosition 600ms ease-in;
-	-webkit-animation: switchPosition 600ms ease-in;
+	flex-direction: column;
 }
 
 @keyframes switchPosition{
@@ -17022,6 +17027,20 @@ button.video-overlay-close{
 
 .perfil-sobre img{
 	margin-left: 160px;
+}
+
+#curriculo-session h3{
+	position: relative;
+	align-self: flex-start;
+	margin-bottom: 0;
+}
+#curriculo-session h4{
+	font-size: 0.875rem;
+	font-weight: bold;
+	position: relative;
+	align-self: flex-start;
+	margin-top: 30px;
+	margin-bottom: 20px;
 }
 
 #especialidades h2{
