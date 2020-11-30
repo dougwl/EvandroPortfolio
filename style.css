@@ -16875,54 +16875,50 @@ button.video-overlay-close{
 	position: relative;
 }
 
-.perfil-detalhes--link-wrapper a{
+.perfil-detalhes--link-wrapper > a{
 	color: #555555;
-}
+	animation: switchPosition 600ms ease-in;
+	-webkit-animation: switchPosition 600ms ease-in;
+	min-width: 100%;
+	position: absolute;
+} 
 
 .perfil-detalhes--link-wrapper p{
 	margin-bottom: 0;
 }
 
-.perfil-detalhes--link-wrapper a:not(.--active) ul:not(.perfil-detalhes--placeHolder),
-.perfil-detalhes--link-wrapper a:not(.--active) p:not(.perfil-detalhes--placeHolder),
-.perfil-detalhes--link-wrapper a.--active ul.perfil-detalhes--placeHolder,
-.perfil-detalhes--link-wrapper a.--active p.perfil-detalhes--placeHolder{
+.perfil-detalhes--link-wrapper > a:not(.--active) ul:not(.perfil-detalhes--placeHolder),
+.perfil-detalhes--link-wrapper > a:not(.--active) p:not(.perfil-detalhes--placeHolder),
+.perfil-detalhes--link-wrapper > a.--active ul.perfil-detalhes--placeHolder,
+.perfil-detalhes--link-wrapper > a.--active p.perfil-detalhes--placeHolder{
 	display: none;
 }
 
-.perfil-container.--active [class$=--link-wrapper] > a > :not(img):not(.external-link-arrow):not(.external-link-close){
+.perfil-container.--active .perfil-detalhes--link-wrapper > a > :not(img):not(.external-link-arrow):not(.external-link-close){
 	min-width: 100%;
 }
 
-.perfil-container:not(.--active) [class$=--link-wrapper] > a:nth-child(1){
+.perfil-container:not(.--active) .perfil-detalhes--link-wrapper > a:nth-child(1){
 	grid-column-start: 1;
 	grid-column-end: 3;
 	grid-row-start: 1;
 }
 
-.perfil-container:not(.--active) [class$=--link-wrapper] > a:nth-child(2){
+.perfil-container:not(.--active) .perfil-detalhes--link-wrapper > a:nth-child(2){
 	grid-column-start: 1;
 	grid-column-end: 2;
 	grid-row-start: 2;
 	bottom: 0;
 }
 
-.perfil-container:not(.--active) [class$=--link-wrapper] > a:nth-child(3){
+.perfil-container:not(.--active) .perfil-detalhes--link-wrapper > a:nth-child(3){
 	grid-column-start: 2;
 	grid-column-end: 3;
 	grid-row-start: 2;
 	bottom: 0;
 }
 
-.perfil-container.--active [class$=--link-wrapper] > a,
-.perfil-container:not(.--active) [class$=--link-wrapper] > a{
-	min-width: 100%;
-	position: absolute;
-	animation: switchPosition 600ms ease-in;
-	-webkit-animation: switchPosition 600ms ease-in;
-} 
-
-.perfil-container.--active [class$=--link-wrapper] > a.--active{
+.perfil-container.--active .perfil-detalhes--link-wrapper > a.--active{
 	grid-column-start: 1 !important;
 	grid-column-end: 3 !important;
 	grid-row-start: 1 !important;
@@ -16935,12 +16931,15 @@ button.video-overlay-close{
 	flex-direction: column;
 }
 
+.perfil-container.--active .perfil-detalhes--link-wrapper > a:not(.--active){
+	display: none;
+}
+
 @keyframes switchPosition{
 	from{
 		opacity: 0;
 	}
 	75%{
-		display: revert;
 		opacity:0.75;
 	}
 	to{
@@ -17034,6 +17033,7 @@ button.video-overlay-close{
 	align-self: flex-start;
 	margin-bottom: 0;
 }
+
 #curriculo-session h4{
 	font-size: 0.875rem;
 	font-weight: bold;
@@ -17055,10 +17055,6 @@ button.video-overlay-close{
 	font-size: 18px;
 	font-weight: 600;
 	text-align: center;
-}
-
-.perfil-container.--active a:not(.--active){
-	display: none;
 }
 
 .whatsapp-chat-bubble{
