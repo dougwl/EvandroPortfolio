@@ -16889,6 +16889,7 @@ button.video-overlay-close{
 
 .perfil-detalhes--link-wrapper > a:not(.--active) ul:not(.perfil-detalhes--placeHolder),
 .perfil-detalhes--link-wrapper > a:not(.--active) p:not(.perfil-detalhes--placeHolder),
+.perfil-detalhes--link-wrapper > a:not(.--active) h3.--when-open,
 .perfil-detalhes--link-wrapper > a.--active ul.perfil-detalhes--placeHolder,
 .perfil-detalhes--link-wrapper > a.--active p.perfil-detalhes--placeHolder{
 	display: none;
@@ -17003,6 +17004,14 @@ button.video-overlay-close{
 #publicacoes-session ul{
 	margin-bottom: 0 !important;
 	padding-left: 10px;
+}
+
+#publicacoes-session h3.--when-open{
+	margin-top: 30px;
+}
+
+#publicacoes-session h3.--when-open + ul p{
+	margin-top: 15px;
 }
 
 .--active #publicacoes-session li{
