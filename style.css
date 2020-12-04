@@ -17001,7 +17001,8 @@ button.video-overlay-close{
 }
 
 #curriculo-session ul,
-#publicacoes-session ul{
+#publicacoes-session ul,
+#simposio-session ul{
 	margin-bottom: 0 !important;
 	padding-left: 10px;
 }
@@ -17014,12 +17015,14 @@ button.video-overlay-close{
 	margin-top: 15px;
 }
 
-.--active #publicacoes-session li{
+.--active #publicacoes-session li,
+.--active #simposio-session li{
 	font-size: 1em;
 	margin-bottom: 10px;
 }
 
-.--active #publicacoes-session li > cite {
+.--active #publicacoes-session li > cite,
+.--active #simposio-session li > cite {
 	font-weight: 800;
 }
 
