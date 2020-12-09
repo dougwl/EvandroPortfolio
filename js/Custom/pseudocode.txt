@@ -32,3 +32,10 @@ Else if Intersection Ratio is bigger than 0 AND New Intersection is smaller than
         Print (Going Down);
     }
 }
+
+min-height: 450px
+max-height: 
+
+width: min(max(50vw,400px), 600px);
+
+calc((min(50vw,675px)) )
