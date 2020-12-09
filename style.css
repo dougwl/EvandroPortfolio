@@ -17080,7 +17080,7 @@ button.video-overlay-close{
 }
 
 .perfil-sobre img{
-	margin-left: min(max(50px, max(1025px - 100vw, 100vw - 1025px) * 50), 90px);;
+	margin-left: min(max(50px, max(1025px - 100vw, 100vw - 1025px) * 50), 90px); /* I really love myself at this moment */
 }
 
 #curriculo-session h3{
