@@ -39,3 +39,11 @@ max-height:
 width: min(max(50vw,400px), 600px);
 
 calc((min(50vw,675px)) )
+
+height: min(max(450px,))
+
+
+min-height:450px;
+max-height:550px;
+
+min(max(800px,min(100vw, 100vh)))

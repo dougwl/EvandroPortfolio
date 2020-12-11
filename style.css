@@ -16862,7 +16862,8 @@ button.video-overlay-close{
 
 .perfil-detalhes--block img{
 /* 	max-width: 400px; */
-	padding-right: 40px;
+	margin-right: 40px;
+	margin-left: 40px;
 	/* padding-left: 20px; */
 }
 
@@ -16874,7 +16875,13 @@ button.video-overlay-close{
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: auto auto;
 	position: relative;
-	width: min(max(50vw,400px),600px);
+	width: min(max(50vw,400px),675px);
+}
+
+.perfil-detalhes--link-wrapper h3,
+.perfil-detalhes--link-wrapper h4,
+.perfil-detalhes--link-wrapper h5{
+	text-align: start;
 }
 
 .perfil-detalhes--link-wrapper > a{
@@ -17002,8 +17009,27 @@ button.video-overlay-close{
 }
 
 @media (max-width: 834px){
+
+	.perfil-container.--active{
+		content: '';
+		position: fixed;
+		height: 100vh;
+		width: 100vw;
+		z-index: 4;
+		background: white;
+		top: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	.perfil-container > h2, 
+	.perfil-container > h3{
+		text-align: center;
+	}
+
 	.perfil-detalhes--block{
 		flex-wrap: wrap;
+		max-width: 100%;
 	}
 
 	.perfil-detalhes--link-wrapper{
@@ -17023,14 +17049,17 @@ button.video-overlay-close{
 	}
 
 	.perfil-sobre p{
+		margin-top: 20px;
 		margin-left: 0 !important;
 		padding-left: 24px;
 		padding-right: 24px;
+		max-width: unset !important;
+		text-align: unset !important;
 	}
 
 	.perfil-detalhes--block img{
 		padding-left: 0;
-		padding-right: 20px;
+		/* padding-right: 20px; */
 	}
 
 	.perfil-detalhes--block #perfil-main-photo{
@@ -17076,6 +17105,7 @@ button.video-overlay-close{
 
 .perfil-sobre p{
 	max-width: 550px;
+	text-align: justify;
 	/* margin-left: -20px; */
 }
 
