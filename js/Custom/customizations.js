@@ -759,7 +759,6 @@ function LoadIframes(){
         player.elements.container.appendChild(pauseOverlay); */
         playerController.players.push(player);
     }
-
     /* document.body.removeEventListener('load', LoadIframes()); */
 }
 
@@ -1029,6 +1028,11 @@ let enableSession = (el) => {
                 }
             }
         }
+        if(!document.body.classList.contains('--obscured')){
+            if(document.documentElement.clientWidth <= 834){
+                document.body.classList.add('--obscured');
+            }
+        }
     }
     else{
         block.classList.remove('--active');
@@ -1036,6 +1040,9 @@ let enableSession = (el) => {
         for (let button in perfilButtons) {
             button = perfilButtons[button];
             button.classList.remove('--inactive');
+        }
+        if(document.body.classList.contains('--obscured')){
+            document.body.classList.remove('--obscured');
         }
     }
 };

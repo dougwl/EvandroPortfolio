@@ -17010,16 +17010,46 @@ button.video-overlay-close{
 
 @media (max-width: 834px){
 
-	.perfil-container.--active{
-		content: '';
+	body.--obscured{
+		overflow: hidden;
+	}
+
+	body.--obscured #header-wrap{
+		opacity: 0 !important;
+		visibility:hidden;
+	}
+
+	.perfil-container.--active .perfil-detalhes--link-wrapper{
 		position: fixed;
 		height: 100vh;
 		width: 100vw;
-		z-index: 4;
-		background: white;
+		z-index: 2;
+		overscroll-behavior: contain;
 		top: 0;
 		bottom: 0;
 		left: 0;
+		right: 0;
+	}
+
+	.perfil-container.--active .perfil-detalhes--link-wrapper::after{
+		content: '';
+		position:fixed;
+		top: 0;
+		background: white;
+		height: 100vh;
+		width: 100vw;
+		z-index: 1;
+	}
+
+	.perfil-container.--active .perfil-detalhes--link-wrapper a.--active {
+		height: 100vh;
+		width: 100vw;
+		overflow: auto;
+		z-index: 999;
+	}
+
+	.perfil-container.--active .perfil-detalhes--link-wrapper > a > :not(img):not(.external-link-arrow):not(.external-link-close):not(p):not(ul){
+		margin-bottom: 40px;
 	}
 
 	.perfil-container > h2, 
