@@ -47,3 +47,16 @@ min-height:450px;
 max-height:550px;
 
 min(max(800px,min(100vw, 100vh)))
+
+
+is-watch-page #masthead-container:hover,
+is-watch-page #masthead-container:focus-within{
+    visibility: visible;
+}
+
+is-watch-page #masthead-container:not(:hover),
+is-watch-page #masthead-container:not(:focus-within){
+    visibility: hidden;
+}
+
+kaido koi d a 

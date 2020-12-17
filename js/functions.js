@@ -281,7 +281,7 @@ var SEMICOLON = SEMICOLON || {};
 			SEMICOLON.initialize.functions( bootstrapJs );
 
 			if( 'IntersectionObserver' in window ){
-				console.log( 'IntersectionObserver supported' );
+				/* console.log( 'IntersectionObserver supported' ); */
 			} else {
 				let intersectObserve = {
 					default: 'body',
