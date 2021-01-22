@@ -710,6 +710,12 @@ let registerButtons = (buttons) => {
 }
 registerButtons(menuButtons);
 
+let callToActionButton = document.querySelector('#home .home-button');
+callToActionButton.addEventListener('click',() => {
+    let node = document.querySelector('.perfil-detalhes--link-wrapper');
+    node.scrollIntoView({behavior: "smooth", block: "start"});
+});
+
 
 /* fitty('#video-section-play-title', {multiline:true}); */
 /* fitty('#video-section-description-parent'); */

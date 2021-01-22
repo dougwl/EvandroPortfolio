@@ -831,6 +831,7 @@ a.h-text-dark:hover {
 
 .gradient-text {
 	text-shadow: none !important;
+	background-clip: text;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
@@ -2359,6 +2360,7 @@ img.lazy:not([src]) {
 	width: 100%;
 	height: auto;
 	overflow: hidden;
+	backface-visibility: hidden;
 	-webkit-backface-visibility: hidden;
 }
 
@@ -2398,6 +2400,7 @@ img.lazy:not([src]) {
 
 .flexslider .slider-wrap > .slide {
 	display: none;
+	backface-visibility: hidden;
 	-webkit-backface-visibility: hidden;
 }
 
@@ -3244,7 +3247,6 @@ body:not(.top-search-open) .top-search-parent #primary-menu-trigger {
 	color: #1ABC9C;
 }
 
-.menu-item.sub-menu > .menu-link > div { }
 
 .sub-menu-container,
 .mega-menu-content {
@@ -3377,6 +3379,7 @@ body:not(.top-search-open) .top-search-parent #primary-menu-trigger {
 		-webkit-transform: translate(-280px,0);
 		-o-transform: translate(-280px,0);
 		transform: translate(-280px,0);
+		backface-visibility: hidden;
 		-webkit-backface-visibility: hidden;
 		transform-style: preserve-3d;
 	}
@@ -4773,6 +4776,7 @@ body:not(.top-search-open) .top-search-parent .header-misc > *:not(#top-search) 
 	width: 100%;
 	background-color: #1ABC9C;
 	transform: translateZ(0);
+	backface-visibility: hidden;
 	-webkit-backface-visibility: hidden;
 }
 
@@ -5112,6 +5116,7 @@ body:not(.top-search-open) .top-search-parent .header-misc > *:not(#top-search) 
 	height: 100%;
 	background-color: #F5F5F5;
 	overflow: hidden;
+	backface-visibility: hidden;
 	-webkit-backface-visibility: hidden;
 }
 
@@ -5211,6 +5216,7 @@ body:not(.top-search-open) .top-search-parent .header-misc > *:not(#top-search) 
 	background-color: rgba(0,0,0,0.6);
 	z-index: -1;
 	pointer-events: none;
+	backface-visibility: hidden;
 	-webkit-backface-visibility: hidden;
 	-webkit-transition: opacity .3s ease;
 	-o-transition: opacity .3s ease;
@@ -5242,6 +5248,7 @@ body:not(.top-search-open) .top-search-parent .header-misc > *:not(#top-search) 
 .slider-parallax,
 .slider-parallax .swiper-container {
 	visibility: visible;
+	backface-visibility: hidden;
 	-webkit-backface-visibility: hidden;
 }
 
@@ -6671,8 +6678,6 @@ body:not(.device-touch) .portfolio {
 
 /* Portfolio Single
 -----------------------------------------------------------------*/
-
-.portfolio-single {}
 
 
 /* Portfolio Single - Image
@@ -11926,7 +11931,6 @@ blockquote.float-right {
 
 .quote::before {
 	font-family: 'font-icons';
-	speak: none;
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
@@ -16168,14 +16172,14 @@ label.checkbox { padding-left: 20px; }
 	flex-direction: row-reverse;
 }
 
-.sticky-header #header-wrap{ /* Hide navbar when sticky. */
-	/* visibility:hidden;
+/* .sticky-header #header-wrap{ 
+	visibility:hidden;
 	transition: unset !important;
 	-webkit-transition: unset !important;
 	-moz-transition: unset !important;
 	-ms-transition: unset !important;
-	-o-transition: unset !important; */
-}
+	-o-transition: unset !important;
+} */ /* Hide navbar when sticky. */
 
 body:not(.device-touch) .sticky-header .header-misc:not([style~="visibility: hidden"]) .button {
 	transition: none !important;
@@ -16926,12 +16930,17 @@ button.video-overlay-close{
 
 @media (min-width: 835px){
 
+
 	#home .main-photo img{
 		display: flex !important;
 		margin-left: 3rem !important;
 		margin-top: 1rem !important;
 		align-self: flex-end !important;
 		border-style: none;
+	}
+
+	#home .home-button{
+		display: none;
 	}
 
 	.perfil-detalhes--link-wrapper{
@@ -17047,8 +17056,32 @@ button.video-overlay-close{
 		z-index: 0 !important;
 	}
 
+	#home .home-button{
+		grid-column: 1;
+		display: inline-block;
+		border: 0;
+		text-decoration: none;
+		cursor: pointer;
+		width: 80%;
+		min-width: 148px;
+		max-width: 250px;
+		border-radius: 6px;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		-ms-border-radius: 6px;
+		-o-border-radius: 6px;
+		text-align: center;
+		padding: 12px;
+		outline: 0;
+		background-color: rgb(55, 57, 68);
+		box-shadow: rgba(35, 36, 43, 0.349) 0 1px;
+		color: white;
+		place-self: center;
+	}
+
 	#home .home-content{
-		margin-top: auto !important;
+		/* margin-top: auto !important; */
+		flex-grow: 1
 	}
 
 	#home .main-photo{
@@ -17063,15 +17096,14 @@ button.video-overlay-close{
 
 	#home .main-photo img{
 		grid-column: 1;
-		grid-row: 1;
 		max-width: 80%;
 		place-self: center;
 		align-self: end;
 	}
 
-	.svg-separator{
-		/* z-index: 0 !important; */
-	}
+	/* .svg-separator{
+		z-index: 0 !important;
+	} */
 
 	.svg-separator .bg-white{
 		height: 10px !important;
