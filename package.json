@@ -1,0 +1,36 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "dependencies": {
+    "netlify-cli": "^3.4.1"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.27",
+    "@swc/core": "^1.2.45",
+    "@swc/helpers": "^0.2.4",
+    "browserslist": "^4.16.1",
+    "core-js": "^2.6.12",
+    "expose-loader": "^1.0.3",
+    "regenerator-runtime": "^0.13.7",
+    "swc-loader": "^0.1.12",
+    "webpack": "^5.13.0",
+    "webpack-cli": "^4.3.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/webdevelopment2/evandro-portfolio-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/webdevelopment2/evandro-portfolio-website/issues"
+  },
+  "homepage": "https://gitlab.com/webdevelopment2/evandro-portfolio-website#readme"
+}

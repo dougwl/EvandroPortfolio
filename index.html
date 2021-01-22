@@ -13,7 +13,14 @@
 	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.css" integrity="sha512-x3xO3R+DjCWzHJDwNsIOXKE7RMWqIHnrXJgijDCzLbU6cH9i+v8rgnsZtIpnaf1x5apkwkj1jO9FDkUizkCvBw==" crossorigin="anonymous" /> -->
 	<link rel="stylesheet" href="style.css" type="text/css" />
 	<script src="https://cdn.jsdelivr.net/npm/ionicons@5.2.3/dist/ionicons/ionicons.js" integrity="sha256-r2kkUWpWNvBLLZ3wN+8zqDzlPsxXCbtDyo3mQMt4jNo=" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4/dist/css/bootstrap.min.css,npm/flickity@2/dist/flickity.min.css,npm/plyr@3/dist/plyr.min.css">
+	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/flickity@2/dist/flickity.min.css,npm/plyr@3/dist/plyr.min.css">
+	<link rel="stylesheet" href="./css/Libraries/bootstrap.min.css"> -->
+
+	
+	<link rel="stylesheet" href="./css/Libraries/bootstrap.min.css">
+	<link rel="stylesheet" href="./css/Libraries/flickity.min.css">
+	<link rel="stylesheet" href="./css/Libraries/plyr.css">
+
 	<link rel="stylesheet" href="css/dark.css" type="text/css" />
 	<link rel="stylesheet" href="css/font-icons.css" type="text/css" />
 	<link rel="stylesheet" href="css/animate.css" type="text/css" />
@@ -160,11 +167,11 @@
 					<h2 class="text-white h2 font-weight-semibold mb-2">Evandro Luís Rosa</h2>
 					<p class="text-white-50">Oftalmologista especializado em retina.</p><!-- <p class="text-white-50">CRM-SC 5957 – RQE 2245</p> -->
 				</div>
-				<div class="row topmargin justify-content-end">
-					<div class="col-lg-6">
+				<div class="row topmargin justify-content-end home-content">
+					<div class="col-lg-6 contact-form">
 						<ul class="nav nav-tabs nav-justified flex-column border-bottom-0 flex-md-row bg-color mt-4" id="cityTabs" role="tablist" activeTab='joinville-tab'>
 							<li class="nav-item">
-								<a class="nav-link py-3 active" id="joinville-tab" data-toggle="tab" href="#joinville" role="tab" aria-controls="joinville" aria-selected="true">Joinville</a>
+								<a class="nav-link py-3 active" id="joinville-tab" data-toggle="tab" role="tab" aria-controls="joinville" aria-selected="true">Joinville</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link py-3" id="mafra-tab" data-toggle="tab" role="tab" aria-controls="mafra" aria-selected="false" style="cursor: pointer;">Mafra</a>
@@ -236,8 +243,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-5 d-none d-lg-flex flex-wrap justify-content-center">
-						<img src="demos/movers/images/slider/1.png" alt="Image 1" class="d-flex align-self-end ml-5 mt-3">
+					<div class="col-lg-5 d-none d-lg-flex flex-wrap justify-content-center main-photo">
+						<!-- <img src="/demos/movers/images/slider/Photo Frame.svg" alt="Photo Frame" class="photo-frame"> -->
+						<img src="demos/movers/images/slider/1.png" alt="Image 1" > <!-- class="d-flex align-self-end ml-5 mt-3" -->
 					</div>
 				</div>
 			</section>
@@ -1268,7 +1276,7 @@
 				</div>
 
 				<section id="duvidas" class="container mb-5" style="scroll-margin-top: 120px;">
-					<div class="section-clients mx-auto" style="max-width: 700px">
+					<div class="--container mx-auto" style="max-width: 700px">
 						<h2>Dúvidas Frequentes</h2>
 						<!-- <div class="center clearfix mb-4">
 							<span class="badge badge-pill lightthemecolor color text-uppercase ls1 font-weight-medium py-2 px-3">Dúvidas Frequentes</span>
@@ -1489,20 +1497,25 @@
 	<!-- JavaScripts
 	============================================= -->
 
-	<script src="https://cdn.jsdelivr.net/npm/flickity@2.2.1/dist/flickity.pkgd.min.js" integrity="sha256-3Maq7M1TC8sOke8B4gRkhfGtETqGWq+xenQO7k2mHjI=" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.5.1,npm/jquery.easing@1.4.1,npm/bootstrap@5.0.0-alpha2,npm/bootstrap-datepicker@1.9.0,npm/bootstrap-datepicker@1.9.0/js/locales/bootstrap-datepicker.pt-BR.js,npm/body-scroll-lock@3.1.5,npm/stackblur-canvas@2.4.0,npm/plyr@3.6.2"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/flickity@2.2.1/dist/flickity.pkgd.min.js" integrity="sha256-3Maq7M1TC8sOke8B4gRkhfGtETqGWq+xenQO7k2mHjI=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.5.1,npm/jquery.easing@1.4.1,npm/bootstrap@5.0.0-alpha2,npm/bootstrap-datepicker@1.9.0,npm/bootstrap-datepicker@1.9.0/js/locales/bootstrap-datepicker.pt-BR.js,npm/body-scroll-lock@3.1.5,npm/stackblur-canvas@2.4.0,npm/plyr@3.6.2"></script> -->
 	
 	<!-- <script src="https://cdn.jsdelivr.net/npm/body-scroll-lock@3.1.5/lib/bodyScrollLock.min.js" integrity="sha256-hm8DAe2kEhcuYBHNcNCxoV3RBkFMkB1zsBxN4Sl2LeI=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fitty/2.3.2/fitty.min.js" integrity="sha512-WW8YqRaeVvNVaQd4FvmXZvFfonSRXroDEcfzeBaL7ZyUdULuWZuxkG73xVOdxALmPoSMg0NrI7ClSQ/JTkxEOA==" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/stackblur-canvas/2.4.0/stackblur.min.js" integrity="sha512-D1Dkftsk0YQuXfXYwymRK3QukzoEfukcEixNsRoRG7yHTwdiy7FHRpCIwI23vaKOTSxirA6BTTuPrQsY7TVq8w==" crossorigin="anonymous"></script> -->
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/4.0.7/scrollreveal.min.js" integrity="sha512-yrp2XCY0JvwOgu87K/vTN3IIHolfAJL3SMsFu0ujdKeWWMmFhClABdlxna2TfOhMqX49GbmsIpbZ6fVBE7gleQ==" crossorigin="anonymous"></script> -->
 	
-	<script src="js/functions.js"></script>
-	<script src="js/Custom/customizations.js"></script>
-	
 
-	 
+	<script src="./src/js/Libraries/flickity.pkgd.min.js"></script>
+	<script src="./src/js/Libraries/jquery.min.js"></script>
+	<script src="./src/js/Libraries/jquery.easing.min.js"></script>
+	<script src="./src/js/Libraries/bootstrap.min.js"></script>
+	<script src="./src/js/Libraries/bootstrap-datepicker.min.js"></script>
+	<script src="./src/js/Libraries/bootstrap-datepicker.pt-BR.min.js"></script>
+	<script src="./src/js/Libraries/plyr.min.js"></script>
 
+	<script src="./src/js/functions.js"></script>
+	<script src="dist/bundle.js"></script>
 	
 </body>
 </html>
