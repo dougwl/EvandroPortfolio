@@ -9,5 +9,7 @@ require('../Libraries/bootstrap-datepicker.min');
 require('../Libraries/bootstrap-datepicker.pt-BR.min');
 require('../Libraries/flickity.pkgd.min');
 require('../Libraries/plyr.min'); */
-require('../Custom/customizations.js');
+
+/* require('../Custom/customizations.js'); */
+import "../Custom/customizations"
 //new test

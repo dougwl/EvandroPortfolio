@@ -4,19 +4,19 @@
   "description": "",
   "private": true,
   "dependencies": {
-    "netlify-cli": "^3.4.1"
+    "netlify-cli": "^3.4.6"
   },
   "devDependencies": {
-    "@swc/cli": "^0.1.27",
-    "@swc/core": "^1.2.45",
+    "@swc/cli": "^0.1.33",
+    "@swc/core": "^1.2.46",
     "@swc/helpers": "^0.2.4",
     "browserslist": "^4.16.1",
     "core-js": "^2.6.12",
     "expose-loader": "^1.0.3",
     "regenerator-runtime": "^0.13.7",
     "swc-loader": "^0.1.12",
-    "webpack": "^5.13.0",
-    "webpack-cli": "^4.3.1"
+    "webpack": "^5.17.0",
+    "webpack-cli": "^4.4.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

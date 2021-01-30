@@ -21,21 +21,21 @@
 	<link rel="stylesheet" href="./css/Libraries/flickity.min.css">
 	<link rel="stylesheet" href="./css/Libraries/plyr.css">
 
-	<link rel="stylesheet" href="css/dark.css" type="text/css" />
-	<link rel="stylesheet" href="css/font-icons.css" type="text/css" />
-	<link rel="stylesheet" href="css/animate.css" type="text/css" />
+	<link rel="stylesheet" href="./css/default/dark.css" type="text/css" />
+	<link rel="stylesheet" href="./css/default/font-icons.css" type="text/css" />
+	<link rel="stylesheet" href="./css/default/animate.css" type="text/css" />
 	<!-- <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" /> -->
 
-	<link rel="stylesheet" href="css/custom.css" type="text/css" />
+	<link rel="stylesheet" href="css/default/custom.css" type="text/css" />
 
 	<!-- Movers Demo Specific Stylesheet -->
 	<!-- <link rel="stylesheet" href="css/colors.php?color=0F66DD" /> --> <!-- Theme Color -->
-	<link rel="stylesheet" href="demos/movers/css/fonts.css" type="text/css" />
-	<link rel="stylesheet" href="demos/movers/movers.css" type="text/css" />
+	<link rel="stylesheet" href="./css/main/fonts.css" type="text/css" />
+	<link rel="stylesheet" href="./css/main/style_variations.css" type="text/css" />
 	<!-- / -->
 
 	<!-- DatePicker CSS -->
-	<link rel="stylesheet" href="css/components/datepicker.css" type="text/css" />
+	<link rel="stylesheet" href="css/default/datepicker.css" type="text/css" />
 
 	<!-- Video Carousel CSS -->
 	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.2.1/flickity.min.css" media="screen" integrity="sha512-ztsAq/T5Mif7onFaDEa5wsi2yyDn5ygdVwSSQ4iok5BPJQGYz1CoXWZSA7OgwGWrxrSrbF0K85PD5uLpimu4eQ==" crossorigin="anonymous" /> -->
@@ -160,7 +160,7 @@
 
 		<!-- Slider
 		============================================= -->
-		<section id="slider" class="slider-element bg-color" style="height: auto; padding: 60px 0; background: url('demos/movers/images/bg-2.png') no-repeat center center / 100% 100%;">
+		<section id="slider" class="slider-element bg-color" style="height: auto; padding: 60px 0; background: url('./images/bg-2.png') no-repeat center center / 100% 100%;">
 
 			<section id="home" class="container" style="z-index: 2">
 				<div class="center">
@@ -169,20 +169,19 @@
 				</div>
 				<div class="row topmargin justify-content-end home-content">
 					<div class="col-lg-6 contact-form">
-						<ul class="nav nav-tabs nav-justified flex-column border-bottom-0 flex-md-row bg-color mt-4" id="cityTabs" role="tablist" activeTab='joinville-tab'>
-							<li class="nav-item">
-								<a class="nav-link py-3 active" id="joinville-tab" data-toggle="tab" role="tab" aria-controls="joinville" aria-selected="true">Joinville</a>
+						<ul class="form-nav" id="cityTabs" activeTab='joinville-tab'>
+							<li class="item">
+								<a class="tab active" id="joinville-tab" aria-controls="joinville" aria-selected="true">Joinville</a>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link py-3" id="mafra-tab" data-toggle="tab" role="tab" aria-controls="mafra" aria-selected="false" style="cursor: pointer;">Mafra</a>
+							<li class="item">
+								<a class="tab" id="mafra-tab" aria-controls="mafra" aria-selected="false">Mafra</a>
 							</li>
 						</ul>
 						<div class="tab-content rounded-bottom shadow bg-white py-4 px-5">
 							<div class="tab-pane fade show active" id="joinville" role="tabpanel" aria-labelledby="joinville-tab">
 								<p class="mb-4">Requisite a agenda de horários disponíveis, informando sua data de preferência e entraremos em contato.</p>
 								<p class="mb-4">Ou mande uma mensagem através do WhatsApp.</p>
-								<form class="row contato-form position-relative mb-0" action="https://getform.io/f/b0248972-a402-48be-a602-2392e77758e1" method="post" enctype="x-www-form-urlencoded">  <!-- action="include/form.php" -->
-									<!-- <fieldset formIsActive = 'true'> -->
+								<form class="row contato-form position-relative mb-0" action="https://getform.io/f/b0248972-a402-48be-a602-2392e77758e1" method="post" enctype="x-www-form-urlencoded">
 									<div class="form-process">
 										<div class="css3-spinner">
 											<div class="css3-spinner-scaler"></div>
@@ -238,7 +237,6 @@
 									<input type="hidden" name="prefix" value="contato-form-">
 									<input type="hidden" name="subject" value="Joinville Appointment Request">
 									<input type="hidden" name="html_title" value="Joinville Appointments">
-									<!-- </fieldset> -->
 								</form>
 							</div>
 						</div>
@@ -246,7 +244,10 @@
 					<div class="col-lg-5 d-none d-lg-flex flex-wrap justify-content-center main-photo">
 						<!-- <img src="/demos/movers/images/slider/Photo Frame.svg" alt="Photo Frame" class="photo-frame"> -->
 						<button class="home-button">Conheça meu currículo</button>
-						<img src="demos/movers/images/slider/1.png" alt="Image 1" > <!-- class="d-flex align-self-end ml-5 mt-3" -->
+						<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'>
+							<title>Chevron Down</title>
+							<path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 184l144 144 144-144'/></svg>
+						<img src="./images/home_photo/1.png" alt="Image 1" > <!-- class="d-flex align-self-end ml-5 mt-3" -->
 					</div>
 				</div>
 			</section>
@@ -1012,7 +1013,7 @@
 
 				<div class="clear"></div>
 
-				<section id="treatment-section" class="section p-0 dark mb-0" style="scroll-margin-top: 60px; background: linear-gradient(to right, rgba(0, 0, 0, 0.85), rgba(25,102,221,0.5)), url('demos/movers/images/section/1.jpg') no-repeat center center / cover; min-height: 400px">
+				<section id="treatment-section" class="section p-0 dark mb-0" style="scroll-margin-top: 60px; background: linear-gradient(to right, rgba(0, 0, 0, 0.85), rgba(25,102,221,0.5)), url('./images/video_section_background/1.jpg') no-repeat center center / cover; min-height: 400px">
 					<div class="video-container">
 						<div id="video-section-grid"> <!-- class="row justify-content-between mb-4" -->
 							<div  id="video-section-play-title" class="med-type"> <!-- class="col-lg-5 col-md-6 offset-lg-1 pt-3" -->
@@ -1505,7 +1506,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fitty/2.3.2/fitty.min.js" integrity="sha512-WW8YqRaeVvNVaQd4FvmXZvFfonSRXroDEcfzeBaL7ZyUdULuWZuxkG73xVOdxALmPoSMg0NrI7ClSQ/JTkxEOA==" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/stackblur-canvas/2.4.0/stackblur.min.js" integrity="sha512-D1Dkftsk0YQuXfXYwymRK3QukzoEfukcEixNsRoRG7yHTwdiy7FHRpCIwI23vaKOTSxirA6BTTuPrQsY7TVq8w==" crossorigin="anonymous"></script> -->
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/4.0.7/scrollreveal.min.js" integrity="sha512-yrp2XCY0JvwOgu87K/vTN3IIHolfAJL3SMsFu0ujdKeWWMmFhClABdlxna2TfOhMqX49GbmsIpbZ6fVBE7gleQ==" crossorigin="anonymous"></script> -->
-	
 
 	<script src="./src/js/Libraries/flickity.pkgd.min.js"></script>
 	<script src="./src/js/Libraries/jquery.min.js"></script>
@@ -1514,6 +1514,8 @@
 	<script src="./src/js/Libraries/bootstrap-datepicker.min.js"></script>
 	<script src="./src/js/Libraries/bootstrap-datepicker.pt-BR.min.js"></script>
 	<script src="./src/js/Libraries/plyr.min.js"></script>
+	<script src="./src/js/Libraries/smooth-scroll-into-view-if-needed.min.js"></script>
+	<script src="./src/js/Libraries/bodyScrollLock.min.js"></script>
 
 	<script src="./src/js/functions.js"></script>
 	<script src="dist/bundle.js"></script>

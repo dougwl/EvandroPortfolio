@@ -691,11 +691,14 @@ let ScrollIntoView = async (element = undefined) => {
         }});
 
         let node = document.querySelector(element == '#home'? '#header' : element);
-        node.scrollIntoView({
-            behavior: 'smooth',
-            alignToTop: 'false'
-        });
-
+        try {
+            node.scrollIntoView({
+                behavior: 'smooth',
+                alignToTop: 'false'
+            });
+        } catch (error) {
+            window.scrollIntoView(node, { behavior: 'smooth', block: 'end', inline: 'nearest'});
+        }
     }  
 }
 
@@ -713,7 +716,14 @@ registerButtons(menuButtons);
 let callToActionButton = document.querySelector('#home .home-button');
 callToActionButton.addEventListener('click',() => {
     let node = document.querySelector('.perfil-detalhes--link-wrapper');
-    node.scrollIntoView({behavior: "smooth", block: "start"});
+    try {
+        node.scrollIntoView({
+            behavior: "smooth", 
+            block: "start"
+        });
+    } catch (error) {
+        window.scrollIntoView(node, {behavior: "smooth", block: "start"});
+    }
 });
 
 
@@ -933,36 +943,67 @@ searchButton.addEventListener('click', () => {
 }) */ /* Disabled search features */
 
 // Update the contact form to the correct city, based on the button pressed.
-let anchorList = document.getElementsByClassName('nav-link py-3');
-for (const anchor of anchorList) {
-    anchor.onclick = () =>{
-        let tabPanel = document.getElementsByClassName('tab-pane')[0];
-        let cityName = anchor.getAttribute('aria-controls');
-        if (tabPanel.id != cityName){
-            let form = tabPanel.getElementsByTagName('form')[0];
-            let tabs = document.getElementById('cityTabs');
-            form.setAttribute('fieldset','disabled')
+
+const tabPanel = document.querySelector('.tab-pane');
+const form = tabPanel.querySelector('form');
+const tabsContainer = document.querySelector('#cityTabs');
+const tabs = tabsContainer.querySelectorAll('a');
+let tabState = {current: ''};
+
+tabsContainer.addEventListener('OnTabFocusChange', (ev) => {
+    let newTab = ev.target.id;
+    if(tabState.current != newTab){
+       let keys = Object.keys(tabState);
+       for (let i = 1; i < keys.length; i++) {
+           const tab = keys[i];
+           if(tab != newTab && tabState[tab].node.classList.contains('active')){
+            tabState[tab].node.classList.remove('active');
+            tabState[tab].isActive = false;
+            }    
+       }
+       tabState[newTab].node.classList.add('active');
+       tabState[newTab].isActive = true;
+       tabState['current'] = newTab;
+    }
+});
+
+
+for (const tab of tabs) {
+    tabState[tab.id] = tab.classList.contains('active') ? (() => {
+        tabState['current'] = tab.id; 
+        return {isActive: true, node: tab}
+    })() : {isActive: false, node: tab};
+    tab.addEventListener('click', (ev) =>{
+        let cityName = ev.target.getAttribute('aria-controls');
+        let isActive = ev.target.classList.contains('active');
+
+        if (!isActive){  
+            /* form.setAttribute('fieldset','disabled') */
+            ev.target.dispatchEvent(new CustomEvent('OnTabFocusChange', {bubbles: true}));
             tabPanel.id = cityName;
-            tabPanel.setAttribute('aria-labelledby',anchor.id);
+            tabPanel.setAttribute('aria-labelledby',ev.target.id);
             tabPanel.classList.remove('show');
-            tabs.setAttribute('activeTab',anchor.id);
+            tabsContainer.setAttribute('activeTab',ev.target.id);
+
             for (const field of form.elements) {
                     field.disabled = true;
                     if(field.hasAttribute('required')) field.removeAttribute('required');
             }
+
             setTimeout(() => {
-                let cityField = form.elements.namedItem('contato-form-city')
-                tabPanel.classList.add('show');
-                for (const field of form.elements) {
+                let cityField = form.elements.namedItem('contato-form-city'); //Requesting the city field inside the form.
+                for (const field of form.elements) { //Reseting fields to default values.
                     field.setCustomValidity('');
                     field.removeAttribute('isvalid');
                     field.disabled = false;
                     field.value = '';
                 }
-                cityField.value = cityName.charAt(0).toUpperCase() + cityName.slice(1);
+                cityField.value = cityName.charAt(0).toUpperCase() + cityName.slice(1); //Changing the first letter of the word to uppercase and mergin with the rest of the word.
+                tabPanel.classList.add('show');
             }, 300);
+
         }
-    }
+    });
 }
 
 
@@ -1035,6 +1076,8 @@ let enableSession = (el) => {
     
     let activeButton = el.currentTarget;
     let block = document.getElementsByClassName('perfil-container')[0];
+    let isMobile = document.documentElement.clientWidth <= 834;
+
     if(!el.currentTarget.classList.contains('--active')){
         block.classList.add('--active');
         for (let button in perfilButtons) {
@@ -1042,6 +1085,7 @@ let enableSession = (el) => {
             if(button.id != activeButton.id){
                 if(!button.classList.contains('--inactive')){
                     button.classList.add('--inactive');
+                    if(isMobile) bodyScrollLock.enableBodyScroll(button);
                 }
             }
             else{
@@ -1050,12 +1094,8 @@ let enableSession = (el) => {
                 }
                 if(!button.classList.contains('--active')){
                     button.classList.add('--active');
+                    if(isMobile) bodyScrollLock.disableBodyScroll(button);
                 }
-            }
-        }
-        if(!document.body.classList.contains('--obscured')){
-            if(document.documentElement.clientWidth <= 834){
-                document.body.classList.add('--obscured');
             }
         }
     }
@@ -1069,8 +1109,16 @@ let enableSession = (el) => {
         if(document.body.classList.contains('--obscured')){
             document.body.classList.remove('--obscured');
         }
+        if(isMobile) bodyScrollLock.clearAllBodyScrollLocks();
     }
-    innerVisualHeight();
+    if(!document.body.classList.contains('--obscured')){
+        if(isMobile){
+            document.body.classList.add('--obscured');
+        }
+    }
+    
+    if(isMobile) innerVisualHeight();
+    /* window.addEventListener("scroll", debounce(innerVisualHeight, 150)); */
 };
 
 for (let button in perfilButtons) {
