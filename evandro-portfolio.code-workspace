@@ -9,7 +9,7 @@
 		"telemetry.enableTelemetry": false,
 		"intelephense.telemetry.enabled": false,
 		"svg.preview.background": "transparent",
-		"workbench.colorTheme": "Palenight Operator",
+		"workbench.colorTheme": "1Dark RainCoat Italic",
 		"workbench.preferredDarkColorTheme": "Palenight Italic",
 		"workbench.editor.scrollToSwitchTabs": true,
 		"git.enabled": false,

@@ -17040,27 +17040,62 @@ button.video-overlay-close{
 }
 
 @media (max-width: 833px){
+
+	html {
+		touch-action: manipulation !important;
+	}
 	
 	.contact-form{
 		display:none !important;
 	}
 
 	.stretched #wrapper{
+		border: none !important;
 		outline: none !important;
 	}
 
 	#header{
+		/* display: none !important; */
+		position: fixed;
+		height: 0;
+		width: 100vw;
+		z-index: 3;
+		transform: translateY(-1px);
+	}
+
+	#header > .container:first-of-type{
 		display: none !important;
+	}
+
+	#header .container{
+		display: inherit !important;
+		height: 100%;
+		width: 100%;
 	}
 
 	#header-wrap{
-		display: none !important;
+		border-bottom: none;
+		padding: calc(var(--vh, 1vh) * 1) 0 calc(var(--vh, 1vh) * 1) 0;
+		border: none !important;
+		background: none;
 	}
 
 	.sticky-header #header-wrap{
+		border: none !important;
+		padding: calc(var(--vh, 1vh) * 1) 0 calc(var(--vh, 1vh) * 1) 0;
+		background: rgb(77, 79, 96) !important;
+	}
+
+
+	#slider > #home > .center > h2:first-of-type{
+		border: none !important;
+		padding-top: calc(var(--vh, 1vh) * 5);
+	}
+
+	/* .sticky-header #header-wrap{
 		display: none !important;
 		border: none !important;
-	}
+	} */
 
 	#slider{
 		padding-bottom: 0 !important;

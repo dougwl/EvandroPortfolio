@@ -639,14 +639,14 @@ class ActiveMenuLink{
 function debounce(func, wait, immediate) { // Helper method used to contain bursts of events or methods invocations.
     var timeout;
     return function() {
-        var context = this, args = arguments;
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-        }, wait);
-        if (immediate && !timeout) func.apply(context, args);
-    };
+		var context = this, args = arguments;
+		if (immediate && !timeout) func.apply(context, args);
+		clearTimeout(timeout);
+		timeout = setTimeout(function() {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		}, wait);
+	};
 }
 
 let innerVisualHeight = () => {
@@ -660,14 +660,14 @@ document.addEventListener('DOMContentLoaded', innerVisualHeight);
 let ActiveMenu = new ActiveMenuLink();
 let HideNavbar = new ScrollObserver();
 let Navbar = document.querySelector('#header-wrap');
-HideNavbar.On('OnScrollMove', (val) => {
+/* HideNavbar.On('OnScrollMove', (val) => {
     if(val.detail.Up){
         Navbar.style = "opacity: 1;"
     }
     else{
         Navbar.style = "opacity: 0;"
     }
-}) /* Instead of only hiding the navbar when the sticky-header class is enabled, it hides in any scroll down. 
+}) */ /* Instead of only hiding the navbar when the sticky-header class is enabled, it hides in any scroll down. 
 In this new version, the opacity is set to 0.*/
 
 let ActiveSection = new WatchScrollPosition();
@@ -678,6 +678,22 @@ ActiveSection.Watch({State:true, Callback: (pos,arr) => {
 
 
 ActiveMenu.Change({SectionID: ActiveSection.CurrentSection()});
+
+const supportsSmoothScrolling = (() => {
+    const body = document.body;
+    const defaultScrollBehavior = body.style.scrollBehavior;
+    body.style.scrollBehavior = 'smooth';
+    const hasSmooth = getComputedStyle(body).scrollBehavior === 'smooth';
+    body.style.scrollBehavior = defaultScrollBehavior;
+    return hasSmooth;
+})();
+
+/* let header = document.querySelector('#header');
+ActiveSection.ScrollObserver.On('OnScrollMove', debounce(() => {
+    if(!header.classList.contains('sticky-header')) header.classList.add('sticky-header');
+}, 75, true)) */
+
+
 let ScrollIntoView = async (element = undefined) => {
     if(element != undefined){
 
@@ -692,12 +708,15 @@ let ScrollIntoView = async (element = undefined) => {
 
         let node = document.querySelector(element == '#home'? '#header' : element);
         try {
-            node.scrollIntoView({
-                behavior: 'smooth',
-                alignToTop: 'false'
-            });
+            if(supportsSmoothScrolling){
+                node.scrollIntoView({
+                    behavior: 'smooth',
+                    alignToTop: 'false'
+                });
+            }
+            else throw new Error('Smooth behavior is not supported.')
         } catch (error) {
-            window.scrollIntoView(node, { behavior: 'smooth', block: 'end', inline: 'nearest'});
+            window.scrollIntoView(node, {behavior: "smooth", ease: t => t<.5 ? 16*t*t*t*t*t : 1+16*(--t)*t*t*t*t, duration: 250, block: "start"});
         }
     }  
 }
@@ -714,15 +733,18 @@ let registerButtons = (buttons) => {
 registerButtons(menuButtons);
 
 let callToActionButton = document.querySelector('#home .home-button');
+let node = document.querySelector('.perfil-detalhes--link-wrapper');
+
 callToActionButton.addEventListener('click',() => {
-    let node = document.querySelector('.perfil-detalhes--link-wrapper');
     try {
-        node.scrollIntoView({
-            behavior: "smooth", 
-            block: "start"
-        });
+        if(supportsSmoothScrolling){
+            node.scrollIntoView({
+                behavior: "smooth", 
+                block: "start"
+            });
+        } else throw new Error('Smooth behavior not supported');
     } catch (error) {
-        window.scrollIntoView(node, {behavior: "smooth", block: "start"});
+        window.scrollIntoView(node, {behavior: "smooth", duration: 300, block: "start"});
     }
 });
 
