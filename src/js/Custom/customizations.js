@@ -291,7 +291,6 @@ class VideoController{
 
     HideAllControls() {
         this.HasLoaded(() => {
-            console.log('executing code');
             for (let player of this.players) {
                 player.elements.controls.hidden = true;
             }
@@ -308,7 +307,6 @@ class VideoController{
         if(param.all && !(param.player != null)){
             for (let pl of this.players) {
                 pl.config.clickToPlay = !toggle;
-                console.log(pl);
             }
         }
         else if (param.player != null){
@@ -532,15 +530,18 @@ class WatchScrollPosition{
                 this.Nodes[node.getBoundingClientRect().top + window.pageYOffset - this._positionOffset] = node.id? node.id : `node ${index}`; 
             });
             this.Positions = Object.keys(this.Nodes).map((val) => { return parseFloat(val)});
-            index++; 
+            index++;
         }
+
+        /* console.log(this.Nodes);
+        console.log(this.Positions); */
     }
 
     Watch({ State:State = true , Callback:Callback = undefined, scrollObserver:scrollObserver = undefined}){
         if(State)
         {
             if(Callback !== undefined) this.Subscribers[Callback.name] = Callback;
-            else return console.error('No callback');
+            else return new Error('Callback is not defined');
 
             if (scrollObserver === undefined) {
                 if(this.ScrollObserver === undefined) {
@@ -554,7 +555,7 @@ class WatchScrollPosition{
             } 
 
             else if(this.ScrollObserver === undefined){
-                this.ScrollObserver = ScrollObserver;
+                this.ScrollObserver = scrollObserver;
             }
 
 
@@ -571,9 +572,10 @@ class WatchScrollPosition{
                                     }
                                     break;
                                 }
+                                else return new Error('Callback is null.');
                     }
                 }
-
+                /* console.log(this.Subscribers); */
             })
         }
         else{
@@ -658,16 +660,16 @@ let innerVisualHeight = () => {
 document.addEventListener('DOMContentLoaded', innerVisualHeight);
 
 let ActiveMenu = new ActiveMenuLink();
-let HideNavbar = new ScrollObserver();
+/* let HideNavbar = new ScrollObserver();
 let Navbar = document.querySelector('#header-wrap');
-/* HideNavbar.On('OnScrollMove', (val) => {
+HideNavbar.On('OnScrollMove', (val) => {
     if(val.detail.Up){
         Navbar.style = "opacity: 1;"
     }
     else{
         Navbar.style = "opacity: 0;"
     }
-}) */ /* Instead of only hiding the navbar when the sticky-header class is enabled, it hides in any scroll down. 
+}); */ /* Instead of only hiding the navbar when the sticky-header class is enabled, it hides in any scroll down. 
 In this new version, the opacity is set to 0.*/
 
 let ActiveSection = new WatchScrollPosition();
@@ -696,7 +698,6 @@ ActiveSection.ScrollObserver.On('OnScrollMove', debounce(() => {
 
 let ScrollIntoView = async (element = undefined) => {
     if(element != undefined){
-
         ActiveMenu.Change({SectionID:element});
         ActiveMenu.ScrollingIntoView(true);
         ActiveSection.Watch({State:true, Callback: function Unsubscribe(pos, arr){
@@ -705,8 +706,8 @@ let ScrollIntoView = async (element = undefined) => {
                 ActiveMenu.ScrollingIntoView(false);
             }
         }});
-
-        let node = document.querySelector(element == '#home'? '#header' : element);
+        
+        let node = document.querySelector(element == '#home'? document.documentElement.clientWidth <= 834 ? '#slider' : '#header' : element);
         try {
             if(supportsSmoothScrolling){
                 node.scrollIntoView({
@@ -725,7 +726,7 @@ let menuButtons = document.querySelectorAll('.menu-container li>a');
 let registerButtons = (buttons) => {
     for (const button of buttons) {
         let sectionId = `#${button.id.split("--")[0]}`;
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (ev) => { 
             ScrollIntoView(sectionId);
         });
     }
