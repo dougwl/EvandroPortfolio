@@ -1100,6 +1100,14 @@ let enableSession = (el) => {
     let block = document.getElementsByClassName('perfil-container')[0];
     let isMobile = document.documentElement.clientWidth <= 834;
 
+    if(!document.body.classList.contains('--obscured')){
+        if(isMobile){
+            document.body.classList.add('--obscured');
+        }
+    }
+    
+    if(isMobile) innerVisualHeight();
+
     if(!el.currentTarget.classList.contains('--active')){
         block.classList.add('--active');
         for (let button in perfilButtons) {
@@ -1133,13 +1141,6 @@ let enableSession = (el) => {
         }
         if(isMobile) bodyScrollLock.clearAllBodyScrollLocks();
     }
-    if(!document.body.classList.contains('--obscured')){
-        if(isMobile){
-            document.body.classList.add('--obscured');
-        }
-    }
-    
-    if(isMobile) innerVisualHeight();
     /* window.addEventListener("scroll", debounce(innerVisualHeight, 150)); */
 };
 
