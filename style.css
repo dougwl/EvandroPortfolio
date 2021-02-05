@@ -17580,6 +17580,10 @@ body.--obscured #gotoTop{
 	display:none !important;
 }
 
+.header-extras{
+	display: none !important;
+}
+
 .form-nav{
 	display: flex;
 	flex-wrap: wrap;

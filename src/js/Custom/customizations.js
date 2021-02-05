@@ -501,7 +501,7 @@ class WatchScrollPosition{
 
     constructor(){
         this.Positions = [];
-        this.Nodes = {}
+        this.Nodes = new Map();
         this.ScrollObserver = undefined;
         this.Subscribers = {};
         this._lastPosition = undefined;
@@ -526,16 +526,18 @@ class WatchScrollPosition{
             else{
                 elements[tag] = Array.from(nodes);
             }
-            elements[tag].map((node) => {
+            /* elements[tag].map((node) => {
                 this.Nodes[node.getBoundingClientRect().top + window.pageYOffset - this._positionOffset] = node.id? node.id : `node ${index}`; 
-            });
-            this.Positions = Object.keys(this.Nodes).map((val) => { return parseFloat(val)});
+            }); */
+            for (const node of elements[tag]) {
+                let pos = node.getBoundingClientRect().top + window.pageYOffset - this._positionOffset;
+                this.Nodes[pos] = node.id;
+            }
             index++;
         }
-
-        /* console.log(this.Nodes);
-        console.log(this.Positions); */
+        this.Positions = Object.keys(this.Nodes).map((val) => { return parseFloat(val)});
     }
+
 
     Watch({ State:State = true , Callback:Callback = undefined, scrollObserver:scrollObserver = undefined}){
         if(State)
@@ -663,7 +665,7 @@ let ActiveMenu = new ActiveMenuLink();
 let HideNavbar;
 let Navbar;
 
-if(document.documentElement.clientWidth > 834) {
+if(document.documentElement.clientWidth >= 834) {
     HideNavbar = new ScrollObserver();
     Navbar = document.querySelector('#header-wrap');
     HideNavbar.On('OnScrollMove', (val) => {

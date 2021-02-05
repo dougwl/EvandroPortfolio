@@ -1565,8 +1565,7 @@ var WatchScrollPosition = function() {
     function WatchScrollPosition() {
         _classCallCheck(this, WatchScrollPosition);
         this.Positions = [];
-        this.Nodes = {
-        };
+        this.Nodes = new Map();
         this.ScrollObserver = undefined;
         this.Subscribers = {
         };
@@ -1585,7 +1584,7 @@ var WatchScrollPosition = function() {
                 ];
                 var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
                 try {
-                    var _this = this, _loop = function(_iterator, _step) {
+                    for(var _iterator = Tags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
                         var tag = _step.value;
                         nodes = document.querySelectorAll(tag);
                         if (ExcludedIDs.length > 0) {
@@ -1599,15 +1598,31 @@ var WatchScrollPosition = function() {
                         } else {
                             elements[tag] = Array.from(nodes);
                         }
-                        elements[tag].map((function(node) {
-                            _this.Nodes[node.getBoundingClientRect().top + window.pageYOffset - _this._positionOffset] = node.id ? node.id : "node ".concat(index);
-                        }).bind(_this));
-                        _this.Positions = Object.keys(_this.Nodes).map(function(val) {
-                            return parseFloat(val);
-                        });
+                        var _iteratorNormalCompletion1 = true, _didIteratorError1 = false, _iteratorError1 = undefined;
+                        try {
+                            /* elements[tag].map((node) => {
+                this.Nodes[node.getBoundingClientRect().top + window.pageYOffset - this._positionOffset] = node.id? node.id : `node ${index}`; 
+            }); */ for(var _iterator1 = elements[tag][Symbol.iterator](), _step1; !(_iteratorNormalCompletion1 = (_step1 = _iterator1.next()).done); _iteratorNormalCompletion1 = true){
+                                var node = _step1.value;
+                                var pos = node.getBoundingClientRect().top + window.pageYOffset - this._positionOffset;
+                                this.Nodes[pos] = node.id;
+                            }
+                        } catch (err) {
+                            _didIteratorError1 = true;
+                            _iteratorError1 = err;
+                        } finally{
+                            try {
+                                if (!_iteratorNormalCompletion1 && _iterator1.return != null) {
+                                    _iterator1.return();
+                                }
+                            } finally{
+                                if (_didIteratorError1) {
+                                    throw _iteratorError1;
+                                }
+                            }
+                        }
                         index++;
-                    };
-                    for(var _iterator = Tags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true)_loop(_iterator, _step);
+                    }
                 } catch (err) {
                     _didIteratorError = true;
                     _iteratorError = err;
@@ -1622,6 +1637,9 @@ var WatchScrollPosition = function() {
                         }
                     }
                 }
+                this.Positions = Object.keys(this.Nodes).map(function(val) {
+                    return parseFloat(val);
+                });
             }
         },
         {
@@ -1758,7 +1776,7 @@ var innerVisualHeight = function() {
 var ActiveMenu = new ActiveMenuLink();
 var HideNavbar = void 0;
 var Navbar = void 0;
-if (document.documentElement.clientWidth > 834) {
+if (document.documentElement.clientWidth >= 834) {
     HideNavbar = new ScrollObserver();
     Navbar = document.querySelector('#header-wrap');
     HideNavbar.On('OnScrollMove', function(val) {
@@ -1913,27 +1931,27 @@ var ScrollIntoView = _asyncToGenerator(regeneratorRuntime.mark(function _callee(
 }));
 var menuButtons = document.querySelectorAll('.menu-container li>a');
 var registerButtons = function(buttons) {
-    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+    var _iteratorNormalCompletion2 = true, _didIteratorError2 = false, _iteratorError2 = undefined;
     try {
-        var _loop = function(_iterator, _step) {
-            var button = _step.value;
+        var _loop = function(_iterator2, _step2) {
+            var button = _step2.value;
             var sectionId = "#".concat(button.id.split("--")[0]);
             button.addEventListener('click', function(ev) {
                 ScrollIntoView(sectionId);
             });
         };
-        for(var _iterator = buttons[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true)_loop(_iterator, _step);
+        for(var _iterator2 = buttons[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true)_loop(_iterator2, _step2);
     } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
     } finally{
         try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-                _iterator.return();
+            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                _iterator2.return();
             }
         } finally{
-            if (_didIteratorError) {
-                throw _iteratorError;
+            if (_didIteratorError2) {
+                throw _iteratorError2;
             }
         }
     }
@@ -1999,26 +2017,26 @@ callToActionButton.addEventListener('click', function() {
             }
         },
         resetTransitions: function resetTransitions() {
-            var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+            var _iteratorNormalCompletion2 = true, _didIteratorError2 = false, _iteratorError2 = undefined;
             try {
-                for(var _iterator = this.instance.cells[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
-                    var cell = _step.value;
+                for(var _iterator2 = this.instance.cells[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true){
+                    var cell = _step2.value;
                     var canvas = cell.element.firstElementChild;
                     if (canvas.classList.contains("video-carousel--fade-complete")) {
                         canvas.classList.remove("video-carousel--fade-complete");
                     }
                 }
             } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
             } finally{
                 try {
-                    if (!_iteratorNormalCompletion && _iterator.return != null) {
-                        _iterator.return();
+                    if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                        _iterator2.return();
                     }
                 } finally{
-                    if (_didIteratorError) {
-                        throw _iteratorError;
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
                     }
                 }
             }
@@ -2034,10 +2052,10 @@ function LoadIframes() {
     iframeModel.allow = "autoplay";
     var baseURL = "https://www.youtube.com/embed/";
     playerController = new VideoController(new Array());
-    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+    var _iteratorNormalCompletion2 = true, _didIteratorError2 = false, _iteratorError2 = undefined;
     try {
-        for(var _iterator = iframeSpots[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
-            var node1 = _step.value;
+        for(var _iterator2 = iframeSpots[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true){
+            var node1 = _step2.value;
             var clone = iframeModel.cloneNode();
             clone.src = baseURL + node1.getAttribute('js-data');
             node1.appendChild(clone);
@@ -2047,16 +2065,16 @@ function LoadIframes() {
         player.elements.container.appendChild(pauseOverlay); */ playerController.players.push(player);
         }
     } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
     } finally{
         try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-                _iterator.return();
+            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                _iterator2.return();
             }
         } finally{
-            if (_didIteratorError) {
-                throw _iteratorError;
+            if (_didIteratorError2) {
+                throw _iteratorError2;
             }
         }
     }
@@ -2074,23 +2092,23 @@ function LoadIframes() {
             return isActive;
         };
         var changeActiveDescription = function changeActiveDescription(index) {
-            var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+            var _iteratorNormalCompletion2 = true, _didIteratorError2 = false, _iteratorError2 = undefined;
             try {
-                for(var _iterator = videoDescriptions[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
-                    var el = _step.value;
+                for(var _iterator2 = videoDescriptions[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true){
+                    var el = _step2.value;
                     el.classList.remove("--active-video");
                 }
             } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
             } finally{
                 try {
-                    if (!_iteratorNormalCompletion && _iterator.return != null) {
-                        _iterator.return();
+                    if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                        _iterator2.return();
                     }
                 } finally{
-                    if (_didIteratorError) {
-                        throw _iteratorError;
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
                     }
                 }
             }
@@ -2115,10 +2133,10 @@ function LoadIframes() {
         };
         var executeOnPlay = function() {
             playerController.ShowAllControls();
-            var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+            var _iteratorNormalCompletion2 = true, _didIteratorError2 = false, _iteratorError2 = undefined;
             try {
-                var _loop = function(_iterator, _step) {
-                    var button = _step.value;
+                var _loop = function(_iterator2, _step2) {
+                    var button = _step2.value;
                     var hideButton = function() {
                         return button.classList.add("flickity-button--hidden");
                     };
@@ -2133,18 +2151,18 @@ function LoadIframes() {
                     });
                     hideButton();
                 };
-                for(var _iterator = carouselButtons[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true)_loop(_iterator, _step);
+                for(var _iterator2 = carouselButtons[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true)_loop(_iterator2, _step2);
             } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
             } finally{
                 try {
-                    if (!_iteratorNormalCompletion && _iterator.return != null) {
-                        _iterator.return();
+                    if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                        _iterator2.return();
                     }
                 } finally{
-                    if (_didIteratorError) {
-                        throw _iteratorError;
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
                     }
                 }
             }
@@ -2247,10 +2265,10 @@ tabsContainer.addEventListener('OnTabFocusChange', function(ev) {
         tabState['current'] = newTab;
     }
 });
-var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+var _iteratorNormalCompletion2 = true, _didIteratorError2 = false, _iteratorError2 = undefined;
 try {
-    for(var _iterator = tabs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
-        var tab = _step.value;
+    for(var _iterator2 = tabs[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true){
+        var tab = _step2.value;
         tabState[tab.id] = tab.classList.contains('active') ? (function() {
             tabState['current'] = tab.id;
             return {
@@ -2272,49 +2290,49 @@ try {
                 tabPanel.setAttribute('aria-labelledby', ev.target.id);
                 tabPanel.classList.remove('show');
                 tabsContainer.setAttribute('activeTab', ev.target.id);
-                var _iteratorNormalCompletion1 = true, _didIteratorError1 = false, _iteratorError1 = undefined;
+                var _iteratorNormalCompletion3 = true, _didIteratorError3 = false, _iteratorError3 = undefined;
                 try {
-                    for(var _iterator1 = form.elements[Symbol.iterator](), _step1; !(_iteratorNormalCompletion1 = (_step1 = _iterator1.next()).done); _iteratorNormalCompletion1 = true){
-                        var field = _step1.value;
+                    for(var _iterator3 = form.elements[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true){
+                        var field = _step3.value;
                         field.disabled = true;
                         if (field.hasAttribute('required')) field.removeAttribute('required');
                     }
                 } catch (err) {
-                    _didIteratorError1 = true;
-                    _iteratorError1 = err;
+                    _didIteratorError3 = true;
+                    _iteratorError3 = err;
                 } finally{
                     try {
-                        if (!_iteratorNormalCompletion1 && _iterator1.return != null) {
-                            _iterator1.return();
+                        if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
+                            _iterator3.return();
                         }
                     } finally{
-                        if (_didIteratorError1) {
-                            throw _iteratorError1;
+                        if (_didIteratorError3) {
+                            throw _iteratorError3;
                         }
                     }
                 }
                 setTimeout(function() {
                     var cityField = form.elements.namedItem('contato-form-city'); //Requesting the city field inside the form.
-                    var _iteratorNormalCompletion2 = true, _didIteratorError2 = false, _iteratorError2 = undefined;
+                    var _iteratorNormalCompletion4 = true, _didIteratorError4 = false, _iteratorError4 = undefined;
                     try {
-                        for(var _iterator2 = form.elements[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true){
-                            var field = _step2.value;
+                        for(var _iterator4 = form.elements[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true){
+                            var field = _step4.value;
                             field.setCustomValidity('');
                             field.removeAttribute('isvalid');
                             field.disabled = false;
                             field.value = '';
                         }
                     } catch (err) {
-                        _didIteratorError2 = true;
-                        _iteratorError2 = err;
+                        _didIteratorError4 = true;
+                        _iteratorError4 = err;
                     } finally{
                         try {
-                            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-                                _iterator2.return();
+                            if (!_iteratorNormalCompletion4 && _iterator4.return != null) {
+                                _iterator4.return();
                             }
                         } finally{
-                            if (_didIteratorError2) {
-                                throw _iteratorError2;
+                            if (_didIteratorError4) {
+                                throw _iteratorError4;
                             }
                         }
                     }
@@ -2325,25 +2343,25 @@ try {
         });
     }
 } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
+    _didIteratorError2 = true;
+    _iteratorError2 = err;
 } finally{
     try {
-        if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
+        if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+            _iterator2.return();
         }
     } finally{
-        if (_didIteratorError) {
-            throw _iteratorError;
+        if (_didIteratorError2) {
+            throw _iteratorError2;
         }
     }
 }
 var menuIsOpen = false;
 var executeOnMenuOpened = new MutationObserver(function(mutationList, observer) {
-    var _iteratorNormalCompletion2 = true, _didIteratorError2 = false, _iteratorError2 = undefined;
+    var _iteratorNormalCompletion4 = true, _didIteratorError4 = false, _iteratorError4 = undefined;
     try {
-        for(var _iterator2 = mutationList[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true){
-            var mutation = _step2.value;
+        for(var _iterator4 = mutationList[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true){
+            var mutation = _step4.value;
             if (mutation.type == 'attributes' && mutation.attributeName == 'class') {
                 if (mutation.target.classList.contains('primary-menu-open')) {
                     if (menuIsOpen == false) {
@@ -2358,16 +2376,16 @@ var executeOnMenuOpened = new MutationObserver(function(mutationList, observer) 
             }
         }
     } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
+        _didIteratorError4 = true;
+        _iteratorError4 = err;
     } finally{
         try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-                _iterator2.return();
+            if (!_iteratorNormalCompletion4 && _iterator4.return != null) {
+                _iterator4.return();
             }
         } finally{
-            if (_didIteratorError2) {
-                throw _iteratorError2;
+            if (_didIteratorError4) {
+                throw _iteratorError4;
             }
         }
     }
