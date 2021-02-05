@@ -1756,17 +1756,21 @@ var innerVisualHeight = function() {
 };
 /* window.addEventListener('resize', debounce(innerVisualHeight, 150)); */ document.addEventListener('DOMContentLoaded', innerVisualHeight);
 var ActiveMenu = new ActiveMenuLink();
-/* let HideNavbar = new ScrollObserver();
-let Navbar = document.querySelector('#header-wrap');
-HideNavbar.On('OnScrollMove', (val) => {
-    if(val.detail.Up){
-        Navbar.style = "opacity: 1;"
-    }
-    else{
-        Navbar.style = "opacity: 0;"
-    }
-}); */ /* Instead of only hiding the navbar when the sticky-header class is enabled, it hides in any scroll down. 
-In this new version, the opacity is set to 0.*/ var ActiveSection = new WatchScrollPosition();
+var HideNavbar = void 0;
+var Navbar = void 0;
+if (document.documentElement.clientWidth > 834) {
+    HideNavbar = new ScrollObserver();
+    Navbar = document.querySelector('#header-wrap');
+    HideNavbar.On('OnScrollMove', function(val) {
+        if (val.detail.Up) {
+            Navbar.style = "opacity: 1;";
+        } else {
+            Navbar.style = "opacity: 0;";
+        }
+    });
+} /* Instead of only hiding the navbar when the sticky-header class is enabled, it hides in any scroll down. 
+In this new version, the opacity is set to 0.*/ 
+var ActiveSection = new WatchScrollPosition();
 ActiveSection.GetElements({
     Tags: 'section',
     ExcludedIDs: [
@@ -1820,7 +1824,7 @@ if (!supportsScrollMargin) {
 /* let header = document.querySelector('#header');
 ActiveSection.ScrollObserver.On('OnScrollMove', debounce(() => {
     if(!header.classList.contains('sticky-header')) header.classList.add('sticky-header');
-}, 75, true)) */ var mobileMenu = document.querySelector('#primary-menu-trigger');
+}, 75, true)) */ var mobileMenu = document.documentElement.clientWidth <= 834 ? document.querySelector('#primary-menu-trigger') : undefined;
 var ScrollIntoView = _asyncToGenerator(regeneratorRuntime.mark(function _callee(param) {
     var element = param === void 0 ? undefined : param;
     var node, scrollMarginMarker, before, position, click;
@@ -1828,7 +1832,7 @@ var ScrollIntoView = _asyncToGenerator(regeneratorRuntime.mark(function _callee(
         while(1)switch(_ctx.prev = _ctx.next){
             case 0:
                 if (!(element != undefined)) {
-                    _ctx.next = 18;
+                    _ctx.next = 17;
                     break;
                 }
                 ActiveMenu.Change({
@@ -1847,7 +1851,7 @@ var ScrollIntoView = _asyncToGenerator(regeneratorRuntime.mark(function _callee(
                         }
                     }
                 });
-                node = document.querySelector(element == '#home' ? document.documentElement.clientWidth <= 834 ? '#slider' : '#header' : element);
+                node = document.querySelector(element == '#home' ? mobileMenu != undefined ? '#slider' : '#header' : element);
                 _ctx.prev = 5;
                 if (!supportsSmoothScrolling) {
                     _ctx.next = 10;
@@ -1892,9 +1896,11 @@ var ScrollIntoView = _asyncToGenerator(regeneratorRuntime.mark(function _callee(
                     });
                 }
             case 16:
-                click = new MouseEvent('click');
-                mobileMenu.dispatchEvent(click);
-            case 18:
+                if (mobileMenu != undefined) {
+                    click = new MouseEvent('click');
+                    mobileMenu.dispatchEvent(click);
+                }
+            case 17:
             case "end":
                 return _ctx.stop();
         }

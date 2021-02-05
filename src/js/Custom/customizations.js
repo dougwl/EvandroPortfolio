@@ -660,16 +660,21 @@ let innerVisualHeight = () => {
 document.addEventListener('DOMContentLoaded', innerVisualHeight);
 
 let ActiveMenu = new ActiveMenuLink();
-/* let HideNavbar = new ScrollObserver();
-let Navbar = document.querySelector('#header-wrap');
-HideNavbar.On('OnScrollMove', (val) => {
-    if(val.detail.Up){
-        Navbar.style = "opacity: 1;"
-    }
-    else{
-        Navbar.style = "opacity: 0;"
-    }
-}); */ /* Instead of only hiding the navbar when the sticky-header class is enabled, it hides in any scroll down. 
+let HideNavbar;
+let Navbar;
+
+if(document.documentElement.clientWidth > 834) {
+    HideNavbar = new ScrollObserver();
+    Navbar = document.querySelector('#header-wrap');
+    HideNavbar.On('OnScrollMove', (val) => {
+        if(val.detail.Up){
+            Navbar.style = "opacity: 1;"
+        }
+        else{
+            Navbar.style = "opacity: 0;"
+        }
+    });
+} /* Instead of only hiding the navbar when the sticky-header class is enabled, it hides in any scroll down. 
 In this new version, the opacity is set to 0.*/
 
 let ActiveSection = new WatchScrollPosition();
@@ -723,7 +728,7 @@ if(!supportsScrollMargin){
 ActiveSection.ScrollObserver.On('OnScrollMove', debounce(() => {
     if(!header.classList.contains('sticky-header')) header.classList.add('sticky-header');
 }, 75, true)) */
-let mobileMenu = document.querySelector('#primary-menu-trigger');
+let mobileMenu = document.documentElement.clientWidth <= 834 ? document.querySelector('#primary-menu-trigger') : undefined;
 
 let ScrollIntoView = async (element = undefined) => {
     if(element != undefined){
@@ -736,7 +741,7 @@ let ScrollIntoView = async (element = undefined) => {
             }
         }});
         
-        let node = document.querySelector(element == '#home'? document.documentElement.clientWidth <= 834 ? '#slider' : '#header' : element);
+        let node = document.querySelector(element == '#home'? mobileMenu != undefined ? '#slider' : '#header' : element);
         try {
             if(supportsSmoothScrolling){
                 node.scrollIntoView({
@@ -758,8 +763,10 @@ let ScrollIntoView = async (element = undefined) => {
             }
         }
 
-        let click = new MouseEvent('click');
-        mobileMenu.dispatchEvent(click);
+        if(mobileMenu != undefined){
+            let click = new MouseEvent('click');
+            mobileMenu.dispatchEvent(click);
+        }
     }  
 }
 
