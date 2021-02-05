@@ -19,6 +19,7 @@
 		"liveServer.settings.CustomBrowser": "firefox",
 		"firefox.profileDir": "C:\\Users\\dougl\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\vn9ol9lx.Development",
 		"liveServer.settings.AdvanceCustomBrowserCmdLine": "C:\\Program Files\\Firefox Nightly\\firefoxdev",
-		"editor.suggest.showStatusBar": true
+		"editor.suggest.showStatusBar": true,
+		"editor.wordWrap": "on"
 	}
 }

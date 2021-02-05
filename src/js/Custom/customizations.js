@@ -690,11 +690,40 @@ const supportsSmoothScrolling = (() => {
     return hasSmooth;
 })();
 
+const supportsScrollMargin = (() => {
+    const body = document.body;
+    const defaultScrollMarginTop = body.style.scrollMarginTop;
+    body.style.scrollMarginTop = '1px';
+    const hasSupport = getComputedStyle(body).scrollMarginTop;
+    body.style.scrollMarginTop = defaultScrollMarginTop;
+    return hasSupport;
+})();
+
+
+if(!supportsScrollMargin){
+
+    let hasClass = document.body.classList.contains('no-scroll-margin');
+    if(!hasClass) document.body.classList.add('no-scroll-margin');
+
+    let scrollMarginFragment = new DocumentFragment();
+    let scrollMarginMarker = document.createElement('span');
+    Object.assign(scrollMarginMarker.style, {
+        'position': 'absolute',
+        'height': `1px`,
+        'width': '1px',
+        'top': `0`,
+        'z-index': '999'
+    });
+    scrollMarginMarker.id = "scrollMarginMarker";
+    scrollMarginFragment.appendChild(scrollMarginMarker);
+    document.body.appendChild(scrollMarginFragment);
+}
+
 /* let header = document.querySelector('#header');
 ActiveSection.ScrollObserver.On('OnScrollMove', debounce(() => {
     if(!header.classList.contains('sticky-header')) header.classList.add('sticky-header');
 }, 75, true)) */
-
+let mobileMenu = document.querySelector('#primary-menu-trigger');
 
 let ScrollIntoView = async (element = undefined) => {
     if(element != undefined){
@@ -717,8 +746,20 @@ let ScrollIntoView = async (element = undefined) => {
             }
             else throw new Error('Smooth behavior is not supported.')
         } catch (error) {
-            window.scrollIntoView(node, {behavior: "smooth", ease: t => t<.5 ? 16*t*t*t*t*t : 1+16*(--t)*t*t*t*t, duration: 250, block: "start"});
+            if(supportsScrollMargin) window.scrollIntoView(node, {behavior: "smooth", duration: 300, block: "start"});
+            else {
+                let scrollMarginMarker = document.body.querySelector('#scrollMarginMarker');
+                let before = getComputedStyle(node,':before');
+                let position = node.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop;
+                position += parseInt(before.top, 10);
+                scrollMarginMarker.style.top = `${position}px`;
+                if(node.id == 'slider') window.scrollIntoView(node, {behavior: "smooth", duration: 300, block: "start"});
+                else window.scrollIntoView(scrollMarginMarker, {behavior: "smooth", duration: 300, block: "start"});
+            }
         }
+
+        let click = new MouseEvent('click');
+        mobileMenu.dispatchEvent(click);
     }  
 }
 
@@ -736,6 +777,7 @@ registerButtons(menuButtons);
 let callToActionButton = document.querySelector('#home .home-button');
 let node = document.querySelector('.perfil-detalhes--link-wrapper');
 
+
 callToActionButton.addEventListener('click',() => {
     try {
         if(supportsSmoothScrolling){
@@ -745,7 +787,15 @@ callToActionButton.addEventListener('click',() => {
             });
         } else throw new Error('Smooth behavior not supported');
     } catch (error) {
-        window.scrollIntoView(node, {behavior: "smooth", duration: 300, block: "start"});
+        if(supportsScrollMargin) window.scrollIntoView(node, {behavior: "smooth", duration: 300, block: "start"});
+        else {
+            let scrollMarginMarker = document.body.querySelector('#scrollMarginMarker');
+            let before = getComputedStyle(node,':before');
+            let position = node.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop;
+            position += parseInt(before.top, 10);
+            scrollMarginMarker.style.top = `${position}px`;
+            window.scrollIntoView(scrollMarginMarker, {behavior: "smooth", duration: 300, block: "start"});
+        }
     }
 });
 

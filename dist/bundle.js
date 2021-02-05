@@ -1,42 +1,2460 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/regenerator-runtime/runtime.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/regenerator-runtime/runtime.js ***!
-  \*****************************************************/
+/***/ 666:
 /***/ ((module) => {
 
-eval("/**\n * Copyright (c) 2014-present, Facebook, Inc.\n *\n * This source code is licensed under the MIT license found in the\n * LICENSE file in the root directory of this source tree.\n */\n\nvar runtime = (function (exports) {\n  \"use strict\";\n\n  var Op = Object.prototype;\n  var hasOwn = Op.hasOwnProperty;\n  var undefined; // More compressible than void 0.\n  var $Symbol = typeof Symbol === \"function\" ? Symbol : {};\n  var iteratorSymbol = $Symbol.iterator || \"@@iterator\";\n  var asyncIteratorSymbol = $Symbol.asyncIterator || \"@@asyncIterator\";\n  var toStringTagSymbol = $Symbol.toStringTag || \"@@toStringTag\";\n\n  function define(obj, key, value) {\n    Object.defineProperty(obj, key, {\n      value: value,\n      enumerable: true,\n      configurable: true,\n      writable: true\n    });\n    return obj[key];\n  }\n  try {\n    // IE 8 has a broken Object.defineProperty that only works on DOM objects.\n    define({}, \"\");\n  } catch (err) {\n    define = function(obj, key, value) {\n      return obj[key] = value;\n    };\n  }\n\n  function wrap(innerFn, outerFn, self, tryLocsList) {\n    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.\n    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;\n    var generator = Object.create(protoGenerator.prototype);\n    var context = new Context(tryLocsList || []);\n\n    // The ._invoke method unifies the implementations of the .next,\n    // .throw, and .return methods.\n    generator._invoke = makeInvokeMethod(innerFn, self, context);\n\n    return generator;\n  }\n  exports.wrap = wrap;\n\n  // Try/catch helper to minimize deoptimizations. Returns a completion\n  // record like context.tryEntries[i].completion. This interface could\n  // have been (and was previously) designed to take a closure to be\n  // invoked without arguments, but in all the cases we care about we\n  // already have an existing method we want to call, so there's no need\n  // to create a new function object. We can even get away with assuming\n  // the method takes exactly one argument, since that happens to be true\n  // in every case, so we don't have to touch the arguments object. The\n  // only additional allocation required is the completion record, which\n  // has a stable shape and so hopefully should be cheap to allocate.\n  function tryCatch(fn, obj, arg) {\n    try {\n      return { type: \"normal\", arg: fn.call(obj, arg) };\n    } catch (err) {\n      return { type: \"throw\", arg: err };\n    }\n  }\n\n  var GenStateSuspendedStart = \"suspendedStart\";\n  var GenStateSuspendedYield = \"suspendedYield\";\n  var GenStateExecuting = \"executing\";\n  var GenStateCompleted = \"completed\";\n\n  // Returning this object from the innerFn has the same effect as\n  // breaking out of the dispatch switch statement.\n  var ContinueSentinel = {};\n\n  // Dummy constructor functions that we use as the .constructor and\n  // .constructor.prototype properties for functions that return Generator\n  // objects. For full spec compliance, you may wish to configure your\n  // minifier not to mangle the names of these two functions.\n  function Generator() {}\n  function GeneratorFunction() {}\n  function GeneratorFunctionPrototype() {}\n\n  // This is a polyfill for %IteratorPrototype% for environments that\n  // don't natively support it.\n  var IteratorPrototype = {};\n  IteratorPrototype[iteratorSymbol] = function () {\n    return this;\n  };\n\n  var getProto = Object.getPrototypeOf;\n  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));\n  if (NativeIteratorPrototype &&\n      NativeIteratorPrototype !== Op &&\n      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {\n    // This environment has a native %IteratorPrototype%; use it instead\n    // of the polyfill.\n    IteratorPrototype = NativeIteratorPrototype;\n  }\n\n  var Gp = GeneratorFunctionPrototype.prototype =\n    Generator.prototype = Object.create(IteratorPrototype);\n  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;\n  GeneratorFunctionPrototype.constructor = GeneratorFunction;\n  GeneratorFunction.displayName = define(\n    GeneratorFunctionPrototype,\n    toStringTagSymbol,\n    \"GeneratorFunction\"\n  );\n\n  // Helper for defining the .next, .throw, and .return methods of the\n  // Iterator interface in terms of a single ._invoke method.\n  function defineIteratorMethods(prototype) {\n    [\"next\", \"throw\", \"return\"].forEach(function(method) {\n      define(prototype, method, function(arg) {\n        return this._invoke(method, arg);\n      });\n    });\n  }\n\n  exports.isGeneratorFunction = function(genFun) {\n    var ctor = typeof genFun === \"function\" && genFun.constructor;\n    return ctor\n      ? ctor === GeneratorFunction ||\n        // For the native GeneratorFunction constructor, the best we can\n        // do is to check its .name property.\n        (ctor.displayName || ctor.name) === \"GeneratorFunction\"\n      : false;\n  };\n\n  exports.mark = function(genFun) {\n    if (Object.setPrototypeOf) {\n      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);\n    } else {\n      genFun.__proto__ = GeneratorFunctionPrototype;\n      define(genFun, toStringTagSymbol, \"GeneratorFunction\");\n    }\n    genFun.prototype = Object.create(Gp);\n    return genFun;\n  };\n\n  // Within the body of any async function, `await x` is transformed to\n  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test\n  // `hasOwn.call(value, \"__await\")` to determine if the yielded value is\n  // meant to be awaited.\n  exports.awrap = function(arg) {\n    return { __await: arg };\n  };\n\n  function AsyncIterator(generator, PromiseImpl) {\n    function invoke(method, arg, resolve, reject) {\n      var record = tryCatch(generator[method], generator, arg);\n      if (record.type === \"throw\") {\n        reject(record.arg);\n      } else {\n        var result = record.arg;\n        var value = result.value;\n        if (value &&\n            typeof value === \"object\" &&\n            hasOwn.call(value, \"__await\")) {\n          return PromiseImpl.resolve(value.__await).then(function(value) {\n            invoke(\"next\", value, resolve, reject);\n          }, function(err) {\n            invoke(\"throw\", err, resolve, reject);\n          });\n        }\n\n        return PromiseImpl.resolve(value).then(function(unwrapped) {\n          // When a yielded Promise is resolved, its final value becomes\n          // the .value of the Promise<{value,done}> result for the\n          // current iteration.\n          result.value = unwrapped;\n          resolve(result);\n        }, function(error) {\n          // If a rejected Promise was yielded, throw the rejection back\n          // into the async generator function so it can be handled there.\n          return invoke(\"throw\", error, resolve, reject);\n        });\n      }\n    }\n\n    var previousPromise;\n\n    function enqueue(method, arg) {\n      function callInvokeWithMethodAndArg() {\n        return new PromiseImpl(function(resolve, reject) {\n          invoke(method, arg, resolve, reject);\n        });\n      }\n\n      return previousPromise =\n        // If enqueue has been called before, then we want to wait until\n        // all previous Promises have been resolved before calling invoke,\n        // so that results are always delivered in the correct order. If\n        // enqueue has not been called before, then it is important to\n        // call invoke immediately, without waiting on a callback to fire,\n        // so that the async generator function has the opportunity to do\n        // any necessary setup in a predictable way. This predictability\n        // is why the Promise constructor synchronously invokes its\n        // executor callback, and why async functions synchronously\n        // execute code before the first await. Since we implement simple\n        // async functions in terms of async generators, it is especially\n        // important to get this right, even though it requires care.\n        previousPromise ? previousPromise.then(\n          callInvokeWithMethodAndArg,\n          // Avoid propagating failures to Promises returned by later\n          // invocations of the iterator.\n          callInvokeWithMethodAndArg\n        ) : callInvokeWithMethodAndArg();\n    }\n\n    // Define the unified helper method that is used to implement .next,\n    // .throw, and .return (see defineIteratorMethods).\n    this._invoke = enqueue;\n  }\n\n  defineIteratorMethods(AsyncIterator.prototype);\n  AsyncIterator.prototype[asyncIteratorSymbol] = function () {\n    return this;\n  };\n  exports.AsyncIterator = AsyncIterator;\n\n  // Note that simple async functions are implemented on top of\n  // AsyncIterator objects; they just return a Promise for the value of\n  // the final result produced by the iterator.\n  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {\n    if (PromiseImpl === void 0) PromiseImpl = Promise;\n\n    var iter = new AsyncIterator(\n      wrap(innerFn, outerFn, self, tryLocsList),\n      PromiseImpl\n    );\n\n    return exports.isGeneratorFunction(outerFn)\n      ? iter // If outerFn is a generator, return the full iterator.\n      : iter.next().then(function(result) {\n          return result.done ? result.value : iter.next();\n        });\n  };\n\n  function makeInvokeMethod(innerFn, self, context) {\n    var state = GenStateSuspendedStart;\n\n    return function invoke(method, arg) {\n      if (state === GenStateExecuting) {\n        throw new Error(\"Generator is already running\");\n      }\n\n      if (state === GenStateCompleted) {\n        if (method === \"throw\") {\n          throw arg;\n        }\n\n        // Be forgiving, per 25.3.3.3.3 of the spec:\n        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume\n        return doneResult();\n      }\n\n      context.method = method;\n      context.arg = arg;\n\n      while (true) {\n        var delegate = context.delegate;\n        if (delegate) {\n          var delegateResult = maybeInvokeDelegate(delegate, context);\n          if (delegateResult) {\n            if (delegateResult === ContinueSentinel) continue;\n            return delegateResult;\n          }\n        }\n\n        if (context.method === \"next\") {\n          // Setting context._sent for legacy support of Babel's\n          // function.sent implementation.\n          context.sent = context._sent = context.arg;\n\n        } else if (context.method === \"throw\") {\n          if (state === GenStateSuspendedStart) {\n            state = GenStateCompleted;\n            throw context.arg;\n          }\n\n          context.dispatchException(context.arg);\n\n        } else if (context.method === \"return\") {\n          context.abrupt(\"return\", context.arg);\n        }\n\n        state = GenStateExecuting;\n\n        var record = tryCatch(innerFn, self, context);\n        if (record.type === \"normal\") {\n          // If an exception is thrown from innerFn, we leave state ===\n          // GenStateExecuting and loop back for another invocation.\n          state = context.done\n            ? GenStateCompleted\n            : GenStateSuspendedYield;\n\n          if (record.arg === ContinueSentinel) {\n            continue;\n          }\n\n          return {\n            value: record.arg,\n            done: context.done\n          };\n\n        } else if (record.type === \"throw\") {\n          state = GenStateCompleted;\n          // Dispatch the exception by looping back around to the\n          // context.dispatchException(context.arg) call above.\n          context.method = \"throw\";\n          context.arg = record.arg;\n        }\n      }\n    };\n  }\n\n  // Call delegate.iterator[context.method](context.arg) and handle the\n  // result, either by returning a { value, done } result from the\n  // delegate iterator, or by modifying context.method and context.arg,\n  // setting context.delegate to null, and returning the ContinueSentinel.\n  function maybeInvokeDelegate(delegate, context) {\n    var method = delegate.iterator[context.method];\n    if (method === undefined) {\n      // A .throw or .return when the delegate iterator has no .throw\n      // method always terminates the yield* loop.\n      context.delegate = null;\n\n      if (context.method === \"throw\") {\n        // Note: [\"return\"] must be used for ES3 parsing compatibility.\n        if (delegate.iterator[\"return\"]) {\n          // If the delegate iterator has a return method, give it a\n          // chance to clean up.\n          context.method = \"return\";\n          context.arg = undefined;\n          maybeInvokeDelegate(delegate, context);\n\n          if (context.method === \"throw\") {\n            // If maybeInvokeDelegate(context) changed context.method from\n            // \"return\" to \"throw\", let that override the TypeError below.\n            return ContinueSentinel;\n          }\n        }\n\n        context.method = \"throw\";\n        context.arg = new TypeError(\n          \"The iterator does not provide a 'throw' method\");\n      }\n\n      return ContinueSentinel;\n    }\n\n    var record = tryCatch(method, delegate.iterator, context.arg);\n\n    if (record.type === \"throw\") {\n      context.method = \"throw\";\n      context.arg = record.arg;\n      context.delegate = null;\n      return ContinueSentinel;\n    }\n\n    var info = record.arg;\n\n    if (! info) {\n      context.method = \"throw\";\n      context.arg = new TypeError(\"iterator result is not an object\");\n      context.delegate = null;\n      return ContinueSentinel;\n    }\n\n    if (info.done) {\n      // Assign the result of the finished delegate to the temporary\n      // variable specified by delegate.resultName (see delegateYield).\n      context[delegate.resultName] = info.value;\n\n      // Resume execution at the desired location (see delegateYield).\n      context.next = delegate.nextLoc;\n\n      // If context.method was \"throw\" but the delegate handled the\n      // exception, let the outer generator proceed normally. If\n      // context.method was \"next\", forget context.arg since it has been\n      // \"consumed\" by the delegate iterator. If context.method was\n      // \"return\", allow the original .return call to continue in the\n      // outer generator.\n      if (context.method !== \"return\") {\n        context.method = \"next\";\n        context.arg = undefined;\n      }\n\n    } else {\n      // Re-yield the result returned by the delegate method.\n      return info;\n    }\n\n    // The delegate iterator is finished, so forget it and continue with\n    // the outer generator.\n    context.delegate = null;\n    return ContinueSentinel;\n  }\n\n  // Define Generator.prototype.{next,throw,return} in terms of the\n  // unified ._invoke helper method.\n  defineIteratorMethods(Gp);\n\n  define(Gp, toStringTagSymbol, \"Generator\");\n\n  // A Generator should always return itself as the iterator object when the\n  // @@iterator function is called on it. Some browsers' implementations of the\n  // iterator prototype chain incorrectly implement this, causing the Generator\n  // object to not be returned from this call. This ensures that doesn't happen.\n  // See https://github.com/facebook/regenerator/issues/274 for more details.\n  Gp[iteratorSymbol] = function() {\n    return this;\n  };\n\n  Gp.toString = function() {\n    return \"[object Generator]\";\n  };\n\n  function pushTryEntry(locs) {\n    var entry = { tryLoc: locs[0] };\n\n    if (1 in locs) {\n      entry.catchLoc = locs[1];\n    }\n\n    if (2 in locs) {\n      entry.finallyLoc = locs[2];\n      entry.afterLoc = locs[3];\n    }\n\n    this.tryEntries.push(entry);\n  }\n\n  function resetTryEntry(entry) {\n    var record = entry.completion || {};\n    record.type = \"normal\";\n    delete record.arg;\n    entry.completion = record;\n  }\n\n  function Context(tryLocsList) {\n    // The root entry object (effectively a try statement without a catch\n    // or a finally block) gives us a place to store values thrown from\n    // locations where there is no enclosing try statement.\n    this.tryEntries = [{ tryLoc: \"root\" }];\n    tryLocsList.forEach(pushTryEntry, this);\n    this.reset(true);\n  }\n\n  exports.keys = function(object) {\n    var keys = [];\n    for (var key in object) {\n      keys.push(key);\n    }\n    keys.reverse();\n\n    // Rather than returning an object with a next method, we keep\n    // things simple and return the next function itself.\n    return function next() {\n      while (keys.length) {\n        var key = keys.pop();\n        if (key in object) {\n          next.value = key;\n          next.done = false;\n          return next;\n        }\n      }\n\n      // To avoid creating an additional object, we just hang the .value\n      // and .done properties off the next function object itself. This\n      // also ensures that the minifier will not anonymize the function.\n      next.done = true;\n      return next;\n    };\n  };\n\n  function values(iterable) {\n    if (iterable) {\n      var iteratorMethod = iterable[iteratorSymbol];\n      if (iteratorMethod) {\n        return iteratorMethod.call(iterable);\n      }\n\n      if (typeof iterable.next === \"function\") {\n        return iterable;\n      }\n\n      if (!isNaN(iterable.length)) {\n        var i = -1, next = function next() {\n          while (++i < iterable.length) {\n            if (hasOwn.call(iterable, i)) {\n              next.value = iterable[i];\n              next.done = false;\n              return next;\n            }\n          }\n\n          next.value = undefined;\n          next.done = true;\n\n          return next;\n        };\n\n        return next.next = next;\n      }\n    }\n\n    // Return an iterator with no values.\n    return { next: doneResult };\n  }\n  exports.values = values;\n\n  function doneResult() {\n    return { value: undefined, done: true };\n  }\n\n  Context.prototype = {\n    constructor: Context,\n\n    reset: function(skipTempReset) {\n      this.prev = 0;\n      this.next = 0;\n      // Resetting context._sent for legacy support of Babel's\n      // function.sent implementation.\n      this.sent = this._sent = undefined;\n      this.done = false;\n      this.delegate = null;\n\n      this.method = \"next\";\n      this.arg = undefined;\n\n      this.tryEntries.forEach(resetTryEntry);\n\n      if (!skipTempReset) {\n        for (var name in this) {\n          // Not sure about the optimal order of these conditions:\n          if (name.charAt(0) === \"t\" &&\n              hasOwn.call(this, name) &&\n              !isNaN(+name.slice(1))) {\n            this[name] = undefined;\n          }\n        }\n      }\n    },\n\n    stop: function() {\n      this.done = true;\n\n      var rootEntry = this.tryEntries[0];\n      var rootRecord = rootEntry.completion;\n      if (rootRecord.type === \"throw\") {\n        throw rootRecord.arg;\n      }\n\n      return this.rval;\n    },\n\n    dispatchException: function(exception) {\n      if (this.done) {\n        throw exception;\n      }\n\n      var context = this;\n      function handle(loc, caught) {\n        record.type = \"throw\";\n        record.arg = exception;\n        context.next = loc;\n\n        if (caught) {\n          // If the dispatched exception was caught by a catch block,\n          // then let that catch block handle the exception normally.\n          context.method = \"next\";\n          context.arg = undefined;\n        }\n\n        return !! caught;\n      }\n\n      for (var i = this.tryEntries.length - 1; i >= 0; --i) {\n        var entry = this.tryEntries[i];\n        var record = entry.completion;\n\n        if (entry.tryLoc === \"root\") {\n          // Exception thrown outside of any try block that could handle\n          // it, so set the completion value of the entire function to\n          // throw the exception.\n          return handle(\"end\");\n        }\n\n        if (entry.tryLoc <= this.prev) {\n          var hasCatch = hasOwn.call(entry, \"catchLoc\");\n          var hasFinally = hasOwn.call(entry, \"finallyLoc\");\n\n          if (hasCatch && hasFinally) {\n            if (this.prev < entry.catchLoc) {\n              return handle(entry.catchLoc, true);\n            } else if (this.prev < entry.finallyLoc) {\n              return handle(entry.finallyLoc);\n            }\n\n          } else if (hasCatch) {\n            if (this.prev < entry.catchLoc) {\n              return handle(entry.catchLoc, true);\n            }\n\n          } else if (hasFinally) {\n            if (this.prev < entry.finallyLoc) {\n              return handle(entry.finallyLoc);\n            }\n\n          } else {\n            throw new Error(\"try statement without catch or finally\");\n          }\n        }\n      }\n    },\n\n    abrupt: function(type, arg) {\n      for (var i = this.tryEntries.length - 1; i >= 0; --i) {\n        var entry = this.tryEntries[i];\n        if (entry.tryLoc <= this.prev &&\n            hasOwn.call(entry, \"finallyLoc\") &&\n            this.prev < entry.finallyLoc) {\n          var finallyEntry = entry;\n          break;\n        }\n      }\n\n      if (finallyEntry &&\n          (type === \"break\" ||\n           type === \"continue\") &&\n          finallyEntry.tryLoc <= arg &&\n          arg <= finallyEntry.finallyLoc) {\n        // Ignore the finally entry if control is not jumping to a\n        // location outside the try/catch block.\n        finallyEntry = null;\n      }\n\n      var record = finallyEntry ? finallyEntry.completion : {};\n      record.type = type;\n      record.arg = arg;\n\n      if (finallyEntry) {\n        this.method = \"next\";\n        this.next = finallyEntry.finallyLoc;\n        return ContinueSentinel;\n      }\n\n      return this.complete(record);\n    },\n\n    complete: function(record, afterLoc) {\n      if (record.type === \"throw\") {\n        throw record.arg;\n      }\n\n      if (record.type === \"break\" ||\n          record.type === \"continue\") {\n        this.next = record.arg;\n      } else if (record.type === \"return\") {\n        this.rval = this.arg = record.arg;\n        this.method = \"return\";\n        this.next = \"end\";\n      } else if (record.type === \"normal\" && afterLoc) {\n        this.next = afterLoc;\n      }\n\n      return ContinueSentinel;\n    },\n\n    finish: function(finallyLoc) {\n      for (var i = this.tryEntries.length - 1; i >= 0; --i) {\n        var entry = this.tryEntries[i];\n        if (entry.finallyLoc === finallyLoc) {\n          this.complete(entry.completion, entry.afterLoc);\n          resetTryEntry(entry);\n          return ContinueSentinel;\n        }\n      }\n    },\n\n    \"catch\": function(tryLoc) {\n      for (var i = this.tryEntries.length - 1; i >= 0; --i) {\n        var entry = this.tryEntries[i];\n        if (entry.tryLoc === tryLoc) {\n          var record = entry.completion;\n          if (record.type === \"throw\") {\n            var thrown = record.arg;\n            resetTryEntry(entry);\n          }\n          return thrown;\n        }\n      }\n\n      // The context.catch method must only be called with a location\n      // argument that corresponds to a known catch block.\n      throw new Error(\"illegal catch attempt\");\n    },\n\n    delegateYield: function(iterable, resultName, nextLoc) {\n      this.delegate = {\n        iterator: values(iterable),\n        resultName: resultName,\n        nextLoc: nextLoc\n      };\n\n      if (this.method === \"next\") {\n        // Deliberately forget the last sent value so that we don't\n        // accidentally pass it on to the delegate.\n        this.arg = undefined;\n      }\n\n      return ContinueSentinel;\n    }\n  };\n\n  // Regardless of whether this script is executing as a CommonJS module\n  // or not, return the runtime object so that we can declare the variable\n  // regeneratorRuntime in the outer scope, which allows this module to be\n  // injected easily by `bin/regenerator --include-runtime script.js`.\n  return exports;\n\n}(\n  // If this script is executing as a CommonJS module, use module.exports\n  // as the regeneratorRuntime namespace. Otherwise create a new empty\n  // object. Either way, the resulting object will be used to initialize\n  // the regeneratorRuntime variable at the top of this file.\n   true ? module.exports : 0\n));\n\ntry {\n  regeneratorRuntime = runtime;\n} catch (accidentalStrictMode) {\n  // This module should not be running in strict mode, so the above\n  // assignment should always work unless something is misconfigured. Just\n  // in case runtime.js accidentally runs in strict mode, we can escape\n  // strict mode using a global Function call. This could conceivably fail\n  // if a Content Security Policy forbids using Function, but in that case\n  // the proper solution is to fix the accidental strict mode problem. If\n  // you've misconfigured your bundler to force strict mode and applied a\n  // CSP to forbid Function, and you're not willing to fix either of those\n  // problems, please detail your unique predicament in a GitHub issue.\n  Function(\"r\", \"regeneratorRuntime = r\")(runtime);\n}\n\n\n//# sourceURL=webpack://website/./node_modules/regenerator-runtime/runtime.js?");
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var runtime = (function (exports) {
+  "use strict";
+
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  function define(obj, key, value) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+    return obj[key];
+  }
+  try {
+    // IE 8 has a broken Object.defineProperty that only works on DOM objects.
+    define({}, "");
+  } catch (err) {
+    define = function(obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []);
+
+    // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+    return generator;
+  }
+  exports.wrap = wrap;
+
+  // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+  function tryCatch(fn, obj, arg) {
+    try {
+      return { type: "normal", arg: fn.call(obj, arg) };
+    } catch (err) {
+      return { type: "throw", arg: err };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed";
+
+  // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+  var ContinueSentinel = {};
+
+  // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+
+  // This is a polyfill for %IteratorPrototype% for environments that
+  // don't natively support it.
+  var IteratorPrototype = {};
+  IteratorPrototype[iteratorSymbol] = function () {
+    return this;
+  };
+
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  if (NativeIteratorPrototype &&
+      NativeIteratorPrototype !== Op &&
+      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    // This environment has a native %IteratorPrototype%; use it instead
+    // of the polyfill.
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype =
+    Generator.prototype = Object.create(IteratorPrototype);
+  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+  GeneratorFunctionPrototype.constructor = GeneratorFunction;
+  GeneratorFunction.displayName = define(
+    GeneratorFunctionPrototype,
+    toStringTagSymbol,
+    "GeneratorFunction"
+  );
+
+  // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function(method) {
+      define(prototype, method, function(arg) {
+        return this._invoke(method, arg);
+      });
+    });
+  }
+
+  exports.isGeneratorFunction = function(genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor
+      ? ctor === GeneratorFunction ||
+        // For the native GeneratorFunction constructor, the best we can
+        // do is to check its .name property.
+        (ctor.displayName || ctor.name) === "GeneratorFunction"
+      : false;
+  };
+
+  exports.mark = function(genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      define(genFun, toStringTagSymbol, "GeneratorFunction");
+    }
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  };
+
+  // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `hasOwn.call(value, "__await")` to determine if the yielded value is
+  // meant to be awaited.
+  exports.awrap = function(arg) {
+    return { __await: arg };
+  };
+
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+        if (value &&
+            typeof value === "object" &&
+            hasOwn.call(value, "__await")) {
+          return PromiseImpl.resolve(value.__await).then(function(value) {
+            invoke("next", value, resolve, reject);
+          }, function(err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return PromiseImpl.resolve(value).then(function(unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration.
+          result.value = unwrapped;
+          resolve(result);
+        }, function(error) {
+          // If a rejected Promise was yielded, throw the rejection back
+          // into the async generator function so it can be handled there.
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new PromiseImpl(function(resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise =
+        // If enqueue has been called before, then we want to wait until
+        // all previous Promises have been resolved before calling invoke,
+        // so that results are always delivered in the correct order. If
+        // enqueue has not been called before, then it is important to
+        // call invoke immediately, without waiting on a callback to fire,
+        // so that the async generator function has the opportunity to do
+        // any necessary setup in a predictable way. This predictability
+        // is why the Promise constructor synchronously invokes its
+        // executor callback, and why async functions synchronously
+        // execute code before the first await. Since we implement simple
+        // async functions in terms of async generators, it is especially
+        // important to get this right, even though it requires care.
+        previousPromise ? previousPromise.then(
+          callInvokeWithMethodAndArg,
+          // Avoid propagating failures to Promises returned by later
+          // invocations of the iterator.
+          callInvokeWithMethodAndArg
+        ) : callInvokeWithMethodAndArg();
+    }
+
+    // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
+    return this;
+  };
+  exports.AsyncIterator = AsyncIterator;
+
+  // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    if (PromiseImpl === void 0) PromiseImpl = Promise;
+
+    var iter = new AsyncIterator(
+      wrap(innerFn, outerFn, self, tryLocsList),
+      PromiseImpl
+    );
+
+    return exports.isGeneratorFunction(outerFn)
+      ? iter // If outerFn is a generator, return the full iterator.
+      : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        }
+
+        // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+        return doneResult();
+      }
+
+      context.method = method;
+      context.arg = arg;
+
+      while (true) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+
+        if (context.method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = context.arg;
+
+        } else if (context.method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw context.arg;
+          }
+
+          context.dispatchException(context.arg);
+
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
+        }
+
+        state = GenStateExecuting;
+
+        var record = tryCatch(innerFn, self, context);
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done
+            ? GenStateCompleted
+            : GenStateSuspendedYield;
+
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
+            value: record.arg,
+            done: context.done
+          };
+
+        } else if (record.type === "throw") {
+          state = GenStateCompleted;
+          // Dispatch the exception by looping back around to the
+          // context.dispatchException(context.arg) call above.
+          context.method = "throw";
+          context.arg = record.arg;
+        }
+      }
+    };
+  }
+
+  // Call delegate.iterator[context.method](context.arg) and handle the
+  // result, either by returning a { value, done } result from the
+  // delegate iterator, or by modifying context.method and context.arg,
+  // setting context.delegate to null, and returning the ContinueSentinel.
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (method === undefined) {
+      // A .throw or .return when the delegate iterator has no .throw
+      // method always terminates the yield* loop.
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        // Note: ["return"] must be used for ES3 parsing compatibility.
+        if (delegate.iterator["return"]) {
+          // If the delegate iterator has a return method, give it a
+          // chance to clean up.
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            // If maybeInvokeDelegate(context) changed context.method from
+            // "return" to "throw", let that override the TypeError below.
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError(
+          "The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (! info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      // Assign the result of the finished delegate to the temporary
+      // variable specified by delegate.resultName (see delegateYield).
+      context[delegate.resultName] = info.value;
+
+      // Resume execution at the desired location (see delegateYield).
+      context.next = delegate.nextLoc;
+
+      // If context.method was "throw" but the delegate handled the
+      // exception, let the outer generator proceed normally. If
+      // context.method was "next", forget context.arg since it has been
+      // "consumed" by the delegate iterator. If context.method was
+      // "return", allow the original .return call to continue in the
+      // outer generator.
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+
+    } else {
+      // Re-yield the result returned by the delegate method.
+      return info;
+    }
+
+    // The delegate iterator is finished, so forget it and continue with
+    // the outer generator.
+    context.delegate = null;
+    return ContinueSentinel;
+  }
+
+  // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+  defineIteratorMethods(Gp);
+
+  define(Gp, toStringTagSymbol, "Generator");
+
+  // A Generator should always return itself as the iterator object when the
+  // @@iterator function is called on it. Some browsers' implementations of the
+  // iterator prototype chain incorrectly implement this, causing the Generator
+  // object to not be returned from this call. This ensures that doesn't happen.
+  // See https://github.com/facebook/regenerator/issues/274 for more details.
+  Gp[iteratorSymbol] = function() {
+    return this;
+  };
+
+  Gp.toString = function() {
+    return "[object Generator]";
+  };
+
+  function pushTryEntry(locs) {
+    var entry = { tryLoc: locs[0] };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{ tryLoc: "root" }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  exports.keys = function(object) {
+    var keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    keys.reverse();
+
+    // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      }
+
+      // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1, next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+
+          return next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    // Return an iterator with no values.
+    return { next: doneResult };
+  }
+  exports.values = values;
+
+  function doneResult() {
+    return { value: undefined, done: true };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+
+    reset: function(skipTempReset) {
+      this.prev = 0;
+      this.next = 0;
+      // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+
+      this.method = "next";
+      this.arg = undefined;
+
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" &&
+              hasOwn.call(this, name) &&
+              !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+
+    stop: function() {
+      this.done = true;
+
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+
+    dispatchException: function(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+
+        if (caught) {
+          // If the dispatched exception was caught by a catch block,
+          // then let that catch block handle the exception normally.
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !! caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+
+    abrupt: function(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev &&
+            hasOwn.call(entry, "finallyLoc") &&
+            this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry &&
+          (type === "break" ||
+           type === "continue") &&
+          finallyEntry.tryLoc <= arg &&
+          arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.method = "next";
+        this.next = finallyEntry.finallyLoc;
+        return ContinueSentinel;
+      }
+
+      return this.complete(record);
+    },
+
+    complete: function(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" ||
+          record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = this.arg = record.arg;
+        this.method = "return";
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+
+      return ContinueSentinel;
+    },
+
+    finish: function(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+
+    "catch": function(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+
+      // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+      throw new Error("illegal catch attempt");
+    },
+
+    delegateYield: function(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      if (this.method === "next") {
+        // Deliberately forget the last sent value so that we don't
+        // accidentally pass it on to the delegate.
+        this.arg = undefined;
+      }
+
+      return ContinueSentinel;
+    }
+  };
+
+  // Regardless of whether this script is executing as a CommonJS module
+  // or not, return the runtime object so that we can declare the variable
+  // regeneratorRuntime in the outer scope, which allows this module to be
+  // injected easily by `bin/regenerator --include-runtime script.js`.
+  return exports;
+
+}(
+  // If this script is executing as a CommonJS module, use module.exports
+  // as the regeneratorRuntime namespace. Otherwise create a new empty
+  // object. Either way, the resulting object will be used to initialize
+  // the regeneratorRuntime variable at the top of this file.
+   true ? module.exports : 0
+));
+
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  // This module should not be running in strict mode, so the above
+  // assignment should always work unless something is misconfigured. Just
+  // in case runtime.js accidentally runs in strict mode, we can escape
+  // strict mode using a global Function call. This could conceivably fail
+  // if a Content Security Policy forbids using Function, but in that case
+  // the proper solution is to fix the accidental strict mode problem. If
+  // you've misconfigured your bundler to force strict mode and applied a
+  // CSP to forbid Function, and you're not willing to fix either of those
+  // problems, please detail your unique predicament in a GitHub issue.
+  Function("r", "regeneratorRuntime = r")(runtime);
+}
+
 
 /***/ }),
 
-/***/ "./src/js/App/app.js":
-/*!***************************!*\
-  !*** ./src/js/App/app.js ***!
-  \***************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! regenerator-runtime/runtime */ \"./node_modules/regenerator-runtime/runtime.js\");\n/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Custom_customizations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Custom/customizations */ \"./src/js/Custom/customizations.js\");\n/* harmony import */ var _Custom_customizations__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Custom_customizations__WEBPACK_IMPORTED_MODULE_1__);\n\n/* var jquery = require('../Libraries/jquery.min')\r\nvar $ = jquery;\r\nvar jQuery = jquery;\r\nwindow.$ = jquery;\r\nrequire('../Libraries/jquery.easing.min');\r\nrequire('../Libraries/bootstrap.min');\r\nrequire('../Libraries/bootstrap-datepicker.min');\r\nrequire('../Libraries/bootstrap-datepicker.pt-BR.min');\r\nrequire('../Libraries/flickity.pkgd.min');\r\nrequire('../Libraries/plyr.min'); */ /* require('../Custom/customizations.js'); */ \n\n\n//# sourceURL=webpack://website/./src/js/App/app.js?");
-
-/***/ }),
-
-/***/ "./src/js/Custom/customizations.js":
-/*!*****************************************!*\
-  !*** ./src/js/Custom/customizations.js ***!
-  \*****************************************/
+/***/ 974:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {\n    try {\n        var info = gen[key](arg);\n        var value = info.value;\n    } catch (error) {\n        reject(error);\n        return;\n    }\n    if (info.done) {\n        resolve(value);\n    } else {\n        Promise.resolve(value).then(_next, _throw);\n    }\n}\nfunction _asyncToGenerator(fn) {\n    return function() {\n        var self = this, args = arguments;\n        return new Promise(function(resolve, reject) {\n            var gen = fn.apply(self, args);\n            function _next(value) {\n                asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"next\", value);\n            }\n            function _throw(err) {\n                asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"throw\", err);\n            }\n            _next(undefined);\n        });\n    };\n}\nfunction _classCallCheck(instance, Constructor) {\n    if (!(instance instanceof Constructor)) {\n        throw new TypeError(\"Cannot call a class as a function\");\n    }\n}\nfunction _defineProperties(target, props) {\n    for(var i = 0; i < props.length; i++){\n        var descriptor = props[i];\n        descriptor.enumerable = descriptor.enumerable || false;\n        descriptor.configurable = true;\n        if (\"value\" in descriptor) descriptor.writable = true;\n        Object.defineProperty(target, descriptor.key, descriptor);\n    }\n}\nfunction _createClass(Constructor, protoProps, staticProps) {\n    if (protoProps) _defineProperties(Constructor.prototype, protoProps);\n    if (staticProps) _defineProperties(Constructor, staticProps);\n    return Constructor;\n}\nfunction _defineProperty(obj, key, value) {\n    if (key in obj) {\n        Object.defineProperty(obj, key, {\n            value: value,\n            enumerable: true,\n            configurable: true,\n            writable: true\n        });\n    } else {\n        obj[key] = value;\n    }\n    return obj;\n}\nfunction _objectSpread(target) {\n    for(var i = 1; i < arguments.length; i++){\n        var source = arguments[i] != null ? arguments[i] : {\n        };\n        var ownKeys = Object.keys(source);\n        if (typeof Object.getOwnPropertySymbols === \"function\") {\n            ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {\n                return Object.getOwnPropertyDescriptor(source, sym).enumerable;\n            }));\n        }\n        ownKeys.forEach(function(key) {\n            _defineProperty(target, key, source[key]);\n        });\n    }\n    return target;\n}\nvar regeneratorRuntime = __webpack_require__(/*! regenerator-runtime */ \"./node_modules/regenerator-runtime/runtime.js\");\n//Some new tests\nvar FieldValidation = function() {\n    \"use strict\";\n    function FieldValidation() {\n        _classCallCheck(this, FieldValidation);\n        this.fieldsList = {\n        };\n        this.lastInFocus = '';\n        this.displayingTooltip = false;\n        this.dismissed = ''; // Indicates when pop up is dismissed.\n    }\n    _createClass(FieldValidation, [\n        {\n            /*     'use strict'; */ key: \"CheckOn\",\n            value: function CheckOn(event, nodeObj, message, param) {\n                var timeOut = param === void 0 ? 530 : param;\n                var name = nodeObj.name;\n                var t = timeOut;\n                var msg = message;\n                var instance = this;\n                var ClosePopUp = function() {\n                    if (document.activeElement.getAttribute('name') == name) {\n                        nodeObj.blur();\n                        nodeObj.focus();\n                    }\n                };\n                var SetTimer = (function(time) {\n                    var tt = time != undefined ? time : t;\n                    this.fieldsList[name].status = 'on';\n                    this.fieldsList[name].controller = setTimeout((function() {\n                        this.IsValid(name, msg);\n                    }).bind(this), tt);\n                }).bind(this);\n                var CloseOnOutOfFocus = function() {\n                    var events = [\n                        'scroll',\n                        'click'\n                    ];\n                    var removeAfterUsed = function(evt) {\n                        if (evt.type == 'scroll' || evt.type == 'click') {\n                            if (name == instance.lastInFocus && instance.fieldsList[name].status == 'off') {\n                                nodeObj.blur();\n                                if (evt.target.tagName == 'BUTTON') {\n                                    evt.preventDefault();\n                                    evt.target.click();\n                                }\n                            } else instance.StopThis(name);\n                            instance.dismissed = true;\n                            var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;\n                            try {\n                                for(var _iterator = events[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){\n                                    var ev = _step.value;\n                                    document.removeEventListener(ev, removeAfterUsed, true);\n                                }\n                            } catch (err) {\n                                _didIteratorError = true;\n                                _iteratorError = err;\n                            } finally{\n                                try {\n                                    if (!_iteratorNormalCompletion && _iterator.return != null) {\n                                        _iterator.return();\n                                    }\n                                } finally{\n                                    if (_didIteratorError) {\n                                        throw _iteratorError;\n                                    }\n                                }\n                            }\n                        }\n                    };\n                    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;\n                    try {\n                        for(var _iterator = events[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){\n                            var event1 = _step.value;\n                            document.addEventListener(event1, removeAfterUsed, true);\n                        }\n                    } catch (err) {\n                        _didIteratorError = true;\n                        _iteratorError = err;\n                    } finally{\n                        try {\n                            if (!_iteratorNormalCompletion && _iterator.return != null) {\n                                _iterator.return();\n                            }\n                        } finally{\n                            if (_didIteratorError) {\n                                throw _iteratorError;\n                            }\n                        }\n                    }\n                };\n                this.lastInFocus = name;\n                this.displayingTooltip = false;\n                if (!(name in this.fieldsList)) {\n                    var newField = _defineProperty({\n                    }, name, {\n                        obj: nodeObj,\n                        msg: '',\n                        controller: null,\n                        status: 'off'\n                    });\n                    this.fieldsList = _objectSpread({\n                    }, this.fieldsList, newField);\n                    if (nodeObj.value != '') SetTimer();\n                } else if (event.type == 'input' && event.inputType == 'deleteContentBackward') {\n                    if (nodeObj.value != '') {\n                        if (this.fieldsList[name].status == 'on') {\n                            this.StopThis(name);\n                        } else ClosePopUp();\n                        SetTimer(720);\n                    } else {\n                        if (this.fieldsList[name].status == 'off') ClosePopUp();\n                        this.fieldsList[name].obj.removeAttribute('isvalid');\n                    }\n                } else if (this.fieldsList[name].status == 'off' && nodeObj.value != '') {\n                    ClosePopUp();\n                    SetTimer();\n                } else if (nodeObj.value != '') {\n                    this.StopThis(name);\n                    SetTimer();\n                }\n                if (this.dismissed == '' || this.dismissed == true) {\n                    CloseOnOutOfFocus();\n                    this.dismissed = false;\n                }\n                this.fieldsList[name].obj.setCustomValidity('');\n                this.fieldsList[name].obj.setAttribute('isvalid', true);\n            }\n        },\n        {\n            /* 'use strict'; */ key: \"StopAll\",\n            value: function StopAll() {\n                var controller;\n                var fieldName;\n                for(var field in this.fieldsList){\n                    fieldName = field.name;\n                    if (fieldName in this.fieldsList) {\n                        if (this.fieldsList[fieldName].controller != null) {\n                            clearTimeout(this.fieldsList[fieldName].controller);\n                            this.fieldsList[fieldName].controller = null;\n                            this.fieldsList[fieldName].status = 'off';\n                        }\n                    }\n                }\n            }\n        },\n        {\n            /* 'use strict'; */ key: \"StopThis\",\n            value: function StopThis(obj) {\n                if (obj in this.fieldsList && this.fieldsList[obj].controller != null) {\n                    clearTimeout(this.fieldsList[obj].controller);\n                    this.fieldsList[obj].controller = null;\n                    this.fieldsList[obj].status = 'off';\n                }\n            }\n        },\n        {\n            /* 'use strict'; */ key: \"IsValid\",\n            value: function IsValid(objName, message) {\n                var field = this.fieldsList[objName];\n                var isInViewport = function(elem) {\n                    var bounding = elem.getBoundingClientRect();\n                    return bounding.top >= 0 && bounding.left >= 0 && bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) && bounding.right <= (window.innerWidth || document.documentElement.clientWidth);\n                };\n                if (field.obj.value != '' && field.obj.checkValidity() == false) {\n                    if (field.msg == '') {\n                        field.msg = message;\n                        field.obj.setCustomValidity(message);\n                    }\n                    if (document.activeElement.name == objName || document.activeElement.tagName == 'BODY' && this.lastInFocus == objName) {\n                        if (isInViewport(field.obj) && field.obj.value != '') {\n                            field.obj.reportValidity();\n                        }\n                        this.displayingTooltip = true;\n                    }\n                    field.controller = null;\n                    field.status = 'off';\n                    field.msg = '';\n                    field.obj.setAttribute('isvalid', false);\n                } else if (field.obj.value == '') {\n                    field.controller = null;\n                    field.status = 'off';\n                    field.msg = '';\n                }\n            }\n        },\n        {\n            /* 'use strict'; */ key: \"ListenToField\",\n            value: function ListenToField(param) {\n                var ref = param === void 0 ? {\n                } : param, nodeList = ref.nodeList, _type = ref.type, type = _type === void 0 ? '' : _type, _customMessage = ref.customMessage, customMessage = _customMessage === void 0 ? '' : _customMessage, _tooltipTime = ref.tooltipTime, tooltipTime = _tooltipTime === void 0 ? '' : _tooltipTime;\n                var inputHandler;\n                var assignToEvents = (function(element) {\n                    var message = customMessage;\n                    if (element.type == type || type == '') {\n                        if (element.tagName == 'INPUT' && element.type != 'hidden' && !element.id.includes('botcheck')) {\n                            if (message == '') {\n                                if (element.hasAttribute('tooltip')) {\n                                    message = element.getAttribute('tooltip');\n                                } else console.warn('No message defined, using default tooltip.');\n                            }\n                            if (!element.hasAttribute('inputType')) {\n                                element.addEventListener('input', (function(evt) {\n                                    this.CheckOn(evt, element, message, tooltipTime != '' ? tooltipTime : undefined);\n                                }).bind(this));\n                            } else if (element.getAttribute('inputType') == 'calendar') {\n                                element.addEventListener('blur', (function(evt) {\n                                    this.CheckOn(evt, element, message, tooltipTime != '' ? tooltipTime : undefined);\n                                }).bind(this));\n                            }\n                            element.form.addEventListener('submit', function(ev) {\n                                if (element.value == '') {\n                                    element.setAttribute('required', '');\n                                    element.setCustomValidity('Este campo é obrigatório!');\n                                    ev.stopPropagation();\n                                    ev.preventDefault();\n                                    element.reportValidity();\n                                }\n                            });\n                        }\n                    } else {\n                        throw console.error(\"Type is invalid.\");\n                        return;\n                    }\n                }).bind(this);\n                if (nodeList != undefined || nodeList != null) {\n                    inputHandler = nodeList;\n                } else {\n                    throw console.error('Node list is empty!');\n                    return;\n                }\n                if (inputHandler instanceof NodeList && inputHandler.length > 0) {\n                    var mismatchCount = 0;\n                    for(var field in inputHandler){\n                        if (inputHandler.hasOwnProperty(field)) {\n                            var element = inputHandler[field];\n                            if (element.tagName == 'INPUT') assignToEvents(element);\n                            else mismatchCount += 1;\n                        }\n                    }\n                    if (mismatchCount == inputHandler.length) {\n                        throw console.warn(\"No inputs found!\");\n                    }\n                } else if (inputHandler.tagName == 'INPUT') assignToEvents(inputHandler);\n                else {\n                    throw console.warn(\"No inputs found!\");\n                }\n            }\n        }\n    ]);\n    return FieldValidation;\n}();\n// Input masking using array with string format saved, and compare chars per index.\nvar CustomPlaceHolder = function() {\n    \"use strict\";\n    function CustomPlaceHolder(param) {\n        var _Default = param.Default, Default = _Default === void 0 ? '' : _Default, _Custom = param.Custom, Custom = _Custom === void 0 ? '' : _Custom, _Target = param.Target, Target = _Target === void 0 ? undefined : _Target, _StartWithDefault = param.StartWithDefault, StartWithDefault = _StartWithDefault === void 0 ? true : _StartWithDefault;\n        _classCallCheck(this, CustomPlaceHolder);\n        this.DefaultHolder = Default;\n        this.NewHolder = Custom;\n        this.Node = Target;\n        if (StartWithDefault == true) this.Node.placeholder = this.DefaultHolder;\n    }\n    _createClass(CustomPlaceHolder, [\n        {\n            key: \"OnFocus\",\n            value: function OnFocus(param) {\n                var _ReturnToDefault = param.ReturnToDefault, ReturnToDefault = _ReturnToDefault === void 0 ? true : _ReturnToDefault, _CustomColor = param.CustomColor, CustomColor = _CustomColor === void 0 ? '' : _CustomColor;\n                var defaultColor;\n                this.Node.onfocus = (function() {\n                    this.Node.placeholder = this.NewHolder;\n                }).bind(this);\n                if (ReturnToDefault == true) {\n                    this.Node.onblur = (function() {\n                        this.Node.placeholder = this.DefaultHolder;\n                    }).bind(this);\n                }\n            }\n        }\n    ]);\n    return CustomPlaceHolder;\n}();\nvar VideoController = function() {\n    \"use strict\";\n    function VideoController(playersList) {\n        _classCallCheck(this, VideoController);\n        this.players = playersList;\n        this.loadIsComplete = false;\n    }\n    _createClass(VideoController, [\n        {\n            key: \"HasLoaded\",\n            value: function HasLoaded(code) {\n                var onInstanceCreated = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {\n                    var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, player;\n                    return regeneratorRuntime.wrap(function _callee$(_ctx) {\n                        while(1)switch(_ctx.prev = _ctx.next){\n                            case 0:\n                                if (this.loadIsComplete) {\n                                    _ctx.next = 28;\n                                    break;\n                                }\n                                _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;\n                                _ctx.prev = 2;\n                                _iterator = this.players[Symbol.iterator]();\n                            case 4:\n                                if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {\n                                    _ctx.next = 13;\n                                    break;\n                                }\n                                player = _step.value;\n                                if (!(player.elements.controls === undefined)) {\n                                    _ctx.next = 10;\n                                    break;\n                                }\n                                _ctx.next = 9;\n                                return setTimeout(function() {\n                                    return onInstanceCreated();\n                                }, 0.1);\n                            case 9:\n                                return _ctx.abrupt(\"return\", _ctx.sent);\n                            case 10:\n                                _iteratorNormalCompletion = true;\n                                _ctx.next = 4;\n                                break;\n                            case 13:\n                                _ctx.next = 19;\n                                break;\n                            case 15:\n                                _ctx.prev = 15;\n                                _ctx.t0 = _ctx[\"catch\"](2);\n                                _didIteratorError = true;\n                                _iteratorError = _ctx.t0;\n                            case 19:\n                                _ctx.prev = 19;\n                                _ctx.prev = 20;\n                                if (!_iteratorNormalCompletion && _iterator.return != null) {\n                                    _iterator.return();\n                                }\n                            case 22:\n                                _ctx.prev = 22;\n                                if (!_didIteratorError) {\n                                    _ctx.next = 25;\n                                    break;\n                                }\n                                throw _iteratorError;\n                            case 25:\n                                return _ctx.finish(22);\n                            case 26:\n                                return _ctx.finish(19);\n                            case 27:\n                                /* console.log('but setting to true'); */ this.loadIsComplete = true;\n                            case 28:\n                                code();\n                            case 29:\n                            case \"end\":\n                                return _ctx.stop();\n                        }\n                    }, _callee, this, [\n                        [\n                            20,\n                            ,\n                            22,\n                            26\n                        ],\n                        [\n                            2,\n                            15,\n                            19,\n                            27\n                        ]\n                    ]);\n                }).bind(this)).bind(this);\n                onInstanceCreated();\n            }\n        },\n        {\n            key: \"ExecuteOnAllPlayers\",\n            value: function ExecuteOnAllPlayers(method) {\n                var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;\n                try {\n                    for(var _iterator = this.players[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){\n                        var player = _step.value;\n                        method(player);\n                    }\n                } catch (err) {\n                    _didIteratorError = true;\n                    _iteratorError = err;\n                } finally{\n                    try {\n                        if (!_iteratorNormalCompletion && _iterator.return != null) {\n                            _iterator.return();\n                        }\n                    } finally{\n                        if (_didIteratorError) {\n                            throw _iteratorError;\n                        }\n                    }\n                }\n            }\n        },\n        {\n            key: \"PauseAll\",\n            value: function PauseAll() {\n                var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;\n                try {\n                    for(var _iterator = this.players[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){\n                        var player = _step.value;\n                        if (player.playing) {\n                            player.pause();\n                            return;\n                        }\n                    }\n                } catch (err) {\n                    _didIteratorError = true;\n                    _iteratorError = err;\n                } finally{\n                    try {\n                        if (!_iteratorNormalCompletion && _iterator.return != null) {\n                            _iterator.return();\n                        }\n                    } finally{\n                        if (_didIteratorError) {\n                            throw _iteratorError;\n                        }\n                    }\n                }\n            }\n        },\n        {\n            key: \"StopAll\",\n            value: function StopAll() {\n                var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;\n                try {\n                    for(var _iterator = this.players[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){\n                        var player = _step.value;\n                        if (player.paused || player.playing) {\n                            player.stop();\n                        }\n                    }\n                } catch (err) {\n                    _didIteratorError = true;\n                    _iteratorError = err;\n                } finally{\n                    try {\n                        if (!_iteratorNormalCompletion && _iterator.return != null) {\n                            _iterator.return();\n                        }\n                    } finally{\n                        if (_didIteratorError) {\n                            throw _iteratorError;\n                        }\n                    }\n                }\n            }\n        },\n        {\n            key: \"HideAllControls\",\n            value: function HideAllControls() {\n                this.HasLoaded((function() {\n                    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;\n                    try {\n                        for(var _iterator = this.players[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){\n                            var player = _step.value;\n                            player.elements.controls.hidden = true;\n                        }\n                    } catch (err) {\n                        _didIteratorError = true;\n                        _iteratorError = err;\n                    } finally{\n                        try {\n                            if (!_iteratorNormalCompletion && _iterator.return != null) {\n                                _iterator.return();\n                            }\n                        } finally{\n                            if (_didIteratorError) {\n                                throw _iteratorError;\n                            }\n                        }\n                    }\n                }).bind(this));\n            }\n        },\n        {\n            key: \"ShowAllControls\",\n            value: function ShowAllControls() {\n                var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;\n                try {\n                    for(var _iterator = this.players[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){\n                        var player = _step.value;\n                        player.elements.controls.hidden = false;\n                    }\n                } catch (err) {\n                    _didIteratorError = true;\n                    _iteratorError = err;\n                } finally{\n                    try {\n                        if (!_iteratorNormalCompletion && _iterator.return != null) {\n                            _iterator.return();\n                        }\n                    } finally{\n                        if (_didIteratorError) {\n                            throw _iteratorError;\n                        }\n                    }\n                }\n            }\n        },\n        {\n            key: \"DisablePlayOnClick\",\n            value: function DisablePlayOnClick(toggle, param) {\n                var param1 = param === void 0 ? {\n                    all: true,\n                    player: null\n                } : param;\n                if (param1.all && !(param1.player != null)) {\n                    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;\n                    try {\n                        for(var _iterator = this.players[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){\n                            var pl = _step.value;\n                            pl.config.clickToPlay = !toggle;\n                        }\n                    } catch (err) {\n                        _didIteratorError = true;\n                        _iteratorError = err;\n                    } finally{\n                        try {\n                            if (!_iteratorNormalCompletion && _iterator.return != null) {\n                                _iterator.return();\n                            }\n                        } finally{\n                            if (_didIteratorError) {\n                                throw _iteratorError;\n                            }\n                        }\n                    }\n                } else if (param1.player != null) {\n                    param1.player.config.clickToPlay = !toggle;\n                }\n            }\n        }\n    ]);\n    return VideoController;\n}();\nvar ScrollObserver = function() {\n    \"use strict\";\n    function ScrollObserver(param) {\n        var ref = param === void 0 ? {\n            observerOptions: undefined,\n            customCallback: undefined\n        } : param, observerOptions = ref.observerOptions, customCallback = ref.customCallback;\n        _classCallCheck(this, ScrollObserver);\n        _defineProperty(this, \"_defaultOptions\", function(steps) {\n            return Array(steps + 1).fill(0).map(function(_, index) {\n                return index / steps;\n            });\n        });\n        this.Options = this._defaultOptions;\n        this.Callback = (function(v) {\n            this._defaultCallback(v);\n        }).bind(this);\n        this.State = {\n            ascending: false,\n            descending: false\n        };\n        this.OnScrollMove = function(val) {\n            return new CustomEvent('OnScrollMove', {\n                detail: {\n                    Up: val === 'Up' ? true : false,\n                    Down: val === 'Down' ? true : false\n                }\n            });\n        };\n        this.Initialized = false;\n        this.TopPosition = {\n            current: 0,\n            previous: 0,\n            direction: ''\n        };\n        this._numberOfSignedEvents = 0;\n        this.Observer = new IntersectionObserver(this.Callback, {\n            threshold: this.Options(10)\n        });\n        var _container = document.createDocumentFragment().appendChild(document.createElement('div'));\n        _container.setAttribute('id', 'scrollMarkerContainer');\n        Object.assign(_container.style, {\n            position: 'absolute',\n            top: 0\n        });\n        var gapBetweenMarkers = 1;\n        var areaAvailable = document.documentElement.scrollHeight - document.documentElement.clientHeight - window.innerHeight;\n        var numberOfMarkers = Math.round(areaAvailable / (window.innerHeight - gapBetweenMarkers));\n        var markersHeight = areaAvailable / numberOfMarkers;\n        var rest = numberOfMarkers * (markersHeight + gapBetweenMarkers) - areaAvailable;\n        var _markers = [];\n        var position = window.innerHeight;\n        for(var index = 0; index < numberOfMarkers; index++){\n            _markers.push(_container.appendChild(document.createElement('div')));\n            _markers[index].setAttribute('id', \"scrollMarker\".concat(index));\n            if (index != 0) position = position + markersHeight + gapBetweenMarkers;\n            if (index == numberOfMarkers - 1) markersHeight += rest * -1;\n            Object.assign(_markers[index].style, {\n                'position': 'absolute',\n                'height': \"\".concat(markersHeight, \"px\"),\n                'width': '1px',\n                'top': \"\".concat(position, \"px\"),\n                'z-index': '999'\n            });\n            this.Observer.observe(_markers[index]);\n        }\n        this.scrollMarker = {\n            container: _container,\n            markers: _markers\n        };\n        document.body.appendChild(this.scrollMarker.container);\n        ScrollObserver.ActiveObservers.push(this);\n    }\n    _createClass(ScrollObserver, [\n        {\n            /**\r\n     * \r\n     * @param {IntersectionObserverEntry[]} entries \r\n     */ key: \"_defaultCallback\",\n            value: function _defaultCallback(entries) {\n                if (this.Initialized) {\n                    if (this._numberOfSignedEvents < 1) return console.error('No signed event listeners');\n                    this.TopPosition.current = window.scrollY;\n                    if (this.TopPosition.current > this.TopPosition.previous || this.TopPosition.current === this.TopPosition.previous && this.TopPosition.direction === 'Down') {\n                        this.State = {\n                            'descending': true,\n                            'ascending': false\n                        };\n                        this.scrollMarker.container.dispatchEvent(this.OnScrollMove('Down'));\n                        this.TopPosition.direction = 'Down';\n                    } else if (this.TopPosition.current < this.TopPosition.previous || this.TopPosition.current === this.TopPosition.previous && this.TopPosition.direction === 'Up') {\n                        this.State = {\n                            'descending': false,\n                            'ascending': true\n                        };\n                        this.scrollMarker.container.dispatchEvent(this.OnScrollMove('Up'));\n                        this.TopPosition.direction = 'Up';\n                    }\n                    this.TopPosition.previous = this.TopPosition.current;\n                } else {\n                    this.Initialized = true;\n                }\n            }\n        },\n        {\n            key: \"On\",\n            value: function On(param, param1) {\n                var event = param === void 0 ? '' : param, callBack = param1 === void 0 ? undefined : param1;\n                if (callBack !== undefined) {\n                    if (event === 'OnScrollMove') {\n                        this.scrollMarker.container.addEventListener('OnScrollMove', callBack);\n                        this._numberOfSignedEvents += 1;\n                    } else if (event === 'OnIntersectionEnter') {\n                        this.scrollMarker.container.addEventListener('OnIntersectionEnter', callBack);\n                        this._numberOfSignedEvents += 1;\n                    } else if (event === 'OnIntersectionLeave') {\n                        this.scrollMarker.container.addEventListener('OnIntersectionLeave', callBack);\n                        this._numberOfSignedEvents += 1;\n                    } else {\n                        return console.error(\"Event not supported\");\n                    }\n                } else console.error('Callback is undefined.');\n            }\n        },\n        {\n            key: \"Off\",\n            value: function Off(param, param1) {\n                var event = param === void 0 ? '' : param, callBack = param1 === void 0 ? undefined : param1;\n                if (callBack !== undefined && this._numberOfSignedEvents > 0) {\n                    if (event === 'OnScrollMove') {\n                        this.scrollMarker.container.removeEventListener('OnScrollMove', callBack);\n                        this._numberOfSignedEvents -= 1;\n                    } else if (event === 'OnIntersectionEnter') {\n                        this.scrollMarker.container.removeEventListener('OnIntersectionEnter', callBack);\n                        this._numberOfSignedEvents -= 1;\n                    } else if (event === 'OnIntersectionLeave') {\n                        this.scrollMarker.container.removeEventListener('OnIntersectionLeave', callBack);\n                        this._numberOfSignedEvents -= 1;\n                    } else {\n                        return console.error(\"Only event supported is OnScrollMove\");\n                    }\n                } else console.error('Callback is undefined.');\n            }\n        }\n    ]);\n    return ScrollObserver;\n}();\n_defineProperty(ScrollObserver, \"ActiveObservers\", []);\nvar Sort = function() {\n    \"use strict\";\n    function Sort() {\n        _classCallCheck(this, Sort);\n    }\n    _createClass(Sort, null, [\n        {\n            key: \"quickSort\",\n            value: function quickSort(originalArray) {\n                if (originalArray.length <= 1) {\n                    return originalArray;\n                } else {\n                    var leftSide = [];\n                    var rightSide = [];\n                    var newArray = [];\n                    var pivot = originalArray.pop();\n                    var length = originalArray.length;\n                    for(var i = 0; i < length; i++){\n                        if (originalArray[i] <= pivot) {\n                            leftSide.push(originalArray[i]);\n                        } else {\n                            rightSide.push(originalArray[i]);\n                        }\n                    } //END FOR   \n                    return newArray.concat(Sort.quickSort(leftSide), pivot, Sort.quickSort(rightSide));\n                } //END ELSE\n            }\n        }\n    ]);\n    return Sort;\n}();\nvar WatchScrollPosition = function() {\n    \"use strict\";\n    function WatchScrollPosition() {\n        _classCallCheck(this, WatchScrollPosition);\n        this.Positions = [];\n        this.Nodes = {\n        };\n        this.ScrollObserver = undefined;\n        this.Subscribers = {\n        };\n        this._lastPosition = undefined;\n        this._positionOffset = 180;\n    }\n    _createClass(WatchScrollPosition, [\n        {\n            key: \"GetElements\",\n            value: function GetElements(param) {\n                var tmp = param.Tags, Tags = tmp === void 0 ? [] : tmp, tmp1 = param.ExcludedIDs, ExcludedIDs = tmp1 === void 0 ? [] : tmp1;\n                var elements = new Object;\n                var nodes, exclude, index = 0;\n                if (!Array.isArray(Tags)) Tags = [\n                    Tags\n                ];\n                var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;\n                try {\n                    var _this = this, _loop = function(_iterator, _step) {\n                        var tag = _step.value;\n                        nodes = document.querySelectorAll(tag);\n                        if (ExcludedIDs.length > 0) {\n                            ExcludedIDs = ExcludedIDs.filter(function(val) {\n                                nodes = Array.from(nodes).filter(function(node) {\n                                    return node.id == val ? !(exclude = true) : !(exclude = false);\n                                });\n                                return !exclude;\n                            });\n                            elements[tag] = nodes;\n                        } else {\n                            elements[tag] = Array.from(nodes);\n                        }\n                        elements[tag].map((function(node) {\n                            _this.Nodes[node.getBoundingClientRect().top + window.pageYOffset - _this._positionOffset] = node.id ? node.id : \"node \".concat(index);\n                        }).bind(_this));\n                        _this.Positions = Object.keys(_this.Nodes).map(function(val) {\n                            return parseFloat(val);\n                        });\n                        index++;\n                    };\n                    for(var _iterator = Tags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true)_loop(_iterator, _step);\n                } catch (err) {\n                    _didIteratorError = true;\n                    _iteratorError = err;\n                } finally{\n                    try {\n                        if (!_iteratorNormalCompletion && _iterator.return != null) {\n                            _iterator.return();\n                        }\n                    } finally{\n                        if (_didIteratorError) {\n                            throw _iteratorError;\n                        }\n                    }\n                }\n            }\n        },\n        {\n            key: \"Watch\",\n            value: function Watch(param) {\n                var tmp = param.State, State = tmp === void 0 ? true : tmp, tmp1 = param.Callback, Callback = tmp1 === void 0 ? undefined : tmp1, tmp2 = param.scrollObserver, scrollObserver = tmp2 === void 0 ? undefined : tmp2;\n                if (State) {\n                    if (Callback !== undefined) this.Subscribers[Callback.name] = Callback;\n                    else return new Error('Callback is not defined');\n                    if (scrollObserver === undefined) {\n                        if (this.ScrollObserver === undefined) {\n                            if (ScrollObserver.ActiveObservers.length > 0) {\n                                this.ScrollObserver = ScrollObserver.ActiveObservers[0];\n                            } else {\n                                this.ScrollObserver = new ScrollObserver();\n                            }\n                        }\n                    } else if (this.ScrollObserver === undefined) {\n                        this.ScrollObserver = scrollObserver;\n                    }\n                    this.ScrollObserver.On('OnScrollMove', (function() {\n                        for(var i = 0; i < this.Positions.length; i++){\n                            var position = this.Positions[i];\n                            if (window.pageYOffset >= position && !(window.pageYOffset >= this.Positions[i + 1]) && position != this._lastPosition) {\n                                this._lastPosition = position;\n                                if (Callback !== undefined) {\n                                    for(var subscriber in this.Subscribers){\n                                        this.Subscribers[subscriber](position, this.Nodes);\n                                    }\n                                    break;\n                                } else return new Error('Callback is null.');\n                            }\n                        }\n                    }).bind(this));\n                } else {\n                    for(var method in this.Subscribers){\n                        if (method == Callback.name) {\n                            delete this.Subscribers[method];\n                            return;\n                        }\n                    }\n                }\n            }\n        },\n        {\n            key: \"CurrentSection\",\n            value: function CurrentSection() {\n                var windowPosition = window.pageYOffset;\n                for(var i = 0; i < this.Positions.length; i++){\n                    var sectionPosition = this.Positions[i];\n                    if (windowPosition >= sectionPosition && !(windowPosition >= this.Positions[i + 1])) {\n                        return this.Nodes[this.Positions[i]];\n                    } else if (windowPosition < this.Positions[0]) {\n                        return this.Nodes[this.Positions[0]];\n                    }\n                }\n            }\n        }\n    ]);\n    return WatchScrollPosition;\n}();\nvar ActiveMenuLink = function() {\n    \"use strict\";\n    function ActiveMenuLink() {\n        _classCallCheck(this, ActiveMenuLink);\n        this.ActiveButton = undefined;\n        this.NewButton = undefined;\n    }\n    _createClass(ActiveMenuLink, [\n        {\n            key: \"ScrollingIntoView\",\n            value: function ScrollingIntoView(state) {\n                ActiveMenuLink.ScrollIntoView = state;\n            }\n        },\n        {\n            key: \"Change\",\n            value: function Change(param) {\n                var _SectionID = param.SectionID, SectionID = _SectionID === void 0 ? undefined : _SectionID;\n                return _asyncToGenerator(regeneratorRuntime.mark(function _callee() {\n                    return regeneratorRuntime.wrap(function _callee$(_ctx) {\n                        while(1)switch(_ctx.prev = _ctx.next){\n                            case 0:\n                                if (ActiveMenuLink.ScrollIntoView) {\n                                    _ctx.next = 8;\n                                    break;\n                                }\n                                if (this.ActiveButton == undefined) this.ActiveButton = document.querySelector('.current');\n                                this.NewButton = document.querySelector(SectionID[0] == '#' ? \"\".concat(SectionID, \"--button\") : \"#\".concat(SectionID, \"--button\"));\n                                if (!(this.NewButton != undefined)) {\n                                    _ctx.next = 7;\n                                    break;\n                                }\n                                {\n                                    if (this.ActiveButton.id != this.NewButton.id) {\n                                        this.ActiveButton.classList.remove(\"current\");\n                                        this.ActiveButton = this.NewButton.parentElement;\n                                        this.ActiveButton.classList.add(\"current\");\n                                    }\n                                }\n                                _ctx.next = 8;\n                                break;\n                            case 7:\n                                return _ctx.abrupt(\"return\", new console.error(\"Can't find node with specified ID\"));\n                            case 8:\n                            case \"end\":\n                                return _ctx.stop();\n                        }\n                    }, _callee, this);\n                }).bind(this))();\n            }\n        }\n    ]);\n    return ActiveMenuLink;\n}();\n_defineProperty(ActiveMenuLink, \"ScrollIntoView\", false);\nfunction debounce(func, wait, immediate) {\n    var timeout;\n    return function() {\n        var context = this, args = arguments;\n        if (immediate && !timeout) func.apply(context, args);\n        clearTimeout(timeout);\n        timeout = setTimeout(function() {\n            timeout = null;\n            if (!immediate) func.apply(context, args);\n        }, wait);\n    };\n}\nvar innerVisualHeight = function() {\n    var vh = window.innerHeight * 0.01;\n    document.documentElement.style.setProperty('--vh', \"\".concat(vh, \"px\"));\n};\n/* window.addEventListener('resize', debounce(innerVisualHeight, 150)); */ document.addEventListener('DOMContentLoaded', innerVisualHeight);\nvar ActiveMenu = new ActiveMenuLink();\n/* let HideNavbar = new ScrollObserver();\r\nlet Navbar = document.querySelector('#header-wrap');\r\nHideNavbar.On('OnScrollMove', (val) => {\r\n    if(val.detail.Up){\r\n        Navbar.style = \"opacity: 1;\"\r\n    }\r\n    else{\r\n        Navbar.style = \"opacity: 0;\"\r\n    }\r\n}); */ /* Instead of only hiding the navbar when the sticky-header class is enabled, it hides in any scroll down. \r\nIn this new version, the opacity is set to 0.*/ var ActiveSection = new WatchScrollPosition();\nActiveSection.GetElements({\n    Tags: 'section',\n    ExcludedIDs: [\n        'content',\n        'slider'\n    ]\n});\nActiveSection.Watch({\n    State: true,\n    Callback: function(pos, arr) {\n        ActiveMenu.Change({\n            SectionID: arr[pos]\n        });\n    }\n});\nActiveMenu.Change({\n    SectionID: ActiveSection.CurrentSection()\n});\nvar supportsSmoothScrolling = function() {\n    var body = document.body;\n    var defaultScrollBehavior = body.style.scrollBehavior;\n    body.style.scrollBehavior = 'smooth';\n    var hasSmooth = getComputedStyle(body).scrollBehavior === 'smooth';\n    body.style.scrollBehavior = defaultScrollBehavior;\n    return hasSmooth;\n}();\n/* let header = document.querySelector('#header');\r\nActiveSection.ScrollObserver.On('OnScrollMove', debounce(() => {\r\n    if(!header.classList.contains('sticky-header')) header.classList.add('sticky-header');\r\n}, 75, true)) */ var ScrollIntoView = _asyncToGenerator(regeneratorRuntime.mark(function _callee(param) {\n    var element = param === void 0 ? undefined : param;\n    var node;\n    return regeneratorRuntime.wrap(function _callee$(_ctx) {\n        while(1)switch(_ctx.prev = _ctx.next){\n            case 0:\n                if (!(element != undefined)) {\n                    _ctx.next = 16;\n                    break;\n                }\n                ActiveMenu.Change({\n                    SectionID: element\n                });\n                ActiveMenu.ScrollingIntoView(true);\n                ActiveSection.Watch({\n                    State: true,\n                    Callback: function Unsubscribe(pos, arr) {\n                        if (\"#\".concat(arr[pos]) == element) {\n                            ActiveSection.Watch({\n                                State: false,\n                                Callback: Unsubscribe\n                            });\n                            ActiveMenu.ScrollingIntoView(false);\n                        }\n                    }\n                });\n                node = document.querySelector(element == '#home' ? document.documentElement.clientWidth <= 834 ? '#slider' : '#header' : element);\n                _ctx.prev = 5;\n                if (!supportsSmoothScrolling) {\n                    _ctx.next = 10;\n                    break;\n                }\n                {\n                    node.scrollIntoView({\n                        behavior: 'smooth',\n                        alignToTop: 'false'\n                    });\n                }\n                _ctx.next = 11;\n                break;\n            case 10:\n                throw new Error('Smooth behavior is not supported.');\n            case 11:\n                _ctx.next = 16;\n                break;\n            case 13:\n                _ctx.prev = 13;\n                _ctx.t0 = _ctx[\"catch\"](5);\n                window.scrollIntoView(node, {\n                    behavior: \"smooth\",\n                    ease: function(t) {\n                        return t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t;\n                    },\n                    duration: 250,\n                    block: \"start\"\n                });\n            case 16:\n            case \"end\":\n                return _ctx.stop();\n        }\n    }, _callee, null, [\n        [\n            5,\n            13\n        ]\n    ]);\n}));\nvar menuButtons = document.querySelectorAll('.menu-container li>a');\nvar registerButtons = function(buttons) {\n    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;\n    try {\n        var _loop = function(_iterator, _step) {\n            var button = _step.value;\n            var sectionId = \"#\".concat(button.id.split(\"--\")[0]);\n            button.addEventListener('click', function(ev) {\n                ScrollIntoView(sectionId);\n            });\n        };\n        for(var _iterator = buttons[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true)_loop(_iterator, _step);\n    } catch (err) {\n        _didIteratorError = true;\n        _iteratorError = err;\n    } finally{\n        try {\n            if (!_iteratorNormalCompletion && _iterator.return != null) {\n                _iterator.return();\n            }\n        } finally{\n            if (_didIteratorError) {\n                throw _iteratorError;\n            }\n        }\n    }\n};\nregisterButtons(menuButtons);\nvar callToActionButton = document.querySelector('#home .home-button');\nvar node = document.querySelector('.perfil-detalhes--link-wrapper');\ncallToActionButton.addEventListener('click', function() {\n    try {\n        if (supportsSmoothScrolling) {\n            node.scrollIntoView({\n                behavior: \"smooth\",\n                block: \"start\"\n            });\n        } else throw new Error('Smooth behavior not supported');\n    } catch (error) {\n        window.scrollIntoView(node, {\n            behavior: \"smooth\",\n            duration: 300,\n            block: \"start\"\n        });\n    }\n});\n/* fitty('#video-section-play-title', {multiline:true}); */ /* fitty('#video-section-description-parent'); */ // Add the attribute search-active to the search bar panel and control when it's true or not.\n/* ScrollReveal().reveal(document.querySelectorAll('.mainpage-experience-block-elements img')); */ var OverlayCarousel = function() {\n    var carousel = new Flickity(document.querySelector(\".video-carousel\"), {\n        wrapAround: true,\n        contain: true,\n        cellAlign: 'left'\n    });\n    var selectedSlide = carousel.selectedElement;\n    return {\n        instance: carousel,\n        currentSlide: selectedSlide,\n        startTransition: function startTransition(code) {\n            var previousCanvas = this.currentSlide.firstElementChild;\n            var newCanvas = this.instance.selectedElement.firstElementChild;\n            if (!newCanvas.classList.contains(\"video-carousel--fade-complete\")) {\n                newCanvas.classList.add(\"video-carousel--fade-complete\");\n                if (code !== undefined) {\n                    var pauseWhenTransitioned = (function() {\n                        code();\n                        this.instance.selectedElement.removeEventListener(\"transitionend\", pauseWhenTransitioned);\n                    }).bind(this);\n                    this.instance.selectedElement.addEventListener('transitionend', pauseWhenTransitioned);\n                }\n            }\n            if (newCanvas != previousCanvas) {\n                previousCanvas.classList.remove(\"video-carousel--fade-complete\");\n                this.currentSlide = this.instance.selectedElement;\n            }\n        },\n        resetTransitions: function resetTransitions() {\n            var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;\n            try {\n                for(var _iterator = this.instance.cells[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){\n                    var cell = _step.value;\n                    var canvas = cell.element.firstElementChild;\n                    if (canvas.classList.contains(\"video-carousel--fade-complete\")) {\n                        canvas.classList.remove(\"video-carousel--fade-complete\");\n                    }\n                }\n            } catch (err) {\n                _didIteratorError = true;\n                _iteratorError = err;\n            } finally{\n                try {\n                    if (!_iteratorNormalCompletion && _iterator.return != null) {\n                        _iterator.return();\n                    }\n                } finally{\n                    if (_didIteratorError) {\n                        throw _iteratorError;\n                    }\n                }\n            }\n        }\n    };\n}();\nvar playerController;\nfunction LoadIframes() {\n    var iframeSpots = document.querySelectorAll(\".video-player\");\n    var iframeModel = document.createElement(\"iframe\");\n    iframeModel.allowFullscreen = true;\n    iframeModel.setAttribute(\"allowtransparency\", true);\n    iframeModel.allow = \"autoplay\";\n    var baseURL = \"https://www.youtube.com/embed/\";\n    playerController = new VideoController(new Array());\n    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;\n    try {\n        for(var _iterator = iframeSpots[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){\n            var node1 = _step.value;\n            var clone = iframeModel.cloneNode();\n            clone.src = baseURL + node1.getAttribute('js-data');\n            node1.appendChild(clone);\n            var player = new Plyr(node1);\n            /*    let pauseOverlay = document.createElement(\"div\");\r\n        pauseOverlay.className = \"obscure-on-pause\";\r\n        player.elements.container.appendChild(pauseOverlay); */ playerController.players.push(player);\n        }\n    } catch (err) {\n        _didIteratorError = true;\n        _iteratorError = err;\n    } finally{\n        try {\n            if (!_iteratorNormalCompletion && _iterator.return != null) {\n                _iterator.return();\n            }\n        } finally{\n            if (_didIteratorError) {\n                throw _iteratorError;\n            }\n        }\n    }\n}\n/* document.body.addEventListener('load', LoadIframes()); */ var EnableOverlay = new function() {\n    var videoSection = document.querySelector(\"#video-section-play-title\"); /* Make this whole function as a class and remove this query, by searching the children directly. */ \n    var playButton = videoSection.querySelector('.play-video');\n    var overlay = videoSection.querySelector('.video-overlay');\n    var carouselButtons = document.querySelectorAll(\".flickity-button\");\n    var videoDescriptions = document.querySelector(\".video-overlay--descriptions\").children;\n    var videoCarousel = document.querySelector(\".video-carousel\");\n    playButton.addEventListener('click', function() {\n        var enableOverlay = function enableOverlay(isActive) {\n            document.querySelector(\"body\").style = isActive ? \"overflow:hidden;\" : \"overflow:visible\";\n            return isActive;\n        };\n        var changeActiveDescription = function changeActiveDescription(index) {\n            var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;\n            try {\n                for(var _iterator = videoDescriptions[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){\n                    var el = _step.value;\n                    el.classList.remove(\"--active-video\");\n                }\n            } catch (err) {\n                _didIteratorError = true;\n                _iteratorError = err;\n            } finally{\n                try {\n                    if (!_iteratorNormalCompletion && _iterator.return != null) {\n                        _iterator.return();\n                    }\n                } finally{\n                    if (_didIteratorError) {\n                        throw _iteratorError;\n                    }\n                }\n            }\n            videoDescriptions[index].classList.add(\"--active-video\");\n        };\n        if (playerController === undefined) {\n            LoadIframes();\n        }\n        OverlayCarousel.resetTransitions();\n        OverlayCarousel.instance.on('change', function() {\n            playerController.HideAllControls();\n            OverlayCarousel.startTransition(function() {\n                playerController.PauseAll();\n                playerController.StopAll();\n            });\n            changeActiveDescription(OverlayCarousel.instance.selectedIndex);\n        });\n        changeActiveDescription(OverlayCarousel.instance.selectedIndex);\n        OverlayCarousel.startTransition();\n        var stopOnEnd = function(ev) {\n            ev.detail.plyr.stop();\n        };\n        var executeOnPlay = function() {\n            playerController.ShowAllControls();\n            var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;\n            try {\n                var _loop = function(_iterator, _step) {\n                    var button = _step.value;\n                    var hideButton = function() {\n                        return button.classList.add(\"flickity-button--hidden\");\n                    };\n                    var showButton = function() {\n                        button.classList.remove(\"flickity-button--hidden\");\n                        playerController.ExecuteOnAllPlayers(function(player) {\n                            return player.elements.container.removeEventListener('pause', showButton);\n                        });\n                    };\n                    playerController.ExecuteOnAllPlayers(function(player) {\n                        return player.elements.container.addEventListener('pause', showButton);\n                    });\n                    hideButton();\n                };\n                for(var _iterator = carouselButtons[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true)_loop(_iterator, _step);\n            } catch (err) {\n                _didIteratorError = true;\n                _iteratorError = err;\n            } finally{\n                try {\n                    if (!_iteratorNormalCompletion && _iterator.return != null) {\n                        _iterator.return();\n                    }\n                } finally{\n                    if (_didIteratorError) {\n                        throw _iteratorError;\n                    }\n                }\n            }\n        };\n        playerController.ExecuteOnAllPlayers(function(player) {\n            player.elements.container.addEventListener('ended', stopOnEnd);\n            player.elements.container.addEventListener('playing', executeOnPlay);\n        });\n        playerController.StopAll();\n        playerController.HideAllControls();\n        var changeOverlayStatus = function() {\n            overlay.setAttribute('active', overlay.getAttribute('active') == 'false' ? enableOverlay(true) : enableOverlay(false));\n        };\n        changeOverlayStatus();\n        var DisablePlayOnDrag = function(ev) {\n            var CancelClick = function(ev1) {\n                ev1.stopPropagation();\n                window.removeEventListener('click', CancelClick, true);\n            };\n            window.addEventListener('click', CancelClick, true);\n        };\n        OverlayCarousel.instance.on('dragStart', DisablePlayOnDrag);\n        overlay.addEventListener('click', function CloseOverlay(ev) {\n            if (ev.target != this && !ev.target.classList.contains('icon-line-cross') && !ev.target.classList.contains('video-overlay-close')) {\n                return;\n            }\n            changeOverlayStatus();\n            overlay.removeEventListener('click', CloseOverlay);\n            OverlayCarousel.instance.select(0, false, true);\n            /* overlay.firstElementChild.removeEventListener('click',PreventParentClick);  */ playerController.PauseAll();\n            playerController.ExecuteOnAllPlayers(function(player) {\n                player.elements.container.removeEventListener('ended', stopOnEnd);\n                player.elements.container.removeEventListener('playing', executeOnPlay);\n            });\n            OverlayCarousel.instance.off('dragStart', DisablePlayOnDrag);\n        });\n        OverlayCarousel.instance.resize();\n    });\n};\n/* let searchButton = document.getElementById(\"top-search-trigger\");\r\nlet searchPanel = searchButton.closest(\".header-row\");\r\nsearchPanel.setAttribute('search-active',false);\r\n\r\nsearchButton.addEventListener('click', () => {\r\n    let typedOnSearchBar;\r\n    let searchBlur;\r\n    let searchInput = document.getElementById(\"main-search-bar\");\r\n    searchInput.setAttribute('empty', true);\r\n    if(searchPanel.hasAttribute(\"search-active\") && searchPanel.getAttribute('search-active') == \"false\"){\r\n        if(searchInput.value != '') searchInput.value = '';\r\n        searchPanel.setAttribute('search-active',true);\r\n        typedOnSearchBar = (ev) => {\r\n            if(ev.inputType != \"deleteContentBackward\" && !searchInput.value == ''){\r\n                searchInput.setAttribute('empty', false);\r\n            }\r\n            else if(ev.inputType == \"deleteContentBackward\" && searchInput.value == ''){\r\n                searchInput.setAttribute('empty', true);\r\n            }\r\n        }\r\n        searchBlur = (ev) => {\r\n            if(ev.target.id != \"main-search-bar\" && ev.target.id != \"close-search-bar\" ){\r\n                if (searchPanel.getAttribute('search-active') == \"true\") {\r\n                    searchPanel.setAttribute('search-active',false);\r\n                    document.removeEventListener('click', searchBlur);\r\n                    searchInput.removeEventListener('input', typedOnSearchBar);\r\n                }\r\n            }\r\n\r\n        }\r\n        searchInput.addEventListener('input', typedOnSearchBar);\r\n        document.addEventListener('click', searchBlur);\r\n        searchInput.focus();\r\n    }\r\n    else if (searchPanel.getAttribute('search-active') == \"true\") {\r\n        searchPanel.setAttribute('search-active',false);\r\n        searchInput.removeEventListener('input', typedOnSearchBar);\r\n        document.removeEventListener('click', searchBlur);\r\n    }\r\n}) */ /* Disabled search features */ // Update the contact form to the correct city, based on the button pressed.\nvar tabPanel = document.querySelector('.tab-pane');\nvar form = tabPanel.querySelector('form');\nvar tabsContainer = document.querySelector('#cityTabs');\nvar tabs = tabsContainer.querySelectorAll('a');\nvar tabState = {\n    current: ''\n};\ntabsContainer.addEventListener('OnTabFocusChange', function(ev) {\n    var newTab = ev.target.id;\n    if (tabState.current != newTab) {\n        var keys = Object.keys(tabState);\n        for(var i = 1; i < keys.length; i++){\n            var tab = keys[i];\n            if (tab != newTab && tabState[tab].node.classList.contains('active')) {\n                tabState[tab].node.classList.remove('active');\n                tabState[tab].isActive = false;\n            }\n        }\n        tabState[newTab].node.classList.add('active');\n        tabState[newTab].isActive = true;\n        tabState['current'] = newTab;\n    }\n});\nvar _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;\ntry {\n    for(var _iterator = tabs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){\n        var tab = _step.value;\n        tabState[tab.id] = tab.classList.contains('active') ? (function() {\n            tabState['current'] = tab.id;\n            return {\n                isActive: true,\n                node: tab\n            };\n        })() : {\n            isActive: false,\n            node: tab\n        };\n        tab.addEventListener('click', function(ev) {\n            var cityName = ev.target.getAttribute('aria-controls');\n            var isActive = ev.target.classList.contains('active');\n            if (!isActive) {\n                /* form.setAttribute('fieldset','disabled') */ ev.target.dispatchEvent(new CustomEvent('OnTabFocusChange', {\n                    bubbles: true\n                }));\n                tabPanel.id = cityName;\n                tabPanel.setAttribute('aria-labelledby', ev.target.id);\n                tabPanel.classList.remove('show');\n                tabsContainer.setAttribute('activeTab', ev.target.id);\n                var _iteratorNormalCompletion1 = true, _didIteratorError1 = false, _iteratorError1 = undefined;\n                try {\n                    for(var _iterator1 = form.elements[Symbol.iterator](), _step1; !(_iteratorNormalCompletion1 = (_step1 = _iterator1.next()).done); _iteratorNormalCompletion1 = true){\n                        var field = _step1.value;\n                        field.disabled = true;\n                        if (field.hasAttribute('required')) field.removeAttribute('required');\n                    }\n                } catch (err) {\n                    _didIteratorError1 = true;\n                    _iteratorError1 = err;\n                } finally{\n                    try {\n                        if (!_iteratorNormalCompletion1 && _iterator1.return != null) {\n                            _iterator1.return();\n                        }\n                    } finally{\n                        if (_didIteratorError1) {\n                            throw _iteratorError1;\n                        }\n                    }\n                }\n                setTimeout(function() {\n                    var cityField = form.elements.namedItem('contato-form-city'); //Requesting the city field inside the form.\n                    var _iteratorNormalCompletion2 = true, _didIteratorError2 = false, _iteratorError2 = undefined;\n                    try {\n                        for(var _iterator2 = form.elements[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true){\n                            var field = _step2.value;\n                            field.setCustomValidity('');\n                            field.removeAttribute('isvalid');\n                            field.disabled = false;\n                            field.value = '';\n                        }\n                    } catch (err) {\n                        _didIteratorError2 = true;\n                        _iteratorError2 = err;\n                    } finally{\n                        try {\n                            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {\n                                _iterator2.return();\n                            }\n                        } finally{\n                            if (_didIteratorError2) {\n                                throw _iteratorError2;\n                            }\n                        }\n                    }\n                    cityField.value = cityName.charAt(0).toUpperCase() + cityName.slice(1); //Changing the first letter of the word to uppercase and mergin with the rest of the word.\n                    tabPanel.classList.add('show');\n                }, 300);\n            }\n        });\n    }\n} catch (err) {\n    _didIteratorError = true;\n    _iteratorError = err;\n} finally{\n    try {\n        if (!_iteratorNormalCompletion && _iterator.return != null) {\n            _iterator.return();\n        }\n    } finally{\n        if (_didIteratorError) {\n            throw _iteratorError;\n        }\n    }\n}\nvar menuIsOpen = false;\nvar executeOnMenuOpened = new MutationObserver(function(mutationList, observer) {\n    var _iteratorNormalCompletion1 = true, _didIteratorError1 = false, _iteratorError1 = undefined;\n    try {\n        for(var _iterator1 = mutationList[Symbol.iterator](), _step1; !(_iteratorNormalCompletion1 = (_step1 = _iterator1.next()).done); _iteratorNormalCompletion1 = true){\n            var mutation = _step1.value;\n            if (mutation.type == 'attributes' && mutation.attributeName == 'class') {\n                if (mutation.target.classList.contains('primary-menu-open')) {\n                    if (menuIsOpen == false) {\n                        bodyScrollLock.disableBodyScroll(mutation.target);\n                        menuIsOpen = true;\n                    }\n                } else if (menuIsOpen == true) {\n                    bodyScrollLock.enableBodyScroll(mutation.target);\n                    document.getElementsByClassName('header-wrap-clone')[0].removeAttribute('style');\n                    menuIsOpen = false;\n                }\n            }\n        }\n    } catch (err) {\n        _didIteratorError1 = true;\n        _iteratorError1 = err;\n    } finally{\n        try {\n            if (!_iteratorNormalCompletion1 && _iterator1.return != null) {\n                _iterator1.return();\n            }\n        } finally{\n            if (_didIteratorError1) {\n                throw _iteratorError1;\n            }\n        }\n    }\n});\nexecuteOnMenuOpened.observe(document.querySelector(\"body\"), {\n    attributes: true\n});\nvar fieldValidation = new FieldValidation();\nfieldValidation.ListenToField({\n    nodeList: document.querySelectorAll(\"input[id^='contato-form']\")\n});\nvar emailPlaceHolder = new CustomPlaceHolder({\n    Default: 'Seu email',\n    Custom: 'email@dominio.com',\n    Target: document.getElementById('contato-form-email'),\n    StartWithDefault: true\n}).OnFocus({\n    ReturnToDefault: true\n});\nvar calendarPlaceHolder = new CustomPlaceHolder({\n    Default: \"Data de Interesse\",\n    Custom: \"DD/MM/AAAA\",\n    Target: document.getElementById('contato-form-date'),\n    StartWithDefault: true\n}).OnFocus({\n    ReturnToDefault: true\n});\nvar phonePlaceHolder = new CustomPlaceHolder({\n    Default: \"Seu Telefone\",\n    Custom: '(DD) X XXXX-XXXX',\n    Target: document.getElementById('contato-form-phone'),\n    StartWithDefault: true\n}).OnFocus({\n    ReturnToDefault: true\n});\njQuery('.home-date').datepicker({\n    language: 'pt-BR',\n    autoclose: true,\n    startDate: \"tomorrow\",\n    endDate: \"+2m\"\n});\n/* testing.On('OnScrollDown',()=>{}); */ var perfilButtons = {\n};\nperfilButtons.curriculo = document.getElementById(\"curriculo-session\");\nperfilButtons.simposios = document.getElementById(\"simposio-session\");\nperfilButtons.publicacoes = document.getElementById(\"publicacoes-session\");\nvar enableSession = function(el) {\n    var activeButton = el.currentTarget;\n    var block = document.getElementsByClassName('perfil-container')[0];\n    var isMobile = document.documentElement.clientWidth <= 834;\n    if (!document.body.classList.contains('--obscured')) {\n        if (isMobile) {\n            document.body.classList.add('--obscured');\n        }\n    }\n    if (isMobile) innerVisualHeight();\n    if (!el.currentTarget.classList.contains('--active')) {\n        block.classList.add('--active');\n        for(var button in perfilButtons){\n            button = perfilButtons[button];\n            if (button.id != activeButton.id) {\n                if (!button.classList.contains('--inactive')) {\n                    button.classList.add('--inactive');\n                    if (isMobile) bodyScrollLock.enableBodyScroll(button);\n                }\n            } else {\n                if (button.classList.contains('--inactive')) {\n                    button.classList.remove('--inactive');\n                }\n                if (!button.classList.contains('--active')) {\n                    button.classList.add('--active');\n                    if (isMobile) bodyScrollLock.disableBodyScroll(button);\n                }\n            }\n        }\n    } else {\n        block.classList.remove('--active');\n        el.currentTarget.classList.remove('--active');\n        for(var button in perfilButtons){\n            button = perfilButtons[button];\n            button.classList.remove('--inactive');\n        }\n        if (document.body.classList.contains('--obscured')) {\n            document.body.classList.remove('--obscured');\n        }\n        if (isMobile) bodyScrollLock.clearAllBodyScrollLocks();\n    }\n};\nfor(var button in perfilButtons){\n    button = perfilButtons[button];\n    button.addEventListener('click', enableSession, true);\n}\n\n\n//# sourceURL=webpack://website/./src/js/Custom/customizations.js?");
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+    try {
+        var info = gen[key](arg);
+        var value = info.value;
+    } catch (error) {
+        reject(error);
+        return;
+    }
+    if (info.done) {
+        resolve(value);
+    } else {
+        Promise.resolve(value).then(_next, _throw);
+    }
+}
+function _asyncToGenerator(fn) {
+    return function() {
+        var self = this, args = arguments;
+        return new Promise(function(resolve, reject) {
+            var gen = fn.apply(self, args);
+            function _next(value) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+            }
+            function _throw(err) {
+                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+            }
+            _next(undefined);
+        });
+    };
+}
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+    }
+}
+function _defineProperties(target, props) {
+    for(var i = 0; i < props.length; i++){
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+    }
+}
+function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+}
+function _defineProperty(obj, key, value) {
+    if (key in obj) {
+        Object.defineProperty(obj, key, {
+            value: value,
+            enumerable: true,
+            configurable: true,
+            writable: true
+        });
+    } else {
+        obj[key] = value;
+    }
+    return obj;
+}
+function _objectSpread(target) {
+    for(var i = 1; i < arguments.length; i++){
+        var source = arguments[i] != null ? arguments[i] : {
+        };
+        var ownKeys = Object.keys(source);
+        if (typeof Object.getOwnPropertySymbols === "function") {
+            ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {
+                return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+            }));
+        }
+        ownKeys.forEach(function(key) {
+            _defineProperty(target, key, source[key]);
+        });
+    }
+    return target;
+}
+var regeneratorRuntime = __webpack_require__(666);
+//Some new tests
+var FieldValidation = function() {
+    "use strict";
+    function FieldValidation() {
+        _classCallCheck(this, FieldValidation);
+        this.fieldsList = {
+        };
+        this.lastInFocus = '';
+        this.displayingTooltip = false;
+        this.dismissed = ''; // Indicates when pop up is dismissed.
+    }
+    _createClass(FieldValidation, [
+        {
+            /*     'use strict'; */ key: "CheckOn",
+            value: function CheckOn(event, nodeObj, message, param) {
+                var timeOut = param === void 0 ? 530 : param;
+                var name = nodeObj.name;
+                var t = timeOut;
+                var msg = message;
+                var instance = this;
+                var ClosePopUp = function() {
+                    if (document.activeElement.getAttribute('name') == name) {
+                        nodeObj.blur();
+                        nodeObj.focus();
+                    }
+                };
+                var SetTimer = (function(time) {
+                    var tt = time != undefined ? time : t;
+                    this.fieldsList[name].status = 'on';
+                    this.fieldsList[name].controller = setTimeout((function() {
+                        this.IsValid(name, msg);
+                    }).bind(this), tt);
+                }).bind(this);
+                var CloseOnOutOfFocus = function() {
+                    var events = [
+                        'scroll',
+                        'click'
+                    ];
+                    var removeAfterUsed = function(evt) {
+                        if (evt.type == 'scroll' || evt.type == 'click') {
+                            if (name == instance.lastInFocus && instance.fieldsList[name].status == 'off') {
+                                nodeObj.blur();
+                                if (evt.target.tagName == 'BUTTON') {
+                                    evt.preventDefault();
+                                    evt.target.click();
+                                }
+                            } else instance.StopThis(name);
+                            instance.dismissed = true;
+                            var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+                            try {
+                                for(var _iterator = events[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
+                                    var ev = _step.value;
+                                    document.removeEventListener(ev, removeAfterUsed, true);
+                                }
+                            } catch (err) {
+                                _didIteratorError = true;
+                                _iteratorError = err;
+                            } finally{
+                                try {
+                                    if (!_iteratorNormalCompletion && _iterator.return != null) {
+                                        _iterator.return();
+                                    }
+                                } finally{
+                                    if (_didIteratorError) {
+                                        throw _iteratorError;
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+                    try {
+                        for(var _iterator = events[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
+                            var event1 = _step.value;
+                            document.addEventListener(event1, removeAfterUsed, true);
+                        }
+                    } catch (err) {
+                        _didIteratorError = true;
+                        _iteratorError = err;
+                    } finally{
+                        try {
+                            if (!_iteratorNormalCompletion && _iterator.return != null) {
+                                _iterator.return();
+                            }
+                        } finally{
+                            if (_didIteratorError) {
+                                throw _iteratorError;
+                            }
+                        }
+                    }
+                };
+                this.lastInFocus = name;
+                this.displayingTooltip = false;
+                if (!(name in this.fieldsList)) {
+                    var newField = _defineProperty({
+                    }, name, {
+                        obj: nodeObj,
+                        msg: '',
+                        controller: null,
+                        status: 'off'
+                    });
+                    this.fieldsList = _objectSpread({
+                    }, this.fieldsList, newField);
+                    if (nodeObj.value != '') SetTimer();
+                } else if (event.type == 'input' && event.inputType == 'deleteContentBackward') {
+                    if (nodeObj.value != '') {
+                        if (this.fieldsList[name].status == 'on') {
+                            this.StopThis(name);
+                        } else ClosePopUp();
+                        SetTimer(720);
+                    } else {
+                        if (this.fieldsList[name].status == 'off') ClosePopUp();
+                        this.fieldsList[name].obj.removeAttribute('isvalid');
+                    }
+                } else if (this.fieldsList[name].status == 'off' && nodeObj.value != '') {
+                    ClosePopUp();
+                    SetTimer();
+                } else if (nodeObj.value != '') {
+                    this.StopThis(name);
+                    SetTimer();
+                }
+                if (this.dismissed == '' || this.dismissed == true) {
+                    CloseOnOutOfFocus();
+                    this.dismissed = false;
+                }
+                this.fieldsList[name].obj.setCustomValidity('');
+                this.fieldsList[name].obj.setAttribute('isvalid', true);
+            }
+        },
+        {
+            /* 'use strict'; */ key: "StopAll",
+            value: function StopAll() {
+                var controller;
+                var fieldName;
+                for(var field in this.fieldsList){
+                    fieldName = field.name;
+                    if (fieldName in this.fieldsList) {
+                        if (this.fieldsList[fieldName].controller != null) {
+                            clearTimeout(this.fieldsList[fieldName].controller);
+                            this.fieldsList[fieldName].controller = null;
+                            this.fieldsList[fieldName].status = 'off';
+                        }
+                    }
+                }
+            }
+        },
+        {
+            /* 'use strict'; */ key: "StopThis",
+            value: function StopThis(obj) {
+                if (obj in this.fieldsList && this.fieldsList[obj].controller != null) {
+                    clearTimeout(this.fieldsList[obj].controller);
+                    this.fieldsList[obj].controller = null;
+                    this.fieldsList[obj].status = 'off';
+                }
+            }
+        },
+        {
+            /* 'use strict'; */ key: "IsValid",
+            value: function IsValid(objName, message) {
+                var field = this.fieldsList[objName];
+                var isInViewport = function(elem) {
+                    var bounding = elem.getBoundingClientRect();
+                    return bounding.top >= 0 && bounding.left >= 0 && bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) && bounding.right <= (window.innerWidth || document.documentElement.clientWidth);
+                };
+                if (field.obj.value != '' && field.obj.checkValidity() == false) {
+                    if (field.msg == '') {
+                        field.msg = message;
+                        field.obj.setCustomValidity(message);
+                    }
+                    if (document.activeElement.name == objName || document.activeElement.tagName == 'BODY' && this.lastInFocus == objName) {
+                        if (isInViewport(field.obj) && field.obj.value != '') {
+                            field.obj.reportValidity();
+                        }
+                        this.displayingTooltip = true;
+                    }
+                    field.controller = null;
+                    field.status = 'off';
+                    field.msg = '';
+                    field.obj.setAttribute('isvalid', false);
+                } else if (field.obj.value == '') {
+                    field.controller = null;
+                    field.status = 'off';
+                    field.msg = '';
+                }
+            }
+        },
+        {
+            /* 'use strict'; */ key: "ListenToField",
+            value: function ListenToField(param) {
+                var ref = param === void 0 ? {
+                } : param, nodeList = ref.nodeList, _type = ref.type, type = _type === void 0 ? '' : _type, _customMessage = ref.customMessage, customMessage = _customMessage === void 0 ? '' : _customMessage, _tooltipTime = ref.tooltipTime, tooltipTime = _tooltipTime === void 0 ? '' : _tooltipTime;
+                var inputHandler;
+                var assignToEvents = (function(element) {
+                    var message = customMessage;
+                    if (element.type == type || type == '') {
+                        if (element.tagName == 'INPUT' && element.type != 'hidden' && !element.id.includes('botcheck')) {
+                            if (message == '') {
+                                if (element.hasAttribute('tooltip')) {
+                                    message = element.getAttribute('tooltip');
+                                } else console.warn('No message defined, using default tooltip.');
+                            }
+                            if (!element.hasAttribute('inputType')) {
+                                element.addEventListener('input', (function(evt) {
+                                    this.CheckOn(evt, element, message, tooltipTime != '' ? tooltipTime : undefined);
+                                }).bind(this));
+                            } else if (element.getAttribute('inputType') == 'calendar') {
+                                element.addEventListener('blur', (function(evt) {
+                                    this.CheckOn(evt, element, message, tooltipTime != '' ? tooltipTime : undefined);
+                                }).bind(this));
+                            }
+                            element.form.addEventListener('submit', function(ev) {
+                                if (element.value == '') {
+                                    element.setAttribute('required', '');
+                                    element.setCustomValidity('Este campo é obrigatório!');
+                                    ev.stopPropagation();
+                                    ev.preventDefault();
+                                    element.reportValidity();
+                                }
+                            });
+                        }
+                    } else {
+                        throw console.error("Type is invalid.");
+                        return;
+                    }
+                }).bind(this);
+                if (nodeList != undefined || nodeList != null) {
+                    inputHandler = nodeList;
+                } else {
+                    throw console.error('Node list is empty!');
+                    return;
+                }
+                if (inputHandler instanceof NodeList && inputHandler.length > 0) {
+                    var mismatchCount = 0;
+                    for(var field in inputHandler){
+                        if (inputHandler.hasOwnProperty(field)) {
+                            var element = inputHandler[field];
+                            if (element.tagName == 'INPUT') assignToEvents(element);
+                            else mismatchCount += 1;
+                        }
+                    }
+                    if (mismatchCount == inputHandler.length) {
+                        throw console.warn("No inputs found!");
+                    }
+                } else if (inputHandler.tagName == 'INPUT') assignToEvents(inputHandler);
+                else {
+                    throw console.warn("No inputs found!");
+                }
+            }
+        }
+    ]);
+    return FieldValidation;
+}();
+// Input masking using array with string format saved, and compare chars per index.
+var CustomPlaceHolder = function() {
+    "use strict";
+    function CustomPlaceHolder(param) {
+        var _Default = param.Default, Default = _Default === void 0 ? '' : _Default, _Custom = param.Custom, Custom = _Custom === void 0 ? '' : _Custom, _Target = param.Target, Target = _Target === void 0 ? undefined : _Target, _StartWithDefault = param.StartWithDefault, StartWithDefault = _StartWithDefault === void 0 ? true : _StartWithDefault;
+        _classCallCheck(this, CustomPlaceHolder);
+        this.DefaultHolder = Default;
+        this.NewHolder = Custom;
+        this.Node = Target;
+        if (StartWithDefault == true) this.Node.placeholder = this.DefaultHolder;
+    }
+    _createClass(CustomPlaceHolder, [
+        {
+            key: "OnFocus",
+            value: function OnFocus(param) {
+                var _ReturnToDefault = param.ReturnToDefault, ReturnToDefault = _ReturnToDefault === void 0 ? true : _ReturnToDefault, _CustomColor = param.CustomColor, CustomColor = _CustomColor === void 0 ? '' : _CustomColor;
+                var defaultColor;
+                this.Node.onfocus = (function() {
+                    this.Node.placeholder = this.NewHolder;
+                }).bind(this);
+                if (ReturnToDefault == true) {
+                    this.Node.onblur = (function() {
+                        this.Node.placeholder = this.DefaultHolder;
+                    }).bind(this);
+                }
+            }
+        }
+    ]);
+    return CustomPlaceHolder;
+}();
+var VideoController = function() {
+    "use strict";
+    function VideoController(playersList) {
+        _classCallCheck(this, VideoController);
+        this.players = playersList;
+        this.loadIsComplete = false;
+    }
+    _createClass(VideoController, [
+        {
+            key: "HasLoaded",
+            value: function HasLoaded(code) {
+                var onInstanceCreated = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+                    var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, player;
+                    return regeneratorRuntime.wrap(function _callee$(_ctx) {
+                        while(1)switch(_ctx.prev = _ctx.next){
+                            case 0:
+                                if (this.loadIsComplete) {
+                                    _ctx.next = 28;
+                                    break;
+                                }
+                                _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+                                _ctx.prev = 2;
+                                _iterator = this.players[Symbol.iterator]();
+                            case 4:
+                                if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                                    _ctx.next = 13;
+                                    break;
+                                }
+                                player = _step.value;
+                                if (!(player.elements.controls === undefined)) {
+                                    _ctx.next = 10;
+                                    break;
+                                }
+                                _ctx.next = 9;
+                                return setTimeout(function() {
+                                    return onInstanceCreated();
+                                }, 0.1);
+                            case 9:
+                                return _ctx.abrupt("return", _ctx.sent);
+                            case 10:
+                                _iteratorNormalCompletion = true;
+                                _ctx.next = 4;
+                                break;
+                            case 13:
+                                _ctx.next = 19;
+                                break;
+                            case 15:
+                                _ctx.prev = 15;
+                                _ctx.t0 = _ctx["catch"](2);
+                                _didIteratorError = true;
+                                _iteratorError = _ctx.t0;
+                            case 19:
+                                _ctx.prev = 19;
+                                _ctx.prev = 20;
+                                if (!_iteratorNormalCompletion && _iterator.return != null) {
+                                    _iterator.return();
+                                }
+                            case 22:
+                                _ctx.prev = 22;
+                                if (!_didIteratorError) {
+                                    _ctx.next = 25;
+                                    break;
+                                }
+                                throw _iteratorError;
+                            case 25:
+                                return _ctx.finish(22);
+                            case 26:
+                                return _ctx.finish(19);
+                            case 27:
+                                /* console.log('but setting to true'); */ this.loadIsComplete = true;
+                            case 28:
+                                code();
+                            case 29:
+                            case "end":
+                                return _ctx.stop();
+                        }
+                    }, _callee, this, [
+                        [
+                            20,
+                            ,
+                            22,
+                            26
+                        ],
+                        [
+                            2,
+                            15,
+                            19,
+                            27
+                        ]
+                    ]);
+                }).bind(this)).bind(this);
+                onInstanceCreated();
+            }
+        },
+        {
+            key: "ExecuteOnAllPlayers",
+            value: function ExecuteOnAllPlayers(method) {
+                var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+                try {
+                    for(var _iterator = this.players[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
+                        var player = _step.value;
+                        method(player);
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally{
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return != null) {
+                            _iterator.return();
+                        }
+                    } finally{
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+        },
+        {
+            key: "PauseAll",
+            value: function PauseAll() {
+                var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+                try {
+                    for(var _iterator = this.players[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
+                        var player = _step.value;
+                        if (player.playing) {
+                            player.pause();
+                            return;
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally{
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return != null) {
+                            _iterator.return();
+                        }
+                    } finally{
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+        },
+        {
+            key: "StopAll",
+            value: function StopAll() {
+                var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+                try {
+                    for(var _iterator = this.players[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
+                        var player = _step.value;
+                        if (player.paused || player.playing) {
+                            player.stop();
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally{
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return != null) {
+                            _iterator.return();
+                        }
+                    } finally{
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+        },
+        {
+            key: "HideAllControls",
+            value: function HideAllControls() {
+                this.HasLoaded((function() {
+                    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+                    try {
+                        for(var _iterator = this.players[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
+                            var player = _step.value;
+                            player.elements.controls.hidden = true;
+                        }
+                    } catch (err) {
+                        _didIteratorError = true;
+                        _iteratorError = err;
+                    } finally{
+                        try {
+                            if (!_iteratorNormalCompletion && _iterator.return != null) {
+                                _iterator.return();
+                            }
+                        } finally{
+                            if (_didIteratorError) {
+                                throw _iteratorError;
+                            }
+                        }
+                    }
+                }).bind(this));
+            }
+        },
+        {
+            key: "ShowAllControls",
+            value: function ShowAllControls() {
+                var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+                try {
+                    for(var _iterator = this.players[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
+                        var player = _step.value;
+                        player.elements.controls.hidden = false;
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally{
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return != null) {
+                            _iterator.return();
+                        }
+                    } finally{
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+        },
+        {
+            key: "DisablePlayOnClick",
+            value: function DisablePlayOnClick(toggle, param) {
+                var param1 = param === void 0 ? {
+                    all: true,
+                    player: null
+                } : param;
+                if (param1.all && !(param1.player != null)) {
+                    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+                    try {
+                        for(var _iterator = this.players[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
+                            var pl = _step.value;
+                            pl.config.clickToPlay = !toggle;
+                        }
+                    } catch (err) {
+                        _didIteratorError = true;
+                        _iteratorError = err;
+                    } finally{
+                        try {
+                            if (!_iteratorNormalCompletion && _iterator.return != null) {
+                                _iterator.return();
+                            }
+                        } finally{
+                            if (_didIteratorError) {
+                                throw _iteratorError;
+                            }
+                        }
+                    }
+                } else if (param1.player != null) {
+                    param1.player.config.clickToPlay = !toggle;
+                }
+            }
+        }
+    ]);
+    return VideoController;
+}();
+var ScrollObserver = function() {
+    "use strict";
+    function ScrollObserver(param) {
+        var ref = param === void 0 ? {
+            observerOptions: undefined,
+            customCallback: undefined
+        } : param, observerOptions = ref.observerOptions, customCallback = ref.customCallback;
+        _classCallCheck(this, ScrollObserver);
+        _defineProperty(this, "_defaultOptions", function(steps) {
+            return Array(steps + 1).fill(0).map(function(_, index) {
+                return index / steps;
+            });
+        });
+        this.Options = this._defaultOptions;
+        this.Callback = (function(v) {
+            this._defaultCallback(v);
+        }).bind(this);
+        this.State = {
+            ascending: false,
+            descending: false
+        };
+        this.OnScrollMove = function(val) {
+            return new CustomEvent('OnScrollMove', {
+                detail: {
+                    Up: val === 'Up' ? true : false,
+                    Down: val === 'Down' ? true : false
+                }
+            });
+        };
+        this.Initialized = false;
+        this.TopPosition = {
+            current: 0,
+            previous: 0,
+            direction: ''
+        };
+        this._numberOfSignedEvents = 0;
+        this.Observer = new IntersectionObserver(this.Callback, {
+            threshold: this.Options(10)
+        });
+        var _container = document.createDocumentFragment().appendChild(document.createElement('div'));
+        _container.setAttribute('id', 'scrollMarkerContainer');
+        Object.assign(_container.style, {
+            position: 'absolute',
+            top: 0
+        });
+        var gapBetweenMarkers = 1;
+        var areaAvailable = document.documentElement.scrollHeight - document.documentElement.clientHeight - window.innerHeight;
+        var numberOfMarkers = Math.round(areaAvailable / (window.innerHeight - gapBetweenMarkers));
+        var markersHeight = areaAvailable / numberOfMarkers;
+        var rest = numberOfMarkers * (markersHeight + gapBetweenMarkers) - areaAvailable;
+        var _markers = [];
+        var position = window.innerHeight;
+        for(var index = 0; index < numberOfMarkers; index++){
+            _markers.push(_container.appendChild(document.createElement('div')));
+            _markers[index].setAttribute('id', "scrollMarker".concat(index));
+            if (index != 0) position = position + markersHeight + gapBetweenMarkers;
+            if (index == numberOfMarkers - 1) markersHeight += rest * -1;
+            Object.assign(_markers[index].style, {
+                'position': 'absolute',
+                'height': "".concat(markersHeight, "px"),
+                'width': '1px',
+                'top': "".concat(position, "px"),
+                'z-index': '999'
+            });
+            this.Observer.observe(_markers[index]);
+        }
+        this.scrollMarker = {
+            container: _container,
+            markers: _markers
+        };
+        document.body.appendChild(this.scrollMarker.container);
+        ScrollObserver.ActiveObservers.push(this);
+    }
+    _createClass(ScrollObserver, [
+        {
+            /**
+     * 
+     * @param {IntersectionObserverEntry[]} entries 
+     */ key: "_defaultCallback",
+            value: function _defaultCallback(entries) {
+                if (this.Initialized) {
+                    if (this._numberOfSignedEvents < 1) return console.error('No signed event listeners');
+                    this.TopPosition.current = window.scrollY;
+                    if (this.TopPosition.current > this.TopPosition.previous || this.TopPosition.current === this.TopPosition.previous && this.TopPosition.direction === 'Down') {
+                        this.State = {
+                            'descending': true,
+                            'ascending': false
+                        };
+                        this.scrollMarker.container.dispatchEvent(this.OnScrollMove('Down'));
+                        this.TopPosition.direction = 'Down';
+                    } else if (this.TopPosition.current < this.TopPosition.previous || this.TopPosition.current === this.TopPosition.previous && this.TopPosition.direction === 'Up') {
+                        this.State = {
+                            'descending': false,
+                            'ascending': true
+                        };
+                        this.scrollMarker.container.dispatchEvent(this.OnScrollMove('Up'));
+                        this.TopPosition.direction = 'Up';
+                    }
+                    this.TopPosition.previous = this.TopPosition.current;
+                } else {
+                    this.Initialized = true;
+                }
+            }
+        },
+        {
+            key: "On",
+            value: function On(param, param1) {
+                var event2 = param === void 0 ? '' : param, callBack = param1 === void 0 ? undefined : param1;
+                if (callBack !== undefined) {
+                    if (event2 === 'OnScrollMove') {
+                        this.scrollMarker.container.addEventListener('OnScrollMove', callBack);
+                        this._numberOfSignedEvents += 1;
+                    } else if (event2 === 'OnIntersectionEnter') {
+                        this.scrollMarker.container.addEventListener('OnIntersectionEnter', callBack);
+                        this._numberOfSignedEvents += 1;
+                    } else if (event2 === 'OnIntersectionLeave') {
+                        this.scrollMarker.container.addEventListener('OnIntersectionLeave', callBack);
+                        this._numberOfSignedEvents += 1;
+                    } else {
+                        return console.error("Event not supported");
+                    }
+                } else console.error('Callback is undefined.');
+            }
+        },
+        {
+            key: "Off",
+            value: function Off(param, param1) {
+                var event2 = param === void 0 ? '' : param, callBack = param1 === void 0 ? undefined : param1;
+                if (callBack !== undefined && this._numberOfSignedEvents > 0) {
+                    if (event2 === 'OnScrollMove') {
+                        this.scrollMarker.container.removeEventListener('OnScrollMove', callBack);
+                        this._numberOfSignedEvents -= 1;
+                    } else if (event2 === 'OnIntersectionEnter') {
+                        this.scrollMarker.container.removeEventListener('OnIntersectionEnter', callBack);
+                        this._numberOfSignedEvents -= 1;
+                    } else if (event2 === 'OnIntersectionLeave') {
+                        this.scrollMarker.container.removeEventListener('OnIntersectionLeave', callBack);
+                        this._numberOfSignedEvents -= 1;
+                    } else {
+                        return console.error("Only event supported is OnScrollMove");
+                    }
+                } else console.error('Callback is undefined.');
+            }
+        }
+    ]);
+    return ScrollObserver;
+}();
+_defineProperty(ScrollObserver, "ActiveObservers", []);
+var Sort = function() {
+    "use strict";
+    function Sort() {
+        _classCallCheck(this, Sort);
+    }
+    _createClass(Sort, null, [
+        {
+            key: "quickSort",
+            value: function quickSort(originalArray) {
+                if (originalArray.length <= 1) {
+                    return originalArray;
+                } else {
+                    var leftSide = [];
+                    var rightSide = [];
+                    var newArray = [];
+                    var pivot = originalArray.pop();
+                    var length = originalArray.length;
+                    for(var i = 0; i < length; i++){
+                        if (originalArray[i] <= pivot) {
+                            leftSide.push(originalArray[i]);
+                        } else {
+                            rightSide.push(originalArray[i]);
+                        }
+                    } //END FOR   
+                    return newArray.concat(Sort.quickSort(leftSide), pivot, Sort.quickSort(rightSide));
+                } //END ELSE
+            }
+        }
+    ]);
+    return Sort;
+}();
+var WatchScrollPosition = function() {
+    "use strict";
+    function WatchScrollPosition() {
+        _classCallCheck(this, WatchScrollPosition);
+        this.Positions = [];
+        this.Nodes = {
+        };
+        this.ScrollObserver = undefined;
+        this.Subscribers = {
+        };
+        this._lastPosition = undefined;
+        this._positionOffset = 180;
+    }
+    _createClass(WatchScrollPosition, [
+        {
+            key: "GetElements",
+            value: function GetElements(param) {
+                var tmp = param.Tags, Tags = tmp === void 0 ? [] : tmp, tmp1 = param.ExcludedIDs, ExcludedIDs = tmp1 === void 0 ? [] : tmp1;
+                var elements = new Object;
+                var nodes, exclude, index = 0;
+                if (!Array.isArray(Tags)) Tags = [
+                    Tags
+                ];
+                var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+                try {
+                    var _this = this, _loop = function(_iterator, _step) {
+                        var tag = _step.value;
+                        nodes = document.querySelectorAll(tag);
+                        if (ExcludedIDs.length > 0) {
+                            ExcludedIDs = ExcludedIDs.filter(function(val) {
+                                nodes = Array.from(nodes).filter(function(node) {
+                                    return node.id == val ? !(exclude = true) : !(exclude = false);
+                                });
+                                return !exclude;
+                            });
+                            elements[tag] = nodes;
+                        } else {
+                            elements[tag] = Array.from(nodes);
+                        }
+                        elements[tag].map((function(node) {
+                            _this.Nodes[node.getBoundingClientRect().top + window.pageYOffset - _this._positionOffset] = node.id ? node.id : "node ".concat(index);
+                        }).bind(_this));
+                        _this.Positions = Object.keys(_this.Nodes).map(function(val) {
+                            return parseFloat(val);
+                        });
+                        index++;
+                    };
+                    for(var _iterator = Tags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true)_loop(_iterator, _step);
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally{
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return != null) {
+                            _iterator.return();
+                        }
+                    } finally{
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+        },
+        {
+            key: "Watch",
+            value: function Watch(param) {
+                var tmp = param.State, State = tmp === void 0 ? true : tmp, tmp1 = param.Callback, Callback = tmp1 === void 0 ? undefined : tmp1, tmp2 = param.scrollObserver, scrollObserver = tmp2 === void 0 ? undefined : tmp2;
+                if (State) {
+                    if (Callback !== undefined) this.Subscribers[Callback.name] = Callback;
+                    else return new Error('Callback is not defined');
+                    if (scrollObserver === undefined) {
+                        if (this.ScrollObserver === undefined) {
+                            if (ScrollObserver.ActiveObservers.length > 0) {
+                                this.ScrollObserver = ScrollObserver.ActiveObservers[0];
+                            } else {
+                                this.ScrollObserver = new ScrollObserver();
+                            }
+                        }
+                    } else if (this.ScrollObserver === undefined) {
+                        this.ScrollObserver = scrollObserver;
+                    }
+                    this.ScrollObserver.On('OnScrollMove', (function() {
+                        for(var i = 0; i < this.Positions.length; i++){
+                            var position = this.Positions[i];
+                            if (window.pageYOffset >= position && !(window.pageYOffset >= this.Positions[i + 1]) && position != this._lastPosition) {
+                                this._lastPosition = position;
+                                if (Callback !== undefined) {
+                                    for(var subscriber in this.Subscribers){
+                                        this.Subscribers[subscriber](position, this.Nodes);
+                                    }
+                                    break;
+                                } else return new Error('Callback is null.');
+                            }
+                        }
+                    }).bind(this));
+                } else {
+                    for(var method in this.Subscribers){
+                        if (method == Callback.name) {
+                            delete this.Subscribers[method];
+                            return;
+                        }
+                    }
+                }
+            }
+        },
+        {
+            key: "CurrentSection",
+            value: function CurrentSection() {
+                var windowPosition = window.pageYOffset;
+                for(var i = 0; i < this.Positions.length; i++){
+                    var sectionPosition = this.Positions[i];
+                    if (windowPosition >= sectionPosition && !(windowPosition >= this.Positions[i + 1])) {
+                        return this.Nodes[this.Positions[i]];
+                    } else if (windowPosition < this.Positions[0]) {
+                        return this.Nodes[this.Positions[0]];
+                    }
+                }
+            }
+        }
+    ]);
+    return WatchScrollPosition;
+}();
+var ActiveMenuLink = function() {
+    "use strict";
+    function ActiveMenuLink() {
+        _classCallCheck(this, ActiveMenuLink);
+        this.ActiveButton = undefined;
+        this.NewButton = undefined;
+    }
+    _createClass(ActiveMenuLink, [
+        {
+            key: "ScrollingIntoView",
+            value: function ScrollingIntoView(state) {
+                ActiveMenuLink.ScrollIntoView = state;
+            }
+        },
+        {
+            key: "Change",
+            value: function Change(param) {
+                var _SectionID = param.SectionID, SectionID = _SectionID === void 0 ? undefined : _SectionID;
+                return _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+                    return regeneratorRuntime.wrap(function _callee$(_ctx) {
+                        while(1)switch(_ctx.prev = _ctx.next){
+                            case 0:
+                                if (ActiveMenuLink.ScrollIntoView) {
+                                    _ctx.next = 8;
+                                    break;
+                                }
+                                if (this.ActiveButton == undefined) this.ActiveButton = document.querySelector('.current');
+                                this.NewButton = document.querySelector(SectionID[0] == '#' ? "".concat(SectionID, "--button") : "#".concat(SectionID, "--button"));
+                                if (!(this.NewButton != undefined)) {
+                                    _ctx.next = 7;
+                                    break;
+                                }
+                                {
+                                    if (this.ActiveButton.id != this.NewButton.id) {
+                                        this.ActiveButton.classList.remove("current");
+                                        this.ActiveButton = this.NewButton.parentElement;
+                                        this.ActiveButton.classList.add("current");
+                                    }
+                                }
+                                _ctx.next = 8;
+                                break;
+                            case 7:
+                                return _ctx.abrupt("return", new console.error("Can't find node with specified ID"));
+                            case 8:
+                            case "end":
+                                return _ctx.stop();
+                        }
+                    }, _callee, this);
+                }).bind(this))();
+            }
+        }
+    ]);
+    return ActiveMenuLink;
+}();
+_defineProperty(ActiveMenuLink, "ScrollIntoView", false);
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        if (immediate && !timeout) func.apply(context, args);
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        }, wait);
+    };
+}
+var innerVisualHeight = function() {
+    var vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', "".concat(vh, "px"));
+};
+/* window.addEventListener('resize', debounce(innerVisualHeight, 150)); */ document.addEventListener('DOMContentLoaded', innerVisualHeight);
+var ActiveMenu = new ActiveMenuLink();
+/* let HideNavbar = new ScrollObserver();
+let Navbar = document.querySelector('#header-wrap');
+HideNavbar.On('OnScrollMove', (val) => {
+    if(val.detail.Up){
+        Navbar.style = "opacity: 1;"
+    }
+    else{
+        Navbar.style = "opacity: 0;"
+    }
+}); */ /* Instead of only hiding the navbar when the sticky-header class is enabled, it hides in any scroll down. 
+In this new version, the opacity is set to 0.*/ var ActiveSection = new WatchScrollPosition();
+ActiveSection.GetElements({
+    Tags: 'section',
+    ExcludedIDs: [
+        'content',
+        'slider'
+    ]
+});
+ActiveSection.Watch({
+    State: true,
+    Callback: function(pos, arr) {
+        ActiveMenu.Change({
+            SectionID: arr[pos]
+        });
+    }
+});
+ActiveMenu.Change({
+    SectionID: ActiveSection.CurrentSection()
+});
+var supportsSmoothScrolling = function() {
+    var body = document.body;
+    var defaultScrollBehavior = body.style.scrollBehavior;
+    body.style.scrollBehavior = 'smooth';
+    var hasSmooth = getComputedStyle(body).scrollBehavior === 'smooth';
+    body.style.scrollBehavior = defaultScrollBehavior;
+    return hasSmooth;
+}();
+var supportsScrollMargin = function() {
+    var body = document.body;
+    var defaultScrollMarginTop = body.style.scrollMarginTop;
+    body.style.scrollMarginTop = '1px';
+    var hasSupport = getComputedStyle(body).scrollMarginTop;
+    body.style.scrollMarginTop = defaultScrollMarginTop;
+    return hasSupport;
+}();
+if (!supportsScrollMargin) {
+    var hasClass = document.body.classList.contains('no-scroll-margin');
+    if (!hasClass) document.body.classList.add('no-scroll-margin');
+    var scrollMarginFragment = new DocumentFragment();
+    var scrollMarginMarker = document.createElement('span');
+    Object.assign(scrollMarginMarker.style, {
+        'position': 'absolute',
+        'height': "1px",
+        'width': '1px',
+        'top': "0",
+        'z-index': '999'
+    });
+    scrollMarginMarker.id = "scrollMarginMarker";
+    scrollMarginFragment.appendChild(scrollMarginMarker);
+    document.body.appendChild(scrollMarginFragment);
+}
+/* let header = document.querySelector('#header');
+ActiveSection.ScrollObserver.On('OnScrollMove', debounce(() => {
+    if(!header.classList.contains('sticky-header')) header.classList.add('sticky-header');
+}, 75, true)) */ var mobileMenu = document.querySelector('#primary-menu-trigger');
+var ScrollIntoView = _asyncToGenerator(regeneratorRuntime.mark(function _callee(param) {
+    var element = param === void 0 ? undefined : param;
+    var node, scrollMarginMarker, before, position, click;
+    return regeneratorRuntime.wrap(function _callee$(_ctx) {
+        while(1)switch(_ctx.prev = _ctx.next){
+            case 0:
+                if (!(element != undefined)) {
+                    _ctx.next = 18;
+                    break;
+                }
+                ActiveMenu.Change({
+                    SectionID: element
+                });
+                ActiveMenu.ScrollingIntoView(true);
+                ActiveSection.Watch({
+                    State: true,
+                    Callback: function Unsubscribe(pos, arr) {
+                        if ("#".concat(arr[pos]) == element) {
+                            ActiveSection.Watch({
+                                State: false,
+                                Callback: Unsubscribe
+                            });
+                            ActiveMenu.ScrollingIntoView(false);
+                        }
+                    }
+                });
+                node = document.querySelector(element == '#home' ? document.documentElement.clientWidth <= 834 ? '#slider' : '#header' : element);
+                _ctx.prev = 5;
+                if (!supportsSmoothScrolling) {
+                    _ctx.next = 10;
+                    break;
+                }
+                {
+                    node.scrollIntoView({
+                        behavior: 'smooth',
+                        alignToTop: 'false'
+                    });
+                }
+                _ctx.next = 11;
+                break;
+            case 10:
+                throw new Error('Smooth behavior is not supported.');
+            case 11:
+                _ctx.next = 16;
+                break;
+            case 13:
+                _ctx.prev = 13;
+                _ctx.t0 = _ctx["catch"](5);
+                if (supportsScrollMargin) window.scrollIntoView(node, {
+                    behavior: "smooth",
+                    duration: 300,
+                    block: "start"
+                });
+                else {
+                    scrollMarginMarker = document.body.querySelector('#scrollMarginMarker');
+                    before = getComputedStyle(node, ':before');
+                    position = node.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop;
+                    position += parseInt(before.top, 10);
+                    scrollMarginMarker.style.top = "".concat(position, "px");
+                    if (node.id == 'slider') window.scrollIntoView(node, {
+                        behavior: "smooth",
+                        duration: 300,
+                        block: "start"
+                    });
+                    else window.scrollIntoView(scrollMarginMarker, {
+                        behavior: "smooth",
+                        duration: 300,
+                        block: "start"
+                    });
+                }
+            case 16:
+                click = new MouseEvent('click');
+                mobileMenu.dispatchEvent(click);
+            case 18:
+            case "end":
+                return _ctx.stop();
+        }
+    }, _callee, null, [
+        [
+            5,
+            13
+        ]
+    ]);
+}));
+var menuButtons = document.querySelectorAll('.menu-container li>a');
+var registerButtons = function(buttons) {
+    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+    try {
+        var _loop = function(_iterator, _step) {
+            var button = _step.value;
+            var sectionId = "#".concat(button.id.split("--")[0]);
+            button.addEventListener('click', function(ev) {
+                ScrollIntoView(sectionId);
+            });
+        };
+        for(var _iterator = buttons[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true)_loop(_iterator, _step);
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally{
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+                _iterator.return();
+            }
+        } finally{
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
+    }
+};
+registerButtons(menuButtons);
+var callToActionButton = document.querySelector('#home .home-button');
+var node = document.querySelector('.perfil-detalhes--link-wrapper');
+callToActionButton.addEventListener('click', function() {
+    try {
+        if (supportsSmoothScrolling) {
+            node.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        } else throw new Error('Smooth behavior not supported');
+    } catch (error) {
+        if (supportsScrollMargin) window.scrollIntoView(node, {
+            behavior: "smooth",
+            duration: 300,
+            block: "start"
+        });
+        else {
+            var scrollMarginMarker = document.body.querySelector('#scrollMarginMarker');
+            var before = getComputedStyle(node, ':before');
+            var position = node.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop;
+            position += parseInt(before.top, 10);
+            scrollMarginMarker.style.top = "".concat(position, "px");
+            window.scrollIntoView(scrollMarginMarker, {
+                behavior: "smooth",
+                duration: 300,
+                block: "start"
+            });
+        }
+    }
+});
+/* fitty('#video-section-play-title', {multiline:true}); */ /* fitty('#video-section-description-parent'); */ // Add the attribute search-active to the search bar panel and control when it's true or not.
+/* ScrollReveal().reveal(document.querySelectorAll('.mainpage-experience-block-elements img')); */ var OverlayCarousel = function() {
+    var carousel = new Flickity(document.querySelector(".video-carousel"), {
+        wrapAround: true,
+        contain: true,
+        cellAlign: 'left'
+    });
+    var selectedSlide = carousel.selectedElement;
+    return {
+        instance: carousel,
+        currentSlide: selectedSlide,
+        startTransition: function startTransition(code) {
+            var previousCanvas = this.currentSlide.firstElementChild;
+            var newCanvas = this.instance.selectedElement.firstElementChild;
+            if (!newCanvas.classList.contains("video-carousel--fade-complete")) {
+                newCanvas.classList.add("video-carousel--fade-complete");
+                if (code !== undefined) {
+                    var pauseWhenTransitioned = (function() {
+                        code();
+                        this.instance.selectedElement.removeEventListener("transitionend", pauseWhenTransitioned);
+                    }).bind(this);
+                    this.instance.selectedElement.addEventListener('transitionend', pauseWhenTransitioned);
+                }
+            }
+            if (newCanvas != previousCanvas) {
+                previousCanvas.classList.remove("video-carousel--fade-complete");
+                this.currentSlide = this.instance.selectedElement;
+            }
+        },
+        resetTransitions: function resetTransitions() {
+            var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+            try {
+                for(var _iterator = this.instance.cells[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
+                    var cell = _step.value;
+                    var canvas = cell.element.firstElementChild;
+                    if (canvas.classList.contains("video-carousel--fade-complete")) {
+                        canvas.classList.remove("video-carousel--fade-complete");
+                    }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally{
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return != null) {
+                        _iterator.return();
+                    }
+                } finally{
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+        }
+    };
+}();
+var playerController;
+function LoadIframes() {
+    var iframeSpots = document.querySelectorAll(".video-player");
+    var iframeModel = document.createElement("iframe");
+    iframeModel.allowFullscreen = true;
+    iframeModel.setAttribute("allowtransparency", true);
+    iframeModel.allow = "autoplay";
+    var baseURL = "https://www.youtube.com/embed/";
+    playerController = new VideoController(new Array());
+    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+    try {
+        for(var _iterator = iframeSpots[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
+            var node1 = _step.value;
+            var clone = iframeModel.cloneNode();
+            clone.src = baseURL + node1.getAttribute('js-data');
+            node1.appendChild(clone);
+            var player = new Plyr(node1);
+            /*    let pauseOverlay = document.createElement("div");
+        pauseOverlay.className = "obscure-on-pause";
+        player.elements.container.appendChild(pauseOverlay); */ playerController.players.push(player);
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally{
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+                _iterator.return();
+            }
+        } finally{
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
+    }
+}
+/* document.body.addEventListener('load', LoadIframes()); */ var EnableOverlay = new function() {
+    var videoSection = document.querySelector("#video-section-play-title"); /* Make this whole function as a class and remove this query, by searching the children directly. */ 
+    var playButton = videoSection.querySelector('.play-video');
+    var overlay = videoSection.querySelector('.video-overlay');
+    var carouselButtons = document.querySelectorAll(".flickity-button");
+    var videoDescriptions = document.querySelector(".video-overlay--descriptions").children;
+    var videoCarousel = document.querySelector(".video-carousel");
+    playButton.addEventListener('click', function() {
+        var enableOverlay = function enableOverlay(isActive) {
+            document.querySelector("body").style = isActive ? "overflow:hidden;" : "overflow:visible";
+            return isActive;
+        };
+        var changeActiveDescription = function changeActiveDescription(index) {
+            var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+            try {
+                for(var _iterator = videoDescriptions[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
+                    var el = _step.value;
+                    el.classList.remove("--active-video");
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally{
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return != null) {
+                        _iterator.return();
+                    }
+                } finally{
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+            videoDescriptions[index].classList.add("--active-video");
+        };
+        if (playerController === undefined) {
+            LoadIframes();
+        }
+        OverlayCarousel.resetTransitions();
+        OverlayCarousel.instance.on('change', function() {
+            playerController.HideAllControls();
+            OverlayCarousel.startTransition(function() {
+                playerController.PauseAll();
+                playerController.StopAll();
+            });
+            changeActiveDescription(OverlayCarousel.instance.selectedIndex);
+        });
+        changeActiveDescription(OverlayCarousel.instance.selectedIndex);
+        OverlayCarousel.startTransition();
+        var stopOnEnd = function(ev) {
+            ev.detail.plyr.stop();
+        };
+        var executeOnPlay = function() {
+            playerController.ShowAllControls();
+            var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+            try {
+                var _loop = function(_iterator, _step) {
+                    var button = _step.value;
+                    var hideButton = function() {
+                        return button.classList.add("flickity-button--hidden");
+                    };
+                    var showButton = function() {
+                        button.classList.remove("flickity-button--hidden");
+                        playerController.ExecuteOnAllPlayers(function(player) {
+                            return player.elements.container.removeEventListener('pause', showButton);
+                        });
+                    };
+                    playerController.ExecuteOnAllPlayers(function(player) {
+                        return player.elements.container.addEventListener('pause', showButton);
+                    });
+                    hideButton();
+                };
+                for(var _iterator = carouselButtons[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true)_loop(_iterator, _step);
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally{
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return != null) {
+                        _iterator.return();
+                    }
+                } finally{
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+        };
+        playerController.ExecuteOnAllPlayers(function(player) {
+            player.elements.container.addEventListener('ended', stopOnEnd);
+            player.elements.container.addEventListener('playing', executeOnPlay);
+        });
+        playerController.StopAll();
+        playerController.HideAllControls();
+        var changeOverlayStatus = function() {
+            overlay.setAttribute('active', overlay.getAttribute('active') == 'false' ? enableOverlay(true) : enableOverlay(false));
+        };
+        changeOverlayStatus();
+        var DisablePlayOnDrag = function(ev) {
+            var CancelClick = function(ev1) {
+                ev1.stopPropagation();
+                window.removeEventListener('click', CancelClick, true);
+            };
+            window.addEventListener('click', CancelClick, true);
+        };
+        OverlayCarousel.instance.on('dragStart', DisablePlayOnDrag);
+        overlay.addEventListener('click', function CloseOverlay(ev) {
+            if (ev.target != this && !ev.target.classList.contains('icon-line-cross') && !ev.target.classList.contains('video-overlay-close')) {
+                return;
+            }
+            changeOverlayStatus();
+            overlay.removeEventListener('click', CloseOverlay);
+            OverlayCarousel.instance.select(0, false, true);
+            /* overlay.firstElementChild.removeEventListener('click',PreventParentClick);  */ playerController.PauseAll();
+            playerController.ExecuteOnAllPlayers(function(player) {
+                player.elements.container.removeEventListener('ended', stopOnEnd);
+                player.elements.container.removeEventListener('playing', executeOnPlay);
+            });
+            OverlayCarousel.instance.off('dragStart', DisablePlayOnDrag);
+        });
+        OverlayCarousel.instance.resize();
+    });
+};
+/* let searchButton = document.getElementById("top-search-trigger");
+let searchPanel = searchButton.closest(".header-row");
+searchPanel.setAttribute('search-active',false);
+
+searchButton.addEventListener('click', () => {
+    let typedOnSearchBar;
+    let searchBlur;
+    let searchInput = document.getElementById("main-search-bar");
+    searchInput.setAttribute('empty', true);
+    if(searchPanel.hasAttribute("search-active") && searchPanel.getAttribute('search-active') == "false"){
+        if(searchInput.value != '') searchInput.value = '';
+        searchPanel.setAttribute('search-active',true);
+        typedOnSearchBar = (ev) => {
+            if(ev.inputType != "deleteContentBackward" && !searchInput.value == ''){
+                searchInput.setAttribute('empty', false);
+            }
+            else if(ev.inputType == "deleteContentBackward" && searchInput.value == ''){
+                searchInput.setAttribute('empty', true);
+            }
+        }
+        searchBlur = (ev) => {
+            if(ev.target.id != "main-search-bar" && ev.target.id != "close-search-bar" ){
+                if (searchPanel.getAttribute('search-active') == "true") {
+                    searchPanel.setAttribute('search-active',false);
+                    document.removeEventListener('click', searchBlur);
+                    searchInput.removeEventListener('input', typedOnSearchBar);
+                }
+            }
+
+        }
+        searchInput.addEventListener('input', typedOnSearchBar);
+        document.addEventListener('click', searchBlur);
+        searchInput.focus();
+    }
+    else if (searchPanel.getAttribute('search-active') == "true") {
+        searchPanel.setAttribute('search-active',false);
+        searchInput.removeEventListener('input', typedOnSearchBar);
+        document.removeEventListener('click', searchBlur);
+    }
+}) */ /* Disabled search features */ // Update the contact form to the correct city, based on the button pressed.
+var tabPanel = document.querySelector('.tab-pane');
+var form = tabPanel.querySelector('form');
+var tabsContainer = document.querySelector('#cityTabs');
+var tabs = tabsContainer.querySelectorAll('a');
+var tabState = {
+    current: ''
+};
+tabsContainer.addEventListener('OnTabFocusChange', function(ev) {
+    var newTab = ev.target.id;
+    if (tabState.current != newTab) {
+        var keys = Object.keys(tabState);
+        for(var i = 1; i < keys.length; i++){
+            var tab = keys[i];
+            if (tab != newTab && tabState[tab].node.classList.contains('active')) {
+                tabState[tab].node.classList.remove('active');
+                tabState[tab].isActive = false;
+            }
+        }
+        tabState[newTab].node.classList.add('active');
+        tabState[newTab].isActive = true;
+        tabState['current'] = newTab;
+    }
+});
+var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
+try {
+    for(var _iterator = tabs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
+        var tab = _step.value;
+        tabState[tab.id] = tab.classList.contains('active') ? (function() {
+            tabState['current'] = tab.id;
+            return {
+                isActive: true,
+                node: tab
+            };
+        })() : {
+            isActive: false,
+            node: tab
+        };
+        tab.addEventListener('click', function(ev) {
+            var cityName = ev.target.getAttribute('aria-controls');
+            var isActive = ev.target.classList.contains('active');
+            if (!isActive) {
+                /* form.setAttribute('fieldset','disabled') */ ev.target.dispatchEvent(new CustomEvent('OnTabFocusChange', {
+                    bubbles: true
+                }));
+                tabPanel.id = cityName;
+                tabPanel.setAttribute('aria-labelledby', ev.target.id);
+                tabPanel.classList.remove('show');
+                tabsContainer.setAttribute('activeTab', ev.target.id);
+                var _iteratorNormalCompletion1 = true, _didIteratorError1 = false, _iteratorError1 = undefined;
+                try {
+                    for(var _iterator1 = form.elements[Symbol.iterator](), _step1; !(_iteratorNormalCompletion1 = (_step1 = _iterator1.next()).done); _iteratorNormalCompletion1 = true){
+                        var field = _step1.value;
+                        field.disabled = true;
+                        if (field.hasAttribute('required')) field.removeAttribute('required');
+                    }
+                } catch (err) {
+                    _didIteratorError1 = true;
+                    _iteratorError1 = err;
+                } finally{
+                    try {
+                        if (!_iteratorNormalCompletion1 && _iterator1.return != null) {
+                            _iterator1.return();
+                        }
+                    } finally{
+                        if (_didIteratorError1) {
+                            throw _iteratorError1;
+                        }
+                    }
+                }
+                setTimeout(function() {
+                    var cityField = form.elements.namedItem('contato-form-city'); //Requesting the city field inside the form.
+                    var _iteratorNormalCompletion2 = true, _didIteratorError2 = false, _iteratorError2 = undefined;
+                    try {
+                        for(var _iterator2 = form.elements[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true){
+                            var field = _step2.value;
+                            field.setCustomValidity('');
+                            field.removeAttribute('isvalid');
+                            field.disabled = false;
+                            field.value = '';
+                        }
+                    } catch (err) {
+                        _didIteratorError2 = true;
+                        _iteratorError2 = err;
+                    } finally{
+                        try {
+                            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                                _iterator2.return();
+                            }
+                        } finally{
+                            if (_didIteratorError2) {
+                                throw _iteratorError2;
+                            }
+                        }
+                    }
+                    cityField.value = cityName.charAt(0).toUpperCase() + cityName.slice(1); //Changing the first letter of the word to uppercase and mergin with the rest of the word.
+                    tabPanel.classList.add('show');
+                }, 300);
+            }
+        });
+    }
+} catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+} finally{
+    try {
+        if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
+        }
+    } finally{
+        if (_didIteratorError) {
+            throw _iteratorError;
+        }
+    }
+}
+var menuIsOpen = false;
+var executeOnMenuOpened = new MutationObserver(function(mutationList, observer) {
+    var _iteratorNormalCompletion2 = true, _didIteratorError2 = false, _iteratorError2 = undefined;
+    try {
+        for(var _iterator2 = mutationList[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true){
+            var mutation = _step2.value;
+            if (mutation.type == 'attributes' && mutation.attributeName == 'class') {
+                if (mutation.target.classList.contains('primary-menu-open')) {
+                    if (menuIsOpen == false) {
+                        bodyScrollLock.disableBodyScroll(mutation.target);
+                        menuIsOpen = true;
+                    }
+                } else if (menuIsOpen == true) {
+                    bodyScrollLock.enableBodyScroll(mutation.target);
+                    document.getElementsByClassName('header-wrap-clone')[0].removeAttribute('style');
+                    menuIsOpen = false;
+                }
+            }
+        }
+    } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+    } finally{
+        try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                _iterator2.return();
+            }
+        } finally{
+            if (_didIteratorError2) {
+                throw _iteratorError2;
+            }
+        }
+    }
+});
+executeOnMenuOpened.observe(document.querySelector("body"), {
+    attributes: true
+});
+var fieldValidation = new FieldValidation();
+fieldValidation.ListenToField({
+    nodeList: document.querySelectorAll("input[id^='contato-form']")
+});
+var emailPlaceHolder = new CustomPlaceHolder({
+    Default: 'Seu email',
+    Custom: 'email@dominio.com',
+    Target: document.getElementById('contato-form-email'),
+    StartWithDefault: true
+}).OnFocus({
+    ReturnToDefault: true
+});
+var calendarPlaceHolder = new CustomPlaceHolder({
+    Default: "Data de Interesse",
+    Custom: "DD/MM/AAAA",
+    Target: document.getElementById('contato-form-date'),
+    StartWithDefault: true
+}).OnFocus({
+    ReturnToDefault: true
+});
+var phonePlaceHolder = new CustomPlaceHolder({
+    Default: "Seu Telefone",
+    Custom: '(DD) X XXXX-XXXX',
+    Target: document.getElementById('contato-form-phone'),
+    StartWithDefault: true
+}).OnFocus({
+    ReturnToDefault: true
+});
+jQuery('.home-date').datepicker({
+    language: 'pt-BR',
+    autoclose: true,
+    startDate: "tomorrow",
+    endDate: "+2m"
+});
+/* testing.On('OnScrollDown',()=>{}); */ var perfilButtons = {
+};
+perfilButtons.curriculo = document.getElementById("curriculo-session");
+perfilButtons.simposios = document.getElementById("simposio-session");
+perfilButtons.publicacoes = document.getElementById("publicacoes-session");
+var enableSession = function(el) {
+    var activeButton = el.currentTarget;
+    var block = document.getElementsByClassName('perfil-container')[0];
+    var isMobile = document.documentElement.clientWidth <= 834;
+    if (!document.body.classList.contains('--obscured')) {
+        if (isMobile) {
+            document.body.classList.add('--obscured');
+        }
+    }
+    if (isMobile) innerVisualHeight();
+    if (!el.currentTarget.classList.contains('--active')) {
+        block.classList.add('--active');
+        for(var button in perfilButtons){
+            button = perfilButtons[button];
+            if (button.id != activeButton.id) {
+                if (!button.classList.contains('--inactive')) {
+                    button.classList.add('--inactive');
+                    if (isMobile) bodyScrollLock.enableBodyScroll(button);
+                }
+            } else {
+                if (button.classList.contains('--inactive')) {
+                    button.classList.remove('--inactive');
+                }
+                if (!button.classList.contains('--active')) {
+                    button.classList.add('--active');
+                    if (isMobile) bodyScrollLock.disableBodyScroll(button);
+                }
+            }
+        }
+    } else {
+        block.classList.remove('--active');
+        el.currentTarget.classList.remove('--active');
+        for(var button in perfilButtons){
+            button = perfilButtons[button];
+            button.classList.remove('--inactive');
+        }
+        if (document.body.classList.contains('--obscured')) {
+            document.body.classList.remove('--obscured');
+        }
+        if (isMobile) bodyScrollLock.clearAllBodyScrollLocks();
+    }
+};
+for(var button in perfilButtons){
+    button = perfilButtons[button];
+    button.addEventListener('click', enableSession, true);
+}
+
 
 /***/ })
 
@@ -71,8 +2489,8 @@ eval("function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg)
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
 /******/ 		__webpack_require__.n = (module) => {
 /******/ 			var getter = module && module.__esModule ?
-/******/ 				() => module['default'] :
-/******/ 				() => module;
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
 /******/ 			__webpack_require__.d(getter, { a: getter });
 /******/ 			return getter;
 /******/ 		};
@@ -92,24 +2510,29 @@ eval("function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg)
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-/******/ 	// startup
-/******/ 	// Load entry module
-/******/ 	__webpack_require__("./src/js/App/app.js");
-/******/ 	// This entry module used 'exports' so it can't be inlined
+(() => {
+"use strict";
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(666);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Custom_customizations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(974);
+/* harmony import */ var _Custom_customizations__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Custom_customizations__WEBPACK_IMPORTED_MODULE_1__);
+
+/* var jquery = require('../Libraries/jquery.min')
+var $ = jquery;
+var jQuery = jquery;
+window.$ = jquery;
+require('../Libraries/jquery.easing.min');
+require('../Libraries/bootstrap.min');
+require('../Libraries/bootstrap-datepicker.min');
+require('../Libraries/bootstrap-datepicker.pt-BR.min');
+require('../Libraries/flickity.pkgd.min');
+require('../Libraries/plyr.min'); */ /* require('../Custom/customizations.js'); */ 
+
+})();
+
 /******/ })()
 ;

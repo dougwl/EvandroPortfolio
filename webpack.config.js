@@ -2,7 +2,7 @@ module.exports = {
     entry: {
       app: './src/js/App/app.js'
     },
-    mode: 'development', //production | development
+    mode: 'production', //production | development
     output: {
       path: `${__dirname}/dist`,
       filename: 'bundle.js',
@@ -18,6 +18,9 @@ module.exports = {
           }
         }
       ]
+    },
+    optimization: {
+      minimize: false
     },
     watch: true,
     watchOptions: {
