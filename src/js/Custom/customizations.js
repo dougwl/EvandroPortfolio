@@ -381,6 +381,10 @@ class ScrollObserver{
         ScrollObserver.ActiveObservers.push(this);
     }
 
+
+    /**
+    * @type {[ScrollObserver]} Observers
+    */
     static ActiveObservers = [];
 
     _defaultOptions = (steps) => {return Array(steps + 1).fill(0).map((_,index) => {
@@ -501,7 +505,7 @@ class WatchScrollPosition{
 
     constructor(){
         this.Positions = [];
-        this.Nodes = new Map();
+        this.Nodes = new Map(); ///
         this.ScrollObserver = undefined;
         this.Subscribers = {};
         this._lastPosition = undefined;
@@ -509,7 +513,7 @@ class WatchScrollPosition{
     }
 
     GetElements({Tags:Tags = [], ExcludedIDs:ExcludedIDs = []}){
-        let elements = new Object;
+        let elements = new Map();
         let nodes, exclude,index = 0;
         if(!Array.isArray(Tags)) Tags = [Tags];
         for (const tag of Tags) {
@@ -521,24 +525,26 @@ class WatchScrollPosition{
                     });
                     return !exclude;
                 });
-                elements[tag] = nodes; 
+                elements.set(tag,nodes);
             }
             else{
-                elements[tag] = Array.from(nodes);
+                elements.set(tag,Array.from(nodes)); 
             }
-            /* elements[tag].map((node) => {
-                this.Nodes[node.getBoundingClientRect().top + window.pageYOffset - this._positionOffset] = node.id? node.id : `node ${index}`; 
-            }); */
-            for (const node of elements[tag]) {
-                let pos = node.getBoundingClientRect().top + window.pageYOffset - this._positionOffset;
-                this.Nodes[pos] = node.id;
-            }
+            elements.get(tag).map((node) => {
+                this.Nodes.set(node.getBoundingClientRect().top + window.pageYOffset - this._positionOffset, node.id? node.id : `node ${index}`);
+            })
             index++;
         }
-        this.Positions = Object.keys(this.Nodes).map((val) => { return parseFloat(val)});
+        this.Positions = Array.from(this.Nodes.keys(), (val) => { return parseFloat(val)});
     }
 
-
+    /**
+     * 
+     * @param {Object} WatchInfo
+     * @param {function(number, Map)} WatchInfo.Callback
+     * @param {ScrollObserver} WatchInfo.Observer
+     * @return {void} void
+     */
     Watch({ State:State = true , Callback:Callback = undefined, scrollObserver:scrollObserver = undefined}){
         if(State)
         {
@@ -560,7 +566,7 @@ class WatchScrollPosition{
                 this.ScrollObserver = scrollObserver;
             }
 
-
+            
             this.ScrollObserver.On('OnScrollMove', () => {
                 for (let i = 0; i < this.Positions.length; i++) {
                     const position = this.Positions[i];
@@ -596,10 +602,10 @@ class WatchScrollPosition{
             const sectionPosition = this.Positions[i];
             if(windowPosition >= sectionPosition && 
                 !(windowPosition >= this.Positions[i+1])){
-                    return this.Nodes[this.Positions[i]];
+                    return this.Nodes.get(this.Positions[i]);
             }
             else if(windowPosition < this.Positions[0]){
-                return this.Nodes[this.Positions[0]];
+                return this.Nodes.get(this.Positions[0]);
             }
         }
     }
@@ -619,14 +625,16 @@ class ActiveMenuLink{
         ActiveMenuLink.ScrollIntoView = state;
     }
 
+    /**
+     * 
+     * @param {string} SectionID 
+     */
     async Change({
         SectionID = undefined
     }){
-
         if(!ActiveMenuLink.ScrollIntoView){
             if(this.ActiveButton == undefined) this.ActiveButton =  document.querySelector('.current');
             this.NewButton = document.querySelector(SectionID[0] == '#'? `${SectionID}--button` : `#${SectionID}--button`);
-
             if(this.NewButton != undefined){
                 if(this.ActiveButton.id != this.NewButton.id){
                     this.ActiveButton.classList.remove("current");
@@ -682,11 +690,26 @@ In this new version, the opacity is set to 0.*/
 let ActiveSection = new WatchScrollPosition();
 ActiveSection.GetElements({Tags:'section',ExcludedIDs:['content','slider']});
 ActiveSection.Watch({State:true, Callback: (pos,arr) => {
-    ActiveMenu.Change({SectionID: arr[pos]});
+    ActiveMenu.Change({SectionID: arr.get(pos)});
 }});
 
-
 ActiveMenu.Change({SectionID: ActiveSection.CurrentSection()});
+
+let header = document.querySelector('#header');
+let isSticky = ScrollObserver.ActiveObservers[0].On('OnScrollMove', (val) => {
+    if(val.detail.Down){
+        if(window.pageYOffset > 110){
+            if(header.classList.contains('sticky-header')) return;
+            else header.classList.add('sticky-header')
+        }
+    }
+    else{
+        if(window.pageYOffset < 110){
+            if(header.classList.contains('sticky-header')) header.classList.remove('sticky-header');
+            else return;
+        }
+    }
+});
 
 const supportsSmoothScrolling = (() => {
     const body = document.body;

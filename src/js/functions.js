@@ -2066,7 +2066,7 @@ var SEMICOLON = SEMICOLON || {};
 					}
 				}, 1000);
 			}
-
+/* 
 			SEMICOLON.header.stickyMenu( headerWrapOffset );
 			SEMICOLON.header.stickyPageMenu( pageMenuOffset );
 
@@ -2095,7 +2095,7 @@ var SEMICOLON = SEMICOLON || {};
 						$pagemenu.filter('.sticky-page-menu:not(.dots-menu,.no-sticky)').find( $pageMenuWrap ).css({ 'top': headerHeight +'px' });
 					}
 				}
-			}, 500 );
+			}, 500 ); */
 
 			window.onfocus = function() {
 				let headerHeight = $headerWrap.outerHeight();
