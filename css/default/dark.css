@@ -95,7 +95,7 @@ body #side-panel.dark {
 	color: #BBB;
 }
 
-.dark #header,
+/* .dark #header,
 #header.dark {
 	background-color: #333;
 	border-bottom-color: rgba(255,255,255,0.05);
@@ -103,7 +103,7 @@ body #side-panel.dark {
 
 .dark #header-wrap {
 	background-color: #333;
-}
+} */
 
 @media (min-width: 992px) {
 

@@ -16135,7 +16135,7 @@ label.checkbox { padding-left: 20px; }
 }
 
 #header-wrap{
-	background-color: #4d4f60 !important;
+	background-color: #4d4f60;
 	border-top: hidden !important;
 	transition: all 0.20s ease;
 	-webkit-transition: all 0.20s ease;
@@ -17098,7 +17098,11 @@ button.video-overlay-close{
 		border-bottom: none;
 		padding: calc(var(--vh, 1vh) * 1) 0 calc(var(--vh, 1vh) * 1) 0;
 		border: none !important;
-		background: none !important;
+		background: none;
+	}
+
+	.primary-menu-open #header-wrap{
+		background: rgb(77, 79, 96);
 	}
 
 	body.--obscured #header-wrap {
