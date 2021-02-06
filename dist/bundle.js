@@ -1864,7 +1864,7 @@ var ScrollIntoView = _asyncToGenerator(regeneratorRuntime.mark(function _callee(
                 ActiveSection.Watch({
                     State: true,
                     Callback: function Unsubscribe(pos, arr) {
-                        if ("#".concat(arr[pos]) == element) {
+                        if ("#".concat(arr.get(pos)) == element) {
                             ActiveSection.Watch({
                                 State: false,
                                 Callback: Unsubscribe

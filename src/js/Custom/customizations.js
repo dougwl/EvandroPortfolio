@@ -760,7 +760,7 @@ let ScrollIntoView = async (element = undefined) => {
         ActiveMenu.Change({SectionID:element});
         ActiveMenu.ScrollingIntoView(true);
         ActiveSection.Watch({State:true, Callback: function Unsubscribe(pos, arr){
-            if(`#${arr[pos]}` == element){
+            if(`#${arr.get(pos)}` == element){
                 ActiveSection.Watch({State:false, Callback: Unsubscribe})
                 ActiveMenu.ScrollingIntoView(false);
             }
