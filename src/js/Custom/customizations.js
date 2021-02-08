@@ -1,3 +1,5 @@
+const { resolve } = require("core-js/fn/promise");
+
 //Some new tests
 class FieldValidation{
 
@@ -347,28 +349,20 @@ class ScrollObserver{
         })
 
         let gapBetweenMarkers = 1;
-        const areaAvailable = (document.documentElement.scrollHeight - document.documentElement.clientHeight) - window.innerHeight;
-        const numberOfMarkers = Math.round(areaAvailable / (window.innerHeight - gapBetweenMarkers));
-        let markersHeight = ((areaAvailable) / numberOfMarkers);
-        let rest = (numberOfMarkers * (markersHeight + gapBetweenMarkers)) - areaAvailable;
-        const _markers = [];
+        let _markers = [];
         let position = window.innerHeight;
+        let areaAvailable;
+        let numberOfMarkers;
+        let markersHeight;
+        let rest;
+        
 
+        areaAvailable = (document.documentElement.scrollHeight - document.documentElement.clientHeight) - window.innerHeight;
+        numberOfMarkers = Math.round(areaAvailable / (window.innerHeight - gapBetweenMarkers));
+        
         for (let index = 0; index < numberOfMarkers; index++) {
             _markers.push(_container.appendChild(document.createElement('div')));
             _markers[index].setAttribute('id', `scrollMarker${index}`);
-
-            if(index != 0) position = position + markersHeight + gapBetweenMarkers;
-            if(index == numberOfMarkers - 1) markersHeight += rest * -1;
-            
-            Object.assign(_markers[index].style, {
-                'position': 'absolute',
-                'height': `${markersHeight}px`,
-                'width': '1px',
-                'top': `${position}px`,
-                'z-index': '999'
-            });
-
             this.Observer.observe(_markers[index]);
         }
 
@@ -377,8 +371,63 @@ class ScrollObserver{
             markers: _markers
         }
 
-        document.body.appendChild(this.scrollMarker.container);
         ScrollObserver.ActiveObservers.push(this);
+
+        /* ************************************************ */
+
+        let scrollHeight = document.documentElement.scrollHeight;
+        let scrollHeightHasChanged = (delay) => {
+            new Promise((resolve) => {
+                if(scrollHeight != document.documentElement.scrollHeight){
+                    scrollHeight = document.documentElement.scrollHeight;
+                    resolve(true);
+                }
+                else resolve(false);
+            })
+        };
+
+        let waitForHeightChange = async function waitFor(delay){
+            let safetyNet;
+            let changed;
+            while(!changed && safetyNet < 10){
+                changed = await scrollHeightHasChanged(delay);
+                safetyNet++;
+            }
+            console.log(scrollHeight) // Need to wait more time !!!! 
+            return;
+        }
+
+        waitForHeightChange(200).then(() => {
+            areaAvailable = (scrollHeight - document.documentElement.clientHeight * 2);
+            let newMarkersAmount = Math.round(areaAvailable / (window.innerHeight - gapBetweenMarkers));
+            if(newMarkersAmount > numberOfMarkers){
+                for (let index = 0; index < newMarkersAmount - numberOfMarkers; index++) {
+                    _markers.push(_container.appendChild(document.createElement('div')));
+                    _markers[this.scrollMarker.markers.length - 1].setAttribute('id', `scrollMarker${this.scrollMarker.markers.length}`);
+                    this.Observer.observe(_markers[this.scrollMarker.markers.length - 1]);
+                }
+                numberOfMarkers = newMarkersAmount;
+            }
+
+            markersHeight = ((areaAvailable) / numberOfMarkers);
+            rest = (numberOfMarkers * (markersHeight + gapBetweenMarkers)) - areaAvailable;
+
+            for (let index = 0; index < numberOfMarkers; index++) {
+
+                if(index != 0) position = position + markersHeight + gapBetweenMarkers;
+                if(index == numberOfMarkers - 1) markersHeight += rest * -1;
+                
+                Object.assign(_markers[index].style, {
+                    'position': 'absolute',
+                    'height': `${markersHeight}px`,
+                    'width': '1px',
+                    'top': `${position}px`,
+                    'z-index': '999'
+                });
+            }
+
+            document.body.appendChild(this.scrollMarker.container);
+        })
     }
 
 
@@ -661,6 +710,7 @@ function debounce(func, wait, immediate) { // Helper method used to contain burs
 	};
 }
 
+
 let innerVisualHeight = () => {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`)
@@ -686,6 +736,7 @@ if(document.documentElement.clientWidth >= 834) {
     });
 } /* Instead of only hiding the navbar when the sticky-header class is enabled, it hides in any scroll down. 
 In this new version, the opacity is set to 0.*/
+
 
 let ActiveSection = new WatchScrollPosition();
 ActiveSection.GetElements({Tags:'section',ExcludedIDs:['content','slider']});
