@@ -3301,7 +3301,7 @@ var ScrollObserver = function() {
                 }
             }, _callee);
         }));
-        window.addEventListener('load', (function() {
+        /* waitForHeightChange(100, 1000, 3000).then() */ window.addEventListener('load', (function() {
             var availableSpace = freeArea() > oldFreeArea ? freeArea() - oldFreeArea : 0; // if bigger, realize operation between () --> &&()
             if (availableSpace > 0.1) {
                 markersHeight = document.documentElement.clientHeight - gap;

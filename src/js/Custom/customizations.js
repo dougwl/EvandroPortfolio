@@ -423,6 +423,8 @@ class ScrollObserver{
             }       // Need to wait more time !!!! 
         }
 
+        /* waitForHeightChange(100, 1000, 3000).then() */
+
         window.addEventListener('load',() => {
             let availableSpace = freeArea() > oldFreeArea ? (freeArea() - oldFreeArea) : 0; // if bigger, realize operation between () --> &&()
             if (availableSpace > 0.1){
