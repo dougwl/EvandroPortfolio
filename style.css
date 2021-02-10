@@ -17690,10 +17690,10 @@ body.--obscured #gotoTop{
 	scroll-margin-top: 360px;
 }
 
-#scrollMarkerContainer > * {
+/* #scrollMarkerContainer > * {
 	background: red;
 	width: 10px !important;
-}
+} */
 
 
 

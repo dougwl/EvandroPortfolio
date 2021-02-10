@@ -348,18 +348,21 @@ class ScrollObserver{
             top: 0,
         })
 
-        let gapBetweenMarkers = 1;
+        let gap = 1;
         let _markers = [];
         let position = window.innerHeight;
-        let areaAvailable;
+        let freeArea = () => document.documentElement.scrollHeight - (document.documentElement.clientHeight * 2);
+        let oldFreeArea = freeArea();
         let numberOfMarkers;
         let markersHeight;
-        let rest;
+        let leftover;
         
+        numberOfMarkers = Math.round(freeArea() / (document.documentElement.clientHeight - gap));
 
-        areaAvailable = (document.documentElement.scrollHeight - document.documentElement.clientHeight) - window.innerHeight;
-        numberOfMarkers = Math.round(areaAvailable / (window.innerHeight - gapBetweenMarkers));
-        
+        markersHeight = document.documentElement.clientHeight - gap;
+        leftover = freeArea() - ((document.documentElement.clientHeight - gap) * numberOfMarkers);
+        if(leftover > 0) numberOfMarkers++;
+
         for (let index = 0; index < numberOfMarkers; index++) {
             _markers.push(_container.appendChild(document.createElement('div')));
             _markers[index].setAttribute('id', `scrollMarker${index}`);
@@ -373,60 +376,89 @@ class ScrollObserver{
 
         ScrollObserver.ActiveObservers.push(this);
 
+        for (let index = 0; index < numberOfMarkers; index++) {
+
+            if(index != 0) position = position + markersHeight + gap;
+            if(index == numberOfMarkers - 1) markersHeight = leftover;
+            
+            Object.assign(_markers[index].style, {
+                'position': 'absolute',
+                'height': `${markersHeight}px`,
+                'width': '1px',
+                'top': `${position}px`,
+                'z-index': '999'
+            });
+        } 
+
+        document.body.appendChild(this.scrollMarker.container);
+
         /* ************************************************ */
 
         let scrollHeight = document.documentElement.scrollHeight;
         let scrollHeightHasChanged = (delay) => {
-            new Promise((resolve) => {
+            return new Promise((resolve) => {
+                let Resolve = (state) => { setTimeout(() => {
+                    return resolve(state);
+                }, delay);}
                 if(scrollHeight != document.documentElement.scrollHeight){
                     scrollHeight = document.documentElement.scrollHeight;
-                    resolve(true);
+                    Resolve(true);
                 }
-                else resolve(false);
+                else {
+                    Resolve(false);
+                }
             })
         };
 
-        let waitForHeightChange = async function waitFor(delay){
-            let safetyNet;
-            let changed;
-            while(!changed && safetyNet < 10){
-                changed = await scrollHeightHasChanged(delay);
-                safetyNet++;
-            }
-            console.log(scrollHeight) // Need to wait more time !!!! 
-            return;
+        let waitForHeightChange = async (interval, optimalTime = 0, maxTime = 0) => { //Instead of a loop, try changing the body to a iterator function.
+            let hasChanged = false;
+            let decurredTime = 0;
+            let strikeOut = 0;
+            let maxStrikes = ((maxTime + optimalTime) / 2) / interval; // Average value between min/max , divided by the interval;
+            while(decurredTime < optimalTime || decurredTime < maxTime){
+                hasChanged = await scrollHeightHasChanged(interval);
+                hasChanged ? strikeOut-- : strikeOut++;
+                decurredTime += interval;
+               /*  if(maxTime > 0 && strikeOut >= maxStrikes) break; */
+            }       // Need to wait more time !!!! 
         }
 
-        waitForHeightChange(200).then(() => {
-            areaAvailable = (scrollHeight - document.documentElement.clientHeight * 2);
-            let newMarkersAmount = Math.round(areaAvailable / (window.innerHeight - gapBetweenMarkers));
-            if(newMarkersAmount > numberOfMarkers){
-                for (let index = 0; index < newMarkersAmount - numberOfMarkers; index++) {
+        window.addEventListener('load',() => {
+            let availableSpace = freeArea() > oldFreeArea ? (freeArea() - oldFreeArea) : 0; // if bigger, realize operation between () --> &&()
+            if (availableSpace > 0.1){
+                markersHeight = document.documentElement.clientHeight - gap;
+                let lastMarker = () => _markers[_markers.length - 1];
+                let lastMarkerHeight = () => parseFloat(lastMarker().style.height);
+                while(availableSpace > 0){
+                    let dif;
+                    if(availableSpace <= 30){
+                        lastMarker().style.height = `${(lastMarkerHeight() + availableSpace) - _markers.length}px`;
+                        return;
+                    }
+                    if(lastMarkerHeight() < markersHeight){ 
+                        dif = availableSpace;
+                        availableSpace -= (markersHeight - lastMarkerHeight()); 
+                        if(availableSpace > 30) {
+                            lastMarker().style.height = `${(lastMarkerHeight() + (markersHeight - lastMarkerHeight())) - _markers.length}px`;
+                        }
+                        else{
+                            availableSpace = dif;
+                            lastMarker().style.height = `${(lastMarkerHeight() + availableSpace) - _markers.length}px`;
+                            return;
+                        }
+                    }
                     _markers.push(_container.appendChild(document.createElement('div')));
-                    _markers[this.scrollMarker.markers.length - 1].setAttribute('id', `scrollMarker${this.scrollMarker.markers.length}`);
-                    this.Observer.observe(_markers[this.scrollMarker.markers.length - 1]);
+                    lastMarker().setAttribute('id', `scrollMarker${_markers.length - 1}`);
+                    Object.assign(lastMarker().style, {
+                        'position': 'absolute',
+                        'height': `0px`,
+                        'width': '1px',
+                        'top': `${parseFloat(lastMarker().style.top) + markersHeight + gap}px`,
+                        'z-index': '999'
+                    });
+                    this.Observer.observe(lastMarker());
                 }
-                numberOfMarkers = newMarkersAmount;
             }
-
-            markersHeight = ((areaAvailable) / numberOfMarkers);
-            rest = (numberOfMarkers * (markersHeight + gapBetweenMarkers)) - areaAvailable;
-
-            for (let index = 0; index < numberOfMarkers; index++) {
-
-                if(index != 0) position = position + markersHeight + gapBetweenMarkers;
-                if(index == numberOfMarkers - 1) markersHeight += rest * -1;
-                
-                Object.assign(_markers[index].style, {
-                    'position': 'absolute',
-                    'height': `${markersHeight}px`,
-                    'width': '1px',
-                    'top': `${position}px`,
-                    'z-index': '999'
-                });
-            }
-
-            document.body.appendChild(this.scrollMarker.container);
         })
     }
 

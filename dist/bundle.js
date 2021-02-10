@@ -964,7 +964,7 @@ __webpack_require__(5645).inspectSource = function (it) {
 
 /***/ }),
 
-/***/ 2974:
+/***/ 2593:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1588,7 +1588,7 @@ if (!USE_NATIVE) {
 
 $export($export.G + $export.W + $export.F * !USE_NATIVE, { Promise: $Promise });
 __webpack_require__(2943)($Promise, PROMISE);
-__webpack_require__(2974)(PROMISE);
+__webpack_require__(2593)(PROMISE);
 Wrapper = __webpack_require__(5645)[PROMISE];
 
 // statics
@@ -1793,7 +1793,7 @@ for (var collections = getKeys(DOMIterables), i = 0; i < collections.length; i++
 
 /***/ }),
 
-/***/ 666:
+/***/ 5666:
 /***/ ((module) => {
 
 /**
@@ -2548,7 +2548,7 @@ try {
 
 /***/ }),
 
-/***/ 974:
+/***/ 2974:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -2628,7 +2628,7 @@ function _objectSpread(target) {
     }
     return target;
 }
-var regeneratorRuntime = __webpack_require__(666);
+var regeneratorRuntime = __webpack_require__(5666);
 var ref = __webpack_require__(8135), resolve = ref.resolve;
 //Some new tests
 var FieldValidation = function() {
@@ -3183,7 +3183,6 @@ var ScrollObserver = function() {
             customCallback: undefined
         } : param, observerOptions = ref1.observerOptions, customCallback = ref1.customCallback;
         _classCallCheck(this, ScrollObserver);
-        var _this = this;
         _defineProperty(this, "_defaultOptions", function(steps) {
             return Array(steps + 1).fill(0).map(function(_, index) {
                 return index / steps;
@@ -3221,15 +3220,20 @@ var ScrollObserver = function() {
             position: 'absolute',
             top: 0
         });
-        var gapBetweenMarkers = 1;
+        var gap = 1;
         var _markers = [];
         var position = window.innerHeight;
-        var areaAvailable;
+        var freeArea = function() {
+            return document.documentElement.scrollHeight - document.documentElement.clientHeight * 2;
+        };
+        var oldFreeArea = freeArea();
         var numberOfMarkers;
         var markersHeight;
-        var rest;
-        areaAvailable = document.documentElement.scrollHeight - document.documentElement.clientHeight - window.innerHeight;
-        numberOfMarkers = Math.round(areaAvailable / (window.innerHeight - gapBetweenMarkers));
+        var leftover;
+        numberOfMarkers = Math.round(freeArea() / (document.documentElement.clientHeight - gap));
+        markersHeight = document.documentElement.clientHeight - gap;
+        leftover = freeArea() - (document.documentElement.clientHeight - gap) * numberOfMarkers;
+        if (leftover > 0) numberOfMarkers++;
         for(var index = 0; index < numberOfMarkers; index++){
             _markers.push(_container.appendChild(document.createElement('div')));
             _markers[index].setAttribute('id', "scrollMarker".concat(index));
@@ -3240,74 +3244,102 @@ var ScrollObserver = function() {
             markers: _markers
         };
         ScrollObserver.ActiveObservers.push(this);
+        for(var index1 = 0; index1 < numberOfMarkers; index1++){
+            if (index1 != 0) position = position + markersHeight + gap;
+            if (index1 == numberOfMarkers - 1) markersHeight = leftover;
+            Object.assign(_markers[index1].style, {
+                'position': 'absolute',
+                'height': "".concat(markersHeight, "px"),
+                'width': '1px',
+                'top': "".concat(position, "px"),
+                'z-index': '999'
+            });
+        }
+        document.body.appendChild(this.scrollMarker.container);
         /* ************************************************ */ var scrollHeight = document.documentElement.scrollHeight;
         var scrollHeightHasChanged = function(delay) {
-            new Promise(function(resolve1) {
+            return new Promise(function(resolve1) {
+                var Resolve = function(state) {
+                    setTimeout(function() {
+                        return resolve1(state);
+                    }, delay);
+                };
                 if (scrollHeight != document.documentElement.scrollHeight) {
                     scrollHeight = document.documentElement.scrollHeight;
-                    resolve1(true);
-                } else resolve1(false);
+                    Resolve(true);
+                } else {
+                    Resolve(false);
+                }
             });
         };
-        var waitForHeightChange = function(delay) {
-            var _waitFor = _asyncToGenerator(regeneratorRuntime.mark(function _callee(delay) {
-                var safetyNet, changed;
-                return regeneratorRuntime.wrap(function _callee$(_ctx) {
-                    while(1)switch(_ctx.prev = _ctx.next){
-                        case 0:
-                            ;
-                            ;
-                        case 2:
-                            if (!(!changed && safetyNet < 10)) {
-                                _ctx.next = 9;
-                                break;
-                            }
-                            _ctx.next = 5;
-                            return scrollHeightHasChanged(delay);
-                        case 5:
-                            changed = _ctx.sent;
-                            safetyNet++;
-                            _ctx.next = 2;
+        var waitForHeightChange = _asyncToGenerator(regeneratorRuntime.mark(function _callee(interval, param1, param2) {
+            var optimalTime = param1 === void 0 ? 0 : param1, maxTime = param2 === void 0 ? 0 : param2;
+            var hasChanged, decurredTime, strikeOut, maxStrikes;
+            return regeneratorRuntime.wrap(function _callee$(_ctx) {
+                while(1)switch(_ctx.prev = _ctx.next){
+                    case 0:
+                        hasChanged = false;
+                        decurredTime = 0;
+                        strikeOut = 0;
+                        maxStrikes = (maxTime + optimalTime) / 2 / interval; // Average value between min/max , divided by the interval;
+                    case 4:
+                        if (!(decurredTime < optimalTime || decurredTime < maxTime)) {
+                            _ctx.next = 12;
                             break;
-                        case 9:
-                            console.log(scrollHeight); // Need to wait more time !!!! 
-                            return _ctx.abrupt("return");
-                        case 11:
-                        case "end":
-                            return _ctx.stop();
-                    }
-                }, _callee);
-            }));
-            function waitFor() {
-                return _waitFor.apply(_this, arguments);
-            }
-            return waitFor;
-        }();
-        waitForHeightChange(200).then((function() {
-            areaAvailable = scrollHeight - document.documentElement.clientHeight * 2;
-            var newMarkersAmount = Math.round(areaAvailable / (window.innerHeight - gapBetweenMarkers));
-            if (newMarkersAmount > numberOfMarkers) {
-                for(var index1 = 0; index1 < newMarkersAmount - numberOfMarkers; index1++){
-                    _markers.push(_container.appendChild(document.createElement('div')));
-                    _markers[this.scrollMarker.markers.length - 1].setAttribute('id', "scrollMarker".concat(this.scrollMarker.markers.length));
-                    this.Observer.observe(_markers[this.scrollMarker.markers.length - 1]);
+                        }
+                        _ctx.next = 7;
+                        return scrollHeightHasChanged(interval);
+                    case 7:
+                        hasChanged = _ctx.sent;
+                        hasChanged ? strikeOut-- : strikeOut++;
+                        decurredTime += interval;
+                        _ctx.next = 4;
+                        break;
+                    case 12:
+                    case "end":
+                        return _ctx.stop();
                 }
-                numberOfMarkers = newMarkersAmount;
+            }, _callee);
+        }));
+        window.addEventListener('load', (function() {
+            var availableSpace = freeArea() > oldFreeArea ? freeArea() - oldFreeArea : 0; // if bigger, realize operation between () --> &&()
+            if (availableSpace > 0.1) {
+                markersHeight = document.documentElement.clientHeight - gap;
+                var lastMarker = function() {
+                    return _markers[_markers.length - 1];
+                };
+                var lastMarkerHeight = function() {
+                    return parseFloat(lastMarker().style.height);
+                };
+                while(availableSpace > 0){
+                    var dif = void 0;
+                    if (availableSpace <= 30) {
+                        lastMarker().style.height = "".concat(lastMarkerHeight() + availableSpace - _markers.length, "px");
+                        return;
+                    }
+                    if (lastMarkerHeight() < markersHeight) {
+                        dif = availableSpace;
+                        availableSpace -= markersHeight - lastMarkerHeight();
+                        if (availableSpace > 30) {
+                            lastMarker().style.height = "".concat(lastMarkerHeight() + (markersHeight - lastMarkerHeight()) - _markers.length, "px");
+                        } else {
+                            availableSpace = dif;
+                            lastMarker().style.height = "".concat(lastMarkerHeight() + availableSpace - _markers.length, "px");
+                            return;
+                        }
+                    }
+                    _markers.push(_container.appendChild(document.createElement('div')));
+                    lastMarker().setAttribute('id', "scrollMarker".concat(_markers.length - 1));
+                    Object.assign(lastMarker().style, {
+                        'position': 'absolute',
+                        'height': "0px",
+                        'width': '1px',
+                        'top': "".concat(parseFloat(lastMarker().style.top) + markersHeight + gap, "px"),
+                        'z-index': '999'
+                    });
+                    this.Observer.observe(lastMarker());
+                }
             }
-            markersHeight = areaAvailable / numberOfMarkers;
-            rest = numberOfMarkers * (markersHeight + gapBetweenMarkers) - areaAvailable;
-            for(var index2 = 0; index2 < numberOfMarkers; index2++){
-                if (index2 != 0) position = position + markersHeight + gapBetweenMarkers;
-                if (index2 == numberOfMarkers - 1) markersHeight += rest * -1;
-                Object.assign(_markers[index2].style, {
-                    'position': 'absolute',
-                    'height': "".concat(markersHeight, "px"),
-                    'width': '1px',
-                    'top': "".concat(position, "px"),
-                    'z-index': '999'
-                });
-            }
-            document.body.appendChild(this.scrollMarker.container);
         }).bind(this));
     }
     _createClass(ScrollObserver, [
@@ -3434,7 +3466,7 @@ var WatchScrollPosition = function() {
             value: function GetElements(param) {
                 var tmp = param.Tags, Tags = tmp === void 0 ? [] : tmp, tmp1 = param.ExcludedIDs, ExcludedIDs = tmp1 === void 0 ? [] : tmp1;
                 var elements = new Map();
-                var nodes, exclude, index2 = 0;
+                var nodes, exclude, index = 0;
                 if (!Array.isArray(Tags)) Tags = [
                     Tags
                 ];
@@ -3455,9 +3487,9 @@ var WatchScrollPosition = function() {
                             elements.set(tag, Array.from(nodes));
                         }
                         elements.get(tag).map((function(node) {
-                            _this.Nodes.set(node.getBoundingClientRect().top + window.pageYOffset - _this._positionOffset, node.id ? node.id : "node ".concat(index2));
+                            _this.Nodes.set(node.getBoundingClientRect().top + window.pageYOffset - _this._positionOffset, node.id ? node.id : "node ".concat(index));
                         }).bind(_this));
-                        index2++;
+                        index++;
                     };
                     for(var _iterator = Tags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true)_loop(_iterator, _step);
                 } catch (err) {
@@ -3951,7 +3983,7 @@ function LoadIframes() {
             document.querySelector("body").style = isActive ? "overflow:hidden;" : "overflow:visible";
             return isActive;
         };
-        var changeActiveDescription = function changeActiveDescription(index2) {
+        var changeActiveDescription = function changeActiveDescription(index) {
             var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
             try {
                 for(var _iterator = videoDescriptions[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
@@ -3972,7 +4004,7 @@ function LoadIframes() {
                     }
                 }
             }
-            videoDescriptions[index2].classList.add("--active-video");
+            videoDescriptions[index].classList.add("--active-video");
         };
         if (playerController === undefined) {
             LoadIframes();
@@ -4400,9 +4432,9 @@ for(var button in perfilButtons){
 /************************************************************************/
 (() => {
 "use strict";
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(666);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5666);
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Custom_customizations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(974);
+/* harmony import */ var _Custom_customizations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2974);
 /* harmony import */ var _Custom_customizations__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Custom_customizations__WEBPACK_IMPORTED_MODULE_1__);
 
 /* var jquery = require('../Libraries/jquery.min')
