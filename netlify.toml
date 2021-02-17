@@ -10,9 +10,6 @@
   # directory located at the absolute path "root/project/build-output"
   publish = "."
 
-  # Default build command.
-  command = "echo 'default context'"
-
 [context.production]
   command = "make production"
   [context.production.environment]
