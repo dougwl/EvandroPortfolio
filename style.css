@@ -17773,12 +17773,18 @@ body.--obscured #gotoTop{
 } */
 
 #footer #ChatBubble{
-	max-width: 25%;
+	max-width: 15%;
 	position: absolute;
-	top: 50%;
-	right: 50%;
+	top: 67%;
+	right: 60%;
 	margin-top: -440px;
 	margin-right: -480px;
+}
+
+#footer #ChatBubble path{
+	stroke: #333 !important;
+	fill: #fff !important;
+	stroke-width: 5px !important;
 }
 
 /* #copyrights *{
