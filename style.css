@@ -17705,6 +17705,7 @@ body.--obscured #gotoTop{
 	margin-top: 30vh;
 	margin-bottom: -10vh !important;
 	background: none !important;
+	padding-left: 5vw;
 }
 
 #contato-bottom h2,
@@ -17713,6 +17714,8 @@ body.--obscured #gotoTop{
 	font-weight: 1000 !important;
 	margin-bottom: 10px;
 }
+
+
 
 #footer svg{
 	position: relative;
@@ -17745,7 +17748,7 @@ body.--obscured #gotoTop{
 }
 
 #footer .basic-information a{
-	color: #db7e87;
+	color: #fff;
 	font-weight: 800;
 }
 
@@ -17760,8 +17763,17 @@ body.--obscured #gotoTop{
 	margin-right: auto;
 }
 
-#footer .footer-image{
-	max-width: 100%;
+/* #footer .footer-image{
+	max-width: 25%;
+	position: absolute;
+	top: 50%;
+	right: 50%;
+	margin-top: -440px;
+	margin-right: -480px;
+} */
+
+#footer #ChatBubble{
+	max-width: 25%;
 	position: absolute;
 	top: 50%;
 	right: 50%;
