@@ -1,5 +1,5 @@
-const { resolve } = require("core-js/fn/promise");
-
+/* const { resolve } = require("core-js/fn/promise");
+ */
 //Some new tests
 class FieldValidation{
 
