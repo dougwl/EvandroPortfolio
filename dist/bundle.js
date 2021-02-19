@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 5666:
+/***/ 666:
 /***/ ((module) => {
 
 /**
@@ -756,7 +756,7 @@ try {
 
 /***/ }),
 
-/***/ 2974:
+/***/ 974:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -836,7 +836,7 @@ function _objectSpread(target) {
     }
     return target;
 }
-var regeneratorRuntime = __webpack_require__(5666);
+var regeneratorRuntime = __webpack_require__(666);
 /* const { resolve } = require("core-js/fn/promise");
  */ //Some new tests
 var FieldValidation = function() {
@@ -2640,9 +2640,9 @@ for(var button in perfilButtons){
 /************************************************************************/
 (() => {
 "use strict";
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5666);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(666);
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Custom_customizations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2974);
+/* harmony import */ var _Custom_customizations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(974);
 /* harmony import */ var _Custom_customizations__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Custom_customizations__WEBPACK_IMPORTED_MODULE_1__);
 
 /* var jquery = require('../Libraries/jquery.min')

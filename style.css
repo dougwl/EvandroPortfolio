@@ -16949,7 +16949,7 @@ body.--obscured #gotoTop{
 
 
 
-#footer svg{
+#footer .footer-diagonal svg{
 	position: relative;
 	top: -.5px;
 	width: 100%;
@@ -16987,7 +16987,7 @@ body.--obscured #gotoTop{
 #copyrights{
 	display: flex;
 	justify-content: end;
-	max-width: 85%;
+	max-width: min(85%, 1140px);
 	padding-left: 15px;
 	padding-right: 15px;
 	color: #fff !important;
@@ -17018,11 +17018,14 @@ body.--obscured #gotoTop{
 
 #footer #ChatBubble{
 	max-width: 15%;
+	height: min-content;
 	position: absolute;
-	top: 67%;
-	right: 60%;
-	margin-top: -440px;
-	margin-right: -480px;
+	top: -7%;
+	right: 15%;
+	/* top: 75%;
+	right: 60%; */
+	/* margin-top: -440px;
+	margin-right: -480px; */
 }
 
 #footer #ChatBubble path{
@@ -17801,9 +17804,13 @@ grid-template-columns: 1fr 1fr; */
 		padding-right: 5vw;
 	}
 
+	#footer{
+		margin-top: -13vh;
+	}
+
 	#footer .container{
 		padding-left: 5vh;
-		padding-top: 10vh;
+		padding-top: 55px;
 	}
 
 	#footer .basic-information{
@@ -17834,11 +17841,16 @@ grid-template-columns: 1fr 1fr; */
 	}
 
 	#footer #ChatBubble{
-		max-width: 40%;
-		top: 90%;
-		left: 45%;
-		width: 40%;
-		height: 25%;
+		max-width: none;
+		width: 100%;
+		top: 100%;
+		left: 10%;
+		right: 0;
+		height: 25vw;
+	}
+
+	#duvidas{
+		margin-top: 0;
 	}
 }
 
