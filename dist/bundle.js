@@ -2638,6 +2638,8 @@ for(var button in perfilButtons){
 /******/ 	})();
 /******/ 	
 /************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(666);

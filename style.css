@@ -16947,6 +16947,15 @@ body.--obscured #gotoTop{
 	margin-bottom: 10px;
 }
 
+#contato-bottom .container a{
+	margin-top: 40px !important;
+	background-color: rgb(77, 79, 96);
+	color: rgb(255, 255, 255);
+	font-weight: 500 !important;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
 
 
 #footer .footer-diagonal svg{
@@ -16982,6 +16991,20 @@ body.--obscured #gotoTop{
 #footer .basic-information a{
 	color: #fff;
 	font-weight: 800;
+}
+
+#footer .basic-information ._phone{
+	font-size: 1.4rem;
+}
+
+#footer .basic-information p:first-of-type{
+	font-weight: 550;
+	margin-bottom: 10px;
+}
+
+#footer .basic-information p{
+	margin-bottom: 0;
+	text-align: end;
 }
 
 #copyrights{
@@ -17020,12 +17043,8 @@ body.--obscured #gotoTop{
 	max-width: min(15%, 220px);
 	height: min-content;
 	position: absolute;
-	top: -7%;
+	top: -5%;
 	right: 15%;
-	/* top: 75%;
-	right: 60%; */
-	/* margin-top: -440px;
-	margin-right: -480px; */
 }
 
 #footer #ChatBubble path{
@@ -17804,6 +17823,19 @@ grid-template-columns: 1fr 1fr; */
 		padding-right: 5vw;
 	}
 
+	#contato-bottom .container{
+		text-align: center;
+	}
+
+	#contato-bottom .container a{
+		display: flex;
+		width: min-content;
+		text-align: center;
+		margin-left: auto !important;
+		margin-right: auto !important;
+		margin-top: 60px !important;
+	}
+
 	#footer{
 		margin-top: -13vh;
 	}
@@ -17816,6 +17848,21 @@ grid-template-columns: 1fr 1fr; */
 	#footer .basic-information{
 		justify-content: start;
 		align-items: start;
+		margin-top: 60px;
+	}
+
+	#footer .basic-information ._phone{
+		font-size: 1.2rem;
+	}
+
+	#footer .basic-information p{
+		text-align: start;
+		max-width: 90%;
+	}
+
+	#footer .basic-information p:first-of-type{
+		font-weight: 520;
+		max-width: 70%;
 	}
 
 	#copyrights{
@@ -17842,11 +17889,13 @@ grid-template-columns: 1fr 1fr; */
 
 	#footer #ChatBubble{
 		max-width: none;
-		width: 100%;
-		top: 100%;
-		left: 10%;
+		width: max(min(max(130px,min(18vh,35vw)),185px), min(15%,185px));
+		top: -5%;
 		right: 0;
-		height: 25vw;
+		left: 0;
+		margin-left: auto;
+		margin-right: auto;
+		height: min-content;
 	}
 
 	#duvidas{
