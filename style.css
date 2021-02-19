@@ -17017,7 +17017,7 @@ body.--obscured #gotoTop{
 } */
 
 #footer #ChatBubble{
-	max-width: 15%;
+	max-width: min(15%, 220px);
 	height: min-content;
 	position: absolute;
 	top: -7%;
