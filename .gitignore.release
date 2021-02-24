@@ -1,0 +1,9 @@
+.swcrc
+package-lock.json
+package.json
+spack.config.js
+webpack.config.js
+browsers
+.netlify/
+.vs/
+.vscode/
