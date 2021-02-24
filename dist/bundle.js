@@ -838,7 +838,7 @@ function _objectSpread(target) {
 }
 var regeneratorRuntime = __webpack_require__(666);
 /* const { resolve } = require("core-js/fn/promise");
- */ //Some new tests
+ */ /* Just a new comment */ //Some new tests
 var FieldValidation = function() {
     "use strict";
     function FieldValidation() {
