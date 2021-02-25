@@ -1806,17 +1806,19 @@ var ActiveMenuLink = function() {
      */ function Change(param) {
                 var _SectionID = param.SectionID, SectionID = _SectionID === void 0 ? undefined : _SectionID;
                 return _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+                    var body;
                     return regeneratorRuntime.wrap(function _callee$(_ctx) {
                         while(1)switch(_ctx.prev = _ctx.next){
                             case 0:
                                 if (ActiveMenuLink.ScrollIntoView) {
-                                    _ctx.next = 8;
+                                    _ctx.next = 9;
                                     break;
                                 }
+                                body = document.body;
                                 if (this.ActiveButton == undefined) this.ActiveButton = document.querySelector('.current');
                                 this.NewButton = document.querySelector(SectionID[0] == '#' ? "".concat(SectionID, "--button") : "#".concat(SectionID, "--button"));
                                 if (!(this.NewButton != undefined)) {
-                                    _ctx.next = 7;
+                                    _ctx.next = 8;
                                     break;
                                 }
                                 {
@@ -1824,13 +1826,14 @@ var ActiveMenuLink = function() {
                                         this.ActiveButton.classList.remove("current");
                                         this.ActiveButton = this.NewButton.parentElement;
                                         this.ActiveButton.classList.add("current");
+                                        body.setAttribute("activeSection", SectionID);
                                     }
                                 }
-                                _ctx.next = 8;
+                                _ctx.next = 9;
                                 break;
-                            case 7:
-                                return _ctx.abrupt("return", new console.error("Can't find node with specified ID"));
                             case 8:
+                                return _ctx.abrupt("return", new console.error("Can't find node with specified ID"));
+                            case 9:
                             case "end":
                                 return _ctx.stop();
                         }

@@ -718,6 +718,7 @@ class ActiveMenuLink{
         SectionID = undefined
     }){
         if(!ActiveMenuLink.ScrollIntoView){
+            let body = document.body;
             if(this.ActiveButton == undefined) this.ActiveButton =  document.querySelector('.current');
             this.NewButton = document.querySelector(SectionID[0] == '#'? `${SectionID}--button` : `#${SectionID}--button`);
             if(this.NewButton != undefined){
@@ -725,10 +726,10 @@ class ActiveMenuLink{
                     this.ActiveButton.classList.remove("current");
                     this.ActiveButton = this.NewButton.parentElement;
                     this.ActiveButton.classList.add("current");
+                    body.setAttribute("activeSection",SectionID);
                 }
             }
             else return new console.error("Can't find node with specified ID");
-
         }
     }
 }
