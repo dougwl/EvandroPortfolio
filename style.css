@@ -17918,11 +17918,20 @@ grid-template-columns: 1fr 1fr; */
 	}
 }
 
-@media (min-width: 768px){
+/* @media (min-width: 768px){
 	.whatsapp-chat-bubble{
 		top: unset;
 		right: calc(50% - 36px);
 		left: unset;
 	}
+} */
+
+.chat-bubble{
+	position: fixed;
+	bottom: 3%;
+	right: 3%;
+	width: 5%;
+	height: min-content;
+	z-index: 999;
 }
 
