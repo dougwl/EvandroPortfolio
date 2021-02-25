@@ -726,7 +726,7 @@ class ActiveMenuLink{
                     this.ActiveButton.classList.remove("current");
                     this.ActiveButton = this.NewButton.parentElement;
                     this.ActiveButton.classList.add("current");
-                    body.setAttribute("activeSection",SectionID);
+                    body.setAttribute("active-section",SectionID);
                 }
             }
             else return new console.error("Can't find node with specified ID");

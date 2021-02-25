@@ -1826,7 +1826,7 @@ var ActiveMenuLink = function() {
                                         this.ActiveButton.classList.remove("current");
                                         this.ActiveButton = this.NewButton.parentElement;
                                         this.ActiveButton.classList.add("current");
-                                        body.setAttribute("activeSection", SectionID);
+                                        body.setAttribute("active-section", SectionID);
                                     }
                                 }
                                 _ctx.next = 9;
