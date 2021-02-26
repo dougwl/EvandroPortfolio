@@ -16938,6 +16938,7 @@ body.--obscured #gotoTop{
 	background: none !important;
 	padding-left: 5vw;
 	padding-top: 0;
+	z-index: 1001;
 }
 
 #contato-bottom h2,
@@ -16970,6 +16971,7 @@ body.--obscured #gotoTop{
 	background-color: rgb(77, 79, 96) !important;
 	margin-top: -100px;
 	scroll-margin-top: 360px;
+	z-index: 1000;
 }
 
 #footer .basic-information{
@@ -17938,6 +17940,7 @@ grid-template-columns: 1fr 1fr; */
 	-moz-transition: opacity 250ms ease-in;
 	-ms-transition: opacity 250ms ease-in;
 	-o-transition: opacity 250ms ease-in;
+	cursor: pointer;
 }
 
 body[active-section="contato-bottom"] .chat-bubble{
