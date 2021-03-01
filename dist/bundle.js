@@ -2581,6 +2581,16 @@ for(var button in perfilButtons){
     button = perfilButtons[button];
     button.addEventListener('click', enableSession, true);
 }
+var whatsNumber = 9999999999999;
+var whatsURL = "https://wa.me/";
+var whatsMessage = "?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta%20com%20o%20Dr.%20Evandro!";
+var whatsCompleteURL = "".concat(whatsURL).concat(whatsNumber).concat(whatsMessage);
+var chatBubble = document.querySelector(".chat-bubble");
+if (chatBubble) {
+    chatBubble.addEventListener('click', function() {
+        window.open(whatsCompleteURL);
+    });
+}
 
 
 /***/ })

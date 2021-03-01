@@ -17393,6 +17393,26 @@ grid-template-columns: 1fr 1fr; */
 	}
 }
 
+.chat-bubble{
+	position: fixed;
+	bottom: 3%;
+	right: 2%;
+	width: max(min(15vw, 58px), 5vw);
+	height: min-content;
+	z-index: 999;
+	transition: opacity 250ms ease-in;
+	-webkit-transition: opacity 250ms ease-in;
+	-moz-transition: opacity 250ms ease-in;
+	-ms-transition: opacity 250ms ease-in;
+	-o-transition: opacity 250ms ease-in;
+	cursor: pointer;
+}
+
+body[active-section="contato-bottom"] .chat-bubble{
+	opacity: 0;
+	pointer-events: none;
+}
+
 @media (max-width: 833px){
 
 	html {
@@ -17928,23 +17948,5 @@ grid-template-columns: 1fr 1fr; */
 	}
 } */
 
-.chat-bubble{
-	position: fixed;
-	bottom: 3%;
-	right: 2%;
-	width: 5%;
-	height: min-content;
-	z-index: 999;
-	transition: opacity 250ms ease-in;
-	-webkit-transition: opacity 250ms ease-in;
-	-moz-transition: opacity 250ms ease-in;
-	-ms-transition: opacity 250ms ease-in;
-	-o-transition: opacity 250ms ease-in;
-	cursor: pointer;
-}
 
-body[active-section="contato-bottom"] .chat-bubble{
-	opacity: 0;
-	pointer-events: none;
-}
 

@@ -1319,3 +1319,17 @@ for (let button in perfilButtons) {
     button = perfilButtons[button];
     button.addEventListener('click', enableSession, true);
 }
+
+let whatsNumber = 9999999999999;
+let whatsURL = "https://wa.me/";
+let whatsMessage = "?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta%20com%20o%20Dr.%20Evandro!";
+let whatsCompleteURL = `${whatsURL}${whatsNumber}${whatsMessage}`;
+
+let chatBubble = document.querySelector(".chat-bubble");
+if(chatBubble){
+    chatBubble.addEventListener('click',() =>{
+        window.open(whatsCompleteURL);
+    })
+}
+
+
