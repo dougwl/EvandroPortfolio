@@ -17413,6 +17413,34 @@ body[active-section="contato-bottom"] .chat-bubble{
 	pointer-events: none;
 }
 
+.chat-bubble{
+	transition: all 150ms ease-in;
+	-webkit-transition: all 150ms ease-in;
+	-moz-transition: all 150ms ease-in;
+	-ms-transition: all 150ms ease-in;
+	-o-transition: all 150ms ease-in;
+}
+
+.chat-bubble:hover{
+	transform: scale(1.1);
+	-webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	-o-transform: scale(1.1);
+}
+
+.chat-bubble #bubble{
+	transition: fill 180ms ease-in;
+	-webkit-transition: fill 180ms ease-in;
+	-moz-transition: fill 180ms ease-in;
+	-ms-transition: fill 180ms ease-in;
+	-o-transition: fill 180ms ease-in;
+}
+
+.chat-bubble:hover #bubble{
+	fill: #0D9F4E !important;
+}
+
 @media (max-width: 833px){
 
 	html {
