@@ -16977,8 +16977,8 @@ body.--obscured #gotoTop{
 #footer .basic-information{
 	display: flex;
 	flex-direction: column;
-	justify-content: end;
-	align-items: end;
+	justify-content: flex-end;
+	align-items: flex-end;
 }
 
 #footer .basic-information h4{
@@ -17011,7 +17011,7 @@ body.--obscured #gotoTop{
 
 #copyrights{
 	display: flex;
-	justify-content: end;
+	justify-content: flex-end;
 	max-width: min(85%, 1140px);
 	padding-left: 15px;
 	padding-right: 15px;
@@ -17570,7 +17570,7 @@ body[active-section="contato-bottom"] .chat-bubble{
 
 	#home .home-button{
 		grid-column: 1;
-		place-self: end center;
+		place-self: flex-end center;
 		text-align: center;
 		width: max(148px, min(80%,250px));
 		padding: 12px;
@@ -17615,7 +17615,7 @@ body[active-section="contato-bottom"] .chat-bubble{
 	#home .main-photo > img{
 		grid-column: 1;
 		max-width: 80%;
-		place-self: end center;
+		place-self: flex-end center;
 	}
 
 	/* .svg-separator{
@@ -17868,8 +17868,8 @@ body[active-section="contato-bottom"] .chat-bubble{
 	}
 
 	#footer .basic-information{
-		justify-content: start;
-		align-items: start;
+		justify-content: flex-start;
+		align-items: flex-start;
 		margin-top: 60px;
 	}
 
