@@ -16957,7 +16957,10 @@ body.--obscured #gotoTop{
 	padding-bottom: 15px;
 }
 
-
+#contato-bottom .container a:hover {
+	transition: all 150ms ease-in;
+	background-color: #0D9F4E;
+}
 
 #footer .footer-diagonal svg{
 	position: relative;
