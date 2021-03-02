@@ -17421,7 +17421,7 @@ body[active-section="contato-bottom"] .chat-bubble{
 	-o-transition: all 150ms ease-in;
 }
 
-.chat-bubble:hover{
+.chat-bubble:hover{	
 	transform: scale(1.1);
 	-webkit-transform: scale(1.1);
 	-moz-transform: scale(1.1);

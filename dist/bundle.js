@@ -1441,6 +1441,7 @@ var ScrollObserver = function() {
         numberOfMarkers = Math.round(freeArea() / (document.documentElement.clientHeight - gap));
         markersHeight = document.documentElement.clientHeight - gap;
         leftover = freeArea() - (document.documentElement.clientHeight - gap) * numberOfMarkers;
+        if (leftover < 0) leftover *= -1;
         if (leftover > 0) numberOfMarkers++;
         for(var index = 0; index < numberOfMarkers; index++){
             _markers.push(_container.appendChild(document.createElement('div')));
@@ -1452,9 +1453,12 @@ var ScrollObserver = function() {
             markers: _markers
         };
         ScrollObserver.ActiveObservers.push(this);
+        console.log("number of markers: ".concat(numberOfMarkers));
         for(var index1 = 0; index1 < numberOfMarkers; index1++){
             if (index1 != 0) position = position + markersHeight + gap;
-            if (index1 == numberOfMarkers - 1) markersHeight = leftover;
+            if (index1 == numberOfMarkers - 1) {
+                markersHeight = leftover;
+            }
             Object.assign(_markers[index1].style, {
                 'position': 'absolute',
                 'height': "".concat(markersHeight, "px"),
@@ -1480,7 +1484,7 @@ var ScrollObserver = function() {
                 }
             });
         };
-        var waitForHeightChange = _asyncToGenerator(regeneratorRuntime.mark(function _callee(interval, param1, param2) {
+        /* Unnused code */ var waitForHeightChange = _asyncToGenerator(regeneratorRuntime.mark(function _callee(interval, param1, param2) {
             var optimalTime = param1 === void 0 ? 0 : param1, maxTime = param2 === void 0 ? 0 : param2;
             var hasChanged, decurredTime, strikeOut, maxStrikes;
             return regeneratorRuntime.wrap(function _callee$(_ctx) {

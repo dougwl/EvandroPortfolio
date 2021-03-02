@@ -363,6 +363,7 @@ class ScrollObserver{
 
         markersHeight = document.documentElement.clientHeight - gap;
         leftover = freeArea() - ((document.documentElement.clientHeight - gap) * numberOfMarkers);
+        if(leftover < 0) leftover *= -1;
         if(leftover > 0) numberOfMarkers++;
 
         for (let index = 0; index < numberOfMarkers; index++) {
@@ -378,10 +379,13 @@ class ScrollObserver{
 
         ScrollObserver.ActiveObservers.push(this);
 
+        console.log(`number of markers: ${numberOfMarkers}`);
         for (let index = 0; index < numberOfMarkers; index++) {
 
             if(index != 0) position = position + markersHeight + gap;
-            if(index == numberOfMarkers - 1) markersHeight = leftover;
+            if(index == numberOfMarkers - 1) {
+                markersHeight = leftover;
+            }
             
             Object.assign(_markers[index].style, {
                 'position': 'absolute',
@@ -412,6 +416,7 @@ class ScrollObserver{
             })
         };
 
+        /* Unnused code */
         let waitForHeightChange = async (interval, optimalTime = 0, maxTime = 0) => { //Instead of a loop, try changing the body to a iterator function.
             let hasChanged = false;
             let decurredTime = 0;
