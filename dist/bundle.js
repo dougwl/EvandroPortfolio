@@ -2585,11 +2585,34 @@ var whatsNumber = 9999999999999;
 var whatsURL = "https://wa.me/";
 var whatsMessage = "?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta%20com%20o%20Dr.%20Evandro!";
 var whatsCompleteURL = "".concat(whatsURL).concat(whatsNumber).concat(whatsMessage);
-var chatBubble = document.querySelector(".chat-bubble");
-if (chatBubble) {
-    chatBubble.addEventListener('click', function() {
-        window.open(whatsCompleteURL);
-    });
+var whatsAppButtons = {
+    chatBubble: document.querySelector(".chat-bubble"),
+    contatoButton: document.querySelector("#contato-bottom a")
+};
+if (whatsAppButtons.chatBubble && whatsAppButtons.contatoButton) {
+    var buttons = Object.values(whatsAppButtons);
+    var _iteratorNormalCompletion2 = true, _didIteratorError2 = false, _iteratorError2 = undefined;
+    try {
+        for(var _iterator2 = buttons[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true){
+            var button1 = _step2.value;
+            button1.addEventListener('click', function() {
+                window.open(whatsCompleteURL);
+            });
+        }
+    } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+    } finally{
+        try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                _iterator2.return();
+            }
+        } finally{
+            if (_didIteratorError2) {
+                throw _iteratorError2;
+            }
+        }
+    }
 }
 
 

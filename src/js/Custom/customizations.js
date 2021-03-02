@@ -1325,11 +1325,16 @@ let whatsURL = "https://wa.me/";
 let whatsMessage = "?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta%20com%20o%20Dr.%20Evandro!";
 let whatsCompleteURL = `${whatsURL}${whatsNumber}${whatsMessage}`;
 
-let chatBubble = document.querySelector(".chat-bubble");
-if(chatBubble){
-    chatBubble.addEventListener('click',() =>{
-        window.open(whatsCompleteURL);
-    })
+let whatsAppButtons = { chatBubble: document.querySelector(".chat-bubble"),
+                        contatoButton: document.querySelector("#contato-bottom a")};
+
+if(whatsAppButtons.chatBubble && whatsAppButtons.contatoButton){
+    let buttons = Object.values(whatsAppButtons);
+    for (const button of buttons) {
+        button.addEventListener('click',() =>{
+            window.open(whatsCompleteURL);
+        })
+    }
 }
 
 
