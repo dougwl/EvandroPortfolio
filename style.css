@@ -16144,13 +16144,15 @@ label.checkbox { padding-left: 20px; }
 	-o-transition: all 0.20s ease;
 } /* Changes navbar color and create transition. */
 
-#header-wrap[style="opacity: 0;"]{
+#header-wrap[obscured="true"]{
 	transform: translate(0,-110%);
-	visibility: hidden;
 	-webkit-transform: translate(0,-110%);
 	-moz-transform: translate(0,-110%);
 	-ms-transform: translate(0,-110%);
 	-o-transform: translate(0,-110%);
+	opacity: 0;
+	pointer-events: none;
+	/* visibility: hidden; */
 } /* Hides the navbar when opacity is 0 */
 
 .header-row[search-active="false"] .header-misc {
@@ -16193,7 +16195,7 @@ body:not(.device-touch) .sticky-header .header-misc:not([style~="visibility: hid
 	background: yellow !important;
 } */
 
-.sticky-header #header-wrap[style="opacity: 0;"] .menu-container > .menu-item > .menu-link::after {
+.sticky-header #header-wrap[obscured="true"] .menu-container > .menu-item > .menu-link::after {
 	transition: none !important;
 	-webkit-transition: none !important;
 	-moz-transition: none !important;
@@ -17443,6 +17445,14 @@ body[active-section="contato-bottom"] .chat-bubble{
 .chat-bubble:hover #bubble{
 	fill: #0D9F4E !important;
 }
+
+/* Remaking Navbar ********************************************************** */ 
+
+
+
+
+/* ********************************************** */
+
 
 @media (max-width: 833px){
 

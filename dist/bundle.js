@@ -1874,9 +1874,9 @@ if (document.documentElement.clientWidth >= 834) {
     Navbar = document.querySelector('#header-wrap');
     HideNavbar.On('OnScrollMove', function(val) {
         if (val.detail.Up) {
-            Navbar.style = "opacity: 1;";
+            Navbar.setAttribute('obscured', 'false');
         } else {
-            Navbar.style = "opacity: 0;";
+            Navbar.setAttribute('obscured', 'true');
         }
     });
 } /* Instead of only hiding the navbar when the sticky-header class is enabled, it hides in any scroll down. 

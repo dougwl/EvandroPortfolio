@@ -371,13 +371,13 @@ footer .list-unstyled li a,
 	background-color: var(--headerbg, #0F66DD);
 } */
 
-#header.dark:not(.transparent-header) {
+/* #header.dark:not(.transparent-header) {
 	border-bottom-color: rgba(255, 255, 255, .1);
 }
 
 #header.dark:not(.sticky-header) #header-wrap {
 	border-top: 1px solid rgba(255, 255, 255, .1);
-}
+} */
 
 #header-wrap .header-buttons {
 	margin-left: 1rem;
