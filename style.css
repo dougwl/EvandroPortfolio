@@ -16147,11 +16147,11 @@ label.checkbox { padding-left: 20px; }
 	will-change: left, top, transform;
 	background-color: #4d4f60;
 	border-top: hidden !important;
-	transition: all 200ms ease-in;
-	-webkit-transition: all 200ms ease-in;
-	-moz-transition: all 200ms ease-in;
-	-ms-transition: all 200ms ease-in;
-	-o-transition: all 200ms ease-in;
+	transition: all 200ms ease-in-out;
+	-webkit-transition: all 200ms ease-in-out;
+	-moz-transition: all 200ms ease-in-out;
+	-ms-transition: all 200ms ease-in-out;
+	-o-transition: all 200ms ease-in-out;
 	-webkit-backface-visibility: hidden;
 }
 
