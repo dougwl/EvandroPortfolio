@@ -484,12 +484,12 @@ var SEMICOLON = SEMICOLON || {};
 
 		initialize: function() {
 
-			if( $headerWrap.length > 0 ) {
+			/* if( $headerWrap.length > 0 ) {
 				if( $('.header-wrap-clone').length < 1 ) {
 					$headerWrap.after('<div class="header-wrap-clone"></div>');
 				}
 				$headerWrapClone = $('.header-wrap-clone');
-			}
+			} */
 
 			if( $pagemenu.length > 0 ) {
 				$pagemenu.find('#page-menu-wrap').after('<div class="page-menu-wrap-clone"></div>');

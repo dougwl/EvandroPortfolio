@@ -2708,11 +2708,11 @@ html[xmlns] .slider-wrap {
 	border-bottom: 1px solid #F5F5F5;
 }
 
-#header-wrap {
+/* #header-wrap {
 	position: relative;
 	background-color: #FFF;
 	width: 100%;
-}
+} */
 
 /* .primary-menu-open #header-wrap{
 	height: 100vh;
@@ -2753,7 +2753,7 @@ html[xmlns] .slider-wrap {
 
 @media (min-width: 992px) {
 
-	#header-wrap {
+	/* #header-wrap {
 		position: fixed;
 		height: auto;
 		z-index: 9999;
@@ -2772,7 +2772,7 @@ html[xmlns] .slider-wrap {
 	[data-sticky-offset]:not([data-sticky-offset="full"]):not(.sticky-header) #header-wrap,
 	body:not(.stretched) #header:not(.sticky-header) #header-wrap {
 		position: absolute;
-	}
+	} */
 
 	.header-wrap-clone {
 		display: block;
@@ -2880,17 +2880,17 @@ html[xmlns] .slider-wrap {
 		transition: top .4s ease;
 	}
 
-	.sticky-header #header-wrap {
+	/* .sticky-header #header-wrap {
 		position: fixed;
 		top: 0;
 		left: 0;
 		background-color: #FFF;
 		box-shadow: 0 0 10px rgba(0,0,0,0.1);
-	}
+	} */
 
-	.sticky-header.full-header #header-wrap {
+	/* .sticky-header.full-header #header-wrap {
 		border-bottom: 1px solid #EEE;
-	}
+	} */
 
 	.sticky-header.semi-transparent { background-color: transparent; }
 
@@ -15968,9 +15968,9 @@ label.checkbox { padding-left: 20px; }
 	animation-name: fadeInRightSmall;
 }
 
-.sticky-header #header-wrap{
+/* .sticky-header #header-wrap{
 	background: rgb(77, 79, 96) !important;
-}
+} */
 
 
 @-webkit-keyframes fadeInUpSmall {
@@ -16134,26 +16134,72 @@ label.checkbox { padding-left: 20px; }
 	border-bottom: hidden;
 }
 
+/* Remaking Navbar ********************************************************** */ 
+
 #header-wrap{
+	position: sticky;
+	top:0;
+	z-index: 9999;
+	width: 100%;
+	height: 60px;
+	box-shadow: 0 0 0 rgba(0,0,0,0.1);
+	backface-visibility: hidden;
+	will-change: left, top, transform;
 	background-color: #4d4f60;
 	border-top: hidden !important;
-	transition: all 0.20s ease;
-	-webkit-transition: all 0.20s ease;
-	-moz-transition: all 0.20s ease;
-	-ms-transition: all 0.20s ease;
-	-o-transition: all 0.20s ease;
-} /* Changes navbar color and create transition. */
+	transition: all 200ms ease-in;
+	-webkit-transition: all 200ms ease-in;
+	-moz-transition: all 200ms ease-in;
+	-ms-transition: all 200ms ease-in;
+	-o-transition: all 200ms ease-in;
+	-webkit-backface-visibility: hidden;
+}
 
-#header-wrap[obscured="true"]{
+#header-wrap .container,
+#header-wrap .header-row,
+#header-wrap nav,
+#header-wrap ul,
+#header-wrap li{
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+#header-wrap a{
+	color: #FFFFFF;
+}
+
+#wrapper{
+	background-color: #4D4F60;
+}
+
+.sticky-header #header-wrap{
+	top: -1px;
+	filter: blur(0) !important;
+	-webkit-filter: blur(0) !important;
+}
+
+.sticky-header + #header-wrap[obscured="true"]{
 	transform: translate(0,-110%);
 	-webkit-transform: translate(0,-110%);
 	-moz-transform: translate(0,-110%);
 	-ms-transform: translate(0,-110%);
 	-o-transform: translate(0,-110%);
-	opacity: 0;
 	pointer-events: none;
-	/* visibility: hidden; */
 } /* Hides the navbar when opacity is 0 */
+
+.sticky-header #header-wrap[obscured="true"] .menu-container > .menu-item > .menu-link::after {
+	transition: none !important;
+	-webkit-transition: none !important;
+	-moz-transition: none !important;
+	-ms-transition: none !important;
+	-o-transition: none !important;
+} /* Commented out this line because it was disabling the menu link animations. */
+
+
+
+/* ********************************************** */
+
 
 .header-row[search-active="false"] .header-misc {
 	flex-direction: row;
@@ -16194,14 +16240,6 @@ body:not(.device-touch) .sticky-header .header-misc:not([style~="visibility: hid
 /* #header #header-wrap[style="visibility: visible;"]{
 	background: yellow !important;
 } */
-
-.sticky-header #header-wrap[obscured="true"] .menu-container > .menu-item > .menu-link::after {
-	transition: none !important;
-	-webkit-transition: none !important;
-	-moz-transition: none !important;
-	-ms-transition: none !important;
-	-o-transition: none !important;
-} /* Commented out this line because it was disabling the menu link animations. */
 
 .svg-themecolor{
 	fill: #4d4f60 !important;
@@ -16901,11 +16939,7 @@ body.--obscured #gotoTop{
 	background-color: rgba(var(--themecolorrgb), 0.7);
 }
 
-.sticky-header #header-wrap{
-	top: -1px;
-	filter: blur(0) !important;
-	-webkit-filter: blur(0) !important;
-}
+
 
 #content .content-wrap{
 	overflow: visible;
@@ -17445,16 +17479,6 @@ body[active-section="contato-bottom"] .chat-bubble{
 .chat-bubble:hover #bubble{
 	fill: #0D9F4E !important;
 }
-
-/* Remaking Navbar ********************************************************** */ 
-
-#header-wrap{
-	
-}
-
-
-/* ********************************************** */
-
 
 @media (max-width: 833px){
 
