@@ -758,6 +758,19 @@ let innerVisualHeight = () => {
     document.documentElement.style.setProperty('--vh', `${vh}px`)
 }
 
+let isMobile = window.matchMedia("maxWidth: 991.98px");
+
+if(isMobile){
+    const menuTrigger = document.querySelector("#header-wrap #primary-menu-trigger");
+    menuTrigger.addEventListener('click', () => {
+        if(!document.body.classList.contains("primary-menu-open")){
+            document.body.classList.add("primary-menu-open");
+        }
+        else document.body.classList.remove("primary-menu-open");
+    })
+}
+
+
 /* window.addEventListener('resize', debounce(innerVisualHeight, 150)); */
 document.addEventListener('DOMContentLoaded', innerVisualHeight);
 

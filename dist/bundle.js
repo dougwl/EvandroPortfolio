@@ -1865,6 +1865,15 @@ var innerVisualHeight = function() {
     var vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', "".concat(vh, "px"));
 };
+var isMobile = window.matchMedia("maxWidth: 991.98px");
+if (isMobile) {
+    var menuTrigger = document.querySelector("#header-wrap #primary-menu-trigger");
+    menuTrigger.addEventListener('click', function() {
+        if (!document.body.classList.contains("primary-menu-open")) {
+            document.body.classList.add("primary-menu-open");
+        } else document.body.classList.remove("primary-menu-open");
+    });
+}
 /* window.addEventListener('resize', debounce(innerVisualHeight, 150)); */ document.addEventListener('DOMContentLoaded', innerVisualHeight);
 var ActiveMenu = new ActiveMenuLink();
 var HideNavbar = void 0;
@@ -2542,13 +2551,13 @@ perfilButtons.publicacoes = document.getElementById("publicacoes-session");
 var enableSession = function(el) {
     var activeButton = el.currentTarget;
     var block = document.getElementsByClassName('perfil-container')[0];
-    var isMobile = document.documentElement.clientWidth <= 834;
+    var isMobile1 = document.documentElement.clientWidth <= 834;
     if (!document.body.classList.contains('--obscured')) {
-        if (isMobile) {
+        if (isMobile1) {
             document.body.classList.add('--obscured');
         }
     }
-    if (isMobile) innerVisualHeight();
+    if (isMobile1) innerVisualHeight();
     if (!el.currentTarget.classList.contains('--active')) {
         block.classList.add('--active');
         for(var button in perfilButtons){
@@ -2556,7 +2565,7 @@ var enableSession = function(el) {
             if (button.id != activeButton.id) {
                 if (!button.classList.contains('--inactive')) {
                     button.classList.add('--inactive');
-                    if (isMobile) bodyScrollLock.enableBodyScroll(button);
+                    if (isMobile1) bodyScrollLock.enableBodyScroll(button);
                 }
             } else {
                 if (button.classList.contains('--inactive')) {
@@ -2564,7 +2573,7 @@ var enableSession = function(el) {
                 }
                 if (!button.classList.contains('--active')) {
                     button.classList.add('--active');
-                    if (isMobile) bodyScrollLock.disableBodyScroll(button);
+                    if (isMobile1) bodyScrollLock.disableBodyScroll(button);
                 }
             }
         }
@@ -2578,7 +2587,7 @@ var enableSession = function(el) {
         if (document.body.classList.contains('--obscured')) {
             document.body.classList.remove('--obscured');
         }
-        if (isMobile) bodyScrollLock.clearAllBodyScrollLocks();
+        if (isMobile1) bodyScrollLock.clearAllBodyScrollLocks();
     }
 };
 for(var button in perfilButtons){

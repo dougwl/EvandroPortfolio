@@ -2744,6 +2744,88 @@ html[xmlns] .slider-wrap {
 	flex-wrap: wrap;
 }
 
+/* Remaking Navbar ********************************************************** */ 
+
+#header-wrap{
+	position: sticky;
+	top:0;
+	z-index: 9999;
+	width: 100%;
+	height: 60px;
+	box-shadow: 0 0 0 rgba(0,0,0,0.1);
+	backface-visibility: hidden;
+	will-change: left, top, transform;
+	background-color: #4d4f60;
+	border-top: hidden !important;
+	transition: all 200ms ease-in-out;
+	-webkit-transition: all 200ms ease-in-out;
+	-moz-transition: all 200ms ease-in-out;
+	-ms-transition: all 200ms ease-in-out;
+	-o-transition: all 200ms ease-in-out;
+	-webkit-backface-visibility: hidden;
+}
+
+#header-wrap .container,
+#header-wrap .menu-container, 
+#header-wrap .header-row,
+#header-wrap nav,
+#header-wrap nav li{
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+#header-wrap a{
+	color: #FFFFFF;
+}
+
+#wrapper{
+	background-color: #4D4F60;
+}
+
+.sticky-header #header-wrap{
+	top: -1px;
+	filter: blur(0) !important;
+	-webkit-filter: blur(0) !important;
+}
+
+.sticky-header + #header-wrap[obscured="true"]{
+	transform: translate(0,-110%);
+	-webkit-transform: translate(0,-110%);
+	-moz-transform: translate(0,-110%);
+	-ms-transform: translate(0,-110%);
+	-o-transform: translate(0,-110%);
+	pointer-events: none;
+} /* Hides the navbar when opacity is 0 */
+
+.sticky-header #header-wrap[obscured="true"] .menu-container > .menu-item > .menu-link::after {
+	transition: none !important;
+	-webkit-transition: none !important;
+	-moz-transition: none !important;
+	-ms-transition: none !important;
+	-o-transition: none !important;
+} /* Commented out this line because it was disabling the menu link animations. */
+
+/* .primary-menu-open #header-wrap{
+	height: 100vh;
+}
+
+.primary-menu-open #header-wrap .container{
+	height: 80vh;
+	overflow-x: hidden;
+	overflow-y: auto;
+	scrollbar-width: none;
+}
+
+.primary-menu-open #header-wrap .container::-webkit-scrollbar{
+	width: 0;
+	height: 0;
+} */
+
+
+
+/* ********************************************** */
+
 @media (max-width: 768px){
 	.header-row.banner-items{
 		justify-content: center;
@@ -2957,9 +3039,9 @@ html[xmlns] .slider-wrap {
 		-webkit-backface-visibility: hidden;
 }
 
-	.sticky-header .header-wrap-clone {
+	/* .sticky-header .header-wrap-clone {
 		display: block;
-	}
+	} */
 
 	.sticky-header .menu-container{
 		max-height: 60vh;
@@ -2984,6 +3066,60 @@ html[xmlns] .slider-wrap {
 		background-color: rgba(255,255,255,0.8);
 		z-index: 1;
 	}
+
+	#header-wrap{
+		position: fixed;
+		box-shadow: none;
+		transition: height 150ms ease-in;
+		-webkit-transition: height 150ms ease-in;
+		-moz-transition: height 150ms ease-in;
+		-ms-transition: height 150ms ease-in;
+		-o-transition: height 150ms ease-in;
+}
+
+	#header-wrap,
+	#header-wrap .menu-container,
+	#header-wrap nav.primary-menu,
+	#header-wrap nav li,
+	.primary-menu-open #header-wrap .header-row{
+		height: unset;
+	}
+
+	#header-wrap nav ul.menu-container{
+		overflow:hidden;
+		margin-top: 0px;
+		margin-bottom: 0px;
+		padding-top: 0px;
+		padding-bottom: 0px;
+	}
+
+
+	.primary-menu-open #header-wrap nav ul.menu-container{
+		/* height: min-content; */
+		display: block !important;
+		animation-duration: 3500ms;
+		animation-name: openDrawer;
+		animation-timing-function: ease-in-out;
+	}
+
+	@keyframes openDrawer{
+		from{
+			height: 0;
+		}
+		
+		to{
+			height: min-content;
+		}
+	}
+
+	:not(.primary-menu-open) #header-wrap nav ul.menu-container{
+		display:none;
+		transition: height 4s ease-in;
+		-webkit-transition: height 4s ease-in;
+		-moz-transition: height 4s ease-in;
+		-ms-transition: height 4s ease-in;
+		-o-transition: height 4s ease-in;
+}
 
 }
 
@@ -3214,6 +3350,7 @@ body:not(.top-search-open) .top-search-parent #primary-menu-trigger {
 
 .menu-item:not(:first-child) {
 	border-top: 1px solid #EEE;
+	border-top-color: rgba(255,255,255,0.15);
 }
 
 .menu-link {
@@ -16134,73 +16271,6 @@ label.checkbox { padding-left: 20px; }
 	border-bottom: hidden;
 }
 
-/* Remaking Navbar ********************************************************** */ 
-
-#header-wrap{
-	position: sticky;
-	top:0;
-	z-index: 9999;
-	width: 100%;
-	height: 60px;
-	box-shadow: 0 0 0 rgba(0,0,0,0.1);
-	backface-visibility: hidden;
-	will-change: left, top, transform;
-	background-color: #4d4f60;
-	border-top: hidden !important;
-	transition: all 200ms ease-in-out;
-	-webkit-transition: all 200ms ease-in-out;
-	-moz-transition: all 200ms ease-in-out;
-	-ms-transition: all 200ms ease-in-out;
-	-o-transition: all 200ms ease-in-out;
-	-webkit-backface-visibility: hidden;
-}
-
-#header-wrap .container,
-#header-wrap .header-row,
-#header-wrap nav,
-#header-wrap ul,
-#header-wrap li{
-	display: flex;
-	align-items: center;
-	height: 100%;
-}
-
-#header-wrap a{
-	color: #FFFFFF;
-}
-
-#wrapper{
-	background-color: #4D4F60;
-}
-
-.sticky-header #header-wrap{
-	top: -1px;
-	filter: blur(0) !important;
-	-webkit-filter: blur(0) !important;
-}
-
-.sticky-header + #header-wrap[obscured="true"]{
-	transform: translate(0,-110%);
-	-webkit-transform: translate(0,-110%);
-	-moz-transform: translate(0,-110%);
-	-ms-transform: translate(0,-110%);
-	-o-transform: translate(0,-110%);
-	pointer-events: none;
-} /* Hides the navbar when opacity is 0 */
-
-.sticky-header #header-wrap[obscured="true"] .menu-container > .menu-item > .menu-link::after {
-	transition: none !important;
-	-webkit-transition: none !important;
-	-moz-transition: none !important;
-	-ms-transition: none !important;
-	-o-transition: none !important;
-} /* Commented out this line because it was disabling the menu link animations. */
-
-
-
-/* ********************************************** */
-
-
 .header-row[search-active="false"] .header-misc {
 	flex-direction: row;
 }
@@ -17506,13 +17576,14 @@ body[active-section="contato-bottom"] .chat-bubble{
 		-moz-transform: translateY(-1px);
 		-ms-transform: translateY(-1px);
 		-o-transform: translateY(-1px);
-}
+	}
 
 	#header > .container:first-of-type{
 		display: none !important;
 	}
 
-	#header .container{
+	#header .container,
+	#header-wrap .container{
 		display: inherit !important;
 		height: 100%;
 		width: 100%;
@@ -17927,6 +17998,18 @@ body[active-section="contato-bottom"] .chat-bubble{
 
 	#footer{
 		margin-top: -13vh;
+	}
+
+	#footer::after {
+		content: '';
+		background: white;
+		position: absolute;
+		display: flex;
+		height: 2vh;
+		width: 100vw;
+		z-index: -1;
+		top: 0;
+		transform: translateY(-2vh);
 	}
 
 	#footer .container{

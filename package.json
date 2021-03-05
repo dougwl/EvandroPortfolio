@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "dependencies": {
-    "netlify-cli": "^3.10.2"
+    "netlify-cli": "^3.10.5"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.33",
