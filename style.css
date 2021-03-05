@@ -3081,7 +3081,7 @@ html[xmlns] .slider-wrap {
 	}
 
 
-	.sticky-header #menu-trigger-filler{
+	.sticky-header + #header-wrap #menu-trigger-filler{
 		animation: TriggerFiller 250ms ease-in;
 		-webkit-animation: TriggerFiller 250ms ease-in;
 		position: fixed;
