@@ -762,11 +762,21 @@ let isMobile = window.matchMedia("maxWidth: 991.98px");
 
 if(isMobile){
     const menuTrigger = document.querySelector("#header-wrap #primary-menu-trigger");
+    const menu = document.querySelector("#header-wrap nav .menu-container");
     menuTrigger.addEventListener('click', () => {
         if(!document.body.classList.contains("primary-menu-open")){
             document.body.classList.add("primary-menu-open");
+            menu.classList.add("show-menu");
         }
-        else document.body.classList.remove("primary-menu-open");
+        else {
+            document.body.classList.remove("primary-menu-open");
+            menu.classList.remove('show-menu');
+            menu.classList.add('hide-menu');
+            menu.addEventListener('animationend', function OnAnimationEnd(anim){
+                menu.classList.remove('hide-menu');
+                menu.removeEventListener('animationend', OnAnimationEnd);
+            })
+        }
     })
 }
 
@@ -1230,7 +1240,6 @@ let executeOnMenuOpened = new MutationObserver( (mutationList, observer)=> {
             }
             else if(menuIsOpen == true) {
                 bodyScrollLock.enableBodyScroll(mutation.target);
-                document.getElementsByClassName('header-wrap-clone')[0].removeAttribute('style');
                 menuIsOpen = false;
             }
         }

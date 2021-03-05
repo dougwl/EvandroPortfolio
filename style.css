@@ -2806,6 +2806,10 @@ html[xmlns] .slider-wrap {
 	-o-transition: none !important;
 } /* Commented out this line because it was disabling the menu link animations. */
 
+#header-wrap svg path{
+	stroke: #fff;
+}
+
 /* .primary-menu-open #header-wrap{
 	height: 100vh;
 }
@@ -3070,12 +3074,7 @@ html[xmlns] .slider-wrap {
 	#header-wrap{
 		position: fixed;
 		box-shadow: none;
-		transition: height 150ms ease-in;
-		-webkit-transition: height 150ms ease-in;
-		-moz-transition: height 150ms ease-in;
-		-ms-transition: height 150ms ease-in;
-		-o-transition: height 150ms ease-in;
-}
+	}
 
 	#header-wrap,
 	#header-wrap .menu-container,
@@ -3093,33 +3092,44 @@ html[xmlns] .slider-wrap {
 		padding-bottom: 0px;
 	}
 
-
-	.primary-menu-open #header-wrap nav ul.menu-container{
-		/* height: min-content; */
-		display: block !important;
-		animation-duration: 3500ms;
-		animation-name: openDrawer;
-		animation-timing-function: ease-in-out;
+	body:not(.primary-menu-open) #header-wrap nav ul.menu-container{
+		display: none;
 	}
 
 	@keyframes openDrawer{
 		from{
-			height: 0;
+			max-height: 0;
 		}
-		
 		to{
-			height: min-content;
+			max-height: 999px;
 		}
 	}
 
-	:not(.primary-menu-open) #header-wrap nav ul.menu-container{
-		display:none;
-		transition: height 4s ease-in;
-		-webkit-transition: height 4s ease-in;
-		-moz-transition: height 4s ease-in;
-		-ms-transition: height 4s ease-in;
-		-o-transition: height 4s ease-in;
-}
+	@keyframes closeDrawer{
+		from{
+			max-height: 999px;
+		}
+		1%{
+			max-height: 400px;
+		}
+		to{
+			max-height: 0;
+		}
+	}
+
+	#header-wrap nav ul.menu-container.show-menu{
+		display: block !important;
+		animation-duration: 350ms;
+		animation-name: openDrawer;
+		animation-timing-function: ease-in;
+	}
+
+	#header-wrap nav ul:not(.show-menu).menu-container.hide-menu{
+		display: block !important;
+		animation-duration: 250ms;
+		animation-name: closeDrawer;
+		animation-timing-function: ease-in-out;
+	}
 
 }
 
