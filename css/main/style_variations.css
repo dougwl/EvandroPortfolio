@@ -5,7 +5,7 @@
 /* Root Settings
 -----------------------------------------------------------------*/
 :root {
-	--themecolor:  				#4D4F60; /* #0F66DD */
+	--themecolor:  				#c0714c; /* #0F66DD */
 	--themecolorrgb: 			77,79,96; /* 25,102,221; */
 
 	--headerbg: 				var(--themecolor);

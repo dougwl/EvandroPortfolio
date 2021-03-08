@@ -140,6 +140,9 @@ dl, dt, dd, ol, ul, li {
 :active,
 :focus { outline: none !important; }
 
+:root{
+	--mainColor: #c0714c;
+}
 
 /* ----------------------------------------------------------------
 	Typography
@@ -2755,7 +2758,7 @@ html[xmlns] .slider-wrap {
 	box-shadow: 0 0 0 rgba(0,0,0,0.1);
 	backface-visibility: hidden;
 	will-change: left, top, transform;
-	background-color: #4d4f60;
+	background-color: var(--mainColor);
 	border-top: hidden !important;
 	transition: all 200ms ease-in-out;
 	-webkit-transition: all 200ms ease-in-out;
@@ -2780,7 +2783,7 @@ html[xmlns] .slider-wrap {
 }
 
 #wrapper{
-	background-color: #4D4F60;
+	background-color: var(--mainColor);
 }
 
 .sticky-header #header-wrap{
@@ -16360,7 +16363,7 @@ label.checkbox { padding-left: 20px; }
 /* Custom made */
 
 #header{
-	background-color: #4d4f60 !important;
+	background-color: var(--mainColor) !important;
 	border-bottom: hidden;
 }
 
@@ -16421,7 +16424,7 @@ body:not(.device-touch) .sticky-header .header-misc:not([style~="visibility: hid
 } */
 
 .bg-color{ 
-	background-color: #4d4f60 !important;
+	background-color: var(--mainColor) !important;
 }
 
 /* #slider .nav-link:not(.active):hover {
@@ -17051,7 +17054,7 @@ body.--obscured #gotoTop{
 	margin-top: 1.5rem !important;
 	flex-direction: row !important;
 	border-bottom: 0;
-	background-color: #4d4f60 !important;
+	background-color: var(--mainColor) !important;
 	list-style: none;
 }
 
@@ -17068,7 +17071,7 @@ body.--obscured #gotoTop{
 }
 
 .form-nav .tab{
-	border: 1px solid rgba(255, 255, 255, .15);
+	border: 1px solid #fff;
 	transition: transform 0.1s ease-out;
 	-webkit-transition: transform 0.1s ease-out;
 	-moz-transition: transform 0.1s ease-out;
@@ -17089,7 +17092,7 @@ body.--obscured #gotoTop{
 
 .form-nav .tab:not(.active){
 	color:#fff;
-	background-color: rgba(255, 255, 255, .15);
+	background-color: var(--mainColor);
 	transform: translateY(5%);
 	-webkit-transform: translateY(5%);
 	-moz-transform: translateY(5%);
@@ -17098,7 +17101,7 @@ body.--obscured #gotoTop{
 }
 
 .form-nav .tab:hover:not(.active){
-	border-color: rgba(255, 255, 255, .25);
+	border-color: #fff;
 	background-color: rgba(var(--themecolorrgb), 0.7);
 }
 
@@ -17114,7 +17117,7 @@ body.--obscured #gotoTop{
 
 #treatment-section{
 	scroll-margin-top: 60px; 
-	background: linear-gradient(to right, rgba(0, 0, 0, 0.85), rgba(25,102,221,0.5)), url('./images/video_section_background/1.jpg') no-repeat center center / cover; 
+	background: linear-gradient(to right, rgba(0, 0, 0, 0.85), var(--mainColor)), url('./images/video_section_background/1.jpg') no-repeat center center / cover; 
 	min-height: 400px;
 }
 
@@ -17149,7 +17152,7 @@ body.--obscured #gotoTop{
 
 #contato-bottom .container a{
 	margin-top: 40px !important;
-	background-color: rgb(77, 79, 96);
+	background-color: var(--mainColor);
 	color: rgb(255, 255, 255);
 	font-weight: 500 !important;
 	padding-top: 15px;
@@ -17170,7 +17173,7 @@ body.--obscured #gotoTop{
 }
 
 #footer{
-	background-color: rgb(77, 79, 96) !important;
+	background-color: var(--mainColor) !important;
 	margin-top: -100px;
 	scroll-margin-top: 360px;
 	z-index: 1000;
@@ -17641,6 +17644,14 @@ body[active-section="contato-bottom"] .chat-bubble{
 
 .chat-bubble:hover #bubble{
 	fill: #0D9F4E !important;
+}
+
+.chat-bubble path#wp_border{
+	fill: #533122 !important;
+}
+
+.chat-bubble #bubble{
+	fill: var(--mainColor) !important;
 }
 
 @media (max-width: 833px){
