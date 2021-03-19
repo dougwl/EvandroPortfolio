@@ -17577,6 +17577,10 @@ grid-template-columns: 1fr 1fr; */
 	display: none;
 }
 
+.perfil-detalhes--link-wrapper a:hover .external-link-arrow{
+    transform: translateX(5px);
+}
+
 #home .main-photo svg{
 	display:none;
 }

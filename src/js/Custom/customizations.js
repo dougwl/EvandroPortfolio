@@ -487,6 +487,7 @@ class ScrollObserver{
      */
     _defaultCallback(entries){
 
+        
         if(this.Initialized) {
 
             if(this._numberOfSignedEvents < 1) return console.error('No signed event listeners');
