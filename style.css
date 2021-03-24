@@ -17680,6 +17680,10 @@ body[active-section="contato-bottom"] .chat-bubble{
 	fill: #0D9F4E !important;
 }
 
+.chat-bubble:hover path#wp_border{
+	fill: #2b2b2b !important;
+}
+
 .chat-bubble path#wp_border{
 	fill: #533122 !important;
 }
@@ -18253,14 +18257,56 @@ body[active-section="contato-bottom"] .chat-bubble{
 		background: linear-gradient(180deg, rgba(192,113,76,0.07184872239911588) 0%, rgba(192,113,76,0.07184872239911588) 47%, rgba(192,113,76,0.6656862574131215) 99%);
 	}
 
+	#home{
+		min-height: 425px;
+	}
+
 	#home .center{
 		text-align: start !important;
+		position: absolute;
+		margin-top: -15px;
+	}
+
+	#home h2:first-of-type{
+		max-width: 450px;
+	}
+
+	#home p:first-of-type{
+		margin-top: 20px;
 	}
 
 	#slider .home-content .contact-form{
 		display: none;
 	}
 
+	#header .container > .banner-items{
+		min-height: 150px;
+	}
+
+	#logo img{
+		height: 100%;
+		max-height: 80px;
+	}
+
+	#home .home-callToAction{
+		border: none;
+		border-radius: 30px;
+		background: #3e2a20;
+		color: white;
+		height: 50px;
+		width: 230px;
+		margin-top: 35px;
+		font-size: 18px;
+	}
+
+	body[active-section="home"] .chat-bubble{
+		opacity: 0;
+		transition: opacity 295ms ease-in;
+		-webkit-transition: opacity 295ms ease-in;
+		-moz-transition: opacity 295ms ease-in;
+		-ms-transition: opacity 295ms ease-in;
+		-o-transition: opacity 295ms ease-in;
+}
 
 }
 
