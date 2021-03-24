@@ -18256,6 +18256,12 @@ body[active-section="contato-bottom"] .chat-bubble{
 	#home .center{
 		text-align: start !important;
 	}
+
+	#slider .home-content .contact-form{
+		display: none;
+	}
+
+
 }
 
 /* @media (min-width: 768px){
