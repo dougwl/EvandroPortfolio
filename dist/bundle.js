@@ -2609,9 +2609,10 @@ var whatsMessage = "?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta
 var whatsCompleteURL = "".concat(whatsURL).concat(whatsNumber).concat(whatsMessage);
 var whatsAppButtons = {
     chatBubble: document.querySelector(".chat-bubble"),
-    contatoButton: document.querySelector("#contato-bottom a")
+    contatoButton: document.querySelector("#contato-bottom a"),
+    homeContatoButton: document.querySelector("#home .center button")
 };
-if (whatsAppButtons.chatBubble && whatsAppButtons.contatoButton) {
+if (whatsAppButtons.chatBubble && whatsAppButtons.contatoButton && whatsAppButtons.homeContatoButton) {
     var buttons = Object.values(whatsAppButtons);
     var _iteratorNormalCompletion2 = true, _didIteratorError2 = false, _iteratorError2 = undefined;
     try {

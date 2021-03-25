@@ -405,7 +405,7 @@ footer .list-unstyled li a,
 @media (min-width: 992px) {
 
 	.menu-link {
-		font-weight: 500 !important;
+		/* font-weight: 500 !important; */
 		text-transform: none;
 		letter-spacing: 0;
 		font-size: var(--primary-menu-font-size, 0.9375rem);

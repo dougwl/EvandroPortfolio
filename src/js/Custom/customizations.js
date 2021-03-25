@@ -1354,9 +1354,10 @@ let whatsMessage = "?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta
 let whatsCompleteURL = `${whatsURL}${whatsNumber}${whatsMessage}`;
 
 let whatsAppButtons = { chatBubble: document.querySelector(".chat-bubble"),
-                        contatoButton: document.querySelector("#contato-bottom a")};
+                        contatoButton: document.querySelector("#contato-bottom a"),
+                        homeContatoButton: document.querySelector("#home .center button")};
 
-if(whatsAppButtons.chatBubble && whatsAppButtons.contatoButton){
+if(whatsAppButtons.chatBubble && whatsAppButtons.contatoButton && whatsAppButtons.homeContatoButton){
     let buttons = Object.values(whatsAppButtons);
     for (const button of buttons) {
         button.addEventListener('click',() =>{
