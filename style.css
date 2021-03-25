@@ -17015,13 +17015,13 @@ button.video-overlay-close{
 	display: none;
 }
 
-.whatsapp-chat-bubble{
+/* .whatsapp-chat-bubble{
     position: fixed;
     top: auto;
     left: auto;
     right: 2em;
     bottom: 2em;
-}
+} */
 
 /* .whatsapp-chat-bubble-extra{
 	position: absolute;
@@ -17634,10 +17634,14 @@ grid-template-columns: 1fr 1fr; */
 
 .chat-bubble{
 	position: fixed;
-	bottom: 3%;
-	right: 2%;
+	top: unset;
+	bottom: 15px;
+	right: 10px;
 	width: max(min(15vw, 58px), 5vw);
+	/* height: -webkit-min-content;
 	height: min-content;
+	max-height: -webkit-min-content;
+	max-height: 50px; */
 	z-index: 999;
 	transition: opacity 250ms ease-in;
 	-webkit-transition: opacity 250ms ease-in;
@@ -18199,7 +18203,7 @@ body[active-section="contato-bottom"] .chat-bubble{
 		max-height: 300px;
 		max-width: 297px;
 		width: 60%;
-		background: orange;
+		background: #c0714c;
 		position: absolute;
 		/* top: 0; */
 		left: 0;
@@ -18209,6 +18213,11 @@ body[active-section="contato-bottom"] .chat-bubble{
 		margin-left: auto;
 		margin-right: auto;
 		margin-bottom: 65px;
+		border-radius: 200px;
+		-webkit-border-radius: 200px;
+		-moz-border-radius: 200px;
+		-ms-border-radius: 200px;
+		-o-border-radius: 200px;
 	}
 
 	/* .primary-menu-open #header-wrap {
