@@ -1031,6 +1031,13 @@ let EnableOverlay = new function() {
     let videoCarousel = document.querySelector(".video-carousel");
 
     playButton.addEventListener('click',() =>{
+        
+        let overlayIsOn = document.body.getAttribute("video-overlay");
+        if( overlayIsOn != null) {
+            if(overlayIsOn == "on") document.body.setAttribute("video-overlay", "off");
+            else document.body.setAttribute("video-overlay", "on");
+        }
+        else document.body.setAttribute("video-overlay", "on");
 
         if(playerController === undefined){
             LoadIframes();
@@ -1106,6 +1113,10 @@ let EnableOverlay = new function() {
             if(ev.target != this && !ev.target.classList.contains('icon-line-cross') && !ev.target.classList.contains('video-overlay-close')){
                 return;
             }
+
+            if(document.body.getAttribute("video-overlay") == "on") document.body.setAttribute("video-overlay", "off");
+            else document.body.setAttribute("video-overlay", "on");
+
             changeOverlayStatus();
             overlay.removeEventListener('click',CloseOverlay);
             OverlayCarousel.instance.select(0,false,true);
@@ -1166,7 +1177,7 @@ searchButton.addEventListener('click', () => {
 
 // Update the contact form to the correct city, based on the button pressed.
 
-const tabPanel = document.querySelector('.tab-pane');
+/* const tabPanel = document.querySelector('.tab-pane');
 const form = tabPanel.querySelector('form');
 const tabsContainer = document.querySelector('#cityTabs');
 const tabs = tabsContainer.querySelectorAll('a');
@@ -1187,10 +1198,10 @@ tabsContainer.addEventListener('OnTabFocusChange', (ev) => {
        tabState[newTab].isActive = true;
        tabState['current'] = newTab;
     }
-});
+}); */
 
 
-for (const tab of tabs) {
+/* for (const tab of tabs) {
     tabState[tab.id] = tab.classList.contains('active') ? (() => {
         tabState['current'] = tab.id; 
         return {isActive: true, node: tab}
@@ -1200,7 +1211,7 @@ for (const tab of tabs) {
         let isActive = ev.target.classList.contains('active');
 
         if (!isActive){  
-            /* form.setAttribute('fieldset','disabled') */
+            //form.setAttribute('fieldset','disabled') 
             ev.target.dispatchEvent(new CustomEvent('OnTabFocusChange', {bubbles: true}));
             tabPanel.id = cityName;
             tabPanel.setAttribute('aria-labelledby',ev.target.id);
@@ -1226,7 +1237,7 @@ for (const tab of tabs) {
 
         }
     });
-}
+} */
 
 
 let menuIsOpen = false;
@@ -1249,7 +1260,7 @@ let executeOnMenuOpened = new MutationObserver( (mutationList, observer)=> {
 
 executeOnMenuOpened.observe(document.querySelector("body"), {attributes:true});
 
-let fieldValidation = new FieldValidation();
+/* let fieldValidation = new FieldValidation();
 fieldValidation.ListenToField({
         nodeList:document.querySelectorAll("input[id^='contato-form']")
     }
@@ -1283,7 +1294,7 @@ jQuery('.home-date').datepicker({
     startDate: "tomorrow",
     endDate: "+2m",
 });
-
+ */
 
 /* testing.On('OnScrollDown',()=>{}); */
 

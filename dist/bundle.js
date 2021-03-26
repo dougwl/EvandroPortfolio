@@ -2240,6 +2240,11 @@ function LoadIframes() {
             }
             videoDescriptions[index].classList.add("--active-video");
         };
+        var overlayIsOn = document.body.getAttribute("video-overlay");
+        if (overlayIsOn != null) {
+            if (overlayIsOn == "on") document.body.setAttribute("video-overlay", "off");
+            else document.body.setAttribute("video-overlay", "on");
+        } else document.body.setAttribute("video-overlay", "on");
         if (playerController === undefined) {
             LoadIframes();
         }
@@ -2315,6 +2320,8 @@ function LoadIframes() {
             if (ev.target != this && !ev.target.classList.contains('icon-line-cross') && !ev.target.classList.contains('video-overlay-close')) {
                 return;
             }
+            if (document.body.getAttribute("video-overlay") == "on") document.body.setAttribute("video-overlay", "off");
+            else document.body.setAttribute("video-overlay", "on");
             changeOverlayStatus();
             overlay.removeEventListener('click', CloseOverlay);
             OverlayCarousel.instance.select(0, false, true);
@@ -2368,126 +2375,69 @@ searchButton.addEventListener('click', () => {
         document.removeEventListener('click', searchBlur);
     }
 }) */ /* Disabled search features */ // Update the contact form to the correct city, based on the button pressed.
-var tabPanel = document.querySelector('.tab-pane');
-var form = tabPanel.querySelector('form');
-var tabsContainer = document.querySelector('#cityTabs');
-var tabs = tabsContainer.querySelectorAll('a');
-var tabState = {
-    current: ''
-};
-tabsContainer.addEventListener('OnTabFocusChange', function(ev) {
-    var newTab = ev.target.id;
-    if (tabState.current != newTab) {
-        var keys = Object.keys(tabState);
-        for(var i = 1; i < keys.length; i++){
-            var tab = keys[i];
-            if (tab != newTab && tabState[tab].node.classList.contains('active')) {
-                tabState[tab].node.classList.remove('active');
-                tabState[tab].isActive = false;
-            }
-        }
-        tabState[newTab].node.classList.add('active');
-        tabState[newTab].isActive = true;
-        tabState['current'] = newTab;
+/* const tabPanel = document.querySelector('.tab-pane');
+const form = tabPanel.querySelector('form');
+const tabsContainer = document.querySelector('#cityTabs');
+const tabs = tabsContainer.querySelectorAll('a');
+let tabState = {current: ''};
+
+tabsContainer.addEventListener('OnTabFocusChange', (ev) => {
+    let newTab = ev.target.id;
+    if(tabState.current != newTab){
+       let keys = Object.keys(tabState);
+       for (let i = 1; i < keys.length; i++) {
+           const tab = keys[i];
+           if(tab != newTab && tabState[tab].node.classList.contains('active')){
+            tabState[tab].node.classList.remove('active');
+            tabState[tab].isActive = false;
+            }    
+       }
+       tabState[newTab].node.classList.add('active');
+       tabState[newTab].isActive = true;
+       tabState['current'] = newTab;
     }
-});
-var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
-try {
-    for(var _iterator = tabs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
-        var tab = _step.value;
-        tabState[tab.id] = tab.classList.contains('active') ? (function() {
-            tabState['current'] = tab.id;
-            return {
-                isActive: true,
-                node: tab
-            };
-        })() : {
-            isActive: false,
-            node: tab
-        };
-        tab.addEventListener('click', function(ev) {
-            var cityName = ev.target.getAttribute('aria-controls');
-            var isActive = ev.target.classList.contains('active');
-            if (!isActive) {
-                /* form.setAttribute('fieldset','disabled') */ ev.target.dispatchEvent(new CustomEvent('OnTabFocusChange', {
-                    bubbles: true
-                }));
-                tabPanel.id = cityName;
-                tabPanel.setAttribute('aria-labelledby', ev.target.id);
-                tabPanel.classList.remove('show');
-                tabsContainer.setAttribute('activeTab', ev.target.id);
-                var _iteratorNormalCompletion1 = true, _didIteratorError1 = false, _iteratorError1 = undefined;
-                try {
-                    for(var _iterator1 = form.elements[Symbol.iterator](), _step1; !(_iteratorNormalCompletion1 = (_step1 = _iterator1.next()).done); _iteratorNormalCompletion1 = true){
-                        var field = _step1.value;
-                        field.disabled = true;
-                        if (field.hasAttribute('required')) field.removeAttribute('required');
-                    }
-                } catch (err) {
-                    _didIteratorError1 = true;
-                    _iteratorError1 = err;
-                } finally{
-                    try {
-                        if (!_iteratorNormalCompletion1 && _iterator1.return != null) {
-                            _iterator1.return();
-                        }
-                    } finally{
-                        if (_didIteratorError1) {
-                            throw _iteratorError1;
-                        }
-                    }
+}); */ /* for (const tab of tabs) {
+    tabState[tab.id] = tab.classList.contains('active') ? (() => {
+        tabState['current'] = tab.id; 
+        return {isActive: true, node: tab}
+    })() : {isActive: false, node: tab};
+    tab.addEventListener('click', (ev) =>{
+        let cityName = ev.target.getAttribute('aria-controls');
+        let isActive = ev.target.classList.contains('active');
+
+        if (!isActive){  
+            //form.setAttribute('fieldset','disabled') 
+            ev.target.dispatchEvent(new CustomEvent('OnTabFocusChange', {bubbles: true}));
+            tabPanel.id = cityName;
+            tabPanel.setAttribute('aria-labelledby',ev.target.id);
+            tabPanel.classList.remove('show');
+            tabsContainer.setAttribute('activeTab',ev.target.id);
+
+            for (const field of form.elements) {
+                    field.disabled = true;
+                    if(field.hasAttribute('required')) field.removeAttribute('required');
+            }
+
+            setTimeout(() => {
+                let cityField = form.elements.namedItem('contato-form-city'); //Requesting the city field inside the form.
+                for (const field of form.elements) { //Reseting fields to default values.
+                    field.setCustomValidity('');
+                    field.removeAttribute('isvalid');
+                    field.disabled = false;
+                    field.value = '';
                 }
-                setTimeout(function() {
-                    var cityField = form.elements.namedItem('contato-form-city'); //Requesting the city field inside the form.
-                    var _iteratorNormalCompletion2 = true, _didIteratorError2 = false, _iteratorError2 = undefined;
-                    try {
-                        for(var _iterator2 = form.elements[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true){
-                            var field = _step2.value;
-                            field.setCustomValidity('');
-                            field.removeAttribute('isvalid');
-                            field.disabled = false;
-                            field.value = '';
-                        }
-                    } catch (err) {
-                        _didIteratorError2 = true;
-                        _iteratorError2 = err;
-                    } finally{
-                        try {
-                            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-                                _iterator2.return();
-                            }
-                        } finally{
-                            if (_didIteratorError2) {
-                                throw _iteratorError2;
-                            }
-                        }
-                    }
-                    cityField.value = cityName.charAt(0).toUpperCase() + cityName.slice(1); //Changing the first letter of the word to uppercase and mergin with the rest of the word.
-                    tabPanel.classList.add('show');
-                }, 300);
-            }
-        });
-    }
-} catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-} finally{
-    try {
-        if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
+                cityField.value = cityName.charAt(0).toUpperCase() + cityName.slice(1); //Changing the first letter of the word to uppercase and mergin with the rest of the word.
+                tabPanel.classList.add('show');
+            }, 300);
+
         }
-    } finally{
-        if (_didIteratorError) {
-            throw _iteratorError;
-        }
-    }
-}
-var menuIsOpen = false;
+    });
+} */ var menuIsOpen = false;
 var executeOnMenuOpened = new MutationObserver(function(mutationList, observer) {
-    var _iteratorNormalCompletion2 = true, _didIteratorError2 = false, _iteratorError2 = undefined;
+    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
     try {
-        for(var _iterator2 = mutationList[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true){
-            var mutation = _step2.value;
+        for(var _iterator = mutationList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
+            var mutation = _step.value;
             if (mutation.type == 'attributes' && mutation.attributeName == 'class') {
                 if (mutation.target.classList.contains('primary-menu-open')) {
                     if (menuIsOpen == false) {
@@ -2501,16 +2451,16 @@ var executeOnMenuOpened = new MutationObserver(function(mutationList, observer) 
             }
         }
     } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
+        _didIteratorError = true;
+        _iteratorError = err;
     } finally{
         try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-                _iterator2.return();
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+                _iterator.return();
             }
         } finally{
-            if (_didIteratorError2) {
-                throw _iteratorError2;
+            if (_didIteratorError) {
+                throw _iteratorError;
             }
         }
     }
@@ -2518,41 +2468,41 @@ var executeOnMenuOpened = new MutationObserver(function(mutationList, observer) 
 executeOnMenuOpened.observe(document.querySelector("body"), {
     attributes: true
 });
-var fieldValidation = new FieldValidation();
+/* let fieldValidation = new FieldValidation();
 fieldValidation.ListenToField({
-    nodeList: document.querySelectorAll("input[id^='contato-form']")
-});
-var emailPlaceHolder = new CustomPlaceHolder({
-    Default: 'Seu email',
-    Custom: 'email@dominio.com',
+        nodeList:document.querySelectorAll("input[id^='contato-form']")
+    }
+);
+
+let emailPlaceHolder = new CustomPlaceHolder({
+    Default:'Seu email',
+    Custom:'email@dominio.com',
     Target: document.getElementById('contato-form-email'),
     StartWithDefault: true
-}).OnFocus({
-    ReturnToDefault: true
-});
-var calendarPlaceHolder = new CustomPlaceHolder({
+    }).OnFocus({ReturnToDefault:true});
+
+let calendarPlaceHolder = new CustomPlaceHolder({
     Default: "Data de Interesse",
     Custom: "DD/MM/AAAA",
     Target: document.getElementById('contato-form-date'),
     StartWithDefault: true
-}).OnFocus({
-    ReturnToDefault: true
-});
-var phonePlaceHolder = new CustomPlaceHolder({
+}).OnFocus({ReturnToDefault:true});
+
+let phonePlaceHolder = new CustomPlaceHolder({
     Default: "Seu Telefone",
     Custom: '(DD) X XXXX-XXXX',
     Target: document.getElementById('contato-form-phone'),
     StartWithDefault: true
-}).OnFocus({
-    ReturnToDefault: true
-});
+}).OnFocus({ReturnToDefault:true});
+
+
 jQuery('.home-date').datepicker({
     language: 'pt-BR',
     autoclose: true,
     startDate: "tomorrow",
-    endDate: "+2m"
+    endDate: "+2m",
 });
-/* testing.On('OnScrollDown',()=>{}); */ var perfilButtons = {
+ */ /* testing.On('OnScrollDown',()=>{}); */ var perfilButtons = {
 };
 perfilButtons.curriculo = document.getElementById("curriculo-session");
 perfilButtons.simposios = document.getElementById("simposio-session");
@@ -2614,25 +2564,25 @@ var whatsAppButtons = {
 };
 if (whatsAppButtons.chatBubble && whatsAppButtons.contatoButton && whatsAppButtons.homeContatoButton) {
     var buttons = Object.values(whatsAppButtons);
-    var _iteratorNormalCompletion2 = true, _didIteratorError2 = false, _iteratorError2 = undefined;
+    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
     try {
-        for(var _iterator2 = buttons[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true){
-            var button1 = _step2.value;
+        for(var _iterator = buttons[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
+            var button1 = _step.value;
             button1.addEventListener('click', function() {
                 window.open(whatsCompleteURL);
             });
         }
     } catch (err) {
-        _didIteratorError2 = true;
-        _iteratorError2 = err;
+        _didIteratorError = true;
+        _iteratorError = err;
     } finally{
         try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-                _iterator2.return();
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+                _iterator.return();
             }
         } finally{
-            if (_didIteratorError2) {
-                throw _iteratorError2;
+            if (_didIteratorError) {
+                throw _iteratorError;
             }
         }
     }

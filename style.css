@@ -16495,6 +16495,12 @@ ul#mainpage-experience-list-content :last-child{
 	max-width: revert;
 }
 
+body[video-overlay="on"] #header-wrap,
+body[style="overflow: hidden;"] .chat-bubble{
+	display: none;
+	pointer-events: none;
+}
+
 .video-container{
 	width: 100%;
 	padding: 0 5%;
@@ -17634,6 +17640,8 @@ grid-template-columns: 1fr 1fr; */
 
 .chat-bubble{
 	position: fixed;
+	pointer-events: none;
+	opacity: 0;
 	top: unset;
 	bottom: 15px;
 	right: 10px;
@@ -17651,10 +17659,10 @@ grid-template-columns: 1fr 1fr; */
 	cursor: pointer;
 }
 
-body[active-section="contato-bottom"] .chat-bubble{
+/* body[active-section="contato-bottom"] .chat-bubble{
 	opacity: 0;
 	pointer-events: none;
-}
+} */
 
 .chat-bubble{
 	transition: all 150ms ease-in;
@@ -18191,12 +18199,6 @@ body[active-section="contato-bottom"] .chat-bubble{
 		background-color: rgb(60, 49, 39);
 	}
 
-	body[style="overflow: hidden;"] #header-wrap,
-	body[style="overflow: hidden;"] .chat-bubble{
-		visibility: hidden !important;
-		pointer-events: none;
-	}
-
 	#photo-container::after{
 		content: '';
 		height: 250px;
@@ -18218,6 +18220,16 @@ body[active-section="contato-bottom"] .chat-bubble{
 		-moz-border-radius: 200px;
 		-ms-border-radius: 200px;
 		-o-border-radius: 200px;
+	}
+
+	body:not([active-section="duvidas"]):not([active-section="contato-bottom"]):not([active-section=""]):not([style="overflow: hidden"]) .chat-bubble{
+		opacity: 1;
+		pointer-events: all;
+		transition: opacity 295ms ease-in;
+		-webkit-transition: opacity 295ms ease-in;
+		-moz-transition: opacity 295ms ease-in;
+		-ms-transition: opacity 295ms ease-in;
+		-o-transition: opacity 295ms ease-in;
 	}
 
 	/* .primary-menu-open #header-wrap {
@@ -18259,6 +18271,14 @@ body[active-section="contato-bottom"] .chat-bubble{
 		-moz-border-radius: 200px;
 		-ms-border-radius: 200px;
 		-o-border-radius: 200px;
+	}
+
+	.perfil-sobre{
+		min-height: 200px;
+	}
+
+	.perfil-sobre p{
+		max-width: 50%;
 	}
 
 	.perfil-sobre::after {
@@ -18329,16 +18349,28 @@ body[active-section="contato-bottom"] .chat-bubble{
 		-moz-transition: background 250ms ease-in;
 		-ms-transition: background 250ms ease-in;
 		-o-transition: background 250ms ease-in;
-}
+	}
 
-	body[active-section="home"] .chat-bubble{
-		opacity: 0;
-		pointer-events: none;
+	body:not([active-section="home"]):not([active-section="duvidas"]):not([active-section="contato-bottom"]):not([active-section=""]):not([style="overflow: hidden"]) .chat-bubble{
+		opacity: 1;
+		pointer-events: all;
 		transition: opacity 295ms ease-in;
 		-webkit-transition: opacity 295ms ease-in;
 		-moz-transition: opacity 295ms ease-in;
 		-ms-transition: opacity 295ms ease-in;
 		-o-transition: opacity 295ms ease-in;
+	}
+
+	#header-wrap .container p{
+		display: flex;
+		margin-top: auto;
+		margin-bottom: auto;
+		background: none;
+		border: none;
+		color: white;
+		font-size: 14px;
+		font-weight: 600;
+		margin-left: 250px;
 	}
 
 }
