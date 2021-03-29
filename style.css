@@ -17831,7 +17831,7 @@ grid-template-columns: 1fr 1fr; */
 
 	#home .main-photo > img{
 		grid-column: 1;
-		max-width: 60%; /* changed from 80% */
+		max-height: 30vh; /* changed from 80% */
 		place-self: flex-end center;
 	}
 
@@ -18178,6 +18178,12 @@ grid-template-columns: 1fr 1fr; */
 		margin-top: 30px;
 	}
 
+	#home .center > h2:first-of-type{
+		max-width: 400px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
 	.perfil-detalhes--block #perfil-main-photo{
 		max-height: 300px;
 		margin-top: 50px;
@@ -18232,22 +18238,6 @@ grid-template-columns: 1fr 1fr; */
 		-o-transition: opacity 295ms ease-in;
 	}
 
-	/* #header-wrap .header-row p{
-
-		height: 0;
-		margin-top: 20px;
-		margin-left: auto;
-		font-size: 14px;
-		color: white;
-		font-weight: 500;
-		margin-right: auto;
-		pointer-events: none;
-	}
-
-	body.primary-menu-open #header-wrap .header-row p{
-		opacity: 1;
-	} */
-
 	body.primary-menu-open #header-wrap .container::after{
 		content: attr(data-crm);
 		display: flex;
@@ -18261,9 +18251,6 @@ grid-template-columns: 1fr 1fr; */
 		font-weight: 600;
 	}
 
-	/* .primary-menu-open #header-wrap {
-		background: rgb(192, 113, 76);
-	} */
 }
 
 @media (min-width: 1113px){
