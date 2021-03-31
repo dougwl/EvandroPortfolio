@@ -1920,6 +1920,11 @@ ActiveMenu.Change({
     SectionID: ActiveSection.CurrentSection()
 });
 var header = document.querySelector('#header');
+if (window.pageYOffset > 110) {
+    if (!header.classList.contains('sticky-header')) {
+        header.classList.add('sticky-header');
+    }
+}
 var isSticky = ScrollObserver.ActiveObservers[0].On('OnScrollMove', function(val) {
     if (val.detail.Down) {
         if (window.pageYOffset > 110) {

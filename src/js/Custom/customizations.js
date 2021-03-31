@@ -813,6 +813,13 @@ ActiveSection.Watch({State:true, Callback: (pos,arr) => {
 ActiveMenu.Change({SectionID: ActiveSection.CurrentSection()});
 
 let header = document.querySelector('#header');
+
+if(window.pageYOffset > 110){
+    if(!header.classList.contains('sticky-header')) {
+        header.classList.add('sticky-header');
+    }
+}
+
 let isSticky = ScrollObserver.ActiveObservers[0].On('OnScrollMove', (val) => {
     if(val.detail.Down){
         if(window.pageYOffset > 110){
