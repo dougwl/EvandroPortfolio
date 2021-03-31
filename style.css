@@ -17210,14 +17210,22 @@ body.--obscured #gotoTop{
 	font-size: 1.4rem;
 }
 
-#footer .basic-information p:first-of-type{
+#footer .basic-information a > p:first-of-type{
 	font-weight: 550;
 	margin-bottom: 10px;
+	font-weight: unset;
 }
 
-#footer .basic-information p{
+#footer .basic-information a > p{
+	color: #401e1e;
 	margin-bottom: 0;
 	text-align: end;
+	font-weight: unset;
+	font-style: italic;
+}
+
+#footer .basic-information address > a:hover p{
+	color: #6d3333 !important;
 }
 
 #copyrights{
@@ -18189,15 +18197,7 @@ grid-template-columns: 1fr 1fr; */
 	}
 
 	#header-wrap .logo-mobile{
-		/* position: absolute;
-		top: 0;
-		left: 0;
-		width: 100vw; */
 		height: 50px;
-		/* padding-left: 10vw; */
-		/* width: 100%; */
-		/* margin-top: calc(var(--vh, 1vh) * 2);
-		padding-right: 50px; */
 	}
 
 	/* #header-wrap .mobile-logo-container{
@@ -18242,18 +18242,8 @@ grid-template-columns: 1fr 1fr; */
 		-moz-transition: background 150ms ease-in;
 		-ms-transition: background 150ms ease-in;
 		-o-transition: background 150ms ease-in;
-}
+	}
 
-	/* #header-wrap::after{
-		content: url(images/final_logo.svg);
-		position: absolute;
-		display: flex;
-		height: 40px;
-		width: 100%;
-		margin-left: 70px;
-		top: 25px;
-		left: 0;
-	} */
 
 	#home .home-callToAction{
 		display: none;
@@ -18341,6 +18331,34 @@ grid-template-columns: 1fr 1fr; */
 
 	body.--obscured .chat-bubble{
 		display: none;
+	}
+
+	#footer .basic-information{
+		justify-content: flex-start;
+		align-items: flex-start;
+		margin-top: 60px;
+	}
+
+	#footer .basic-information p{
+		text-align: start !important;
+		max-width: 90% !important;
+	}
+
+	#footer .basic-information p:first-of-type{
+		font-weight: 520 !important;
+		max-width: 70% !important;
+	}
+
+	#footer .basic-information address > a{
+		display: inline-flex;
+		flex-direction: column;
+	}
+
+	#footer #map-icon{
+		height: 18px;
+		align-self: center;
+		position: relative;
+		top: -1.375em;
 	}
 
 }
@@ -18484,6 +18502,10 @@ grid-template-columns: 1fr 1fr; */
 		font-size: 14px;
 		font-weight: 600;
 		margin-left: 250px;
+	}
+
+	#map-icon {
+		display: none;
 	}
 
 }

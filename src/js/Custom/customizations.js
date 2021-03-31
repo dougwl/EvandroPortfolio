@@ -1366,6 +1366,14 @@ for (let button in perfilButtons) {
     button.addEventListener('click', enableSession, true);
 }
 
+/* let address = document.querySelector("address");
+let mapLink = address.getAttribute("link");
+let setLink = (() => {
+    address.addEventListener("click", () => {
+
+    })
+})(); */
+
 let whatsNumber = 9999999999999;
 let whatsURL = "https://wa.me/";
 let whatsMessage = "?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta%20com%20o%20Dr.%20Evandro!";
