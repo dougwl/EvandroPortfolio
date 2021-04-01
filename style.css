@@ -17124,6 +17124,7 @@ body.--obscured #gotoTop{
 #treatment-section{
 	scroll-margin-top: 60px; 
 	background: linear-gradient(to right, rgba(0, 0, 0, 0.85), var(--mainColor)), url('./images/video_section_background/1.jpg') no-repeat center center / cover; 
+	background: linear-gradient(to right, rgba(0, 0, 0, 0.85), var(--mainColor)), url('./images/video_section_background/1.webp') no-repeat center center / cover;
 	min-height: 400px;
 }
 
@@ -17568,7 +17569,7 @@ grid-template-columns: 1fr 1fr; */
 	right: 28px;
 	bottom: auto;
 	opacity: 0.5;
-	font-size: 16px;
+	height: 16px;
 	transition: transform 100ms ease-in;
 	transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg);
 	transform-style: preserve-3d;

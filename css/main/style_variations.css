@@ -278,6 +278,7 @@ a.btn-link:hover i { transform: translateX(4px); }
 }
 
 .play-video:hover i {
+	box-shadow: 0 0 1px 15px rgba(247, 118, 55, 0.14);
 	transform: scale(1.2);
 	-webkit-transform: scale(1.2);
 	-moz-transform: scale(1.2);
