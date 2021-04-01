@@ -1373,7 +1373,7 @@ let setLink = (() => {
     })
 })(); */
 
-let whatsNumber = 9999999999999;
+let whatsNumber = "5547991328882";
 let whatsURL = "https://wa.me/";
 let whatsMessage = "?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta%20com%20o%20Dr.%20Evandro!";
 let whatsCompleteURL = `${whatsURL}${whatsNumber}${whatsMessage}`;
