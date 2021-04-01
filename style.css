@@ -18509,6 +18509,37 @@ grid-template-columns: 1fr 1fr; */
 		display: none;
 	}
 
+	#contato-bottom{
+		pointer-events: none;
+	}
+
+	#contato-bottom .container a{
+		pointer-events: all;
+	}
+
+	#ChatBubble{
+		transition: transform 150ms ease-in;
+		-webkit-transition: transform 150ms ease-in;
+		-moz-transition: transform 150ms ease-in;
+		-ms-transition: transform 150ms ease-in;
+		-o-transition: transform 150ms ease-in;
+	}
+
+	#ChatBubble:hover{
+		transform:rotate(10deg);
+		-webkit-transform:rotate(10deg);
+		-moz-transform:rotate(10deg);
+		-ms-transform:rotate(10deg);
+		-o-transform:rotate(10deg);
+		transition: transform 150ms ease-in;
+		-webkit-transition: transform 150ms ease-in;
+		-moz-transition: transform 150ms ease-in;
+		-ms-transition: transform 150ms ease-in;
+		-o-transition: transform 150ms ease-in;
+	}
+
+
+
 }
 
 /* @media (min-width: 768px){
