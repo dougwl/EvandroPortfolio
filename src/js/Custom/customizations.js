@@ -379,7 +379,6 @@ class ScrollObserver{
 
         ScrollObserver.ActiveObservers.push(this);
 
-        console.log(`number of markers: ${numberOfMarkers}`);
         for (let index = 0; index < numberOfMarkers; index++) {
 
             if(index != 0) position = position + markersHeight + gap;

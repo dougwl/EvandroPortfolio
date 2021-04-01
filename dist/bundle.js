@@ -1453,7 +1453,6 @@ var ScrollObserver = function() {
             markers: _markers
         };
         ScrollObserver.ActiveObservers.push(this);
-        console.log("number of markers: ".concat(numberOfMarkers));
         for(var index1 = 0; index1 < numberOfMarkers; index1++){
             if (index1 != 0) position = position + markersHeight + gap;
             if (index1 == numberOfMarkers - 1) {
