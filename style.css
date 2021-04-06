@@ -18253,7 +18253,7 @@ grid-template-columns: 1fr 1fr; */
 	#home .center p{
 		margin-left: 10px;
 		margin-right: 10px;
-		margin-top: 30px;
+		margin-top: 10px;
 	}
 
 	#home .center > h2:first-of-type{
@@ -18261,6 +18261,10 @@ grid-template-columns: 1fr 1fr; */
 		margin-left: auto;
 		margin-right: auto;
 		padding-top: calc(var(--vh, 1vh) * 10) !important;
+	}
+
+	#home .main-photo > img{
+		max-height: 35vh !important;
 	}
 
 	.perfil-detalhes--block #perfil-main-photo{
@@ -18375,6 +18379,10 @@ grid-template-columns: 1fr 1fr; */
 		display: flex;
 		margin-top: auto;
 		margin-bottom: auto;
+	}
+
+	#home .main-photo img:last-of-type{
+		max-width: 70%;
 	}
 
 	#photo-container #perfil-main-photo{
