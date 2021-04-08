@@ -17078,6 +17078,10 @@ body.--obscured #gotoTop{
 	margin-bottom: 10px;
 }
 
+#contato-bottom p {
+	font-weight: 700 !important;
+}
+
 #contato-bottom .container a{
 	margin-top: 40px !important;
 	background-color: var(--mainColor);
@@ -17902,7 +17906,7 @@ grid-template-columns: 1fr 1fr; */
 	}
 
 	.perfil-container.--active .perfil-detalhes--link-wrapper > a > :not(img):not(.external-link-arrow):not(.external-link-close):not(p):not(ul){
-		margin-bottom: 40px;
+		margin-bottom: 25px;
 	}
 
 	.perfil-container > h2, 
