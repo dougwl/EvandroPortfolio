@@ -16489,7 +16489,7 @@ body[video-overlay="on"] .chat-bubble{
 
 .video-overlay-close{
 	position: absolute;
-	font-size: min(max(3.5vh,4vh),36px);
+	height: min(max(3.5vh,4vh),36px);
 	right: 0;
 	top: 0;
 	bottom: 0;
@@ -16509,7 +16509,15 @@ button.video-overlay-close{
 	-o-transition: color 0.45s ease-in;
 }
 
+.video-overlay-close svg{
+	height: inherit;
+	margin-top: 8vw;
+	pointer-events: none;
+}
 
+.toggle-icon svg{
+	height: 20px;
+}
 
 @media (max-width: 992px), (aspect-ratio: 512/683){
 	.video-overlay{
@@ -17654,6 +17662,32 @@ grid-template-columns: 1fr 1fr; */
 
 .play-video i img{
 	height: 35px;
+}
+
+#treatment-section .video-container ul{
+	padding-left: 0;
+	margin-left: 0;
+	list-style-type: none;
+}
+
+#treatment-section .video-container ul li{
+	display: flex;
+	list-style: none;
+	position: relative;
+	margin-bottom: .5rem !important;
+	margin-top: .5rem !important;
+	align-items: center;
+}
+
+#treatment-section .video-container ul li i{
+	display: inline-flex;
+	align-items: center;
+	align-content: center;
+	height: min-content;
+}
+
+#treatment-section .video-container ul li svg{
+	height: 15px;
 }
 
 @media (max-width: 833px){
