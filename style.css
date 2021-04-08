@@ -16440,6 +16440,7 @@ body[video-overlay="on"] .chat-bubble{
 #video-section-play-title h2{
 	max-width: 345px;
 	margin-top: 45px !important;
+	font-weight: 600;
 }
 
 #video-section-description-parent{
@@ -16874,15 +16875,22 @@ button.video-overlay-close{
 	margin-top: 15px;
 }
 
-.--active #publicacoes-session li,
-.--active #simposio-session li{
+.--active #publicacoes-session li:not(:first-of-type),
+.--active #simposio-session li:not(:first-of-type){
 	font-size: 1em;
 	margin-bottom: 10px;
+	margin-top: 30px;
 }
+
+.--active #publicacoes-session li:first-of-type,
+.--active #simposio-session li:first-of-type{
+	margin-top: 10px;
+}
+
 
 .--active #publicacoes-session li > cite,
 .--active #simposio-session li > cite {
-	font-weight: 800;
+	font-weight: 610;
 }
 
 .perfil-sobre{
@@ -17117,7 +17125,7 @@ body.--obscured #gotoTop{
 
 #footer .basic-information a{
 	color: #fff;
-	font-weight: 800;
+	font-weight: 600;
 }
 
 #footer .basic-information ._phone{
@@ -17497,7 +17505,7 @@ grid-template-columns: 1fr 1fr; */
 }
 
 .perfil-container.--active a .external-link-close{
-	height: 26px !important;
+	height: 21px !important;
 }
 
 .perfil-container.--active a .external-link-close:hover{
@@ -18422,8 +18430,8 @@ grid-template-columns: 1fr 1fr; */
 		position: absolute;
 		left: auto;
 		bottom: auto;
-		top: 33px;
-		right: 95px;
+		top: 30px;
+		right: 91px;
 		font-size: 14px;
 	
 	}
