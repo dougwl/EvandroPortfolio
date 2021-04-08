@@ -18227,6 +18227,11 @@ grid-template-columns: 1fr 1fr; */
 		margin-top: 30px;
 	}
 
+	.perfil-container.--active a .external-link-close {
+		top: 25px !important;
+		right: 10px !important;
+	}
+
 	#home .home-button{
 		background-color: rgb(60, 49, 39);
 	}
@@ -18376,6 +18381,17 @@ grid-template-columns: 1fr 1fr; */
 		border-radius: 20px;
 		background: rgb(192,113,76);
 		background: linear-gradient(180deg, rgba(192,113,76,0.07184872239911588) 0%, rgba(192,113,76,0.07184872239911588) 47%, rgba(192,113,76,0.6656862574131215) 99%);
+	}
+
+	.perfil-container.--active a::after{
+		content: "Fechar";
+		position: absolute;
+		left: auto;
+		bottom: auto;
+		top: 33px;
+		right: 95px;
+		font-size: 14px;
+	
 	}
 
 	#home{
