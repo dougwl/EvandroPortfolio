@@ -16459,6 +16459,7 @@ body[video-overlay="on"] .chat-bubble{
 	max-width: 100%;
 	padding-right: 0;
 	margin-bottom: 0;
+	color: #fff;
 } 
 
 @media (max-width:400px) {
@@ -17488,7 +17489,15 @@ grid-template-columns: 1fr 1fr; */
 }
 
 .perfil-container.--active a .external-link-close{
-	font-size: 20px !important;
+	height: 26px !important;
+}
+
+.perfil-container.--active a .external-link-close:hover{
+	transform: scale(1.5);
+	-webkit-transform: scale(1.5);
+	-moz-transform: scale(1.5);
+	-ms-transform: scale(1.5);
+	-o-transform: scale(1.5);
 }
 
 .perfil-container.--active a .external-link-arrow,
@@ -17498,6 +17507,10 @@ grid-template-columns: 1fr 1fr; */
 
 .perfil-detalhes--link-wrapper a:hover .external-link-arrow{
     transform: translateX(5px);
+}
+
+.perfil-detalhes--link-wrapper a.--active:not(#curriculo-session) ul{
+	margin-top: 20px;
 }
 
 #perfil-main-photo{
@@ -17615,6 +17628,32 @@ grid-template-columns: 1fr 1fr; */
 
 .chat-bubble #bubble{
 	fill: var(--mainColor) !important;
+}
+
+.play-video i {
+	position: relative;
+	padding-left: 6px;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	z-index: 1;
+	background-color: rgba(255, 255, 255, 0.85);
+	color: #111;
+	transition: all .2s ease-in-out;
+	box-shadow: 0 0 1px 15px rgba(255,255,255,.04);
+	-webkit-backface-visibility: hidden;
+	-webkit-transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-ms-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+	display: inline-flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+}
+
+.play-video i img{
+	height: 35px;
 }
 
 @media (max-width: 833px){
