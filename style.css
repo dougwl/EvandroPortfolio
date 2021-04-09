@@ -17702,6 +17702,10 @@ grid-template-columns: 1fr 1fr; */
 	height: 15px;
 }
 
+.video-overlay--page-description h5{
+	color: #c8c7c7;
+}
+
 @media (max-width: 833px){
 
 	html {
