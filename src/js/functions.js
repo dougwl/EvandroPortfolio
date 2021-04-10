@@ -1964,7 +1964,7 @@ var SEMICOLON = SEMICOLON || {};
 
 			SEMICOLON.header.menufunctions();
 			SEMICOLON.header.fullWidthMenu();
-			SEMICOLON.header.stickyMenu();
+			/* SEMICOLON.header.stickyMenu(); */
 			SEMICOLON.initialize.dataResponsiveHeights();
 			SEMICOLON.initialize.stickFooterOnSmall();
 			SEMICOLON.slider.sliderDimensions();
