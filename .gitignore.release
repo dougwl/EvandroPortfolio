@@ -7,3 +7,6 @@ browsers
 .netlify/
 .vs/
 .vscode/
+src/js/App
+src/js/Custom/Tests
+screenSize_reference.txt
