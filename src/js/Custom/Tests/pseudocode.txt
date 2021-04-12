@@ -1,0 +1,62 @@
+
+if Old Position is bigger than New Position {
+
+}
+
+if Intersection Ratio is bigger than 0 AND New Intersection Ratio is bigger than Old {
+    if()
+}
+
+if New Position is Smaller than Old, do{
+    if Intersection Ratio is bigger than 0 AND New Intersection Ratio is bigger than Old{
+
+    }
+    else{
+
+    }
+}
+
+If Intersection Ratio is bigger than 0 AND New Intersection Ratio is bigger than Old, do{
+    if New Position is Smaller than Old and Height is bigger than older{
+        Print (Going Down);
+    }
+    if New Position is bigger than Old and Height is bigger than older{
+        Print (Going Up);
+    }
+}
+Else if Intersection Ratio is bigger than 0 AND New Intersection is smaller than Old, do{
+    if New Position is bigger than Old and Height is smaller than older{
+        Print (Going Up)
+    }
+    if New Position is smaller than Old and Height is bigger than older{
+        Print (Going Down);
+    }
+}
+
+min-height: 450px
+max-height: 
+
+width: min(max(50vw,400px), 600px);
+
+calc((min(50vw,675px)) )
+
+height: min(max(450px,))
+
+
+min-height:450px;
+max-height:550px;
+
+min(max(800px,min(100vw, 100vh)))
+
+
+is-watch-page #masthead-container:hover,
+is-watch-page #masthead-container:focus-within{
+    visibility: visible;
+}
+
+is-watch-page #masthead-container:not(:hover),
+is-watch-page #masthead-container:not(:focus-within){
+    visibility: hidden;
+}
+
+kaido koi d a 
