@@ -17832,9 +17832,14 @@ grid-template-columns: 1fr 1fr; */
 		color: rgba(255, 255, 255, 0.267);
 	}
 
-	#home .main-photo > img{
+	#home .main-photo img{
 		grid-column: 1;
 		max-height: 30vh; /* changed from 80% */
+		place-self: flex-end center;
+	}
+
+	#home .main-photo picture{
+		grid-column: 1;
 		place-self: flex-end center;
 	}
 
@@ -18257,7 +18262,7 @@ grid-template-columns: 1fr 1fr; */
 		padding-top: calc(var(--vh, 1vh) * 10) !important;
 	}
 
-	#home .main-photo > img{
+	#home .main-photo img{
 		margin-bottom: 10px;
 		max-height: 35vh !important;
 	}
