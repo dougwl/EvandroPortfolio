@@ -1373,14 +1373,13 @@ let setLink = (() => {
     })
 })(); */
 
-let whatsNumber = "5547991328882";
+/* let whatsNumber = "5547991328882";
 let whatsURL = "https://wa.me/";
 let whatsMessage = "?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta%20com%20o%20Dr.%20Evandro!";
 let whatsCompleteURL = `${whatsURL}${whatsNumber}${whatsMessage}`;
 
 let whatsAppButtons = { chatBubble: document.querySelector(".chat-bubble"),
-                        contatoButton: document.querySelector("#contato-bottom a"),
-                        homeContatoButton: document.querySelector("#home .center button")};
+                        contatoButton: document.querySelector("#contato-bottom a")};
 
 if(whatsAppButtons.chatBubble && whatsAppButtons.contatoButton && whatsAppButtons.homeContatoButton){
     let buttons = Object.values(whatsAppButtons);
@@ -1389,6 +1388,6 @@ if(whatsAppButtons.chatBubble && whatsAppButtons.contatoButton && whatsAppButton
             window.open(whatsCompleteURL);
         })
     }
-}
+} */
 
 

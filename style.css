@@ -2655,7 +2655,7 @@ html[xmlns] .slider-wrap {
 
 #header-wrap{
 	position: sticky;
-	top:0;
+	top:-1px;
 	z-index: 9999;
 	width: 100%;
 	height: 60px;
@@ -17085,16 +17085,16 @@ body.--obscured #gotoTop{
 
 #contato-bottom .container a{
 	margin-top: 40px !important;
-	background-color: var(--mainColor);
-	color: rgb(255, 255, 255);
-	font-weight: 500 !important;
+	/* background-color: var(--mainColor); */
+	color: #0D9F4E;
+	font-weight: 800 !important;
 	padding-top: 15px;
 	padding-bottom: 15px;
 }
 
 #contato-bottom .container a:hover {
 	transition: all 150ms ease-in;
-	background-color: #0D9F4E;
+	color: lightblue;
 }
 
 #footer .footer-diagonal svg{
@@ -18080,7 +18080,8 @@ grid-template-columns: 1fr 1fr; */
 		text-align: center;
 		margin-left: auto !important;
 		margin-right: auto !important;
-		margin-top: 60px !important;
+		margin-top: 0px !important;
+		padding-top: 0px !important;
 	}
 
 	#footer{
@@ -18487,7 +18488,8 @@ grid-template-columns: 1fr 1fr; */
 		font-weight: 600 !important;
 	}
 
-	#home .home-callToAction{
+	#home .home-callToAction,
+	#home .callToAction{
 		border: none;
 		border-radius: 30px;
 		background: #3e2a20;
@@ -18498,7 +18500,8 @@ grid-template-columns: 1fr 1fr; */
 		font-size: 18px;
 	}
 
-	#home .home-callToAction:hover{
+	#home .home-callToAction:hover,
+	#home .callToAction{
 		background: #0D9F4E;
 		transition: background 250ms ease-in;
 		-webkit-transition: background 250ms ease-in;
